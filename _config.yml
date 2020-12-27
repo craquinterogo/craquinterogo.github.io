@@ -1,17 +1,17 @@
 # site settings
-title: Forty
-subtitle: by HTML5 UP
-email: youremailaddress@gmail.com
-description: A responsive site template designed by HTML5 Up<br /> and released under the Creative Commons.
+title: Quantitative
+subtitle: Finance
+email: craquinterogo@gmail.com
+description: This is my professional webpage, sharing my profile and works in quantitative finance and software development.
 baseurl: / # the subpath of your site, e.g. /blog
 url: # the base hostname & protocol for your site
 author:
-street_address: 1234 Somewhere Road
-city: Nashville
-state: TN
-zip_code: 55555
-country: United States of America
-phone: (716) 555-5555
+street_address: "Bogotá, somewhere"
+city: "Bogotá"
+state: BOG
+zip_code: 
+country: Colombia
+phone: (+57) 304 5603799 
 
 # homepage tiles
 tiles-source: pages # accepts "posts" or "pages"
@@ -24,10 +24,10 @@ github_url: https://github.com/craquinterogo/quantitative_finance
 gitlab_url:
 googleplus_url:
 instagram_url:
-linkedin_url: https://www.linkedin.com/in/craquinterogo/
+linkedin_url: "https://www.linkedin.com/in/craquinterogo/?locale=en_US"
 pinterest_url:
 slack_url:
-twitter_url: 
+twitter_url: https://twitter.com/_arleyquintero
 
 # build settings
 markdown: kramdown
