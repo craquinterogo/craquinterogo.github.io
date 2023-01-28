@@ -28,9 +28,9 @@ nav-menu: true
 		<div class="content">
 			<div class="inner">
 				<header class="major">
-					<h3>Portfolio Management</h3>
+					<h3>(Quant) Portfolio Management</h3>
 				</header>
-				<p>I want to share with you what I´ve learned on portfolio management, since most basic models like Markowitz to some those more complex. This is not an easy issue, and it is worked for many years for many people. Please don´t think about this as a holy grial in investment, because as many things in finance, this model are the basis to industry modelling, and as a model they are and reality abstraction.</p>
+				<p>The good investment decision process/result is the main interest of my professional path so far. On this regard there are plenty of topics I like to research including economic behaviour/performance, macroeconomic analysis, asset allocation, portfolio performance, P&L analysis, trading cost analysis (TCA), P&L attribution (PLA), among others.</p>
 				<ul class="actions">
 					<li><a href="generic.html" class="button">Learn more</a></li>
 				</ul>
@@ -46,7 +46,7 @@ nav-menu: true
 				<header class="major">
 					<h3>Risk Management</h3>
 				</header>
-				<p>Some years ago I´ve been working on financial risk areas. To be more specific, in credit risk, market and liquidity risk. This field is very important because is a issue that can help you to reduce your investing losses if you choose the right model. With this I must say in this field are many models, specially because the variety in market assets, like bonds, stocks, derivatives (swaps, forwards, options, and so on).</p>
+				<p>Because you cannot deal with uncertainty without consider the relevance of good risk management, there is other field that I like. This field results important in the way it is a mechanism of control of losses, in some sense it may help you to keep under control the emotions of quantitative portfolio management and algo/quant trading. Main interest on market, conterparty, and liquidity risk.</p>
 				<ul class="actions">
 					<li><a href="generic.html" class="button">Learn more</a></li>
 				</ul>
@@ -60,9 +60,9 @@ nav-menu: true
 		<div class="content">
 			<div class="inner">
 				<header class="major">
-					<h3>Algorithmic Trading</h3>
+					<h3>Quant/Algorithmic Trading</h3>
 				</header>
-				<p>I must recognize this is a new field in my curriculum. I have been a lot intrigated in this field because foreign markets formany years have been using this approach to trade their assets. In my country this is some new, but is growing year by year.</p>
+				<p>I have been a lot intrigated about taking investment decisions under uncertainty, and especially how to deal with it having quantitative tools. I do have experience working with algorithmic trading strategies through broker's APIs using programming laguages as python, C++, C# and Java. Along with it the passion of machine learning applied on algo/quant-trading.</p>
 				<ul class="actions">
 					<li><a href="generic.html" class="button">Learn more</a></li>
 				</ul>
@@ -76,9 +76,9 @@ nav-menu: true
 		<div class="content">
 			<div class="inner">
 				<header class="major">
-					<h3>Software Development</h3>
+					<h3>Quant Development</h3>
 				</header>
-				<p>Software is a growing tool, if not yet, consolidated tool in many fields. To build software is in some sense easy, and anyone can do it, but the challenge is in how building software in the way you can be extended without changing a lot.</p>
+				<p>In the current world of finance and capital markets there is no chance to compete without having deep knowledge of how to build tools that support your decision taking process, and that's why a good complement of quantitative development is relevant. My experience has been framed on programming languages such as python, C++, Java and recently Ocaml, Julia and Rust. Some other tools which support this taste is AWS with services like S3, EC2, lambda, athena and Sagemaker.</p>
 				<ul class="actions">
 					<li><a href="generic.html" class="button">Learn more</a></li>
 				</ul>
