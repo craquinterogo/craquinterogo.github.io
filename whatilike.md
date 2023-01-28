@@ -1,7 +1,7 @@
 ---
 title: I like
 layout: whatilike
-description: 'A bit of what I like to do, in software development <br> and quantitative finance modeling.'
+description: 'The professional pathway I chose to walk <br>could perfectly be described by what I like to do.'
 image: assets/images/pic07.jpg
 nav-menu: true
 ---
@@ -15,7 +15,7 @@ nav-menu: true
 		<header class="major">
 			<h2>About</h2>
 		</header>
-		<p>All my works are recentlly focused on how to model efficiently finance issues. In this way you could find stock market portfolio issues, asset management, derivatives pricing, and so on.</p>
+		<p>These are the topics where I have been building my professional profile, mainly focused on quantitative finance, portfolio management, and risk management as well as quant development. Usually as a transversal topic on all those topics there is machine learning algorithms such as supervised/unsupervised learning, deep learning and reinforcement learning. Comming soon natural language procesing (NLP) as well.</p>
 	</div>
 </section>
 
@@ -92,9 +92,9 @@ nav-menu: true
 		<div class="content">
 			<div class="inner">
 				<header class="major">
-					<h3>Economic Analysis</h3>
+					<h3>Economic and Market Analysis</h3>
 				</header>
-				<p>So far, I have mentioned some things in finances, but I am working in economic analysis too.</p>
+				<p>The complement of capital market's performance itself is the economic analysis. Almost every movement in capital markets is stemmed from feelings produced from economic facts reading for each agent composing the markets.Because of that it is also interesting to assess the economic facts not only the current ones but also the previous ones in order to identify patters if it applies.</p>
 				<ul class="actions">
 					<li><a href="generic.html" class="button">Learn more</a></li>
 				</ul>
@@ -109,9 +109,9 @@ nav-menu: true
 		<header class="major">
 			<h2>My Personal Github Repository</h2>
 		</header>
-		<p>If you want to know all my public work till now, I do invite you to visit my github personal repository, where you can see many kind of scripts in some languageslike python, javascript and C++. I must warn to you that some scripts have not finished yet, but I am doing all my effort to finish it soon.</p>
+		<p>If you want to know all my public work till now, I do invite you to visit my github personal repository, where you can see a couple of scripts in some programming languages like python (including jupyter notebooks), javascript and C++. I should warn to you some scripts are not finished yet, but I am putting all my effort to finish it soon.</p>
 		<ul class="actions">
-			<li><a href="https://github.com/craquinterogo" target="_blank" class="button next">Get Started</a></li>
+			<li><a href="https://github.com/craquinterogo/quantitative_finance" target="_blank" class="button next">Get Started</a></li>
 		</ul>
 	</div>
 </section>
