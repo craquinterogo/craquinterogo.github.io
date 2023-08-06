@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: about_me
 title: About Me
 description: A brief description
 image: assets/images/quant_finance.jpg
@@ -10,7 +10,7 @@ This is Cristian Quintero, a systems engineer and economist, as well with a mast
 
 I started my professional journey as a software developer in a company which builds software in the fiduciary industry, and here I fell in love with capital markets. My first contact with the finance world was through mutual fund and investment portfolio functionalities along with studies in a capital markets study group in the university. However my perception is that there is some challenges for someone in computational field to get into financial industry, I mean the core of financial industry, because of that the first step I did was prepare myself to be able to manage in this industry and I got the opportunity.
 
-Before to get into the core of banking, that was my first direct contact with the industry, I managed within the data science world, absolutely one of the best experiences I had because I got the chance to understand better how those kind of apporaches are implemented in startups as a tool to boost the data analysis. Definitely a tool I'm used to use nowadays in risk/portfolio management as well. 
+Before to get into the core of banking, that was my first direct contact with the industry, I managed within the data science world, absolutely one of the best experiences I had because I got the chance to understand better how those kind of apporaches are implemented in startups as a tool to boost the data analysis. Definitely a tool I'm used to use nowadays in risk/portfolio management as well.
 
 Many times people tell me that the profilence I have in python is valuable in the financial industry, and absolutely it is. Nowadays a pillar of my skills is to code in Python and C++, two concurrent tools to design, build and analyse a plenty of quantitative models. Nevertheless, the challenges don't stop here. Many other programming languages have borned and its use along quantitative industries, such as Julia, Rust, and Ocaml, among others. That's why I'm also learning a couple of them as a mechanism to keep updated. But don't misunderstand me, I do have also other challenges typical of quantitative finance, for instance, how to assess the soundness of models such as (S)VaR, or ES in risk management or on the other hand how to optimize the expected returns in a trading strategy, how to make the bettest possible asset allocation, how to optimize the cost of trades, and so on. All of them also part of my professional chanllenge daily, learning and implementing.
 
