@@ -2,7 +2,7 @@
 layout: post
 title: The Beginning
 description: The digital word is amazing and the knowledge that support it is very powerful.
-image: assets/images/post_images/001_beginning/journey.jpg
+image: craquinterogo.github.io/assets/images/01_post_images/001_beginning/journey.jpg
 ---
 
 This field, the quantitative finance job market is full of eager people. People eager for getting 6 figures anual checks. I was not different, I'm still working on it though. My goal is not just to have a 6-figures check itself. There are other motivations to get into this amazing world of quantitative finance.

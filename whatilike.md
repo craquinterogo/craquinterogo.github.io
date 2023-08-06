@@ -1,7 +1,7 @@
 ---
 title: I like
 layout: whatilike
-description: 'The professional pathway I chose to walk <br>could perfectly be described by what I like to do.'
+description: "The professional pathway I chose to walk <br>could perfectly be described by what I like to do."
 image: assets/images/pic07.jpg
 nav-menu: true
 ---
@@ -23,7 +23,7 @@ nav-menu: true
 <section id="two" class="spotlights">
 	<section>
 		<a href="generic.html" class="image">
-			<img src="{% link assets/images/trading_screen.jpg %}" alt="" data-position="center center" />
+			<img src="{% link /assets/images/03_what_i_like/trading_screen.jpg %}" alt="" data-position="center center" />
 		</a>
 		<div class="content">
 			<div class="inner">
@@ -39,7 +39,7 @@ nav-menu: true
 	</section>
 	<section>
 		<a href="generic.html" class="image">
-			<img src="{% link assets/images/risk_management.jpg %}" alt="" data-position="top center" />
+			<img src="{% link assets/images/03_what_i_like/risk_management.jpg %}" alt="" data-position="top center" />
 		</a>
 		<div class="content">
 			<div class="inner">
@@ -55,7 +55,7 @@ nav-menu: true
 	</section>
 	<section>
 		<a href="generic.html" class="image">
-			<img src="{% link assets/images/algo_trading.jpg %}" alt="" data-position="25% 25%" />
+			<img src="{% link assets/images/03_what_i_like/algo_trading.jpg %}" alt="" data-position="25% 25%" />
 		</a>
 		<div class="content">
 			<div class="inner">
@@ -71,7 +71,7 @@ nav-menu: true
 	</section>
 	<section>
 		<a href="generic.html" class="image">
-			<img src="{% link assets/images/software_development.jpg %}" alt="" data-position="top center" />
+			<img src="{% link assets/images/03_what_i_like/software_development.jpg %}" alt="" data-position="top center" />
 		</a>
 		<div class="content">
 			<div class="inner">
@@ -87,7 +87,7 @@ nav-menu: true
 	</section>
 	<section>
 		<a href="generic.html" class="image">
-			<img src="{% link assets/images/economic_analysis.jpg %}" alt="" data-position="25% 25%" />
+			<img src="{% link assets/images/03_what_i_like/economic_analysis.jpg %}" alt="" data-position="25% 25%" />
 		</a>
 		<div class="content">
 			<div class="inner">
