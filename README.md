@@ -1,3 +1,25 @@
+# Instalation
+Jekill bundler installation.
+
+```console
+> sudo apt install ruby-dev
+> sudo apt install build-essential
+> sudo apt install ruby-bundler
+```
+
+## Setting local vendor folder for install gems
+Due to sometimes the cache folder may be constrained by the OS, i.e. Ubuntu, a solution is to install the gems in local environments, but without uploading that folder to the repository.
+
+```console
+> bundle config set --local path 'vendor/bundle'
+> bundle install
+```
+
+## Install gem dependencies
+```console
+> bundle install
+```
+
 # RUN
 
 ```console
@@ -8,6 +30,12 @@
 
 ```console
 > jekyll build --trace
+```
+
+## Compiling output
+
+```console
+> bundle exec jekyll build --destination /home/donnetoo/GIT/craquinterogo.github.io
 ```
 
 # Forty - Jekyll Theme
