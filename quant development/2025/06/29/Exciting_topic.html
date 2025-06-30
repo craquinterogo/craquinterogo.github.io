@@ -28,7 +28,7 @@
 
 <!-- Header -->
 <header id="header">
-	<a href="/" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<a href="http://localhost:4000//" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
 	<nav>
 		<a href="#menu">Menu</a>
 	</nav>
@@ -45,7 +45,7 @@
 		    
 		
 		    
-		        <li><a href="/">Home</a></li>
+		        <li><a href="http://localhost:4000//">Home</a></li>
 	    	
 		
 		    
@@ -58,21 +58,21 @@
 		    
 		
 		    
-		        <li><a href="/about_me.html">About Me</a></li>
+		        <li><a href="http://localhost:4000/about_me.html">About Me</a></li>
 		    
 		
 		    
-		        <li><a href="/all_posts.html">All posts</a></li>
+		        <li><a href="http://localhost:4000/all_posts.html">All posts</a></li>
 		    
 		
 		    
 		
 		    
-		        <li><a href="/my_posts.html">My posts</a></li>
+		        <li><a href="http://localhost:4000/my_posts.html">My posts</a></li>
 		    
 		
 		    
-		        <li><a href="/whatilike.html">I like</a></li>
+		        <li><a href="http://localhost:4000/whatilike.html">I like</a></li>
 		    
 		
 	</ul>
@@ -148,7 +148,7 @@
           </header>
           
             <div class="post-image-container">
-              <img src="/assets/images/04_llm_and_mcp/jarvis_.jpg" alt="Time no see you, let see what's going on" />
+              <img src="http://localhost:4000/assets/images/04_llm_and_mcp/jarvis_.jpg" alt="Time no see you, let see what's going on" />
             </div>
           
           <p>Jun 29, 2025</p>
@@ -474,7 +474,7 @@ For true RAG in coding, you'd typically see systems that:
 <h3 id="reading-csv-file---first-step">Reading CSV file - first step</h3>
 <p>As displayed in <code class="language-plaintext highlighter-rouge">utils.py</code> file above, there is a function called <code class="language-plaintext highlighter-rouge">extract_column_from_csv</code> that receives the path to the csv file, the column name and the number of observations to be extracted. It assumes the file content depicts historical prices sorted ascending. By calling the tool <code class="language-plaintext highlighter-rouge">extract_column_from_csv_mcp</code> in <code class="language-plaintext highlighter-rouge">server.py</code>, the fucntion in <code class="language-plaintext highlighter-rouge">utils.py</code> is called. As result, the array with prices is collected by <code class="language-plaintext highlighter-rouge">GPT 4.1</code> then passed by Github Copilot agent to next task designed by it to accomplish the goal. Image below shows the output of this first step. To let the agent continue with next task the user must press the button <strong>Continue</strong>.</p>
 
-<p><img src="/assets/images/04_llm_and_mcp/01_00_calling_mcp_server.png" alt="Calling MCP Server" /></p>
+<p><img src="http://localhost:4000/assets/images/04_llm_and_mcp/01_00_calling_mcp_server.png" alt="Calling MCP Server" /></p>
 
 <p>Input below:</p>
 
@@ -488,7 +488,7 @@ For true RAG in coding, you'd typically see systems that:
 <h3 id="calculating-returns---second-step">Calculating Returns - Second step</h3>
 <p>As part of the common flow to calculate Historical VaR, the returns need to be calculated. Subsequently, GH Copilot agent calls MCP tool <code class="language-plaintext highlighter-rouge">calculate_returns_mcp</code>. This tool internally calls the function <code class="language-plaintext highlighter-rouge">my_var.var.calculate_var_cvar_historical</code> receiving as parameter the list of prices, obtained from call MCP tool <code class="language-plaintext highlighter-rouge">extract_column_from_csv_mcp</code>. Image below shows the input to be sent to the second task, passing as parameter the json with prices. Click to button <strong>Continue</strong> is expected to proceed.</p>
 
-<p><img src="/assets/images/04_llm_and_mcp/01_01_calling_mcp_server.png" alt="Calling MCP Server" /></p>
+<p><img src="http://localhost:4000/assets/images/04_llm_and_mcp/01_01_calling_mcp_server.png" alt="Calling MCP Server" /></p>
 
 <p>Input below:
 s</p>
@@ -518,7 +518,7 @@ s</p>
 <h3 id="calculating-returns---third-step">Calculating Returns - Third step</h3>
 <p>The last step is calling the MCP tool named <code class="language-plaintext highlighter-rouge">calculate_var_cvar_historical_mcp</code> receiving as parameter the returns obtained in second step, together with significance level.</p>
 
-<p><img src="/assets/images/04_llm_and_mcp/01_02_calling_mcp_server.png" alt="Calling MCP Server" /></p>
+<p><img src="http://localhost:4000/assets/images/04_llm_and_mcp/01_02_calling_mcp_server.png" alt="Calling MCP Server" /></p>
 
 <p>Input below:</p>
 
@@ -583,7 +583,7 @@ s</p>
 <h2 id="results">Results</h2>
 <p>As result the VaR is express by <code class="language-plaintext highlighter-rouge">GPT 4.1</code>. I should confess that in this ocassion I expected to see the VaR in percentage format, but LLM model did not interpret it in that way. Instead, the decimal format was shown, such that the HVaR calculated given the functions above, is about -10.77% and HCVaR is about -18.9%. Result is shown below.</p>
 
-<p><img src="/assets/images/04_llm_and_mcp/01_03_calling_mcp_server.png" alt="Calling MCP Server" /></p>
+<p><img src="http://localhost:4000/assets/images/04_llm_and_mcp/01_03_calling_mcp_server.png" alt="Calling MCP Server" /></p>
 
 <p>Moreover, a checking was performed by running the functions in a jupyter notebook calling the same functions in the same order. Result is shown in my Github repositoy, <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/LLM/mcp-server/VaR_validation.ipynb" target="_blank" rel="noopener">here</a>. As expected the result is the same as displayed in Github Copilot chat.</p>
 
@@ -720,13 +720,13 @@ s</p>
 </div>
 
 <!-- Scripts -->
-	<script src="/assets/js/jquery.min.js"></script>
-	<script src="/assets/js/jquery.scrolly.min.js"></script>
-	<script src="/assets/js/jquery.scrollex.min.js"></script>
-	<script src="/assets/js/skel.min.js"></script>
-	<script src="/assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="/assets/js/main.js"></script>
+	<script src="http://localhost:4000/assets/js/jquery.min.js"></script>
+	<script src="http://localhost:4000/assets/js/jquery.scrolly.min.js"></script>
+	<script src="http://localhost:4000/assets/js/jquery.scrollex.min.js"></script>
+	<script src="http://localhost:4000/assets/js/skel.min.js"></script>
+	<script src="http://localhost:4000/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="http://localhost:4000/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="http://localhost:4000/assets/js/main.js"></script>
 
 
         <script>
