@@ -114,6 +114,10 @@
         
       
     
+      
+        
+      
+    
     
     <aside id="sidebar" class="sidebar">
       <div class="sidebar-content">
@@ -124,14 +128,30 @@
             
             
               <li class="recent-post-item">
-                <a href="/quant%20development/2025/06/29/Exciting_topic.html" class="recent-post-link">
+                <a href="/portfolio%20management/2025/07/13/active_and_passive_investing_crypto.html" class="recent-post-link">
                   
                     <div class="recent-post-image">
-                      <img src="/assets/images/04_llm_and_mcp/jarvis_.jpg" alt="Time no see you, let see what's going on" />
+                      <img src="/assets/images/01_post_images/003_crypto/01_crypto_post.jpeg" alt="Active vs Passive Investing in Crypto" />
                     </div>
                   
                   <div class="recent-post-content">
-                    <h5>Time no see you, let see what's going on</h5>
+                    <h5>Active vs Passive Investing in Crypto</h5>
+                    
+                      <span class="recent-post-date">Jul 13, 2025</span>
+                    
+                  </div>
+                </a>
+              </li>
+            
+              <li class="recent-post-item">
+                <a href="/quantitative%20development/2025/06/29/ai_agent_for_quants.html" class="recent-post-link">
+                  
+                    <div class="recent-post-image">
+                      <img src="/assets/images/04_llm_and_mcp/jarvis_.jpg" alt="What about AI Agents for Quants?" />
+                    </div>
+                  
+                  <div class="recent-post-content">
+                    <h5>What about AI Agents for Quants?</h5>
                     
                       <span class="recent-post-date">Jun 29, 2025</span>
                     
@@ -228,6 +248,10 @@
       <!-- One -->
       <section id="one">
 	<div class="inner">
+		
+			
+        
+			
 		
 			
         
@@ -388,7 +412,7 @@
             tocSidebar.classList.toggle('active');
           });
         }
-        // --- Table of Contents Sidebar Generation with Numbering (skip first heading in TOC and content, TOC starts at 1) ---
+        // --- Table of Contents Sidebar Generation with Numbering (include all headings in TOC and content) ---
         const mainContent = document.querySelector('#main .inner');
         if (tocSidebar && mainContent) {
           const headings = mainContent.querySelectorAll('h1, h2, h3, h4');
@@ -396,8 +420,8 @@
             let tocHtml = '<div class="toc-title">Table of Contents</div><ul class="toc-list">';
             let numbers = [0, 0, 0, 0]; // For h1-h4
             let tocNumbers = [0, 0, 0, 0]; // Separate numbering for TOC
-            // Start from the second heading (index 1)
-            for (let idx = 1; idx < headings.length; idx++) {
+            // Start from the first heading (index 0)
+            for (let idx = 0; idx < headings.length; idx++) {
               const heading = headings[idx];
               const level = parseInt(heading.tagName.substring(1)) - 1; // 0-based
               // Update numbering for content
@@ -411,14 +435,11 @@
               if (!heading.id) {
                 heading.id = headingText.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
               }
-              // Only add to TOC if not the first heading after the title (i.e., idx > 1)
-              if (idx > 1) {
-                // Update TOC numbering
-                tocNumbers[level]++;
-                for (let i = level + 1; i < tocNumbers.length; i++) tocNumbers[i] = 0;
-                let tocNumberStr = tocNumbers.slice(0, level + 1).filter(n => n > 0).join('.');
-                tocHtml += `<li class=\"toc-level-${level+1}\"><a href=\"#${heading.id}\"><span class='section-number'>${tocNumberStr}.</span> ${headingText}</a></li>`;
-              }
+              // Add all headings to TOC
+              tocNumbers[level]++;
+              for (let i = level + 1; i < tocNumbers.length; i++) tocNumbers[i] = 0;
+              let tocNumberStr = tocNumbers.slice(0, level + 1).filter(n => n > 0).join('.');
+              tocHtml += `<li class=\"toc-level-${level+1}\"><a href=\"#${heading.id}\"><span class='section-number'>${tocNumberStr}.</span> ${headingText}</a></li>`;
             }
             tocHtml += '</ul>';
             tocSidebar.innerHTML = tocHtml;
@@ -430,6 +451,9 @@
       });
     </script>
 
+  </body>
+
+</html>
   </body>
 
 </html>
