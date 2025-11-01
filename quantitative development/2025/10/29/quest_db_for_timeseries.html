@@ -609,6 +609,19 @@ Sortino Ratio                         -155.247853
 dtype: object
 </span></code></pre></div></div>
 
+<h2 id="closing-the-cursor-and-the-connection">Closing the cursor and the connection</h2>
+<p>It is a good practice to finish the connection once it is not used anymore, specially to release resources. It can be done as follows.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cur</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+<span class="n">conn</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h1 id="stoping-questdb">Stoping QuestDB</h1>
+<p>As you remember you have created an alias named <code class="language-plaintext highlighter-rouge">questdb_engine</code>. You can use the same to stop the daemon once you don’t need it anymore, thereby you close any connection. Just remember start the daemon again if you want to use it again.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>questdb_engine stops
+</code></pre></div></div>
+
 <h1 id="takeaways">Takeaways</h1>
 <p>Some takeaways from this exercise.</p>
 <ul>
