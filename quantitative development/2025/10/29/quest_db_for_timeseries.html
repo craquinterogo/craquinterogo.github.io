@@ -438,7 +438,7 @@ prices,close=122.10,volume=124120.65 1748413809000000
 </code></pre></div></div>
 
 <h2 id="database-connection">Database Connection</h2>
-<p>The <code class="language-plaintext highlighter-rouge">psycopg2</code> library is used in here, and the communication is stablished to localhost (assuming your project is run locally) via port <code class="language-plaintext highlighter-rouge">8812</code>, set by default. User and password is not configured in the creation of the database, so let’s use the values as default. Then, if you’re familizarized with other database connectors in different programming languages, you may notice a cursor is required to be open to manage messages between the client and database engine.</p>
+<p>In this example, the connection to QuestDB is established using the <code class="language-plaintext highlighter-rouge">psycopg2</code> library, which communicates with the database on <code class="language-plaintext highlighter-rouge">localhost</code> via the default port <code class="language-plaintext highlighter-rouge">8812</code>. Unless you have configured custom credentials, the default username and password are used. If you are familiar with other database connectors in different programming languages, you will recognize the need to create a cursor to execute queries and manage communication between the client and the database engine.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span>
     <span class="n">dbname</span><span class="o">=</span><span class="sh">"</span><span class="s">qdb</span><span class="sh">"</span><span class="p">,</span>
@@ -479,7 +479,7 @@ prices,close=122.10,volume=124120.65 1748413809000000
 </code></pre></div></div>
 
 <h2 id="calculating-bollinger-bands">Calculating Bollinger Bands</h2>
-<p>In order to do not reinvent the wheel, the example uses <a href="https://ta-lib.org/" target="_blank" rel="noopener">Ta-Lib</a> package to calculate technical indicators, i.e. Bollinger Bands. Following code describes how it’s calculated. More information of calculation and perhaps some tips to test combined strategies in <a href="https://books.google.lk/books?id=UIxyWFkFJ4QC&amp;printsec=frontcover&amp;source=gbs_ge_summary_r&amp;cad=0#v=onepage&amp;q&amp;f=false" target="_blank" rel="noopener">Technical Analysis for the trading professionals, by Constance Brown (Ch. 11)</a>.</p>
+<p>To avoid reinventing the wheel, this example leverages the <a href="https://ta-lib.org/" target="_blank" rel="noopener">Ta-Lib</a> package for calculating technical indicators such as Bollinger Bands. The following code demonstrates how to perform this calculation. For a deeper understanding of the methodology and additional tips on testing combined strategies, refer to <a href="https://books.google.lk/books?id=UIxyWFkFJ4QC&amp;printsec=frontcover&amp;source=gbs_ge_summary_r&amp;cad=0#v=onepage&amp;q&amp;f=false" target="_blank" rel="noopener">Technical Analysis for the Trading Professional by Constance Brown (Ch. 11)</a>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">upper</span><span class="p">,</span> <span class="n">middle</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">talib</span><span class="p">.</span><span class="nc">BBANDS</span><span class="p">(</span><span class="n">df_prices</span><span class="p">[</span><span class="sh">'</span><span class="s">close</span><span class="sh">'</span><span class="p">],</span> <span class="n">matype</span><span class="o">=</span><span class="n">MA_Type</span><span class="p">.</span><span class="n">SMA</span><span class="p">,</span> <span class="n">timeperiod</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">pl</span><span class="p">.</span><span class="n">Config</span><span class="p">.</span><span class="n">tbl_float_precision</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1"># Show 6 decimals
@@ -490,7 +490,7 @@ prices,close=122.10,volume=124120.65 1748413809000000
 <span class="p">)</span>
 </code></pre></div></div>
 
-<p>Just a recap, the Bollinger Bands are comprised of a moving average (MA) that serves as the baseline, with the upper and lower bands calculated as $\text{MA} \pm n \cdot \delta $, where $\delta$ is the standar deviation and $n$ the number of standar deviations you decide to apply in your trading strategy. A time period for the moving average of 14 data points is choose.</p>
+<p>To recap, Bollinger Bands consist of a moving average (MA) as the central baseline, with the upper and lower bands defined by the formula $\text{MA} \pm n \cdot \delta$, where $\delta$ represents the standard deviation and $n$ is the number of standard deviations selected for the strategy. In this example, a moving average period of 14 data points is used.</p>
 
 <h2 id="plotting-the-results">Plotting the results</h2>
 
@@ -532,7 +532,17 @@ prices,close=122.10,volume=124120.65 1748413809000000
 </code></pre></div></div>
 
 <h2 id="backtesting-the-strategy">Backtesting the strategy</h2>
-<p>The basic strategy consists in get into a long position if the prices is above <strong>the upper band</strong> and get short if the prices is below <strong>the lower band</strong>. For this I’m using <code class="language-plaintext highlighter-rouge">VectorBT</code> library, as it is quite easy to understand and implement given different scenarios in the backtesting. More info <a href="https://vectorbt.dev/api/data/base/" target="_blank" rel="noopener">here</a>.</p>
+
+<p>The core strategy involves entering a <strong>long position</strong> when the price crosses above the <strong>upper Bollinger Band</strong>, and entering a <strong>short position</strong> when the price falls below the <strong>lower Bollinger Band</strong>. This approach aims to capitalize on potential price reversals at the extremes of volatility. For implementation, the <a href="https://vectorbt.dev/api/data/base/" target="_blank" rel="noopener">VectorBT</a> library is utilized due to its intuitive interface and flexibility for backtesting various scenarios.</p>
+
+<p>The entry and exit signals are defined as follows:</p>
+
+<ul>
+  <li><strong>Long Entry:</strong> When <code class="language-plaintext highlighter-rouge">price &gt; upper_band</code></li>
+  <li><strong>Short Entry:</strong> When <code class="language-plaintext highlighter-rouge">price &lt; lower_band</code></li>
+</ul>
+
+<p>This logic can be easily expressed and tested using VectorBT, allowing for rapid prototyping and performance evaluation of the strategy.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">l_entries</span> <span class="o">=</span> <span class="n">df_prices</span><span class="p">[</span><span class="sh">'</span><span class="s">close</span><span class="sh">'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">df_prices</span><span class="p">[</span><span class="sh">'</span><span class="s">lower</span><span class="sh">'</span><span class="p">]</span>
 <span class="n">l_exit</span> <span class="o">=</span> <span class="n">df_prices</span><span class="p">[</span><span class="sh">'</span><span class="s">close</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">df_prices</span><span class="p">[</span><span class="sh">'</span><span class="s">upper</span><span class="sh">'</span><span class="p">]</span>
@@ -622,15 +632,15 @@ dtype: object
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>questdb_engine stops
 </code></pre></div></div>
 
-<h1 id="takeaways">Takeaways</h1>
-<p>Some takeaways from this exercise.</p>
+<h1 id="key-takeaways">Key Takeaways</h1>
+
 <ul>
-  <li>QuestDB is a good alternative to KDB engine, with low or zero cost.</li>
-  <li>QuestDB database is able to store data and metadata in external devices with a simple parameter when starting the daemon.</li>
-  <li>SQL language is one option, and the most easy for first steps in the engine.</li>
-  <li>The engine is designed to work efficiently with timeseries, but it is not like KDB, since build-in functions specially designed for TS are not available in QuestDB.</li>
-  <li>The connection can be done via PosgresQL connectors, that facilitate its management.</li>
-  <li>The ILP protocol shows better performance for ingestion of massive amount of data.</li>
+  <li><strong>QuestDB offers a compelling, cost-effective alternative to the KDB engine</strong> for time-series data storage and analysis.</li>
+  <li><strong>External storage support:</strong> QuestDB can store both data and metadata on external devices by specifying a simple parameter at daemon startup, enhancing portability and flexibility.</li>
+  <li><strong>SQL compatibility:</strong> The familiar SQL language makes it easy to get started and interact with the database, especially for those new to QuestDB.</li>
+  <li><strong>Optimized for time-series workloads:</strong> While QuestDB is designed for efficient time-series data handling, it does not provide the same breadth of built-in time-series functions as KDB.</li>
+  <li><strong>PostgreSQL connector support:</strong> QuestDB can be accessed using standard PostgreSQL connectors, simplifying integration and management across various programming environments.</li>
+  <li><strong>Efficient data ingestion:</strong> The Influx Line Protocol (ILP) enables high-performance ingestion of large volumes of time-series data, outperforming traditional HTTP-based methods for bulk operations.</li>
 </ul>
 
 <hr />
