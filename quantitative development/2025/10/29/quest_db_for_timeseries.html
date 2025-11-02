@@ -462,26 +462,13 @@ prices,close=122.10,volume=124120.65 1748413809000000
 </code></pre></div></div>
 
 <h2 id="retrieving-data">Retrieving data</h2>
-<p>Now, the cursor is used to send an SQL sentence selecting the data for dates 2025-03-13 and 2025-03-14. But depending the data you have fed, you can change it to whatever period you have. Without getting into details, the condition to filter dates can be changed of course, to select a range of dates, you know what I mean.</p>
+<p>Now, the cursor is used to send an SQL sentence selecting the data for dates 2025-03-13 and 2025-03-14. But depending the data you have fed, you can change it to whatever period you have. Without getting into details, the condition to filter dates can be changed of course, to select a range of dates, you know what I mean. QuestDB natively can be connected via polars dataframe, as shown below.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lst_records</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">sql_select</span> <span class="o">=</span> <span class="sh">"</span><span class="s">SELECT to_str(date,</span><span class="sh">'</span><span class="s">yyyy-MM-ddTHH:mm:ss</span><span class="sh">'</span><span class="s">) as date,  close, volume</span><span class="se">\n</span><span class="sh">"</span> \
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sql_select</span> <span class="o">=</span> <span class="sh">"</span><span class="s">SELECT to_str(date,</span><span class="sh">'</span><span class="s">yyyy-MM-ddTHH:mm:ss</span><span class="sh">'</span><span class="s">) as date,  close, volume</span><span class="se">\n</span><span class="sh">"</span> \
                 <span class="sa">f</span><span class="sh">"</span><span class="s">FROM </span><span class="si">{</span><span class="n">TABLE</span><span class="si">}</span><span class="s"> </span><span class="se">\n</span><span class="sh">"</span> \
                 <span class="sh">"</span><span class="s">and to_str(date,</span><span class="sh">'</span><span class="s">yyyy-MM-dd</span><span class="sh">'</span><span class="s">) in (</span><span class="sh">'</span><span class="s">2025-03-13</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="s">2025-03-14</span><span class="sh">'</span><span class="s">)</span><span class="se">\n</span><span class="sh">"</span>
-<span class="n">cur</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">sql_select</span><span class="p">)</span>
-<span class="n">rows</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="nf">fetchall</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
-    <span class="n">lst_records</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
-</code></pre></div></div>
 
-<p>Then the info is stored in a <code class="language-plaintext highlighter-rouge">polar</code> dataframe for facilitating the manipulation, as follows.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">schema</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="sh">"</span><span class="s">date</span><span class="sh">"</span><span class="p">,</span> <span class="n">pl</span><span class="p">.</span><span class="n">Utf8</span><span class="p">),</span>
-    <span class="p">(</span><span class="sh">"</span><span class="s">close</span><span class="sh">"</span><span class="p">,</span> <span class="n">pl</span><span class="p">.</span><span class="n">Float64</span><span class="p">),</span>
-    <span class="p">(</span><span class="sh">"</span><span class="s">volume</span><span class="sh">"</span><span class="p">,</span> <span class="n">pl</span><span class="p">.</span><span class="n">Float64</span><span class="p">),</span>
-<span class="p">]</span>
-<span class="n">df_prices</span> <span class="o">=</span> <span class="n">pl</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">transpose</span><span class="p">(</span><span class="n">lst_records</span><span class="p">),</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+<span class="n">df_prices</span> <span class="o">=</span> <span class="n">pl</span><span class="p">.</span><span class="nf">read_database</span><span class="p">(</span><span class="n">sql_select</span><span class="p">,</span><span class="n">connection</span><span class="o">=</span><span class="n">conn</span><span class="p">,)</span>
 
 <span class="n">df_prices</span> <span class="o">=</span> <span class="n">df_prices</span><span class="p">.</span><span class="nf">with_columns</span><span class="p">([</span>
     <span class="n">pl</span><span class="p">.</span><span class="nf">col</span><span class="p">(</span><span class="sh">"</span><span class="s">date</span><span class="sh">"</span><span class="p">).</span><span class="nb">str</span><span class="p">.</span><span class="nf">strptime</span><span class="p">(</span><span class="n">pl</span><span class="p">.</span><span class="n">Datetime</span><span class="p">,</span> <span class="sh">"</span><span class="s">%Y-%m-%dT%H:%M:%S</span><span class="sh">"</span><span class="p">),</span>
