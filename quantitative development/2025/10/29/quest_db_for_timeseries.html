@@ -16,7 +16,7 @@
 
 	gtag('config', 'G-6YNFJY0416');
 	</script>
-	<title>QuestDB, an alternative for Timeseries Databases. | Cristian</title>
+	<title>QuestDB, an alternative for storing your financial time series. | Cristian</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -193,11 +193,11 @@
 			
         
           <header class="major">
-            <h1>QuestDB, an alternative for Timeseries Databases.</h1>
+            <h1>QuestDB, an alternative for storing your financial time series.</h1>
           </header>
           
             <div class="post-image-container">
-              <img src="/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" alt="QuestDB, an alternative for Timeseries Databases." />
+              <img src="/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" alt="QuestDB, an alternative for storing your financial time series." />
             </div>
           
           <p>Oct 29, 2025</p>
@@ -236,7 +236,12 @@
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>questdb_engine start <span class="nt">-d</span> /media/&lt;username&gt;/&lt;pendrive-name&gt;/my-timeseries/
 </code></pre></div></div>
 
-<p><strong>Voila!</strong>, if you see an output like shown below, you have created your database in an external drive!!. I told you is pretty easy!, but that’s not all I want to share with you. As you can see in the prompt below, you have a user interface via webbrowser to interact with your data!, yous click in the url <code class="language-plaintext highlighter-rouge">http://172.17.0.1:9000</code> or type it in your broser. Immedialy you will get into the nice user interface, which is also quite intuitive if you already have experience with SQL IDEs, but if you want more info take a look in this <a href="https://www.youtube.com/watch?v=oIHTjT_SzVI" target="_blank" rel="noopener">video in Youtube</a>, and subscribe to the channel.</p>
+<p>Or, if you prefer to run without an alias, you may execute it directly with the command below.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>/opt/questdb/questdb-9.1.0-rt-linux-x86-64/bin/questdb.sh start <span class="nt">-d</span> /media/&lt;username&gt;/&lt;pendrive-name&gt;/my-timeseries/
+</code></pre></div></div>
+
+<p><strong>Voila!</strong>, if you see an output as shown below, you have created your database in an external drive!!. I told you it is pretty easy!</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">JAVA: /opt/questdb/questdb-9.1.0-rt-linux-x86-64/bin/java
 
@@ -256,6 +261,10 @@
 </span><span class="gp">QuestDB configuration files are in /media/&lt;username&gt;</span>/&lt;pendrive-name&gt;/my-timeseries/conf
 <span class="go">
 </span></code></pre></div></div>
+
+<p>As you can see in the prompt above, an user interface via webbrowser to interact with your data is available via <code class="language-plaintext highlighter-rouge">http://172.17.0.1:9000</code> url. You can click in the terminal or typing it in your web browser. It redirects to the nice user interface shown below, which is also quite intuitive if you already have experienced with SQL IDEs, but if you want more info take a look in this <a href="https://www.youtube.com/watch?v=oIHTjT_SzVI" target="_blank" rel="noopener">video in Youtube</a>, and subscribe to the channel.</p>
+
+<p><img src="/assets/images/01_post_images/004_quant_developer/004_questdb_webconsole.png" alt="Backtesting Example" /></p>
 
 <h1 id="experiment">Experiment</h1>
 <p>Now, the UI looks nice, but what to do with all that in your pocket?. Let’s assume that you have the following timeseries in a csv file, and you would like to store it in your just created QuestDB database.</p>
@@ -323,7 +332,7 @@
 </table>
 
 <h2 id="creation-of-your-first-table">Creation of your first table</h2>
-<p>As in many databases, you store data in tabular format by means tables. Those tables are created ad-hoc, as you wish or require. In this case, for abovementioned data, we can create the table executing the following command in QuestDB user interface (web-browser).</p>
+<p>As in many databases, you store data in tabular format by means tables. Those tables are created ad-hoc, as you wish or require. In this case, for abovementioned data, we can create the table executing the following command in QuestDB user interface (Center segment for sql queries), via form available in the right lateral panel, or even uploading a csv file directly in the web browser (button panel).</p>
 
 <pre><code class="language-SQL">CREATE TABLE 'prices' (
   date TIMESTAMP,
@@ -417,7 +426,7 @@ prices,close=122.10,volume=124120.65 1748413809000000
   <li><a href="https://pypi.org/project/psycopg2-binary/" target="_blank" rel="noopener">psycopg2-binary</a></li>
   <li><a href="https://pypi.org/project/polars/" target="_blank" rel="noopener">polars</a></li>
   <li><a href="https://pypi.org/project/vectorbt/" target="_blank" rel="noopener">vectorbt</a></li>
-  <li><a href="https://pypi.org/project/TA-Lib/" target="_blank" rel="noopener">Ta-lib</a></li>
+  <li><a href="https://pypi.org/project/TA-Lib/" target="_blank" rel="noopener">TA-lib</a></li>
 </ul>
 
 <p>Perhaps you saw something interesting. We’re not necessarily using QuestDB client. This is because besides QuestDB client, it is also possible get access to the database via <code class="language-plaintext highlighter-rouge">psycopg2</code> library, used for connection to PostgreSQL databases.</p>
@@ -481,7 +490,15 @@ prices,close=122.10,volume=124120.65 1748413809000000
 </code></pre></div></div>
 
 <h2 id="calculating-bollinger-bands">Calculating Bollinger Bands</h2>
-<p>To avoid reinventing the wheel, this example leverages the <a href="https://ta-lib.org/" target="_blank" rel="noopener">Ta-Lib</a> package for calculating technical indicators such as Bollinger Bands. The following code demonstrates how to perform this calculation. For a deeper understanding of the methodology and additional tips on testing combined strategies, refer to <a href="https://books.google.lk/books?id=UIxyWFkFJ4QC&amp;printsec=frontcover&amp;source=gbs_ge_summary_r&amp;cad=0#v=onepage&amp;q&amp;f=false" target="_blank" rel="noopener">Technical Analysis for the Trading Professional by Constance Brown (Ch. 11)</a>.</p>
+<p>To avoid reinventing the wheel, this example leverages the <a href="https://ta-lib.org/" target="_blank" rel="noopener">TA-Lib</a> package for calculating technical indicators such as Bollinger Bands. The following code demonstrates how to perform this calculation. For a deeper understanding of the methodology and additional tips on testing combined strategies, refer to <a href="https://books.google.lk/books?id=UIxyWFkFJ4QC&amp;printsec=frontcover&amp;source=gbs_ge_summary_r&amp;cad=0#v=onepage&amp;q&amp;f=false" target="_blank" rel="noopener">Technical Analysis for the Trading Professional by Constance Brown (Ch. 11)</a>.</p>
+
+<p>A more formal notation is for bands can be found in the book titled <a href="https://books.google.pl/books?id=XuiF-2eWHYUC&amp;printsec=frontcover&amp;source=gbs_atb&amp;redir_esc=y#v=onepage&amp;q&amp;f=false" target="_blank" rel="noopener">Technical Analysis from A to Z</a>, by Steven Achelis, in page 74, where these are described like:</p>
+
+\[UpperBand = MiddleBand + \left[n\cdot \sqrt{\frac{\sum_{j=1}^n(Close_j-MiddleBand)^2}{n}} \right]\]
+
+\[LowerBand = MiddleBand - \left[n\cdot \sqrt{\frac{\sum_{j=1}^n(Close_j-MiddleBand)^2}{n}} \right]\]
+
+<p>Where $MiddleBand$ is the moving average $MA$ in our experiment. This logic can be easily coded and tested using <strong>TA-Lib</strong>, allowing for rapid prototyping and performance evaluation of the strategy. It also provides different moving average methods, that adds flexibility to the experiment.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">upper</span><span class="p">,</span> <span class="n">middle</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">talib</span><span class="p">.</span><span class="nc">BBANDS</span><span class="p">(</span><span class="n">df_prices</span><span class="p">[</span><span class="sh">'</span><span class="s">close</span><span class="sh">'</span><span class="p">],</span> <span class="n">matype</span><span class="o">=</span><span class="n">MA_Type</span><span class="p">.</span><span class="n">SMA</span><span class="p">,</span> <span class="n">timeperiod</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">pl</span><span class="p">.</span><span class="n">Config</span><span class="p">.</span><span class="n">tbl_float_precision</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1"># Show 6 decimals
@@ -492,7 +509,7 @@ prices,close=122.10,volume=124120.65 1748413809000000
 <span class="p">)</span>
 </code></pre></div></div>
 
-<p>To recap, Bollinger Bands consist of a moving average (MA) as the central baseline, with the upper and lower bands defined by the formula $\text{MA} \pm n \cdot \delta$, where $\text{MA}$ stands for Moving Average, $\delta$ represents the standard deviation and $n$ is the number of standard deviations selected for the strategy. In this example, a moving average period of 14 data points is used.</p>
+<p>To recap, Bollinger Bands consist of a moving average (MA) as the central baseline, with the upper and lower bands defined by the formula $\text{MA} \pm \gamma \cdot \delta$, where $\text{MA}$ stands for Moving Average, $\delta$ represents the standard deviation and $\gamma$ is the number of standard deviations selected for the strategy. In this example, a moving average period of 14 data points is used.</p>
 
 <h2 id="plotting-the-results">Plotting the results</h2>
 
@@ -540,11 +557,9 @@ prices,close=122.10,volume=124120.65 1748413809000000
 <p>The entry and exit signals are defined as follows:</p>
 
 <ul>
-  <li><strong>Long Entry:</strong> When <code class="language-plaintext highlighter-rouge">price &lt; lower_band</code> or $P &lt; \text{MA} - n \cdot \delta$</li>
-  <li><strong>Short Entry:</strong> When <code class="language-plaintext highlighter-rouge">price &gt; upper_band</code> or $P &gt; \text{MA} + n \cdot \delta$</li>
+  <li><strong>Long Entry:</strong> When <code class="language-plaintext highlighter-rouge">price &lt; lower_band</code> or $P &lt; \text{MA} - \gamma \cdot \delta$</li>
+  <li><strong>Short Entry:</strong> When <code class="language-plaintext highlighter-rouge">price &gt; upper_band</code> or $P &gt; \text{MA} + \gamma \cdot \delta$</li>
 </ul>
-
-<p>This logic can be easily expressed and tested using VectorBT, allowing for rapid prototyping and performance evaluation of the strategy.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">l_entries</span> <span class="o">=</span> <span class="n">df_prices</span><span class="p">[</span><span class="sh">'</span><span class="s">close</span><span class="sh">'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">df_prices</span><span class="p">[</span><span class="sh">'</span><span class="s">lower</span><span class="sh">'</span><span class="p">]</span>
 <span class="n">l_exit</span> <span class="o">=</span> <span class="n">df_prices</span><span class="p">[</span><span class="sh">'</span><span class="s">close</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">df_prices</span><span class="p">[</span><span class="sh">'</span><span class="s">upper</span><span class="sh">'</span><span class="p">]</span>
@@ -586,7 +601,7 @@ prices,close=122.10,volume=124120.65 1748413809000000
   </li>
 </ul>
 
-<p>Below an example for another date. The result of this example is not promising, but <strong>that’s the exciting part, to conduct the appropriate tuning</strong> which I’ll talk about in forthcoming posts.</p>
+<p>Below an example for another date. The result of this example is not promising, but <strong>that’s the exciting part, conducting the appropriate fine tuning</strong> which I’ll talk about in forthcoming posts.</p>
 
 <p><img src="/assets/images/01_post_images/004_quant_developer/003_bakctesting_example.png" alt="Backtesting Example" /></p>
 
@@ -640,7 +655,7 @@ dtype: object
   <li><strong>QuestDB offers a compelling, cost-effective alternative to the KDB engine</strong> for time-series data storage and analysis.</li>
   <li><strong>External storage support:</strong> QuestDB can store both data and metadata on external devices by specifying a simple parameter at daemon startup, enhancing portability and flexibility.</li>
   <li><strong>SQL compatibility:</strong> The familiar SQL language makes it easy to get started and interact with the database, especially for those new to QuestDB.</li>
-  <li><strong>Optimized for time-series workloads:</strong> While QuestDB is designed for efficient time-series data handling, it does not provide the same breadth of built-in time-series functions as KDB.</li>
+  <li><strong>Optimized for time-series workloads:</strong> While QuestDB is designed for efficient time-series data handling, it <strong>does not provide</strong> the same breadth of built-in time-series functions as KDB.</li>
   <li><strong>PostgreSQL connector support:</strong> QuestDB can be accessed using standard PostgreSQL connectors, simplifying integration and management across various programming environments.</li>
   <li><strong>Efficient data ingestion:</strong> The Influx Line Protocol (ILP) enables high-performance ingestion of large volumes of time-series data, outperforming traditional HTTP-based methods for bulk operations.</li>
 </ul>
