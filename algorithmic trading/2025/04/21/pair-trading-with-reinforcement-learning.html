@@ -97,14 +97,14 @@
 		    
 		
 	</ul>
-	<ul class="actions vertical">
+	<!-- <ul class="actions vertical">
 		<li><a href="#" class="button special fit">Get Started</a></li>
 		<li><a href="#" class="button fit">Log In</a></li>
-	</ul>
+	</ul> -->
 </nav>
  
     
-    <!-- Enhanced Sidebar with Category-specific Posts -->
+    <!-- Enhanced Sidebar with TOC and Category-specific Posts -->
     
       
         
@@ -134,30 +134,56 @@
     
     <aside id="sidebar" class="sidebar">
       <div class="sidebar-content">
-        
-          <div class="sidebar-category-header">
-            <h3>Algorithmic Trading</h3>
-            <div class="category-indicator"></div>
+        <!-- Table of Contents Section (Collapsible) -->
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4>
+              <i class="fa fa-list-ul"></i> Table of Contents
+            </h4>
+            <button class="collapse-toggle" aria-label="Toggle Table of Contents">
+              <i class="fa fa-chevron-down"></i>
+            </button>
           </div>
-          <h4>Posts in this Category</h4>
-          <ul class="recent-posts">
-            
-            
-            
-            
-              <li class="no-related-posts">
-                <p>No other posts in this category yet.</p>
-              </li>
-            
-          </ul>
-          
-          <!-- Show link to all posts in this category -->
-          <div class="sidebar-category-link">
-            <a href="/my_posts.html" class="view-all-category">
-              View All Algorithmic Trading Posts →
-            </a>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav"></nav>
           </div>
-        
+        </div>
+
+        <!-- Related Posts Section (Collapsible) -->
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder"></i> 
+              
+                Algorithmic Trading Posts
+              
+            </h4>
+            <button class="collapse-toggle" aria-label="Toggle Related Posts">
+              <i class="fa fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              <ul class="recent-posts">
+                
+                
+                
+                
+                  <li class="no-related-posts">
+                    <p>No other posts in this category yet.</p>
+                  </li>
+                
+              </ul>
+              
+              <!-- Show link to all posts in this category -->
+              <div class="sidebar-category-link">
+                <a href="/my_posts.html" class="view-all-category">
+                  View All Algorithmic Trading Posts →
+                </a>
+              </div>
+            
+          </div>
+        </div>
       </div>
     </aside>
 
@@ -168,12 +194,6 @@
     
     <!-- Sidebar overlay for mobile -->
     <div id="sidebar-overlay" class="sidebar-overlay"></div>
-    
-    <!-- Table of Contents Sidebar -->
-    <button id="toc-toggle" class="toc-toggle" title="Show/Hide Table of Contents" aria-label="Show/Hide Table of Contents">
-      <span aria-hidden="true">📑</span>
-    </button>
-    <nav id="toc-sidebar" class="toc-sidebar"></nav>
 
     <!-- Main -->
     <div id="main" class="alt">
@@ -214,16 +234,25 @@
           
           <p>Apr 21, 2025</p>
           <p><h1 id="deep-reinforcement-learning-for-pair-trading">Deep Reinforcement Learning for Pair Trading</h1>
-<p>This is a brief summary of one of personal goals achieved recently. It consisted of creating a full study of reinforcement learning strategy using real parameters and going through the full process to assess the output. That said, it consists in a study of reinforcement learning (RL) algorithms known as Proximal Policy Optimization (PPO) and Advantage-Actor-Critic model (A2C) in a pair trading strategy.</p>
+<p>This is a brief summary of a recently achieved personal goal: conducting a comprehensive study of reinforcement learning (RL) strategies using real-world parameters and a rigorous evaluation process. Specifically, the research investigates RL algorithms—Proximal Policy Optimization (PPO) and Advantage Actor-Critic (A2C)—applied to pair trading strategies. The findings are detailed in two articles <a class="citation" href="#quintero2024reinforcement">(Quintero et al., 2024; Quintero et al., 2025)</a>.</p>
 
 <p>A suggestion for the reader to learn about pair trading and/or statistical arbitrage, is the book titled <strong>The art and sci-ence of statistical arbitrage</strong> written by Isichenko. It contains the fundamentals of the strategy and some statistical methods to manage it. As said before, my approach was different in the way I followed partially such principles, still keeping in mind the fundamentals.</p>
 
 <h2 id="from-experimental-frameworks-to-comparative-strategy-analysis">From Experimental Frameworks to Comparative Strategy Analysis</h2>
-<p>The project was performed in three stages. The first one correspond to my master’s thesis where I encompas the strategy by using three learning environments. The first two ones as strategies different to pair trading strategy with discrete action spaces. The third one respecting the rules of pair trading, but in continuous time. The results where mixed, but the takeaway that marked my analysis in this first experiment is the fact that not all RL policies are deterministic. Actually, this first experiment revealed that given that PPO and A2C used stochastic policy, as usual, the analysis under only one path is not something to rely on. You must do the analysis given a number of simulations, or Monte Carlo simulation.</p>
+<p>The project was performed in three stages.</p>
+<ul>
+  <li>
+    <p>The <strong>first</strong> stage corresponds to my master thesis in Quantitative Finance (QF), where I do encompass the strategy by using three learning environments. The two learning environments are aimed to adopt a strategy different from pair trading strategy with discrete action spaces. The third one respecting the rules of pair trading, but in continuous time. Combination of strategies and action spaces were introduced as an excercise of confirmation since RL models have gained a lot of attention in algorithmic trading. As results, a blended output is noticed where the main takeaway that marks my analysis <em>is the fact that not all RL policies are deterministic, therefore model’s output is exposed to variance when extrapolated to stochastic policies</em>. In effect, this first experiment revealed that given that PPO and A2C use stochastic policy, the analysis under only one path is not enought to fully rely on. It is required to conduct the analysis given a number of simulations, at Monte Carlo simulation style.</p>
+  </li>
+  <li>
+    <p>A <strong>second</strong> stage consists in a conference paper as result of proceedings of 11th Workshop on Engineering Applications, WEA 2024, Barranquilla, Colombia, where co-authors such Diego Leon, Javier Sandoval and German Hernandes presented this work. This conference paper helped us to identify some drawbacks in the first analysis. The main one, and I didn’t mention in foregoing paragraph was the arbitrary inclusion of technical indicators, given my experience in traditional trading. It was an assumption that we expected to see an effect from. Our agnostic analysis of their influence suggested they could apport some support to the output though, when <strong>phase 2</strong> was performed we realized the technical indicators do not provide information to the model for making decisions, as we considered in the experiment. <a class="citation" href="#quintero2024reinforcement">(Quintero et al., 2024)</a>.</p>
+  </li>
+  <li>
+    <p>The <strong>third</strong> stage is summarized in a <em>study case</em> article where taking into account the output in stage #2, the signal was redefined together tachnical analysis indicators removal. Additionally, fine tunning is performed using <a href="https://docs.ray.io/en/latest/index.html" target="_blank" rel="noopener">Ray framework</a> for model parameters optimization. The output of this new approach suggests a slight improvement mainly attributed to the signal used to allow the RL agents identify opportunies to get in and get out a position in a pair trading strategy. <a class="citation" href="#quintero2025deep">(Quintero et al., 2025)</a>.</p>
+  </li>
+</ul>
 
-<p>Afterwards, what I call <strong>phase 1</strong> consists in the first conference paper, that as team we participated in. Details of conference paper below. This conference paper helped us to identify some drawbacks in the first analysis. The main one, and I didn’t mention in foregoing paragraph was the arbitrary inclusion of technical indicators, given my experience in manual trading. It was simply an assumption. Nonetheless, and even our agnostic analysis of their influence suggested they could apport some support to the output, when <strong>phase 2</strong> was performed, we realized they do not provide too much information to the model as we though once signal was changed. And was changed becase the last one in <strong>phase 2</strong> makes more sense for mean-reversion assumption. This is widely used in the industry.</p>
-
-<p>I have to acknowledge that the work done by contributors of <a href="https://finrl.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">FinRL</a> boosted our analysis due to they provide a framework to execute this sort of analysis. The benefit of being open-source is that we dive into the bowels of the library. We learned a lot as well during the process, given its interaction with <code class="language-plaintext highlighter-rouge">gym</code> library from OpenAI, among others. They have a good amount of agents, that I encorage you to read about <a href="https://finrl.readthedocs.io/en/latest/start/three_layer.html" target="_blank" rel="noopener">here</a>.</p>
+<p>I have to acknowledge that the work done by contributors of <a href="https://finrl.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">FinRL</a> boosted our analysis due to they provide a framework to execute this sort of analysis. The benefit of being open-source is that we dive into the bowels of the library. From a technical perspective I can highlight the learning on different functions that describe RL agents and how small changes may introduce significan impact among them when learning; furthermore, the interaction with <code class="language-plaintext highlighter-rouge">gym</code> library from OpenAI, among others. They have a good amount of agents, that I encorage the reader to read about in <a href="https://finrl.readthedocs.io/en/latest/start/three_layer.html" target="_blank" rel="noopener">here</a>.</p>
 
 <h2 id="data">Data</h2>
 <p>The selected instrument for these experiments were stocks. More specifically, a subset of pairs that we concluded are candidates after a rigurious fildering all combinations using S&amp;P 500 at 17th October, 2022. We run statistical tests and a measure to determine candidates. More details in <em>phase 1</em> document. This task took several hours in my laptop, I have to say. But it was worth</p>
@@ -340,62 +369,24 @@
 
 <h2 id="-resources">📂 Resources</h2>
 <ul>
-  <li>📜 Paper 1: <a href="https://link.springer.com/chapter/10.1007/978-3-031-74595-9_3">Experimental Framework</a></li>
-  <li>📜 Paper 2: <a href="https://link.springer.com/epdf/10.1007/s42979-025-03854-0">Comparative DRL Study</a></li>
+  <li>📜 Paper 1: <a href="https://link.springer.com/chapter/10.1007/978-3-031-74595-9_3" target="_blank" rel="noopener">Experimental Framework</a></li>
+  <li>📜 Paper 2: <a href="https://link.springer.com/epdf/10.1007/s42979-025-03854-0" target="_blank" rel="noopener">Comparative DRL Study</a></li>
   <li>🧠 Code &amp; data (coming soon / available on request)</li>
 </ul>
 
 <hr />
 
-<h2 id="-citation">📢 Citation</h2>
-<p>If you find this work helpful, please cite the following:</p>
-
-<p>```bibtex
-@inproceedings{deep_reingorment_learning_pair_trading_strategy_ppo_a2c_conferencepaper,
-  title={Reinforcement Learning Model Applied in a Pair Trading Strategy },
-  author={Cristian Quintero, Diego Leon, Javier Sandoval &amp; German Hernandez},
-  booktitle={Applied Computer Science in Engineering – WEA 2024},
-  year={2024},
-  publisher={Springer}
-}</p>
-
-<p>@article{deep_reingorment_learning_pair_trading_strategy_ppo_a2c_comparative,
-  title={Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2 C and PPO},
-  author={Cristian Quintero, Diego Leon, Javier Sandoval &amp; German Hernandez},
-  journal={SN Computer Science},
-  year={2025},
-  publisher={Springer}
-}
-```# coding: utf-8</p>
-
-<p>Gem::Specification.new do |spec|
-  spec.name          = “forty_jekyll_theme”
-  spec.version       = “1.2”
-  spec.authors       = [“Andrew Banchich”]
-  spec.email         = [“andrewbanchich@gmail.com”]</p>
-
-<p>spec.summary       = %q{A Jekyll version of the “Forty” theme by HTML5 UP.}
-  spec.homepage      = “https://gitlab.com/andrewbanchich/forty-jekyll-theme”
-  spec.license       = “MIT”</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>spec.files         = <code class="language-plaintext highlighter-rouge">git ls-files -z</code>.split(“\x0”).select {</td>
-      <td>f</td>
-      <td>f.match(%r{^(assets</td>
-      <td>_layouts</td>
-      <td>_includes</td>
-      <td>_sass</td>
-      <td>LICENSE</td>
-      <td>README)}i) }</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>spec.add_development_dependency “jekyll”, “~&gt; 4.0”
-  spec.add_development_dependency “bundler”, “~&gt; 2.1”
-end</p>
+<h2 id="-full-references-">📚 Full References 📢</h2>
+<ol class="bibliography"><li><span id="quintero2024reinforcement">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2024). Reinforcement Learning Model Applied in a Pair Trading Strategy. In J. C. Figueroa-García, F. S. Garay-Rairán, G. J. Hernández-Pérez, &amp; Y. Díaz-Gutierrez (Eds.), <i>Applied Computer Science in Engineering</i> (Vol. 2094, pp. 29–42). Springer Nature Switzerland. https://doi.org/10.1007/978-3-031-74595-9_3</span></li>
+<li><span id="quintero2025deep">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2025). Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO. <i>SN Computer Science</i>, <i>6</i>(3), 348. https://doi.org/10.1007/s42979-025-03854-0</span></li></ol>
+<!-- <ol class="bibliography"><li><span id="quintero2024reinforcement">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2024). Reinforcement Learning Model Applied in a Pair Trading Strategy. In J. C. Figueroa-García, F. S. Garay-Rairán, G. J. Hernández-Pérez, &amp; Y. Díaz-Gutierrez (Eds.), <i>Applied Computer Science in Engineering</i> (Vol. 2094, pp. 29–42). Springer Nature Switzerland. https://doi.org/10.1007/978-3-031-74595-9_3</span></li>
+<li><span id="quintero2025deep">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2025). Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO. <i>SN Computer Science</i>, <i>6</i>(3), 348. https://doi.org/10.1007/s42979-025-03854-0</span></li></ol>
+<ol class="bibliography"><li><span id="quintero2024reinforcement">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2024). Reinforcement Learning Model Applied in a Pair Trading Strategy. In J. C. Figueroa-García, F. S. Garay-Rairán, G. J. Hernández-Pérez, &amp; Y. Díaz-Gutierrez (Eds.), <i>Applied Computer Science in Engineering</i> (Vol. 2094, pp. 29–42). Springer Nature Switzerland. https://doi.org/10.1007/978-3-031-74595-9_3</span></li>
+<li><span id="quintero2025deep">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2025). Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO. <i>SN Computer Science</i>, <i>6</i>(3), 348. https://doi.org/10.1007/s42979-025-03854-0</span></li></ol>
+<h2 class="bibliography">2024</h2>
+<ol class="bibliography"><li><span id="quintero2024reinforcement">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2024). Reinforcement Learning Model Applied in a Pair Trading Strategy. In J. C. Figueroa-García, F. S. Garay-Rairán, G. J. Hernández-Pérez, &amp; Y. Díaz-Gutierrez (Eds.), <i>Applied Computer Science in Engineering</i> (Vol. 2094, pp. 29–42). Springer Nature Switzerland. https://doi.org/10.1007/978-3-031-74595-9_3</span></li></ol>
+<h2 class="bibliography">2025</h2>
+<ol class="bibliography"><li><span id="quintero2025deep">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2025). Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO. <i>SN Computer Science</i>, <i>6</i>(3), 348. https://doi.org/10.1007/s42979-025-03854-0</span></li></ol> -->
 </p>
         
 			
@@ -417,75 +408,14 @@ end</p>
 
     </div>
 
-    <!-- Contact -->
-<section id="contact">
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
 	<div class="inner">
-		<section>
-			<form action="https://formspree.io/craquinterogo@gmail.com" method="POST">
-				<div class="field half first">
-					<label for="name">Name</label>
-					<input type="text" name="name" id="name" />
-				</div>
-				<div class="field half">
-					<label for="email">Email</label>
-					<input type="text" name="_replyto" id="email" />
-				</div>
-				<div class="field">
-					<label for="message">Message</label>
-					<textarea name="message" id="message" rows="6"></textarea>
-				</div>
-				<ul class="actions">
-					<li><input type="submit" value="Send Message" class="special" /></li>
-					<li><input type="reset" value="Clear" /></li>
-				</ul>
-			</form>
-		</section>
-		<section class="split">
-			<section>
-				<div class="contact-method">
-					<span class="icon alt fa-envelope"></span>
-					<h3>Email</h3>
-					<a href="#">craquinterogo@gmail.com</a>
-				</div>
-			</section>
-			<section>
-				<div class="contact-method">
-					<span class="icon alt fa-phone"></span>
-					<h3>Phone</h3>
-					<span>(+48) 539 641 920</span>
-				</div>
-			</section>
-			<section>
-				<div class="contact-method">
-					<span class="icon alt fa-home"></span>
-					<h3>Address</h3>
-					<span>
-					
-					    Warsaw<br />
-					
-					
-					    Warsaw,
-					
-					
-					    WAR 
-					
-					
-					
-					    Poland
-					
-					</span>
-				</div>
-			</section>
-		</section>
-	</div>
-</section>
-
-<!-- Footer -->
-	<footer id="footer">
-		<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
 			<ul class="icons">
 				
-				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
 				
 				
 				
@@ -494,21 +424,171 @@ end</p>
 				
 				
 				
-				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
 				
 				
 				
-				<li><a href="https://www.linkedin.com/in/craquinterogo/?locale=en_US" class="icon alt fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
 				
-			</ul>
-			<ul class="copyright">
-				<li>&copy; Cristian Quintero</li>
-				<li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
-				<li>Jekyll integration: <a href="http://andrewbanchi.ch" target="_blank">Andrew Banchich</a></li>
-
 			</ul>
 		</div>
-	</footer>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
 
 </div>
 
@@ -523,14 +603,13 @@ end</p>
 
 
         <script>
-      // Sidebar toggle functionality
+      // Sidebar and collapsible sections functionality
       document.addEventListener('DOMContentLoaded', function() {
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebar-toggle');
         const sidebarOverlay = document.getElementById('sidebar-overlay');
-        const tocSidebar = document.getElementById('toc-sidebar');
-        const tocToggle = document.getElementById('toc-toggle');
         
+        // Sidebar toggle for mobile
         if (sidebarToggle && sidebar && sidebarOverlay) {
           sidebarToggle.addEventListener('click', function() {
             sidebar.classList.toggle('active');
@@ -542,49 +621,83 @@ end</p>
             sidebarOverlay.classList.remove('active');
           });
         }
-        // TOC toggle button logic
-        if (tocToggle && tocSidebar) {
-          // Always hide TOC sidebar on load
-          tocSidebar.classList.add('toc-hidden');
-          tocToggle.addEventListener('click', function() {
-            tocSidebar.classList.toggle('toc-hidden');
-            tocSidebar.classList.toggle('active');
+
+        // Collapsible section headers
+        const sectionHeaders = document.querySelectorAll('.sidebar-section-header');
+        sectionHeaders.forEach(header => {
+          header.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const content = document.getElementById(targetId);
+            const toggle = this.querySelector('.collapse-toggle i');
+            
+            if (content) {
+              content.classList.toggle('expanded');
+              content.classList.toggle('collapsed');
+              
+              // Rotate chevron icon
+              if (content.classList.contains('expanded')) {
+                toggle.classList.remove('fa-chevron-right');
+                toggle.classList.add('fa-chevron-down');
+              } else {
+                toggle.classList.remove('fa-chevron-down');
+                toggle.classList.add('fa-chevron-right');
+              }
+            }
           });
-        }
-        // --- Table of Contents Sidebar Generation with Numbering (include all headings in TOC and content) ---
+        });
+
+        // --- Table of Contents Generation in Left Sidebar ---
+        const tocNav = document.getElementById('toc-sidebar-nav');
         const mainContent = document.querySelector('#main .inner');
-        if (tocSidebar && mainContent) {
+        const tocSection = document.querySelector('.toc-section');
+        
+        if (tocNav && mainContent) {
           const headings = mainContent.querySelectorAll('h1, h2, h3, h4');
           if (headings.length > 2) {
-            let tocHtml = '<div class="toc-title">Table of Contents</div><ul class="toc-list">';
+            let tocHtml = '<ul class="toc-list">';
             let numbers = [0, 0, 0, 0]; // For h1-h4
             let tocNumbers = [0, 0, 0, 0]; // Separate numbering for TOC
+            
             // Start from the first heading (index 0)
             for (let idx = 0; idx < headings.length; idx++) {
               const heading = headings[idx];
               const level = parseInt(heading.tagName.substring(1)) - 1; // 0-based
+              
               // Update numbering for content
               numbers[level]++;
               for (let i = level + 1; i < numbers.length; i++) numbers[i] = 0;
+              
               // Build number string for content
               let numberStr = numbers.slice(0, level + 1).filter(n => n > 0).join('.');
+              
               // Prepend number to heading text
               let headingText = heading.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
               heading.innerHTML = `<span class=\"section-number\">${numberStr}.</span> ` + headingText;
+              
               if (!heading.id) {
                 heading.id = headingText.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
               }
+              
               // Add all headings to TOC
               tocNumbers[level]++;
               for (let i = level + 1; i < tocNumbers.length; i++) tocNumbers[i] = 0;
               let tocNumberStr = tocNumbers.slice(0, level + 1).filter(n => n > 0).join('.');
-              tocHtml += `<li class=\"toc-level-${level+1}\"><a href=\"#${heading.id}\"><span class='section-number'>${tocNumberStr}.</span> ${headingText}</a></li>`;
+              
+              tocHtml += `<li class=\"toc-level-${level+1}\"><a href=\"#${heading.id}\"><span class='toc-number'>${tocNumberStr}.</span> ${headingText}</a></li>`;
             }
+            
             tocHtml += '</ul>';
-            tocSidebar.innerHTML = tocHtml;
-            // Do NOT add .active or remove .toc-hidden here
+            tocNav.innerHTML = tocHtml;
+            
+            // Show TOC section
+            if (tocSection) {
+              tocSection.style.display = 'block';
+            }
           } else {
-            tocSidebar.classList.add('toc-hidden'); // Hide if not enough headings
+            // Hide TOC section if not enough headings
+            if (tocSection) {
+              tocSection.style.display = 'none';
+            }
           }
         }
       });

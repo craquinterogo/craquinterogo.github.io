@@ -97,10 +97,10 @@
 		    
 		
 	</ul>
-	<ul class="actions vertical">
+	<!-- <ul class="actions vertical">
 		<li><a href="#" class="button special fit">Get Started</a></li>
 		<li><a href="#" class="button fit">Log In</a></li>
-	</ul>
+	</ul> -->
 </nav>
  
     <aside id="sidebar" class="sidebar">
@@ -293,75 +293,14 @@
 
 </div>
 
-    <!-- Contact -->
-<section id="contact">
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
 	<div class="inner">
-		<section>
-			<form action="https://formspree.io/craquinterogo@gmail.com" method="POST">
-				<div class="field half first">
-					<label for="name">Name</label>
-					<input type="text" name="name" id="name" />
-				</div>
-				<div class="field half">
-					<label for="email">Email</label>
-					<input type="text" name="_replyto" id="email" />
-				</div>
-				<div class="field">
-					<label for="message">Message</label>
-					<textarea name="message" id="message" rows="6"></textarea>
-				</div>
-				<ul class="actions">
-					<li><input type="submit" value="Send Message" class="special" /></li>
-					<li><input type="reset" value="Clear" /></li>
-				</ul>
-			</form>
-		</section>
-		<section class="split">
-			<section>
-				<div class="contact-method">
-					<span class="icon alt fa-envelope"></span>
-					<h3>Email</h3>
-					<a href="#">craquinterogo@gmail.com</a>
-				</div>
-			</section>
-			<section>
-				<div class="contact-method">
-					<span class="icon alt fa-phone"></span>
-					<h3>Phone</h3>
-					<span>(+48) 539 641 920</span>
-				</div>
-			</section>
-			<section>
-				<div class="contact-method">
-					<span class="icon alt fa-home"></span>
-					<h3>Address</h3>
-					<span>
-					
-					    Warsaw<br />
-					
-					
-					    Warsaw,
-					
-					
-					    WAR 
-					
-					
-					
-					    Poland
-					
-					</span>
-				</div>
-			</section>
-		</section>
-	</div>
-</section>
-
-<!-- Footer -->
-	<footer id="footer">
-		<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
 			<ul class="icons">
 				
-				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
 				
 				
 				
@@ -370,21 +309,171 @@
 				
 				
 				
-				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
 				
 				
 				
-				<li><a href="https://www.linkedin.com/in/craquinterogo/?locale=en_US" class="icon alt fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
 				
-			</ul>
-			<ul class="copyright">
-				<li>&copy; Cristian Quintero</li>
-				<li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
-				<li>Jekyll integration: <a href="http://andrewbanchi.ch" target="_blank">Andrew Banchich</a></li>
-
 			</ul>
 		</div>
-	</footer>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
 
 </div>
 
