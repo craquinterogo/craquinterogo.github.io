@@ -358,19 +358,21 @@
   date TIMESTAMP,
   close FLOAT,
   volume FLOAT,
-) timestamp (date) PARTITION BY DAY BYPASS WAL;
+) timestamp (date) PARTITION BY DAY BYPASS WAL
+DEDUP UPSERT KEYS(date);
 </code></pre>
 
 <p>This table will store the table mentioned as example. Some considerations are:</p>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">timestamp (date)</code>: Specifies that the date column is the designated timestamp for this table. QuestDB uses this to efficiently index and query time-series data.</li>
-  <li><code class="language-plaintext highlighter-rouge">PARTITION BY DAY</code>: Tells QuestDB to store data in daily partitions. This improves query performance and makes it easier to manage large time-series datasets.</li>
-  <li><code class="language-plaintext highlighter-rouge">BYPASS WAL</code>: Disables the Write-Ahead Log (WAL) for this table. WAL is used for durability and crash recovery. Bypassing it can improve write performance but may risk data loss if the server crashes before data is flushed to disk.</li>
+  <li><code class="language-plaintext highlighter-rouge">timestamp (date)</code>: Specifies that the date column is the <strong>designated timestamp</strong> for this table. QuestDB uses this to efficiently index and query time-series data. More information <a href="https://questdb.com/docs/concept/designated-timestamp/" target="_blank" rel="noopener">here</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">PARTITION BY DAY</code>: Tells QuestDB to store data in daily partitions. This improves query performance and makes it easier to manage large time-series datasets. More details <a href="https://questdb.com/docs/concept/partitions/" target="_blank" rel="noopener">here</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">BYPASS WAL</code>: Disables the Write-Ahead Log (WAL) for this table. WAL is used for durability and crash recovery. Bypassing it can improve write performance but may risk data loss if the server crashes before data is flushed to disk. Personally I do prefer having it enabled for low amounts of data dump. More details <a href="https://questdb.com/docs/concept/write-ahead-log/" target="_blank" rel="noopener">here</a></li>
+  <li><code class="language-plaintext highlighter-rouge">DEDUP UPSERT KEYS(date, file_path);</code>: Enables deduplication, which ensures that if multiple rows have the same values for the specified key columns (here, <code class="language-plaintext highlighter-rouge">date</code>), only the latest row is kept in the table while updating the remaining ones. This helps prevent duplicate records, maintains data integrity, and simplifies updates when ingesting time series data from multiple or repeated sources. For more details, see the <a href="https://questdb.com/docs/concept/deduplication/">QuestDB deduplication documentation</a>.</li>
 </ul>
 
 <p>Then the forthcoming step is to use this table to store the data we receive from any source, for instance your broker via websockets.</p>
 
-<h2 id="feeding-with-data">Feeding with data</h2>
+<h2 id="data-ingestion">Data Ingestion</h2>
 <p>The reader, you, may use the client provided by QuestDB in many different programming languages like <a href="https://questdb.com/docs/clients/ingest-python/" target="_blank" rel="noopener">Python</a>, <a href="https://questdb.com/docs/clients/ingest-c-and-cpp/" target="_blank" rel="noopener">C++</a>, Rust, Java, and others. However, during my own experiments I realized that for avoiding to use a streaming data pipelines like Kafka, RabbitMQ, Redpanda or any other, I’m allowed to use the <strong>ILP protocol</strong>. Beforementioned protocol refers to InfluxDB protocol, that facilitates the massive ingestion of data. Conversely to the client which conveyes data via HTTP protocol, limiting the number of records given the limit size of the payload, ILP protocol conveys the data in another way. The InfluxDB protocol conveys the information by organizing the data in plain text rows with some rules. Here is the same data in <a href="https://questdb.com/docs/reference/api/ilp/line-protocol/" target="_blank" rel="noopener">QuestDB ILP (Influx Line Protocol)</a> format, ready for ingestion:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>prices,close=121.73,volume=123702.34 1748413800000000
@@ -384,6 +386,24 @@ prices,close=122.20,volume=124180.34 1748413807000000
 prices,close=121.80,volume=123850.12 1748413808000000
 prices,close=122.10,volume=124120.65 1748413809000000
 </code></pre></div></div>
+
+<p>For more details of QuestDB ingestion visit them <a href="https://questdb.com/docs/guides/architecture/data-ingestion/" target="_blank" rel="noopener">here</a>.</p>
+
+<h3 id="testing-using-telnet">Testing using Telnet</h3>
+<p>You can quickly test data ingestion into QuestDB using <code class="language-plaintext highlighter-rouge">telnet</code> and the ILP format. For example, to send the sample rows above to your <code class="language-plaintext highlighter-rouge">prices</code> table, open a terminal and run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telnet localhost 9009
+</code></pre></div></div>
+
+<p>Once connected, paste the following lines (each as a single line, then press Enter):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>prices,close=121.73,volume=123702.34 1748413800000000
+prices,close=122.15,volume=124100.12 1748413801000000
+</code></pre></div></div>
+
+<p>After sending the data, close the connection with <code class="language-plaintext highlighter-rouge">Ctrl+]</code> then type <code class="language-plaintext highlighter-rouge">quit</code>. The rows will be ingested into QuestDB and available for querying.</p>
+
+<h3 id="useful-functions-in-c-for-ilp-ingest">Useful functions in C++ for ILP ingest</h3>
 
 <p>As you see is quite simple creating the information that is conveyed to QuestDB. Further more, it’s practically a transformation of a csv file. the first field corresponds to the name of the table where it is registered, namely <code class="language-plaintext highlighter-rouge">prices</code>, just created above. Subsequently, fields <code class="language-plaintext highlighter-rouge">close</code> and <code class="language-plaintext highlighter-rouge">volume</code> is referenced. Eventually, the last set of information corresponds to the date, that was stablished to be the partition of the table, but also expressed in microseconds, always. This is one remark that worths to mention, every column set as <code class="language-plaintext highlighter-rouge">timestamp</code> datatype, requires to be send in ILP protocol in microseconds. Thereby, an example of function that cast the datetime string in C++ is shown below.</p>
 
@@ -650,7 +670,7 @@ dtype: object
 <span class="n">conn</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
 </code></pre></div></div>
 
-<h1 id="stoping-questdb">Stoping QuestDB</h1>
+<h1 id="stopping-questdb">Stopping QuestDB</h1>
 <p>As you remember you have created an alias named <code class="language-plaintext highlighter-rouge">questdb_engine</code>. You can use the same to stop the daemon once you don’t need it anymore, thereby you close any connection. Just remember start the daemon again if you want to use it again.</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>questdb_engine stops
@@ -659,8 +679,9 @@ dtype: object
 <h1 id="key-takeaways">Key Takeaways</h1>
 
 <ul>
-  <li><strong>QuestDB offers a compelling, cost-effective alternative to the KDB engine</strong> for time-series data storage and analysis.</li>
-  <li><strong>External storage support:</strong> QuestDB can store both data and metadata on external devices by specifying a simple parameter at daemon startup, enhancing portability and flexibility.</li>
+  <li><strong>QuestDB offers a compelling, cost-effective alternative to the KDB engine</strong> for time-series data storage and straightforward analysis.</li>
+  <li><strong>Deduplication of records</strong> allows to reduce the amount of execution code in logic layer managing duplication of records, particularlly useful in time series when price may be corrected in different batches but pointing out same timestamp and ticker.</li>
+  <li><strong>External storage support:</strong> QuestDB may store both data and metadata on external devices by specifying a simple parameter at daemon execution, enhancing portability and flexibility.</li>
   <li><strong>SQL compatibility:</strong> The familiar SQL language makes it easy to get started and interact with the database, especially for those new to QuestDB.</li>
   <li><strong>Optimized for time-series workloads:</strong> While QuestDB is designed for efficient time-series data handling, it <strong>does not provide</strong> the same breadth of built-in time-series functions as KDB.</li>
   <li><strong>PostgreSQL connector support:</strong> QuestDB can be accessed using standard PostgreSQL connectors, simplifying integration and management across various programming environments.</li>
