@@ -108,6 +108,14 @@
     
       
         
+      
+    
+      
+        
+      
+    
+      
+        
           
           
           
@@ -209,6 +217,14 @@
       <!-- One -->
       <section id="one">
 	<div class="inner">
+		
+			
+        
+			
+		
+			
+        
+			
 		
 			
         
@@ -367,7 +383,7 @@ DEDUP UPSERT KEYS(date);
   <li><code class="language-plaintext highlighter-rouge">timestamp (date)</code>: Specifies that the date column is the <strong>designated timestamp</strong> for this table. QuestDB uses this to efficiently index and query time-series data. More information <a href="https://questdb.com/docs/concept/designated-timestamp/" target="_blank" rel="noopener">here</a>.</li>
   <li><code class="language-plaintext highlighter-rouge">PARTITION BY DAY</code>: Tells QuestDB to store data in daily partitions. This improves query performance and makes it easier to manage large time-series datasets. More details <a href="https://questdb.com/docs/concept/partitions/" target="_blank" rel="noopener">here</a>.</li>
   <li><code class="language-plaintext highlighter-rouge">BYPASS WAL</code>: Disables the Write-Ahead Log (WAL) for this table. WAL is used for durability and crash recovery. Bypassing it can improve write performance but may risk data loss if the server crashes before data is flushed to disk. Personally I do prefer having it enabled for low amounts of data dump. More details <a href="https://questdb.com/docs/concept/write-ahead-log/" target="_blank" rel="noopener">here</a></li>
-  <li><code class="language-plaintext highlighter-rouge">DEDUP UPSERT KEYS(date, file_path);</code>: Enables deduplication, which ensures that if multiple rows have the same values for the specified key columns (here, <code class="language-plaintext highlighter-rouge">date</code>), only the latest row is kept in the table while updating the remaining ones. This helps prevent duplicate records, maintains data integrity, and simplifies updates when ingesting time series data from multiple or repeated sources. For more details, see the <a href="https://questdb.com/docs/concept/deduplication/">QuestDB deduplication documentation</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">DEDUP UPSERT KEYS(date, file_path);</code>: Enables deduplication, which ensures that if multiple rows have the same values for the specified key columns (here, <code class="language-plaintext highlighter-rouge">date</code>), only the latest row is kept in the table while updating the remaining ones. This helps prevent duplicate records, maintains data integrity, and simplifies updates when ingesting time series data from multiple or repeated sources. For more details, see the <a href="https://questdb.com/docs/concept/deduplication/" target="_blank" rel="noopener">QuestDB deduplication documentation</a>.</li>
 </ul>
 
 <p>Then the forthcoming step is to use this table to store the data we receive from any source, for instance your broker via websockets.</p>
