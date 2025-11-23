@@ -16,7 +16,7 @@
 
 	gtag('config', 'G-6YNFJY0416');
 	</script>
-	<title>Mean Reversion Stochastic Models vs Reinforcement Learning in Pair Trading: A Comparative Study | Cristian</title>
+	<title>Mean Reversion Model vs RL Model in a Pair Trading Strategy: A Comparative Study | Cristian</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -197,32 +197,31 @@
 			
         
           <header class="major">
-            <h1>Mean Reversion Stochastic Models vs Reinforcement Learning in Pair Trading: A Comparative Study</h1>
+            <h1>Mean Reversion Model vs RL Model in a Pair Trading Strategy: A Comparative Study</h1>
           </header>
           
             <div class="post-image-container">
-              <img src="/assets/images/01_post_images/001_beginning/001_reingorcement_learning.jpg" alt="Mean Reversion Stochastic Models vs Reinforcement Learning in Pair Trading: A Comparative Study" />
+              <img src="/assets/images/01_post_images/001_beginning/001_reingorcement_learning.jpg" alt="Mean Reversion Model vs RL Model in a Pair Trading Strategy: A Comparative Study" />
             </div>
           
           <p>Nov 22, 2025</p>
-          <p><p>This weekend I feel motivated to show a bit of my experiments. This time I want to describe one model I was working in as a piece of personal research that subsequently gave rise to another related article named <a href="https://link.springer.com/epdf/10.1007/s42979-025-03854-0?sharing_token=sGsNKhjDnd_2ZBoSrB-eGPe4RwlQNchNByi7wbcMAY7scbCEPPediauUhVR8XxKT4_zdALps152Vi-Z1NBxIhLio_PphS-G3Iut6fLamaFblG8cBAUWDVZqHXO5UBGcPR4OizeqWiIHNGx9DPfY2TVgQfTs5nLkRXZVxR70kbBc%3D" target="_blank" rel="noopener">Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO</a>, where I’m a coautor. The difference may be noticed in the subset of asset classes, methodology and Reinforcement Learning (RL) models. This version is available also in spanish <a href="" target="_blank" rel="noopener">here</a>.</p>
+          <p><p>This weekend I was motivated to show a bit of my experiments influenced by the refreshing feeling of sharing a bit of learning process last 5 years in algorithmic trading. Thereby, I want to show you a model I was working on as a piece of personal research that subsequently gave rise to another related article named <a href="https://link.springer.com/epdf/10.1007/s42979-025-03854-0?sharing_token=sGsNKhjDnd_2ZBoSrB-eGPe4RwlQNchNByi7wbcMAY7scbCEPPediauUhVR8XxKT4_zdALps152Vi-Z1NBxIhLio_PphS-G3Iut6fLamaFblG8cBAUWDVZqHXO5UBGcPR4OizeqWiIHNGx9DPfY2TVgQfTs5nLkRXZVxR70kbBc%3D" target="_blank" rel="noopener">Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO</a>, where I’m a coautor. This work is the anteroom to the continuous variable experiment using Reinforcement Learning (RL), but recently touched again as an experimental exercise. <strong>The difference will be noticed by the conscious reader in the subset of asset classes, methodology and RL models</strong>.</p>
 
 <div style="background-color: #fff3cd; color: gray; border-left: 6px solid #ffe066; padding: 1em; margin-bottom: 1em;">
 <strong style="color: red;">⚠️ Experimental Notice:</strong><br />
-This article presents ongoing research and is currently <strong style="color: red;">under construction/verification of the codes</strong>. Results, methodologies, and conclusions may be updated as the study progresses. Feedback and suggestions are welcome!
+This article presents ongoing updated version of research and is currently <strong style="color: red;">under construction/verification of the codes</strong>. Results, methodologies, and conclusions may be updated as the updated experiment progresses. Feedback and suggestions are welcome!
 </div>
 
-<h1 id="introduction">Introduction</h1>
+<h1 id="context">Context</h1>
 
-<p>Pair trading is a market-neutral strategy used in trading desks across various asset classes. The core idea is to profit from temporary deviations in the price relationship between two related assets. According to the <strong>Adaptive Market Hypothesis (AMH)</strong>, markets incorporate factors beyond pure rationality, making deterministic dynamics impossible and opening the door to stochastic modeling approaches.</p>
+<p>A bit of context is that pair trading is a market-neutral strategy used in trading desks across various asset classes. The core idea is to profit from temporary deviations in the price relationship between two related assets. According to the <strong>Adaptive Market Hypothesis (AMH)</strong>, see <a class="citation" href="#Lo">(Lo, 2004)</a>, markets incorporate factors beyond pure rationality, preventing deterministic dynamics and opening the door to stochastic modeling approaches.</p>
 
-<p>This work explores whether reinforcement learning can outperform traditional stochastic mean reversion models in identifying optimal entry levels for pair trading strategies.</p>
+<p>Consequently, this experiment explores whether reinforcement learning can outperform traditional stochastic mean reversion models in identifying optimal entry levels for pair trading strategies.</p>
 
 <h2 id="research-questions">Research Questions</h2>
 
 <ol>
-  <li>Is there any relationship between mean reversion models and machine learning in treating a pair trading strategy?</li>
-  <li>For an asset whose spread is stable around the mean for a given time horizon, does one model perform better in terms of profitability?</li>
+  <li>Are there benefits on using RL models in an asset pair whose spread/signal is stable around the mean for a given time horizon?</li>
   <li>Are the optimal entry levels of each model significantly different?</li>
 </ol>
 
@@ -230,21 +229,47 @@ This article presents ongoing research and is currently <strong style="color: re
 
 <h2 id="pair-trading-strategy">Pair Trading Strategy</h2>
 
-<p>Pair trading is defined as a market-neutral strategy where profits are sought by arbitraging temporary deviations in the price relationship of a pair of assets. The spread signal is typically defined as:</p>
+<p>Pair trading is also called <strong>statistical arbitrage</strong> for some authors <a class="citation" href="#Isichenko">(Isichenko, 2021; Pole, 2007)</a>, that may be defined as a market-neutral. Thereby, it is a strategy where profits are sought by arbitraging temporary deviations in the price relationship of a pair of assets. Fun fact, <a class="citation" href="#Pole">(Pole, 2007)</a> says, citing Dowdy, that <em>“statistical arbitrage was invented, curiously, despite the lack of statisticians or statistical content of much of the work”</em>. However, let’s work with the current tools. 
+The spread signal is typically defined as shown in the table below, where $\beta$ depicts the number of units of asset $B$ required to equal the price level $S_A(t)$ associated to asset $A$, given that price of $B$ is $S_B(t)$ at time $t$.</p>
 
-<p><strong>Subtraction method:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Signal</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Subtraction method</td>
+      <td>$S_A(t) - \beta_1 \cdot S_B(t)$</td>
+      <td>Difference between asset prices, scaled by $\beta$. Prefered when econometrics is used for calibration.</td>
+    </tr>
+    <tr>
+      <td>Ratio method</td>
+      <td>$\frac{S_A(t)}{\beta_2 \cdot S_B(t)}$</td>
+      <td>Ratio of asset prices. Prefered when calibration method is optimized around 1.</td>
+    </tr>
+  </tbody>
+</table>
 
-\[\text{Signal} = S_A(t) - \beta \cdot S_B(t)\]
+<p><strong>Example:</strong><br />
+Suppose asset $A$ is trading at 100 monetary units (m.u.) and asset $B$ at 50 m.u. If $\beta = 2$, then $2 \times S_B = S_A$, meaning two units of $B$ match the price of one unit of $A$.</p>
+<ul>
+  <li><strong>Subtraction method:</strong> $S_A - \beta S_B = 100 - 2 \times 50 = 0$</li>
+  <li><strong>Ratio method:</strong> $\frac{S_A}{\beta S_B} = \frac{100}{2 \times 50} = 1$</li>
+</ul>
 
-<p><strong>Ratio method:</strong></p>
+<p>This illustrates how $\beta$ normalizes the spread signal, allowing meaningful comparison and trading decisions between assets with different price scales.</p>
 
-\[\text{Signal} = \frac{S_A(t)}{S_B(t)}\]
+<h3 id="selected-signal">Selected signal</h3>
 
 <p>For this study, the spread model was defined using logarithmic prices:</p>
 
-\[X(t) = \ln(S_A(t)) - \gamma \cdot \ln(S_B(t))\]
+\[X(t) = \ln(S_A(t)) - \beta \cdot \ln(S_B(t))\]
 
-<p>where $S_i(t)$ is the quote of asset $i$, $\gamma &gt; 0$ represents the investment ratio between long and short positions, and since the conversion factor is 1:1 for the analyzed assets, $\gamma = 1$.</p>
+<p>where $S_i(t)$ is the quote of asset $i$, $\beta &gt; 0$ represents the investment ratio between long and short positions, and since the conversion factor is 1:1 for the analyzed assets, $\beta = 1$.</p>
 
 <h2 id="ornstein-uhlenbeck-mean-reversion-model">Ornstein-Uhlenbeck Mean Reversion Model</h2>
 
@@ -259,7 +284,7 @@ This article presents ongoing research and is currently <strong style="color: re
   <li>$\rho$ is the mean reversion speed parameter</li>
   <li>$\theta$ is the long-term average</li>
   <li>$\sigma$ is the process volatility</li>
-  <li>$dL(t)$ is a Lévy process (replacing the traditional Brownian motion $dB$ to account for heavy tails)</li>
+  <li>$dL(t)$ is a Lévy process (replacing the traditional Brownian motion $dB$ to account for heavy tails and jumps)</li>
 </ul>
 
 <h3 id="key-properties">Key Properties</h3>
@@ -284,13 +309,13 @@ This article presents ongoing research and is currently <strong style="color: re
 
 <p>The generalized hyperbolic family of probability distributions is defined as a mixture between a multivariate normal distribution and a generalized inverse Gaussian (GIG) distribution, see <a class="citation" href="#Wibel">(Weibel et al., 2022)</a>. A vector $X$ follows a generalized hyperbolic distribution if:</p>
 
-\[X \stackrel{d}{=} \mu + W\gamma + \sqrt{W}AZ\]
+\[X \stackrel{d}{=} \mu + W\beta + \sqrt{W}AZ\]
 
 <p>where:</p>
 <ul>
   <li>$Z \stackrel{d}{=} N_k(0,I_k)$</li>
   <li>$A \in \mathbb{R}^{d \times k}$</li>
-  <li>$\mu, \gamma \in \mathbb{R}^d$</li>
+  <li>$\mu, \beta \in \mathbb{R}^d$</li>
   <li>$W \geq 0$ is a random vector independent of $Z$ with probability distribution $GIG(\lambda, \xi, \psi)$</li>
 </ul>
 
@@ -298,7 +323,7 @@ This article presents ongoing research and is currently <strong style="color: re
 
 <p>The GHYP density function is:</p>
 
-\[f_X(x) = \frac{(\sqrt{\psi/\chi})^\lambda (\psi+\gamma' \Sigma^{-1}\gamma)^{\frac{d}{2}-\lambda}}{(2\pi)^{\frac{d}{2}} |\Sigma|^{\frac{1}{2}}}  \frac{K_{\lambda-\frac{d}{2}}(\sqrt{(\chi+Q(x))(\psi+\gamma' \Sigma^{-1}\gamma)})e^{(x-\mu)' \Sigma^{-1}\gamma}}{(\sqrt{(\chi+Q(x))(\psi+\gamma' \Sigma^{-1} \gamma)})^{\frac{d}{2}-\lambda}}\]
+\[f_X(x) = \frac{(\sqrt{\psi/\chi})^\lambda (\psi+\beta' \Sigma^{-1}\beta)^{\frac{d}{2}-\lambda}}{(2\pi)^{\frac{d}{2}} |\Sigma|^{\frac{1}{2}}}  \frac{K_{\lambda-\frac{d}{2}}(\sqrt{(\chi+Q(x))(\psi+\beta' \Sigma^{-1}\beta)})e^{(x-\mu)' \Sigma^{-1}\beta}}{(\sqrt{(\chi+Q(x))(\psi+\beta' \Sigma^{-1} \beta)})^{\frac{d}{2}-\lambda}}\]
 
 <h3 id="special-cases">Special Cases</h3>
 <ul>
@@ -338,25 +363,25 @@ This article presents ongoing research and is currently <strong style="color: re
 
 <h3 id="value-function">Value Function</h3>
 
-<p>The value function can be expressed as the expected value of future rewards $r_t$ discounted by $\gamma$:</p>
+<p>The value function can be expressed as the expected value of future rewards $r_t$ discounted by $\beta$:</p>
 
 \[\nu_*(a) = \mathbb{E}[R_t|A_t=a]\]
 
 <p>However, since $\nu_*(a)$ is only known with certainty when action $a$ is taken at some future time $t$, the value function must be estimated through function $Q_t(s,a)$:</p>
 
-\[Q_*(s,a) = \max_\pi \mathbb{E}[r_1 + \gamma r_{t+1} + \gamma^2 r_{t+2}+ ... | s_t = s, A_t = a, \pi]\]
+\[Q_*(s,a) = \max_\pi \mathbb{E}[r_1 + \beta r_{t+1} + \beta^2 r_{t+2}+ ... | s_t = s, A_t = a, \pi]\]
 
-<p>where $\gamma$ is the discount factor, $0 \leq \gamma \leq 1$.</p>
+<p>where $\beta$ is the discount factor, $0 \leq \beta \leq 1$.</p>
 
 <h3 id="policy-update-rules">Policy Update Rules</h3>
 
 <p><strong>Q-learning (off-policy):</strong></p>
 
-\[Q(S_t,A_t) \leftarrow Q(S_t, A_t) + \alpha [R_{t+1}+\gamma \max_a Q(S_{t+1},a) - Q(S_t,A_t)]\]
+\[Q(S_t,A_t) \leftarrow Q(S_t, A_t) + \alpha [R_{t+1}+\beta \max_a Q(S_{t+1},a) - Q(S_t,A_t)]\]
 
 <p><strong>SARSA (on-policy):</strong></p>
 
-\[Q(S_t,A_t) \leftarrow Q(S_t, A_t) + \alpha [R_{t+1}+\gamma Q(S_{t+1},A_{t+1}) - Q(S_t,A_t)]\]
+\[Q(S_t,A_t) \leftarrow Q(S_t, A_t) + \alpha [R_{t+1}+\beta Q(S_{t+1},A_{t+1}) - Q(S_t,A_t)]\]
 
 <p>The key difference is that Q-learning directly considers the action that maximizes the subsequent state, while SARSA only considers the value of the policy applied to the selected action.</p>
 
@@ -444,7 +469,7 @@ This article presents ongoing research and is currently <strong style="color: re
       <th>$\psi$</th>
       <th>$\mu$</th>
       <th>$\sigma$</th>
-      <th>$\gamma$</th>
+      <th>$\beta$</th>
     </tr>
   </thead>
   <tbody>
@@ -543,16 +568,16 @@ x_t - \theta &amp; x_t &gt; \theta \\
 
 <p><strong>For Q-learning:</strong></p>
 
-\[\delta_{Q\text{-learning}} = R_{t+1}+\gamma \max_a Q(S_{t+1},a) - Q(S_t,A_t)\]
+\[\delta_{Q\text{-learning}} = R_{t+1}+\beta \max_a Q(S_{t+1},a) - Q(S_t,A_t)\]
 
 <p><strong>For SARSA:</strong></p>
 
-\[\delta_{SARSA} = R_{t+1}+\gamma Q(S_{t+1},A_{t+1}) - Q(S_t,A_t)\]
+\[\delta_{SARSA} = R_{t+1}+\beta Q(S_{t+1},A_{t+1}) - Q(S_t,A_t)\]
 
-<p>Analysis of $\alpha$ (learning rate) and $\gamma$ (discount factor):</p>
+<p>Analysis of $\alpha$ (learning rate) and $\beta$ (discount factor):</p>
 <ul>
   <li>$\alpha$ shows an inverse relationship with $\delta$</li>
-  <li>$\gamma$ shows a direct relationship with $\delta$</li>
+  <li>$\beta$ shows a direct relationship with $\delta$</li>
 </ul>
 
 <h3 id="optimal-parameters">Optimal Parameters</h3>
@@ -562,7 +587,7 @@ x_t - \theta &amp; x_t &gt; \theta \\
     <tr>
       <th>Position</th>
       <th>$\alpha$</th>
-      <th>$\gamma$</th>
+      <th>$\beta$</th>
       <th>Algorithm</th>
       <th>$\delta$</th>
       <th>Episodes for Convergence</th>
@@ -1062,7 +1087,10 @@ For episode_i = 1 to episodes:
 
 <h2 id="bibliography">Bibliography</h2>
 
-<ol class="bibliography"><li><span id="Leung">Leung, T., &amp; Li, X. (2016). <i>Optimal mean reversion: Mathematical analysis and practical applications</i>. World Scientific.</span></li>
+<ol class="bibliography"><li><span id="Lo">Lo, A. (2004). The adaptative market hypothesis: Market efficiency from an evolutionary perspective. <i>The Journal of Portfolio Management</i>.</span></li>
+<li><span id="Isichenko">Isichenko, M. (2021). <i>Quantitative Portfolio Management: The art and science of statistical arbitrage</i>. Wiley Finance Series.</span></li>
+<li><span id="Pole">Pole, A. (2007). <i>Statistical Arbitrage. Algorithmic trading insights and techniques</i>. Wiley Finance.</span></li>
+<li><span id="Leung">Leung, T., &amp; Li, X. (2016). <i>Optimal mean reversion: Mathematical analysis and practical applications</i>. World Scientific.</span></li>
 <li><span id="Wibel">Weibel, M., Breymann, W., &amp; Luthi, D. (2022). <i>gyph: A package on generalized hyperbolic distributions</i>. CRAN-repository.</span></li>
 <li><span id="Dempster">Dempster, A. P., Laird, N. M., &amp; Rubin, D. B. (1977). Maximum likelihood from incomplete data via the EM algorithm. <i>Journal of the Royal Statistical Society</i>, 1–22.</span></li>
 <li><span id="Yuan">Yuan, Y. (2019). A novel multi-step Q-learning method to improve data efficiency for deep reinforcement learning. <i>Knowledge-Based Systems</i>, <i>175</i>, 107–117.</span></li>
@@ -1090,11 +1118,9 @@ For episode_i = 1 to episodes:
 <li><span id="Carta">Carta, S., Corriga, A., Ferreira, A., &amp; Podda, A. (2021). A multi-layer and multi-ensemble stock trader using deep learning. <i>Applied Science</i>, <i>51</i>, 889–905.</span></li>
 <li><span id="Kowalik:Thesis:2019">Kowalik, P., Kjellevold, A., &amp; Gropen, S. (2019). <i>A deep reinforcement learning approach for stock trading</i> [Master's thesis]. Norwegian University of Science and Technology.</span></li>
 <li><span id="Fama:1970">Fama, E. (1970). Efficient capital markets: A review of theory and empirical work. <i>Journal of Finance</i>, <i>25</i>(2), 383–417.</span></li>
-<li><span id="Lo">Lo, A. (2004). The adaptative market hypothesis: Market efficiency from an evolutionary perspective. <i>The Journal of Portfolio Management</i>.</span></li>
 <li><span id="Shiller:2014">Shiller, R. (2014). Speculative Asset Prices. <i>The American Economic Review</i>, <i>104</i>(6), 1486–1517.</span></li>
 <li><span id="Klioutchinov17">Klioutchinov, I., Sigova, M., &amp; Beizerov, N. (2017). Chaos theory in finance. <i>Procedia Computer Science</i>, <i>119</i>, 368–375.</span></li>
 <li><span id="Minsky77">Minsky, H. (1979). The financial instability hypothesis: An interpretation of Keynes an alternative to ’standard’ theory. <i>Nebraska Journal of Economics, Business</i>, <i>16</i>(1), 5–18.</span></li>
-<li><span id="Isichenko">Isichenko, M. (2021). <i>Quantitative Portfolio Management: The art and science of statistical arbitrage</i>. Wiley Finance Series.</span></li>
 <li><span id="Chan">Chan, E. (2013). <i>Algorithmic trading: winning strategies and their rationale</i>. Wiley Trading Series.</span></li>
 <li><span id="Vidyamurthy">Vidyamurthi, G. (2004). <i>Pairs trading: Quantitative methods and analysis</i>. Wiley Finance.</span></li>
 <li><span id="Krauss">Krauss, C. (2015). <i>Statistical arbitrage pairs trading strategies: Review and outlook</i> (No. 9; Number 9). Institut für Wirtschaftspolitik und Quantitative Wirtschaftsforschung, Nürnberg - Working Paper.</span></li>
