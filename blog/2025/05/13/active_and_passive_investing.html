@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  -->
+<html>
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Active vs Passive Investing in Crypto | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="/" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="/">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+ 
+    
+    <!-- Enhanced Sidebar with TOC and Category-specific Posts -->
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+    
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-content">
+        <!-- Table of Contents Section (Collapsible) -->
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4>
+              <i class="fa fa-list-ul"></i> Table of Contents
+            </h4>
+            <button class="collapse-toggle" aria-label="Toggle Table of Contents">
+              <i class="fa fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav"></nav>
+          </div>
+        </div>
+
+        <!-- Related Posts Section (Collapsible) -->
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder"></i> 
+              
+                Portfolio Management Posts
+              
+            </h4>
+            <button class="collapse-toggle" aria-label="Toggle Related Posts">
+              <i class="fa fa-chevron-down"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              <ul class="recent-posts">
+                
+                
+                
+                
+                  <li class="no-related-posts">
+                    <p>No other posts in this category yet.</p>
+                  </li>
+                
+              </ul>
+              
+              <!-- Show link to all posts in this category -->
+              <div class="sidebar-category-link">
+                <a href="/my-posts" class="view-all-category">
+                  View All Portfolio Management Posts →
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Sidebar toggle for mobile -->
+    <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle sidebar">
+      <i class="fa fa-bars"></i>
+    </button>
+    
+    <!-- Sidebar overlay for mobile -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Main -->
+    <div id="main" class="alt">
+
+      <!-- One -->
+      <section id="one">
+	<div class="inner">
+		
+			
+        
+			
+		
+			
+        
+			
+		
+			
+        
+			
+		
+			
+        
+			
+		
+			
+        
+			
+		
+			
+        
+			
+		
+			
+        
+          <header class="major">
+            <h1>Active vs Passive Investing in Crypto</h1>
+          </header>
+          
+            <div class="post-image-container">
+              <img src="/assets/images/01_post_images/003_crypto/01_crypto_post.jpeg" alt="Active vs Passive Investing in Crypto" />
+            </div>
+          
+          <p>Jul 13, 2025</p>
+          <p><p>For a long time people though the only way to participate in capital markets is staying long periods in front to a screen, looking at line plots and a massive amount of financial figures. Even more extended when talking about cryptocurrencies, a market where any person with access to the internet is allowed to participate. Some decades ago the trading of financial assets was conducted on a trading floor in person, but fortunately this is no longer the case. It is also true that sophisticated financial products have evolved so that today a more diversified type of assets are available, and ready for assessing and investment.</p>
+
+<p>Assets available in capital markets have been evolving to meet the needs of market participants not only in terms of payoffs, but also in terms of investment strategies. Notwithstanding, not always the constraint to participate in capital markets lies on access or diversity of assets, but also time and knowledge. That’s why some sophisticated assets are exclusively granted to trade across <strong>specialized professionals</strong> with dedicated time and experience, for instance in derivatives market. But market has changed and now there are venues granting retail investors to participate remotely. A good example can be read in figure 1-1 of book titled <a href="https://www.amazon.com/Algorithmic-Trading-DMA-introduction-strategies/dp/0956399207" target="_blank" rel="noopener">Algorithmic Trading &amp; DMA</a> written by Johnson B., where different market connection are depicted because of different type of participants.</p>
+
+<p>The fact that someone that is not fully involved in capital markets may participate with a profitable strategy is an old debate among financial professionals. The debate is not only because of the access to market but also because of strategy itself. Like so, at the beginning of 20th century the target in the market was forecast-centered, meaning a very active environment among market participants for getting upfront the better accuracy when forecasting future level of prices. The relevance is almost intuitive, and it is the generation of profits given a significant difference between current prices and forecasted price. An example of this approach is the <strong>Modern Portfolio Theory (MTP)</strong> published in an article named <a href="https://www.jstor.org/stable/2975974" target="_blank" rel="noopener"><strong>Portfolio Selection</strong></a> written by Harry Markowitz in 1952, where both expected return and volatility proxied with return’s variance allows model to optimize the portfolio return. The evolution towards <a href="https://www.jstor.org/stable/2977928" target="_blank" rel="noopener">CAPM model</a> by Sharpe will be covered in another post, but definitely incorporated as an attempt at forecasting returns as well, therefore prices.</p>
+
+<p>Furthermore, in 1960 an article titled <a href="https://www.jstor.org/stable/4468964?origin=JSTOR-pdf" target="_blank" rel="noopener"><strong>The case for un unmanaged investment company</strong></a> by Renshaw, E. and Feldstein, P., highlights a question of two basic axioms of investment company policies: <strong>… that professional advice and continued supervision are worth their price?</strong>. At the same time <strong>unmanaged portfolio</strong> term was coined, meaning cost of management is larged shifted on those professionals responsible for designing and maintaining portfolios with representative averages. Foregoing structure brings to discussion one of the most popular concerns of a portfolio manager, and it is the fact of outperforming the unmanaged average. Thus, the main point of <strong>unmanaged portfolios</strong> is to build consistency by reducing the constant interaction between portfolio manager decisions and assets, therefore reducing as well costs. The <a href="https://www.wiley.com/en-us/The+Exchange-Traded+Funds+Manual%2C+2nd+Edition-p-9780470637340" target="_blank" rel="noopener">Gastineau’s book</a> refers to this approach to as the <strong>Lazy Portfolio Manager</strong> style.</p>
+
+<p>As a reader, you will eventually have noticed the foregoing two paragraphs briefly summarize the two investment approaches commonly refered to as <strong>active investing</strong> and <strong>passive investing</strong>. Roughly speaking, and paraphrasing the CFA L1 text book, <strong>active investing</strong> implies investor are information-motivated actors collecting and analyzing information that let them to identify assets when overvalued or undervalued. On the other hand, about <strong>passive investing</strong>, I do like the concise definition given by Morningstar <a href="https://global.morningstar.com/en-gb/personal-finance/the-rise-of-passive-investing-in-today-s-market" target="_blank" rel="noopener">here</a>, described as investment on securities automatically selected to match an index or part of the market. Two different type of assets in passive investments are pointed out as well: Index Mutual Funds and Exhange-Trade Funds (ETF).</p>
+
+<p>⚠️ Warning</p>
+
+<blockquote>
+  <p>Reader with no experience or knowledge in finance may feel tempted to take the models described above as the perfect tool to build portfolios. But, please be aware that <strong>those models constitute only the baseline</strong> for more advanced models, and given their own assumptions those are not suitable for real world cases, nonetheless, those are a good starting point.</p>
+</blockquote>
+
+<h1 id="crypto-world">Crypto-world</h1>
+<p>I know crypto-fans hate regulation, it’s not always fun, I acknowledge that. Nonetheless, some regulations in European Union (EU) facilitate the comprehension and scope, reason why I’ll borrow some of its definitions. Nonetheless, I’m not pretending to cover the debate about <a href="https://www.ecb.europa.eu/euro/digital_euro/html/index.en.html" target="_blank" rel="noopener">Digital Euro</a>.</p>
+
+<h2 id="mica">MiCA</h2>
+<p>The regulation on crypto-assets within European Union is called <a href="https://finance.ec.europa.eu/digital-finance/crypto-assets_en#legislation" target="_blank" rel="noopener">Markets in Crypto-Assets (MiCA) regulation</a>, and it is aimed to address key risks crypto-world investors face. Moreover, it is worth to highlight that not all crypto-assets have the criterias to be considered a financial instrument, when following the <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32014L0065" target="_blank" rel="noopener">Markets in Financial Instruments Directive II (MiFID II - Directive 2014/65/EU)</a>, Annex I, Section C. Therefore, MiCA regulation refers mainly to those recognized as financial instruments, delegating to other Member States the role of legislating in the field of crypto-assets even if they are not in scope of financial instruments definition.</p>
+
+<p>For additional definitions refer to Article 3 in <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R1114" target="_blank" rel="noopener">MiCA regulation</a>.</p>
+
+<h2 id="crypto-asset">Crypto-asset</h2>
+<p>A crypto-asset, based on MiCA framework is defined as a <strong>“… digital representation of value or of rights that have the potential to bring significant benefits to market participants, including retail holders of crypto-assets”</strong>. Additionally, and I like this part honestly, <strong>“… Representation  of value include external, non-intrinsic value attributted to a crypto-asset by the parties concerned or by market participants, meaning the value is **subjective** and based only on the interest of the purchaser of the crypto-asset.”</strong>. I think the last sentence is clear about the subjective value, that is not something bad if you think about similarity to fiat-currency. A large debate, as many other topics around cryptos, I know.</p>
+
+<h1 id="active-investing">Active Investing</h1>
+<p>Frankly speaking I’m not pretty sure how to emcompass <strong>action investing</strong> because as I pointed out, this approach is permeated with personal strategies dealing with price forecasting. An example of this can be observed by the reader when asking, for instance, to either <a href="https://www.semanticscholar.org/search?q=crypto%20currency%20price%20forecasting&amp;sort=relevance" target="_blank" rel="noopener">Semantic Scholar</a> or <a href="https://www.connectedpapers.com/search?q=crypto%20currency%20price%20forecasting" target="_blank" rel="noopener">Connected Papers</a>, about the topic of <strong>crypto currency price forecasting</strong>. The methodologies are quite diverse, and even some of them may get in conflict. However, below I’d like to emphasize on some general knowledge if you decide go through <strong>active investment</strong> approach, that you should take into account.</p>
+
+<h2 id="emotional-bias">Emotional Bias</h2>
+<p>Emotional biases significantly influence investment decisions, often leading to suboptimal outcomes. In highly volatile markets such as cryptocurrencies, emotions like <strong>fear and greed</strong> are intensified by rapid price swings and the constant flow of news, causing investors to make impulsive trades or irrationally hold onto losing positions. Classic behavioral finance research demonstrates how biases such as <strong>overconfidence</strong>, <strong>loss aversion</strong>, and the <strong>disposition effect</strong> distort risk perception and impair portfolio performance (see <a href="https://academic.oup.com/qje/article-abstract/116/1/261/1939000" target="_blank" rel="noopener">Barber &amp; Odean</a>, <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1540-6261.1985.tb05002.x" target="_blank" rel="noopener">Shefrin &amp; Statman</a>).</p>
+
+<p>Within crypto markets specifically, studies show that social media sentiment, herding behavior, and <strong>FOMO (fear of missing out)</strong> are powerful drivers of price volatility and investor actions (see <a href="https://www.tandfonline.com/doi/full/10.1080/07421222.2018.1440774" target="_blank" rel="noopener">Mai et al.</a>, <a href="https://www.sciencedirect.com/science/article/pii/S2214635022001071" target="_blank" rel="noopener">Almeida &amp; Goncalves</a>). These findings highlight the importance of recognizing and managing emotional biases in order to develop a more disciplined and effective investment strategy—especially in speculative and fast-evolving markets like cryptocurrencies.</p>
+
+<h2 id="asset-allocation">Asset allocation</h2>
+<p>Asset allocation is a fundamental aspect of portfolio management, as it determines how investments are distributed across different assets to balance risk and return. A well-structured allocation helps investors to achieve their financial goals while managing exposure to market volatility. Sounds like MPT, discussed some paragraphs above, right?.</p>
+
+<h3 id="strategic-allocation-in-cryptos">Strategic Allocation in Cryptos</h3>
+<p>Strategic allocation involves setting a long-term target, based on an investor’s risk tolerance, investment goals, and market outlook. Thus, in crypto-assets scope, strategic allocation means deciding weights depicted as a percentage of a portfolio that should be allocated to crypto-assets, and periodically rebalancing to maintain the target. This approach might be blended with other more traditional asset classes such as bonds, equity among others. This approach is <strong>less reactive to short-term market movements</strong> and focuses on <strong>maintaining a consistent risk profile</strong> over time. Nonethelss, in crypto-asset world this approach requires careful considerations due to price volatility, regulatory changes, and evolving market infrastructure.</p>
+
+<h3 id="tactical-allocation-in-cryptos">Tactical Allocation in Cryptos</h3>
+<p>Tactical allocation refers to the active adjustment of portfolio weights in response to short-term market movements, aiming to outperform a benchmark. Thereof, in the context of cryptocurrencies, tactical allocation might involve having exposure among different crypto-assets, based on market sentiment, technical signals, or any other developments. This approach is inherently more dynamic than strategic allocation and requires continuous monitoring and analysis due to the high volatility and rapid evolution of the crypto market.</p>
+
+<p>Furthermore, tactical allocation focuses on traditional asset classes but I think the principles are transferable. For example, in a book titled <a href="https://www.mhprofessional.com/active-portfolio-management-pb-9781265919719-usa" target="_blank" rel="noopener"><strong>Active Portfolio Management</strong></a> by Grinold &amp; Kahn, another named <a href="https://campbell.scholars.harvard.edu//publications/strategic-asset-allocation-portfolio-choice-long-term-investors" target="_blank" rel="noopener"><strong>Dynamic Asset Allocation</strong></a> by Campbell &amp; Viceira, the authors describe quantitative models for tactical shifts and macro signals. However, the lack of historical data and unique risk factors in crypto demand caution and robust risk management, a topic that I’ll discuss as well in a specific-topic blog entry.</p>
+
+<p>Other quantitative models beyond Markowitz can be read in the book named <a href="https://link.springer.com/book/10.1007/978-0-387-77439-8" target="_blank" rel="noopener"><strong>Handbook of Portfolio Construction: Contemporary Applications of Markowitz Technique</strong></a>, as a book consolidating other papers.</p>
+
+<h2 id="fundamenta-analysis">Fundamenta Analysis</h2>
+<p>I do expect to receive controversial feedback about this point, but let’s try it. Fundamental analysis in crypto-asset space goes beyond traditional metrics, and focuses on evaluating the underlying drivers of a digital asset. Key factors may include <strong>tokenomics</strong> (a blend of <strong>token</strong> and <strong>economics</strong>) that refers to the study of … there are different studies that deserve their own attention as listed by <a href="https://arxiv.org/abs/2407.15715" target="_blank" rel="noopener">Kensuke Ito</a>. I hope this Kensuke Ito is not another Nakamoto, in the sense nobody knows him. But even with different definitions of tokenomics, I would say it considers variables such as supply structure, issuance rate, and utility within the ecosystem, also considered by <a href="https://www.nber.org/papers/w27222" target="_blank" rel="noopener">Cong, Li &amp; Wang (2020)</a> and <a href="https://www.nber.org/system/files/working_papers/w27810/w27810.pdf" target="_blank" rel="noopener">Cong, Li &amp; Wang (2021)</a>. Just imagine how developer activity serves as a proxy for ongoing innovation and project sustainability, often measured through GitHub commits or open-source contributions. Additionally, strategic partnerships, ecosystem integrations, and protocol upgrades (like hard forks or Layer 2 deployments) can significantly impact user adoption and market confidence. Likely <em>tokenomics</em> deserve its own post.</p>
+
+<h1 id="passive-investing">Passive Investing</h1>
+<p>As mentioned some paragraphs above, among passive investing classes we may identify ETFs. Roughly speaking, and paraphrasing <a href="https://www.wiley.com/en-us/The+ETF+Handbook%3A+How+to+Value+and+Trade+Exchange+Traded+Funds%2C+2nd+Edition-p-9781119193906" target="_blank" rel="noopener">David Abner</a> words, an ETF are portfolio building blocks as analogy to Lego building blocks, that are used by investors, due to lower fees, ease of use, exchange listing standarization, and tax benefits in some countries. Additionally, it’s worth to mention tha ETFs are not same as Mutual Funds, where <a href="https://www.wiley.com/en-us/The+Exchange-Traded+Funds+Manual%2C+2nd+Edition-p-9780470637340" target="_blank" rel="noopener">Gastineau’s book</a> lists them on first pages.</p>
+
+<h2 id="etfs">ETFs</h2>
+<p>Investor must be aware ETF’s trading has a different mechanism when compared with Spot/Futures prices. Thereof, ETFs are exposed twofold to investors by means primary market and secondary market (see <a href="https://www.ssga.com/us/en/intermediary/resources/education/how-etfs-are-created-and-redeemed" target="_blank" rel="noopener">here</a>). When you as investor are catalogued as an <strong>Authorized Participant (AP)</strong>, you’re allowed to create and/or redeem ETF shares in primary market. It means both wrapping and unwrapping underlying securities into exchanged traded fund structure (see exhibit 3.1 and 3.2 in <a href="https://www.wiley.com/en-us/The+Exchange-Traded+Funds+Manual%2C+2nd+Edition-p-9780470637340" target="_blank" rel="noopener">Gastineau’s book</a>). Furthermore, ETFs can be traded in exchanges, or secondary market, which means that they are also exposed to intraday price volatility. Foregoing two characteristics are relevant since the first one is not present in active investing of crypto-assets, unless you are into active ETF investing (see <a href="https://www.fidelity.com/etfs/active-etf-account" target="_blank" rel="noopener">Fidelity</a> and <a href="https://www.ishares.com/us/insights/active-etf-investors" target="_blank" rel="noopener">iShares</a>).</p>
+
+<p>Despite price volatility during intraday sessions in the secondary market, in a daily basis the fund publishes a price called <strong>Net Asset Value (NAV)</strong> determined in a similar way as done for mutual funds. It means ETF’s expenses and liabilities are substracted from ETF’s total assets, then dividing the result by number of ETF shares outstanding. NAV is expressed in value per share. Thus, NAV may act as an open price in next trading session, of course devealing the opportunity of profits when gaps appear.</p>
+
+<p>⚠️ Warning</p>
+
+<blockquote>
+  <p>Unfortunatelly as a retail investor you won’t be allowed to be an <strong>authorized investor</strong> since it is reserved to market makers, investment banks or financial institutions. Reasons are diverse, but some of them are: access to large capital, operational capacity, and registration with financial/market regulator. Thus, the benefit of creating/redeem shares is only for APs. As retail investors the only chance to purchase ETFs is by means exchanges.</p>
+</blockquote>
+
+<h2 id="crypto-etfs">Crypto ETFs</h2>
+<p>Having known a bit more about ETFs, now lets have a glance on crypto ETFs. Looking for them in the internet, I observe a common classification across different ETFs issuers and other webpages. Summary of such classification below, with <strong>EXAMPLES</strong> by type.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Example ETFs / Funds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Spot Crypto ETFs</td>
+      <td>Track the actual price of a cryptocurrency by holding the underlying asset.</td>
+      <td>iShares Bitcoin Trust <a href="https://www.ishares.com/us/products/333011/ishares-bitcoin-trust-etf" target="_blank" rel="noopener">(IBIT)</a>, Fidelity Wise Origin Bitcoin Fund <a href="https://institutional.fidelity.com/prgw/digital/research/quote/dashboard/summary?symbol=FBTC" target="_blank" rel="noopener">(FBTC)</a></td>
+    </tr>
+    <tr>
+      <td>Futures Crypto ETFs</td>
+      <td>Track cryptocurrency futures contracts rather than the underlying asset.</td>
+      <td>ProShares Bitcoin Strategy ETF <a href="https://www.proshares.com/our-etfs/strategic/bito" target="_blank" rel="noopener">(BITO)</a>, Simplify Bitcoin Strategy PLUS Income ETF <a href="https://www.simplify.us/etfs/maxi-simplify-bitcoin-strategy-plus-income-etf" target="_blank" rel="noopener">(MAXI)</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="spot-crypto-etfs">Spot Crypto ETFs</h3>
+<p>Is almost self-explanatory the sort of ETF this class deals with, but for the sake of research I’ve looked on both example ETF’s prospectus. Thus, both <a href="https://www.ishares.com/us/library/stream-document?stream=reg&amp;product=IUS-IBIT-B&amp;shareClass=NA&amp;documentId=2212465%7E2340699%7E2275834%7E2369501%7E2301203&amp;iframeUrlOverride=%2Fus%2Fliterature%2Fprospectus%2Fp-ishares-bitcoin-trust-12-31.pdf" target="_blank" rel="noopener">IBIL prospectus</a> and <a href="https://www.actionsxchangerepository.fidelity.com/ShowDocument/ComplianceEnvelope.htm?_fax=-18%2342%23-61%23-110%23114%2378%23117%2320%23-1%2396%2339%23-62%23-21%2386%23-100%2337%2316%2335%23-68%2391%23-66%2354%23103%23-16%2369%23-30%2358%23-20%2376%23-84%23-11%23-87%230%23-50%23-20%23-92%23-98%23-116%23-28%2358%23-38%23-43%23-39%23-42%23-96%23-88%2388%23-45%23105%23-76%2367%23125%23123%23-122%23-5%2319%23-74%235%23-89%23-105%23-67%23126%2377%23-126%23100%2345%23-44%23-73%23-15%238%23-21%23-37%23-17%23-14%23-98%23123%23-18%2345%23-59%23-82%2367%2383%23112%2317%2370%23-78%2378%23-50%2336%23-86%23-90%2381%23-21%23-119%23-30%23120%2349%2328%23-98%2333%2351%23-78%23-119%23-16%2350%23-58%2350%23102%2348%23-17%2352%23-99%23" target="_blank" rel="noopener">FBTC prospectus</a> contain a section called <strong>Seed Capital Investor</strong> where briefly describe the purchase of Bitcoin once inflows of capital from investors were received by the <strong>Trust</strong>. The Trust seeks to reflect BTC performance before payment of the Trust’s expenses and liabilities.</p>
+
+<h3 id="futures-crypto-etf">Futures Crypto ETF</h3>
+<p>Conversely to Spot Crypto ETFs, that invest directly on crypto-assets, a Future crypto ETF seeks to follow cryptocurrency behaviour by means derivatives contracts such as Futures. That’s the case of both <a href="https://www.proshares.com/our-etfs/strategic/bito" target="_blank" rel="noopener">BITO prospectus</a> where it is explicitely announced that the <strong>Principal Investment Strategy</strong> is not directly in Ether, but in <strong>Ether Future contracts</strong>, Money Market Instruments (US Treasuries, Repurchase Aggreements -REPO-), and Reverse REPO. Moreover, <a href="https://www.simplify.us/sites/default/files/etfs/prospectus/2025-02/Simiplify-MAXI-SPBC-Prospectus-FINAL-0225_0.pdf" target="_blank" rel="noopener">MAXI prospectus</a> makes the same clarification in <strong>Principal Investment Strategies</strong> section, where also other derivatives are pointed out such as Swaps, Options, or even other ETPs are part of the strategy to follow Bitcoin behaviour, which is the target of the ETF.</p>
+
+<h3 id="indirect-crypto-etfs">Indirect Crypto ETFs</h3>
+<p>Given the massive scope of crypto-assets, there is a special type of Crypto ETFs that are focused on companies crypto-related more than directly crypto-assets. Summary of such classification below, with <strong>EXAMPLES</strong> by type.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Example ETFs / Funds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Thematic Crypto ETFs</td>
+      <td>Focus on a theme, such as DeFi or Web3, including related companies.</td>
+      <td>Bitwise Crypto Innovators ETF <a href="https://bitqetf.com/" target="_blank" rel="noopener">(BITQ)</a></td>
+    </tr>
+    <tr>
+      <td>Blockchain ETFs</td>
+      <td>Invest in companies involved in blockchain technology, not direct crypto.</td>
+      <td>Amplify Transformational Data Sharing ETF <a href="https://amplifyetfs.com/blok/" target="_blank" rel="noopener">(BLOK)</a>, Siren Nasdaq NexGen Economy ETF <a href="https://sirenetfs.com/siren-nasdaq-nexgen-economy-etf-blcn/" target="_blank" rel="noopener">(BLCN)</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>⚠️ Warning</p>
+
+<blockquote>
+  <p>Besides, when dealing with Crypto ETFs, and given the nature of a ETF, it is possible to talk about <strong>ETF implied liquidity</strong>. The goal of such a implied liquidity is the understanding of how it is build for pricing purposes and trading analysis. A key point is that ETF trading volume <strong>IS NOT</strong> the same as ETF liquidity. ETF volume is a historical number showing what has traded in the past. On the other hand, ETF implied liquidity is a forward-looking number showing how much of an ETF can be traded in the future. See <a href="https://www.wiley.com/en-us/The+ETF+Handbook%3A+How+to+Value+and+Trade+Exchange+Traded+Funds%2C+2nd+Edition-p-9781119193906" target="_blank" rel="noopener">David Abner</a>, Chapter 5.</p>
+</blockquote>
+
+<h2 id="crypto-index-funds">Crypto Index Funds</h2>
+<p>On the other hand, as second type of passive investment the reader has is named Index Mutual Funds. It is a type of investment fund that aims to replicate the performance of a specific market index by holding the same securities in the same proportions. It may offer diversification, low management fees, being a popular choice for long-term investors.</p>
+
+<p>Table below provides a comparison of some <strong>EXAMPLES</strong> of the crypto index funds.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fund/ETP</th>
+      <th>Region</th>
+      <th>Assets</th>
+      <th>Structure</th>
+      <th>Holdings Type</th>
+      <th>Exchange</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Bitwise 10 Crypto Index Fund (BITW)</strong></td>
+      <td>US</td>
+      <td>Top 10</td>
+      <td>Public Trust</td>
+      <td>Spot</td>
+      <td>OTCQX</td>
+    </tr>
+    <tr>
+      <td><strong>Grayscale Digital Large Cap (GDLC)</strong></td>
+      <td>US</td>
+      <td>Large Cap</td>
+      <td>Public Trust</td>
+      <td>Spot</td>
+      <td>OTCQX</td>
+    </tr>
+    <tr>
+      <td><strong>21Shares Crypto Basket Index (HODL)</strong></td>
+      <td>EU</td>
+      <td>Top 5</td>
+      <td>ETP</td>
+      <td>Spot</td>
+      <td>SIX, Xetra</td>
+    </tr>
+    <tr>
+      <td><strong>Hashdex Nasdaq Crypto Index ETF (HASH11)</strong></td>
+      <td>BR</td>
+      <td>Top Cryptos</td>
+      <td>ETF</td>
+      <td>Spot</td>
+      <td>B3 (Brazil)</td>
+    </tr>
+    <tr>
+      <td><strong>Crypto20 (C20)</strong></td>
+      <td>Global</td>
+      <td>Top 20</td>
+      <td>Tokenized Fund</td>
+      <td>Spot</td>
+      <td>Ethereum (DEX)</td>
+    </tr>
+    <tr>
+      <td><strong>CoinShares Smart Contract (SLNK)</strong></td>
+      <td>EU</td>
+      <td>Smart Contracts</td>
+      <td>ETP</td>
+      <td>Spot</td>
+      <td>Xetra, SIX</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="takeaways">Takeaways</h1>
+<p>Reader and future crypto investor notices the scope to encompass crypto investing is not something as trivial as the most of people though at the beginning. A key factor to determine the best one that suits personal goals will be strongly associated to the goals, time to perform analysis, even taxes strategies.</p>
+
+<p>If you have time to perform a continuous analysis or, you are a master with automation and you also have the interest for financial-technical stuff, the active investment approach is for you. Conversely, if you are someone who does not have too much time for constantly assessing the information of crypto-asset market, passive investing is for you if you don’t want to miss exposure to this market. Easy, right?.</p>
+
+<p>Even if this takeaways sounds easy, please read the small letters in between each paragraph, you’ll realize that there is plenty of things to learn about, that can boost your profitability without looking your mind because an overexposure or misunderstood strategy. See you in next entry.</p>
+
+<hr />
+
+<blockquote>
+  <p><strong>Disclaimer:</strong><br />
+This content is provided for informational purposes only and does not constitute investment advice, financial recommendations, or an offer to buy or sell any financial instruments. Always conduct your own research and consult with a qualified financial advisor before making investment decisions.</p>
+</blockquote>
+</p>
+        
+			
+		
+			
+        
+			
+		
+			
+        
+			
+		
+			
+        
+			
+		
+			
+        
+			
+		
+			
+        
+			
+		
+	</div>
+      </section>
+
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/assets/js/jquery.scrollex.min.js"></script>
+	<script src="/assets/js/skel.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/assets/js/main.js"></script>
+
+
+        <script>
+      // Sidebar and collapsible sections functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        
+        // Sidebar toggle for mobile
+        if (sidebarToggle && sidebar && sidebarOverlay) {
+          sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+          });
+          
+          sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+          });
+        }
+
+        // Collapsible section headers
+        const sectionHeaders = document.querySelectorAll('.sidebar-section-header');
+        sectionHeaders.forEach(header => {
+          header.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const content = document.getElementById(targetId);
+            const toggle = this.querySelector('.collapse-toggle i');
+            
+            if (content) {
+              content.classList.toggle('expanded');
+              content.classList.toggle('collapsed');
+              
+              // Rotate chevron icon
+              if (content.classList.contains('expanded')) {
+                toggle.classList.remove('fa-chevron-right');
+                toggle.classList.add('fa-chevron-down');
+              } else {
+                toggle.classList.remove('fa-chevron-down');
+                toggle.classList.add('fa-chevron-right');
+              }
+            }
+          });
+        });
+
+        // --- Table of Contents Generation in Left Sidebar ---
+        const tocNav = document.getElementById('toc-sidebar-nav');
+        const mainContent = document.querySelector('#main .inner');
+        const tocSection = document.querySelector('.toc-section');
+        
+        if (tocNav && mainContent) {
+          const headings = mainContent.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            let tocHtml = '<ul class="toc-list">';
+            let numbers = [0, 0, 0, 0]; // For h1-h4
+            let tocNumbers = [0, 0, 0, 0]; // Separate numbering for TOC
+            
+            // Start from the first heading (index 0)
+            for (let idx = 0; idx < headings.length; idx++) {
+              const heading = headings[idx];
+              const level = parseInt(heading.tagName.substring(1)) - 1; // 0-based
+              
+              // Update numbering for content
+              numbers[level]++;
+              for (let i = level + 1; i < numbers.length; i++) numbers[i] = 0;
+              
+              // Build number string for content
+              let numberStr = numbers.slice(0, level + 1).filter(n => n > 0).join('.');
+              
+              // Prepend number to heading text
+              let headingText = heading.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
+              heading.innerHTML = `<span class=\"section-number\">${numberStr}.</span> ` + headingText;
+              
+              if (!heading.id) {
+                heading.id = headingText.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+              }
+              
+              // Add all headings to TOC
+              tocNumbers[level]++;
+              for (let i = level + 1; i < tocNumbers.length; i++) tocNumbers[i] = 0;
+              let tocNumberStr = tocNumbers.slice(0, level + 1).filter(n => n > 0).join('.');
+              
+              tocHtml += `<li class=\"toc-level-${level+1}\"><a href=\"#${heading.id}\"><span class='toc-number'>${tocNumberStr}.</span> ${headingText}</a></li>`;
+            }
+            
+            tocHtml += '</ul>';
+            tocNav.innerHTML = tocHtml;
+            
+            // Show TOC section
+            if (tocSection) {
+              tocSection.style.display = 'block';
+            }
+          } else {
+            // Hide TOC section if not enough headings
+            if (tocSection) {
+              tocSection.style.display = 'none';
+            }
+          }
+        }
+      });
+    </script>
+
+  </body>
+
+</html>
+  </body>
+
+</html>
