@@ -28,6 +28,7 @@
 	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
 	
 	
+	
 	<link rel="stylesheet" href="/assets/css/post.css" />
 	
 		<!-- KaTeX Configuration -->
@@ -356,7 +357,7 @@
   <li><strong>Microtyping</strong>: Advanced typography features for better-looking documents</li>
 </ul>
 
-<h1 id="step-1---installing-tex-live-distribution">Step 1 - Installing TeX Live Distribution</h1>
+<h1 id="installing-tex-live-distribution">Installing TeX Live Distribution</h1>
 
 <p>TeX Live is the most comprehensive and recommended LaTeX distribution for Linux systems. It includes pdfLaTeX and thousands of packages for various document types.</p>
 
@@ -400,7 +401,7 @@ kpathsea version 6.3.5
 
 <p>You should see output showing the pdfLaTeX version information.</p>
 
-<h1 id="step-2---setting-up-a-text-editor">Step 2 - Setting Up a Text Editor</h1>
+<h1 id="setting-up-a-text-editor">Setting Up a Text Editor</h1>
 
 <p>While you can use any text editor to write LaTeX documents, some editors provide special features like syntax highlighting, auto-completion, and integrated compilation.</p>
 
@@ -439,7 +440,7 @@ kpathsea version 6.3.5
 
 <p>I do prefer the IDE.</p>
 
-<h1 id="step-3---creating-your-first-latex-document">Step 3 - Creating Your First LaTeX Document</h1>
+<h1 id="creating-your-first-latex-document">Creating Your First LaTeX Document</h1>
 
 <p>Let’s create a simple LaTeX document to test your installation. Create a file called <code class="language-plaintext highlighter-rouge">first_document.tex</code>:</p>
 
@@ -493,7 +494,7 @@ where <span class="p">$</span><span class="nb">dt</span><span class="p">$</span>
 <span class="nt">\end{document}</span>
 </code></pre></div></div>
 
-<h1 id="step-4---compiling-your-document">Step 4 - Compiling Your Document</h1>
+<h1 id="compiling-your-document">Compiling Your Document</h1>
 
 <p>Now for compiling your <code class="language-plaintext highlighter-rouge">.tex</code> file into a PDF using pdfLaTeX:</p>
 
@@ -525,7 +526,7 @@ where <span class="p">$</span><span class="nb">dt</span><span class="p">$</span>
 
 <p>The first pass generates auxiliary files, and subsequent passes resolve references and update the document structure.</p>
 
-<h1 id="step-5---working-with-bibliographies">Step 5 - Working with Bibliographies</h1>
+<h1 id="working-with-bibliographies">Working with Bibliographies</h1>
 
 <p><strong>Why BibTeX?</strong>. BibTeX is the standard tool for managing bibliographies in LaTeX. It separates citation data from your main document, making it easy to organize, update, and reuse references. BibTeX automatically formats citations and reference lists according to your chosen style, saving time and reducing errors.</p>
 
@@ -636,7 +637,7 @@ Quantitative finance has evolved through foundational works that have shaped mod
 <span class="o">&gt;</span> pdflatex document.tex
 </code></pre></div></div>
 
-<h1 id="step-6---common-pdflatex-commands-and-options">Step 6 - Common pdfLaTeX Commands and Options</h1>
+<h1 id="common-pdflatex-commands-and-options">Common pdfLaTeX Commands and Options</h1>
 
 <p>You can summarize the most useful pdfLaTeX commands in the table below:</p>
 
@@ -681,7 +682,7 @@ Quantitative finance has evolved through foundational works that have shaped mod
 
 <p><strong>Warning</strong>: Only use <code class="language-plaintext highlighter-rouge">-shell-escape</code> with trusted documents as it allows LaTeX to execute system commands.</p>
 
-<h1 id="step-7---essential-latex-packages">Step 7 - Essential LaTeX Packages</h1>
+<h1 id="essential-latex-packages">Essential LaTeX Packages</h1>
 <p>Since more sophisticated presentations require extra tools, pdfLatex also allows to add extra packages to enrich the document. Based on the distribution they can be installed as dollows.</p>
 
 <table>
@@ -768,7 +769,7 @@ Quantitative finance has evolved through foundational works that have shaped mod
 
 <p>These packages ensure you have all the tools necessary for professional scientific and technical documentation in LaTeX.</p>
 
-<h1 id="step-8---troubleshooting-common-issues">Step 8 - Troubleshooting Common Issues</h1>
+<h1 id="troubleshooting-common-issues">Troubleshooting Common Issues</h1>
 
 <p>When working with pdfLaTeX in Linux, you may encounter issues such as missing files, unavailable packages, permission errors, outdated auxiliary files, or compilation failures. Addressing these problems quickly ensures smooth document preparation and compilation.</p>
 
@@ -809,7 +810,7 @@ Quantitative finance has evolved through foundational works that have shaped mod
   </tbody>
 </table>
 
-<h1 id="step-9---automation-with-makefiles">Step 9 - Automation with Makefiles</h1>
+<h1 id="automation-with-makefiles">Automation with Makefiles</h1>
 
 <p>Automating LaTeX compilation with a <code class="language-plaintext highlighter-rouge">Makefile</code> streamlines your workflow by:</p>
 <ul>
@@ -853,7 +854,7 @@ Quantitative finance has evolved through foundational works that have shaped mod
 make clean <span class="c"># This one cleans auxiliary files</span>
 </code></pre></div></div>
 
-<h1 id="step-10---advanced-tips-and-best-practices">Step 10 - Advanced Tips and Best Practices</h1>
+<h1 id="advanced-tips-and-best-practices">Advanced Tips and Best Practices</h1>
 
 <h2 id="use-latexmk-for-automatic-compilation">Use latexmk for automatic compilation</h2>
 <p>latexmk is a highly recommended tool for automating LaTeX document compilation. It intelligently tracks dependencies and automatically runs the necessary sequence of commands (such as multiple pdflatex and bibtex passes) to resolve references, bibliographies, and indexes. This eliminates the need for manual multi-pass compilation and reduces errors caused by forgetting a step.</p>
