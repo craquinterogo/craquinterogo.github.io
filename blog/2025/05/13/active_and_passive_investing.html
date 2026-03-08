@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <!--
-    Forty by HTML5 UP
-    html5up.net | @ajlkn
-    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-  -->
-<html>
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
 
   <head>
 	<!-- Google tag (gtag.js) -->
@@ -27,6 +26,10 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
 	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
 		<!-- KaTeX Configuration -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
@@ -108,87 +111,70 @@
 		<li><a href="#" class="button fit">Log In</a></li>
 	</ul> -->
 </nav>
- 
-    
-    <!-- Enhanced Sidebar with TOC and Category-specific Posts -->
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          
-          
-          
-    
-    <aside id="sidebar" class="sidebar">
-      <div class="sidebar-content">
-        <!-- Table of Contents Section (Collapsible) -->
-        <div class="sidebar-section toc-section">
-          <div class="sidebar-section-header" data-target="toc-content">
-            <h4>
-              <i class="fa fa-list-ul"></i> Table of Contents
-            </h4>
-            <button class="collapse-toggle" aria-label="Toggle Table of Contents">
-              <i class="fa fa-chevron-down"></i>
-            </button>
-          </div>
-          <div id="toc-content" class="sidebar-section-content expanded">
-            <nav id="toc-sidebar-nav"></nav>
-          </div>
-        </div>
 
-        <!-- Related Posts Section (Collapsible) -->
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
         <div class="sidebar-section related-posts-section">
           <div class="sidebar-section-header" data-target="related-posts-content">
             <h4>
-              <i class="fa fa-folder"></i> 
-              
-                Portfolio Management Posts
-              
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Portfolio Management
             </h4>
-            <button class="collapse-toggle" aria-label="Toggle Related Posts">
-              <i class="fa fa-chevron-down"></i>
+            <button class="collapse-toggle" aria-label="Toggle related posts">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
             </button>
           </div>
           <div id="related-posts-content" class="sidebar-section-content expanded">
             
-              <ul class="recent-posts">
-                
-                
-                
-                
-                  <li class="no-related-posts">
-                    <p>No other posts in this category yet.</p>
-                  </li>
-                
-              </ul>
               
-              <!-- Show link to all posts in this category -->
+              
+              
+                <p style="font-size:0.78rem;color:rgba(232,232,232,0.4);margin:0">No other posts yet.</p>
+              
               <div class="sidebar-category-link">
-                <a href="/my-posts" class="view-all-category">
-                  View All Portfolio Management Posts →
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
                 </a>
               </div>
             
@@ -197,57 +183,129 @@
       </div>
     </aside>
 
-    <!-- Sidebar toggle for mobile -->
-    <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle sidebar">
-      <i class="fa fa-bars"></i>
-    </button>
-    
-    <!-- Sidebar overlay for mobile -->
-    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button class="collapse-toggle" aria-label="Toggle table of contents">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
 
-    <!-- Main -->
+    <!-- Mobile toggles -->
+    <button id="sidebar-left-toggle"  class="sidebar-toggle sidebar-toggle--left"  aria-label="Toggle related posts"    aria-expanded="false"><i class="fa fa-folder"   aria-hidden="true"></i></button>
+    <button id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-label="Toggle table of contents" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
     <div id="main" class="alt">
-
-      <!-- One -->
       <section id="one">
-	<div class="inner">
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-          <header class="major">
-            <h1>Active vs Passive Investing in Crypto</h1>
-          </header>
+        <div class="inner">
+
           
-            <div class="post-image-container">
-              <img src="/assets/images/01_post_images/003_crypto/01_crypto_post.jpeg" alt="Active vs Passive Investing in Crypto" />
-            </div>
+            
+              
+            
           
-          <p>Jul 13, 2025</p>
-          <p><p>For a long time people though the only way to participate in capital markets is staying long periods in front to a screen, looking at line plots and a massive amount of financial figures. Even more extended when talking about cryptocurrencies, a market where any person with access to the internet is allowed to participate. Some decades ago the trading of financial assets was conducted on a trading floor in person, but fortunately this is no longer the case. It is also true that sophisticated financial products have evolved so that today a more diversified type of assets are available, and ready for assessing and investment.</p>
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#portfolio-management">Portfolio Management</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Active vs Passive Investing in Crypto</span>
+                    </div>
+                  
+
+                  <h1>Active vs Passive Investing in Crypto</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2025-07-13T00:00:00+02:00">July 13, 2025</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">passive investing</span>
+                      
+                        <span class="post-tag-pill">active investing</span>
+                      
+                        <span class="post-tag-pill">investing</span>
+                      
+                        <span class="post-tag-pill">portfolio management</span>
+                      
+                        <span class="post-tag-pill">cryptocurrency</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="/assets/images/01_post_images/003_crypto/01_crypto_post.jpeg"
+                    alt="Active vs Passive Investing in Crypto"
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <div class="post-body" id="post-body-content">
+                  <p>For a long time people though the only way to participate in capital markets is staying long periods in front to a screen, looking at line plots and a massive amount of financial figures. Even more extended when talking about cryptocurrencies, a market where any person with access to the internet is allowed to participate. Some decades ago the trading of financial assets was conducted on a trading floor in person, but fortunately this is no longer the case. It is also true that sophisticated financial products have evolved so that today a more diversified type of assets are available, and ready for assessing and investment.</p>
 
 <p>Assets available in capital markets have been evolving to meet the needs of market participants not only in terms of payoffs, but also in terms of investment strategies. Notwithstanding, not always the constraint to participate in capital markets lies on access or diversity of assets, but also time and knowledge. That’s why some sophisticated assets are exclusively granted to trade across <strong>specialized professionals</strong> with dedicated time and experience, for instance in derivatives market. But market has changed and now there are venues granting retail investors to participate remotely. A good example can be read in figure 1-1 of book titled <a href="https://www.amazon.com/Algorithmic-Trading-DMA-introduction-strategies/dp/0956399207" target="_blank" rel="noopener">Algorithmic Trading &amp; DMA</a> written by Johnson B., where different market connection are depicted because of different type of participants.</p>
 
@@ -455,33 +513,35 @@
   <p><strong>Disclaimer:</strong><br />
 This content is provided for informational purposes only and does not constitute investment advice, financial recommendations, or an offer to buy or sell any financial instruments. Always conduct your own research and consult with a qualified financial advisor before making investment decisions.</p>
 </blockquote>
-</p>
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-	</div>
-      </section>
 
+                </div>
+
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
     </div>
 
     <!-- Footer -->
@@ -678,110 +738,131 @@ This content is provided for informational purposes only and does not constitute
 	<script src="/assets/js/main.js"></script>
 
 
-        <script>
-      // Sidebar and collapsible sections functionality
-      document.addEventListener('DOMContentLoaded', function() {
-        const sidebar = document.getElementById('sidebar');
-        const sidebarToggle = document.getElementById('sidebar-toggle');
-        const sidebarOverlay = document.getElementById('sidebar-overlay');
-        
-        // Sidebar toggle for mobile
-        if (sidebarToggle && sidebar && sidebarOverlay) {
-          sidebarToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('active');
-            sidebarOverlay.classList.toggle('active');
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── Dual sidebar toggles (mobile) ───────────────── */
+        function makeSidebarToggle(toggleId, sidebarId, overlayId) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+
+          toggle.addEventListener('click', function () {
+            var open = sidebar.classList.toggle('active');
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
           });
-          
-          sidebarOverlay.addEventListener('click', function() {
+          overlay.addEventListener('click', function () {
             sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
+            overlay.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
           });
         }
 
-        // Collapsible section headers
-        const sectionHeaders = document.querySelectorAll('.sidebar-section-header');
-        sectionHeaders.forEach(header => {
-          header.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const content = document.getElementById(targetId);
-            const toggle = this.querySelector('.collapse-toggle i');
-            
-            if (content) {
-              content.classList.toggle('expanded');
-              content.classList.toggle('collapsed');
-              
-              // Rotate chevron icon
-              if (content.classList.contains('expanded')) {
-                toggle.classList.remove('fa-chevron-right');
-                toggle.classList.add('fa-chevron-down');
-              } else {
-                toggle.classList.remove('fa-chevron-down');
-                toggle.classList.add('fa-chevron-right');
-              }
+        makeSidebarToggle('sidebar-left-toggle',  'sidebar-left',  'sidebar-left-overlay');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay');
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
             }
           });
         });
 
-        // --- Table of Contents Generation in Left Sidebar ---
-        const tocNav = document.getElementById('toc-sidebar-nav');
-        const mainContent = document.querySelector('#main .inner');
-        const tocSection = document.querySelector('.toc-section');
-        
-        if (tocNav && mainContent) {
-          const headings = mainContent.querySelectorAll('h1, h2, h3, h4');
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
           if (headings.length > 2) {
-            let tocHtml = '<ul class="toc-list">';
-            let numbers = [0, 0, 0, 0]; // For h1-h4
-            let tocNumbers = [0, 0, 0, 0]; // Separate numbering for TOC
-            
-            // Start from the first heading (index 0)
-            for (let idx = 0; idx < headings.length; idx++) {
-              const heading = headings[idx];
-              const level = parseInt(heading.tagName.substring(1)) - 1; // 0-based
-              
-              // Update numbering for content
-              numbers[level]++;
-              for (let i = level + 1; i < numbers.length; i++) numbers[i] = 0;
-              
-              // Build number string for content
-              let numberStr = numbers.slice(0, level + 1).filter(n => n > 0).join('.');
-              
-              // Prepend number to heading text
-              let headingText = heading.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
-              heading.innerHTML = `<span class=\"section-number\">${numberStr}.</span> ` + headingText;
-              
-              if (!heading.id) {
-                heading.id = headingText.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            var nums    = [0, 0, 0, 0];
+            var tocNums = [0, 0, 0, 0];
+            var html    = '<ul class="toc-list">';
+
+            headings.forEach(function (h) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              h.innerHTML  = '<span class="section-number">' + numStr + '.</span> ' + rawText;
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
               }
-              
-              // Add all headings to TOC
-              tocNumbers[level]++;
-              for (let i = level + 1; i < tocNumbers.length; i++) tocNumbers[i] = 0;
-              let tocNumberStr = tocNumbers.slice(0, level + 1).filter(n => n > 0).join('.');
-              
-              tocHtml += `<li class=\"toc-level-${level+1}\"><a href=\"#${heading.id}\"><span class='toc-number'>${tocNumberStr}.</span> ${headingText}</a></li>`;
-            }
-            
-            tocHtml += '</ul>';
-            tocNav.innerHTML = tocHtml;
-            
-            // Show TOC section
-            if (tocSection) {
-              tocSection.style.display = 'block';
-            }
+              tocNums[level]++;
+              for (var j = level + 1; j < 4; j++) tocNums[j] = 0;
+              var tocNum   = tocNums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              html += '<li class="toc-level-' + (level + 1) + '">'
+                + '<a href="#' + h.id + '">'
+                + '<span class="toc-number">' + tocNum + '.</span> ' + rawText
+                + '</a></li>';
+            });
+
+            html += '</ul>';
+            tocNav.innerHTML = html;
+            if (tocSect) tocSect.style.display = 'block';
           } else {
-            // Hide TOC section if not enough headings
-            if (tocSection) {
-              tocSection.style.display = 'none';
-            }
+            if (tocSect) tocSect.style.display = 'none';
           }
         }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                var active = tocNav.querySelector('a[href="#' + entry.target.id + '"]');
+                if (active) active.setAttribute('data-active', '');
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
       });
+    }());
     </script>
 
   </body>
-
-</html>
-  </body>
-
 </html>

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <!--
-    Forty by HTML5 UP
-    html5up.net | @ajlkn
-    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-  -->
-<html>
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
 
   <head>
 	<!-- Google tag (gtag.js) -->
@@ -27,6 +26,10 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
 	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
 		<!-- KaTeX Configuration -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
@@ -108,163 +111,152 @@
 		<li><a href="#" class="button fit">Log In</a></li>
 	</ul> -->
 </nav>
- 
-    
-    <!-- Enhanced Sidebar with TOC and Category-specific Posts -->
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          
-          
-          
-    
-    <aside id="sidebar" class="sidebar">
-      <div class="sidebar-content">
-        <!-- Table of Contents Section (Collapsible) -->
-        <div class="sidebar-section toc-section">
-          <div class="sidebar-section-header" data-target="toc-content">
-            <h4>
-              <i class="fa fa-list-ul"></i> Table of Contents
-            </h4>
-            <button class="collapse-toggle" aria-label="Toggle Table of Contents">
-              <i class="fa fa-chevron-down"></i>
-            </button>
-          </div>
-          <div id="toc-content" class="sidebar-section-content expanded">
-            <nav id="toc-sidebar-nav"></nav>
-          </div>
-        </div>
 
-        <!-- Related Posts Section (Collapsible) -->
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
         <div class="sidebar-section related-posts-section">
           <div class="sidebar-section-header" data-target="related-posts-content">
             <h4>
-              <i class="fa fa-folder"></i> 
-              
-                General Posts
-              
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              General
             </h4>
-            <button class="collapse-toggle" aria-label="Toggle Related Posts">
-              <i class="fa fa-chevron-down"></i>
+            <button class="collapse-toggle" aria-label="Toggle related posts">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
             </button>
           </div>
           <div id="related-posts-content" class="sidebar-section-content expanded">
             
-              <ul class="recent-posts">
-                
-                
-                
-                  <li class="recent-post-item">
-                    <a href="/blog/2025/11/15/latex_in_linux" class="recent-post-link">
-                      
-                        <div class="recent-post-image">
-                          <img src="/assets/images/01_post_images/001_beginning/js_code_tests.png" alt="Getting Started with pdfLaTeX in Linux - A Complete Guide" />
-                        </div>
-                      
-                      <div class="recent-post-content">
-                        <h5>Getting Started with pdfLaTeX in Linu...</h5>
-                        
-                          <span class="recent-post-date">Nov 15, 2025</span>
-                        
-                      </div>
-                    </a>
-                  </li>
-                
-                  <li class="recent-post-item">
-                    <a href="/blog/2025/07/26/projext-management_complex-systems_and_agile_desingt-hinking" class="recent-post-link">
-                      
-                        <div class="recent-post-image">
-                          <img src="/assets/images/01_post_images/001_beginning/005_Agile_.jpg" alt="Project Management, Complex Systems, Agile and Design Thinking." />
-                        </div>
-                      
-                      <div class="recent-post-content">
-                        <h5>Project Management, Complex Systems, ...</h5>
-                        
-                          <span class="recent-post-date">Jul 26, 2025</span>
-                        
-                      </div>
-                    </a>
-                  </li>
-                
-                  <li class="recent-post-item">
-                    <a href="/blog/2023/08/13/how_to_become_a_quant" class="recent-post-link">
-                      
-                        <div class="recent-post-image">
-                          <img src="/assets/images/01_post_images/002_become/how_to_become.png" alt="To be a Quant" />
-                        </div>
-                      
-                      <div class="recent-post-content">
-                        <h5>To be a Quant</h5>
-                        
-                          <span class="recent-post-date">Aug 13, 2023</span>
-                        
-                      </div>
-                    </a>
-                  </li>
-                
-                  <li class="recent-post-item">
-                    <a href="/blog/2022/03/10/welcome-to-my-blog" class="recent-post-link">
-                      
-                        <div class="recent-post-image">
-                          <img src="/assets/images/01_post_images/001_beginning/welcome_2_my_blog.jpg" alt="Welcome to My Quantitative Finance Blog" />
-                        </div>
-                      
-                      <div class="recent-post-content">
-                        <h5>Welcome to My Quantitative Finance Blog</h5>
-                        
-                          <span class="recent-post-date">Mar 10, 2022</span>
-                        
-                      </div>
-                    </a>
-                  </li>
-                
-                
-              </ul>
               
-              <!-- Show link to all posts in this category -->
+              
+              
+                <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/11/15/latex_in_linux" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/01_post_images/001_beginning/js_code_tests.png" alt="Getting Started with pdfLaTeX in Linux - A Complete Guide" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Getting Started with pdfLaTeX in Linux - ...</h5>
+                          
+                            <span class="recent-post-date">Nov 15, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/07/26/projext-management_complex-systems_and_agile_desingt-hinking" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/01_post_images/001_beginning/005_Agile_.jpg" alt="Project Management, Complex Systems, Agile and Design Thinking." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Project Management, Complex Systems, Agil...</h5>
+                          
+                            <span class="recent-post-date">Jul 26, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2023/08/13/how_to_become_a_quant" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/01_post_images/002_become/how_to_become.png" alt="To be a Quant" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>To be a Quant</h5>
+                          
+                            <span class="recent-post-date">Aug 13, 2023</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2022/03/10/welcome-to-my-blog" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/01_post_images/001_beginning/welcome_2_my_blog.jpg" alt="Welcome to My Quantitative Finance Blog" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Welcome to My Quantitative Finance Blog</h5>
+                          
+                            <span class="recent-post-date">Mar 10, 2022</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                </ul>
+              
               <div class="sidebar-category-link">
-                <a href="/my-posts" class="view-all-category">
-                  View All General Posts →
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
                 </a>
               </div>
             
@@ -273,73 +265,141 @@
       </div>
     </aside>
 
-    <!-- Sidebar toggle for mobile -->
-    <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle sidebar">
-      <i class="fa fa-bars"></i>
-    </button>
-    
-    <!-- Sidebar overlay for mobile -->
-    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button class="collapse-toggle" aria-label="Toggle table of contents">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
 
-    <!-- Main -->
+    <!-- Mobile toggles -->
+    <button id="sidebar-left-toggle"  class="sidebar-toggle sidebar-toggle--left"  aria-label="Toggle related posts"    aria-expanded="false"><i class="fa fa-folder"   aria-hidden="true"></i></button>
+    <button id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-label="Toggle table of contents" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
     <div id="main" class="alt">
-
-      <!-- One -->
       <section id="one">
-	<div class="inner">
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-			
-		
-			
-        
-          <header class="major">
-            <h1>The Beginning</h1>
-          </header>
+        <div class="inner">
+
           
-            <div class="post-image-container">
-              <img src="/assets/images/01_post_images/001_beginning/journey.jpg" alt="The Beginning" />
-            </div>
+            
+              
+            
           
-          <p>Aug 06, 2023</p>
-          <p><p>Quantiative finance field is full of eager people. People that expect getting 6 figures in their anual checks. There is no anything bad with this, we al work for gaining our deserved payment. And even though I had this way of thinking when youger, I’ve also learned to enjoy the journey of learning about models, techniques, and challenges that push you beyond your “limits” from time to time.</p>
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#general">General</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>The Beginning</span>
+                    </div>
+                  
+
+                  <h1>The Beginning</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2023-08-06T00:00:00+02:00">August 06, 2023</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">personal journey</span>
+                      
+                        <span class="post-tag-pill">career transition</span>
+                      
+                        <span class="post-tag-pill">quantitative finance</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="/assets/images/01_post_images/001_beginning/journey.jpg"
+                    alt="The Beginning"
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <div class="post-body" id="post-body-content">
+                  <p>Quantiative finance field is full of eager people. People that expect getting 6 figures in their anual checks. There is no anything bad with this, we al work for gaining our deserved payment. And even though I had this way of thinking when youger, I’ve also learned to enjoy the journey of learning about models, techniques, and challenges that push you beyond your “limits” from time to time.</p>
 
 <p>Quantitative finance comes as a way to move from pure software development. I used to work as a software developer, and I liked. Nonetheless, as software engineer I experimented the monotonous pain of doing similar things many times over the week. I browsed the job market around 2011-2015, and the topic didn’t change to much. Somedays solving bugs, another ones addig features to the system but not always the most interesting ones. In my experience, the best one was being the support of people with better knowledge than me by leading projects from technical perspective. Unfortunatelly, still having this really nice experience I felt incomplete. I have the impression that it was also because at that moment I has known about quantitative finance.</p>
 
@@ -348,17 +408,19 @@
 <p>Do not forget, ever the quantitative stuff, that’s why people refer to us as quants. A quantitative analyst must know the fundamentals in probability, statistics, finance, mathematics be cause that is what we do during the day, assessing and modelling systems with numbers. People that knew me in university (systems engineering) may aknowledge that I was partially interested, because at that moment even physics seemed to me a very far approximation of reality. I think the root cause of that was my experience learning about the quantitative approach of electric fields in my technical highschool. But a miracle happened!. A friend motivated me to participate in a trading concourse performed in Colombia, anually. If you have already read the post <strong>about me</strong>, you may infer there were many events happening around 2011-2014. Well, this is the second driver to get involved in finance, the deep interest for knowing how market agents do shape prices. Of course, in that moment I didn’t think in so technical words, I was just interested on what’s the reason the prices move so fast in one trading session. As result, I started my second bachelor degree in economics, from scratch, I didn’t want to learn everything as any other student, even though I was almost finishing my bachelor degree in systems engineering. As a result of this overlaped experience between this fields of knowledge I started a pretty simple model that afterwards turned into my undergradate document in systems engineering, titled “A FX strategy using graphs theory”. This model tried to to solve the problem of getting the best route to take advantage of arbitrage in the market given crossed quotes in the market. Currencies are the nodes, and quotes are depicted by the edges, the rest is your imagination. Unfortunatelly, in that moment I coded it in PL/SQL, and please don’t ask why, I just did it. Writting this lines just made me reconsider rewrite it again, with market friction parameters to see what happens. Nice material for a new post.</p>
 
 <p>So, wrapping up, the convergence was not planned, as it was not the original idea to become a quant before second time joining university to obtain a diploma as a economist. But I think I have been blessed, or lucky as you wish name this, because many thinks have happened and every day I feel more into my profession as a quant. I do not forget the discipline that requires to know as much as you can of different branches of knowledge to be creative and innovative. Nonetheless, I’ve learned that there is a point in which is clever to start specializing. I think I do have a clear perspective of what I want to be specialized in. What do you guess it is?. A hint … it is not to be a software developer again, I’m greateful because of the experience in the field though …</p>
-</p>
-        
-			
-		
-			
-        
-			
-		
-	</div>
-      </section>
 
+                </div>
+
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
     </div>
 
     <!-- Footer -->
@@ -555,110 +617,131 @@
 	<script src="/assets/js/main.js"></script>
 
 
-        <script>
-      // Sidebar and collapsible sections functionality
-      document.addEventListener('DOMContentLoaded', function() {
-        const sidebar = document.getElementById('sidebar');
-        const sidebarToggle = document.getElementById('sidebar-toggle');
-        const sidebarOverlay = document.getElementById('sidebar-overlay');
-        
-        // Sidebar toggle for mobile
-        if (sidebarToggle && sidebar && sidebarOverlay) {
-          sidebarToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('active');
-            sidebarOverlay.classList.toggle('active');
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── Dual sidebar toggles (mobile) ───────────────── */
+        function makeSidebarToggle(toggleId, sidebarId, overlayId) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+
+          toggle.addEventListener('click', function () {
+            var open = sidebar.classList.toggle('active');
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
           });
-          
-          sidebarOverlay.addEventListener('click', function() {
+          overlay.addEventListener('click', function () {
             sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
+            overlay.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
           });
         }
 
-        // Collapsible section headers
-        const sectionHeaders = document.querySelectorAll('.sidebar-section-header');
-        sectionHeaders.forEach(header => {
-          header.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const content = document.getElementById(targetId);
-            const toggle = this.querySelector('.collapse-toggle i');
-            
-            if (content) {
-              content.classList.toggle('expanded');
-              content.classList.toggle('collapsed');
-              
-              // Rotate chevron icon
-              if (content.classList.contains('expanded')) {
-                toggle.classList.remove('fa-chevron-right');
-                toggle.classList.add('fa-chevron-down');
-              } else {
-                toggle.classList.remove('fa-chevron-down');
-                toggle.classList.add('fa-chevron-right');
-              }
+        makeSidebarToggle('sidebar-left-toggle',  'sidebar-left',  'sidebar-left-overlay');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay');
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
             }
           });
         });
 
-        // --- Table of Contents Generation in Left Sidebar ---
-        const tocNav = document.getElementById('toc-sidebar-nav');
-        const mainContent = document.querySelector('#main .inner');
-        const tocSection = document.querySelector('.toc-section');
-        
-        if (tocNav && mainContent) {
-          const headings = mainContent.querySelectorAll('h1, h2, h3, h4');
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
           if (headings.length > 2) {
-            let tocHtml = '<ul class="toc-list">';
-            let numbers = [0, 0, 0, 0]; // For h1-h4
-            let tocNumbers = [0, 0, 0, 0]; // Separate numbering for TOC
-            
-            // Start from the first heading (index 0)
-            for (let idx = 0; idx < headings.length; idx++) {
-              const heading = headings[idx];
-              const level = parseInt(heading.tagName.substring(1)) - 1; // 0-based
-              
-              // Update numbering for content
-              numbers[level]++;
-              for (let i = level + 1; i < numbers.length; i++) numbers[i] = 0;
-              
-              // Build number string for content
-              let numberStr = numbers.slice(0, level + 1).filter(n => n > 0).join('.');
-              
-              // Prepend number to heading text
-              let headingText = heading.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
-              heading.innerHTML = `<span class=\"section-number\">${numberStr}.</span> ` + headingText;
-              
-              if (!heading.id) {
-                heading.id = headingText.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            var nums    = [0, 0, 0, 0];
+            var tocNums = [0, 0, 0, 0];
+            var html    = '<ul class="toc-list">';
+
+            headings.forEach(function (h) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              h.innerHTML  = '<span class="section-number">' + numStr + '.</span> ' + rawText;
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
               }
-              
-              // Add all headings to TOC
-              tocNumbers[level]++;
-              for (let i = level + 1; i < tocNumbers.length; i++) tocNumbers[i] = 0;
-              let tocNumberStr = tocNumbers.slice(0, level + 1).filter(n => n > 0).join('.');
-              
-              tocHtml += `<li class=\"toc-level-${level+1}\"><a href=\"#${heading.id}\"><span class='toc-number'>${tocNumberStr}.</span> ${headingText}</a></li>`;
-            }
-            
-            tocHtml += '</ul>';
-            tocNav.innerHTML = tocHtml;
-            
-            // Show TOC section
-            if (tocSection) {
-              tocSection.style.display = 'block';
-            }
+              tocNums[level]++;
+              for (var j = level + 1; j < 4; j++) tocNums[j] = 0;
+              var tocNum   = tocNums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              html += '<li class="toc-level-' + (level + 1) + '">'
+                + '<a href="#' + h.id + '">'
+                + '<span class="toc-number">' + tocNum + '.</span> ' + rawText
+                + '</a></li>';
+            });
+
+            html += '</ul>';
+            tocNav.innerHTML = html;
+            if (tocSect) tocSect.style.display = 'block';
           } else {
-            // Hide TOC section if not enough headings
-            if (tocSection) {
-              tocSection.style.display = 'none';
-            }
+            if (tocSect) tocSect.style.display = 'none';
           }
         }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                var active = tocNav.querySelector('a[href="#' + entry.target.id + '"]');
+                if (active) active.setAttribute('data-active', '');
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
       });
+    }());
     </script>
 
   </body>
-
-</html>
-  </body>
-
 </html>

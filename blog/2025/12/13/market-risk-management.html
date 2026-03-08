@@ -15,7 +15,7 @@
 
 	gtag('config', 'G-6YNFJY0416');
 	</script>
-	<title>Pair trading strategy using reinforcement learning algortihms (PPO and A2C) | </title>
+	<title>Market Risk and Portfolio Management (Why It Actually Matters) | </title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -120,42 +120,6 @@
     
       
         
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
           
           
           
@@ -167,7 +131,7 @@
           <div class="sidebar-section-header" data-target="related-posts-content">
             <h4>
               <i class="fa fa-folder" aria-hidden="true"></i>
-              Algorithmic Trading
+              Risk Management
             </h4>
             <button class="collapse-toggle" aria-label="Toggle related posts">
               <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -178,25 +142,7 @@
               
               
               
-                <ul class="recent-posts">
-                  
-                    <li class="recent-post-item">
-                      <a href="/blog/2025/11/22/mean-reversion-vs-reinforcement-learning-pair-trading" class="recent-post-link">
-                        
-                          <div class="recent-post-image">
-                            <img src="/assets/images/01_post_images/001_beginning/001_reingorcement_learning.jpg" alt="Mean Reversion Model vs RL Model in a Pair Trading Strategy: A Comparative Study" loading="lazy" />
-                          </div>
-                        
-                        <div class="recent-post-content">
-                          <h5>Mean Reversion Model vs RL Model in a Pai...</h5>
-                          
-                            <span class="recent-post-date">Nov 22, 2025</span>
-                          
-                        </div>
-                      </a>
-                    </li>
-                  
-                </ul>
+                <p style="font-size:0.78rem;color:rgba(232,232,232,0.4);margin:0">No other posts yet.</p>
               
               <div class="sidebar-category-link">
                 <a href="/all_posts" class="view-all-category">
@@ -242,42 +188,6 @@
           
             
               
-            
-          
-            
-              
-            
-          
-            
-              
-            
-          
-            
-              
-            
-          
-            
-              
-            
-          
-            
-              
-            
-          
-            
-              
-            
-          
-            
-              
-            
-          
-            
-              
-            
-          
-            
-              
 
                 <!-- Post header -->
                 <header class="post-header-block">
@@ -285,20 +195,20 @@
                   <!-- Breadcrumb -->
                   
                     <div class="post-breadcrumb" aria-label="Category">
-                      <a href="/all_posts#algorithmic-trading">Algorithmic Trading</a>
+                      <a href="/all_posts#risk-management">Risk Management</a>
                       <span class="sep" aria-hidden="true">/</span>
-                      <span>Pair trading strategy using reinforcement learn...</span>
+                      <span>Market Risk and Portfolio Management (Why It Ac...</span>
                     </div>
                   
 
-                  <h1>Pair trading strategy using reinforcement learning algortihms (PPO and A2C)</h1>
+                  <h1>Market Risk and Portfolio Management (Why It Actually Matters)</h1>
 
                   <!-- Meta row -->
                   <div class="post-meta" aria-label="Post metadata">
                     
                       <span class="post-meta__item">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                        <time datetime="2025-04-21T00:00:00+02:00">April 21, 2025</time>
+                        <time datetime="2025-12-13T00:00:00+01:00">December 13, 2025</time>
                       </span>
                       <span class="post-meta__sep" aria-hidden="true">·</span>
                     
@@ -312,11 +222,15 @@
                   
                     <div class="post-tags-header" aria-label="Tags">
                       
-                        <span class="post-tag-pill">Algorithmic Trading</span>
+                        <span class="post-tag-pill">risk management</span>
                       
-                        <span class="post-tag-pill">Reinforcement Learning</span>
+                        <span class="post-tag-pill">portfolio management</span>
                       
-                        <span class="post-tag-pill">Pair Trading Strategy</span>
+                        <span class="post-tag-pill">market risk</span>
+                      
+                        <span class="post-tag-pill">VaR</span>
+                      
+                        <span class="post-tag-pill">liquidity risk</span>
                       
                     </div>
                   
@@ -327,171 +241,188 @@
                 
                   <img
                     class="post-hero"
-                    src="/assets/images/02_algo_trading/001_rl_papers/rl_image.jpeg"
-                    alt="Pair trading strategy using reinforcement learning algortihms (PPO and A2C)"
+                    src="/assets/images/01_post_images/005_risk_management/001_market-risk.png"
+                    alt="Market Risk and Portfolio Management (Why It Actually Matters)"
                     loading="eager"
                   />
                 
 
                 <!-- Post body -->
                 <div class="post-body" id="post-body-content">
-                  <h1 id="deep-reinforcement-learning-for-pair-trading">Deep Reinforcement Learning for Pair Trading</h1>
-<p>This is a brief summary of a recently achieved personal goal: conducting a comprehensive study of reinforcement learning (RL) strategies using real-world parameters and a rigorous evaluation process. Specifically, the research investigates RL algorithms—Proximal Policy Optimization (PPO) and Advantage Actor-Critic (A2C)—applied to pair trading strategies. The findings are detailed in two articles <a class="citation" href="#quintero2024reinforcement">(Quintero et al., 2024; Quintero et al., 2025)</a>.</p>
-
-<p>A suggestion for the reader to learn about pair trading and/or statistical arbitrage, is the book titled <strong>The art and sci-ence of statistical arbitrage</strong> written by Isichenko. It contains the fundamentals of the strategy and some statistical methods to manage it. As said before, my approach was different in the way I followed partially such principles, still keeping in mind the fundamentals.</p>
-
-<h2 id="from-experimental-frameworks-to-comparative-strategy-analysis">From Experimental Frameworks to Comparative Strategy Analysis</h2>
-<p>The project was performed in three stages.</p>
-<ul>
-  <li>
-    <p>The <strong>first</strong> stage corresponds to my master thesis in Quantitative Finance (QF), where I do encompass the strategy by using three learning environments. The two learning environments are aimed to adopt a strategy different from pair trading strategy with discrete action spaces. The third one respecting the rules of pair trading, but in continuous time. Combination of strategies and action spaces were introduced as an excercise of confirmation since RL models have gained a lot of attention in algorithmic trading. As results, a blended output is noticed where the main takeaway that marks my analysis <em>is the fact that not all RL policies are deterministic, therefore model’s output is exposed to variance when extrapolated to stochastic policies</em>. In effect, this first experiment revealed that given that PPO and A2C use stochastic policy, the analysis under only one path is not enought to fully rely on. It is required to conduct the analysis given a number of simulations, at Monte Carlo simulation style.</p>
-  </li>
-  <li>
-    <p>A <strong>second</strong> stage consists in a conference paper as result of proceedings of 11th Workshop on Engineering Applications, WEA 2024, Barranquilla, Colombia, where co-authors such Diego Leon, Javier Sandoval and German Hernandes presented this work. This conference paper helped us to identify some drawbacks in the first analysis. The main one, and I didn’t mention in foregoing paragraph was the arbitrary inclusion of technical indicators, given my experience in traditional trading. It was an assumption that we expected to see an effect from. Our agnostic analysis of their influence suggested they could apport some support to the output though, when <strong>phase 2</strong> was performed we realized the technical indicators do not provide information to the model for making decisions, as we considered in the experiment. <a class="citation" href="#quintero2024reinforcement">(Quintero et al., 2024)</a>.</p>
-  </li>
-  <li>
-    <p>The <strong>third</strong> stage is summarized in a <em>study case</em> article where taking into account the output in stage #2, the signal was redefined together tachnical analysis indicators removal. Additionally, fine tunning is performed using <a href="https://docs.ray.io/en/latest/index.html" target="_blank" rel="noopener">Ray framework</a> for model parameters optimization. The output of this new approach suggests a slight improvement mainly attributed to the signal used to allow the RL agents identify opportunies to get in and get out a position in a pair trading strategy. <a class="citation" href="#quintero2025deep">(Quintero et al., 2025)</a>.</p>
-  </li>
-</ul>
-
-<p>I have to acknowledge that the work done by contributors of <a href="https://finrl.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">FinRL</a> boosted our analysis due to they provide a framework to execute this sort of analysis. The benefit of being open-source is that we dive into the bowels of the library. From a technical perspective I can highlight the learning on different functions that describe RL agents and how small changes may introduce significan impact among them when learning; furthermore, the interaction with <code class="language-plaintext highlighter-rouge">gym</code> library from OpenAI, among others. They have a good amount of agents, that I encorage the reader to read about in <a href="https://finrl.readthedocs.io/en/latest/start/three_layer.html" target="_blank" rel="noopener">here</a>.</p>
-
-<h2 id="data">Data</h2>
-<p>The selected instrument for these experiments were stocks. More specifically, a subset of pairs that we concluded are candidates after a rigurious fildering all combinations using S&amp;P 500 at 17th October, 2022. We run statistical tests and a measure to determine candidates. More details in <em>phase 1</em> document. This task took several hours in my laptop, I have to say. But it was worth</p>
-
-<p>Now, the project is summarized in two research studies exploring the use of <strong>Deep Reinforcement Learning (DRL)</strong> for <strong>pair trading</strong> — evolving from an experimental prototype to a comparative evaluation using well-known DRL algorithms.</p>
-
-<hr />
-<h1 id="conference-paper-and-paper">Conference paper and paper</h1>
-
-<h2 id="-phase-1-experimental-drl-framework-for-pair-trading">📘 Phase 1: Experimental DRL Framework for Pair Trading</h2>
-
-<ul>
-  <li><strong>📄 Title:</strong> Reinforcement Learning Model Applied in a Pair Trading Strategy</li>
-  <li><strong>📚 Source:</strong> Springer WEA, 2024</li>
-  <li><strong>🔗 DOI:</strong> <a href="https://link.springer.com/chapter/10.1007/978-3-031-74595-9_3" target="_blank" rel="noopener">Link to Chapter</a></li>
-</ul>
-
-<h3 id="-highlights">🧪 Highlights</h3>
-<ul>
-  <li>Developed three <strong>customized RL environments</strong> simulating a pair trading as a single-agent control task over a subset of 5 stock pairs from S&amp;P 500.</li>
-  <li><strong>Continuous action space:</strong> agent decides both position direction and size.</li>
-  <li><strong>Reward function:</strong> Portfolio value, discounting trading costs.</li>
-  <li>The action space includes <strong>technical indicators</strong>.</li>
-</ul>
-
-<h3 id="-results">✅ Results</h3>
-<ul>
-  <li>PPO showed the most consistent performance in Sharpe ratio and cumulative return.</li>
-  <li>A2C and DDPG had higher variance—highlighting sensitivity to hyperparameters and reward design.</li>
-  <li>RL models do not outperform classical methods in pair trading strategies, consistently.</li>
-</ul>
+                  <blockquote>
+  <p>⚠️ <strong>Disclaimer:</strong> Any suggestion or information described in this post does not constitute investment advice. The content reflects only the personal point of view of the writer and should not be considered as a recommendation for any financial decision.</p>
+</blockquote>
 
 <hr />
 
-<h2 id="-phase-2-comparative-study-of-a2c-and-ppo-but-with-new-signal">🚀 Phase 2: Comparative Study of A2C and PPO, but with new signal</h2>
+<h2 id="risk-is-not-the-enemy-ignorance-of-it-is">Risk is not the enemy. Ignorance of it is.</h2>
 
-<p><strong>📄 Title:</strong> Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO
-<strong>📚 Source:</strong> SN Computer Science, 2025<br />
-<strong>🔗 DOI:</strong> <a href="https://link.springer.com/epdf/10.1007/s42979-025-03854-0" target="_blank" rel="noopener">Link to Article</a></p>
+<p>I have spent a good portion of my professional career inside risk management departments, and one thing that strikes me every single time is how often people outside the field (and even some inside it) treat risk management as a bureaucratic checkbox. A necessary evil. Something that slows things down. This post is an attempt to push back on that idea, as clearly as I can.</p>
 
-<h3 id="-methodology">🧠 Methodology</h3>
-<ul>
-  <li>Same universe a in <strong>phase 1</strong></li>
-  <li>Different signal. This time it is adjusted by the moving average of last month to remov the trend.</li>
-  <li>Agents trained in a different environment where action space is continuous, but letting them oscilate depending of the band in the strategy.</li>
-  <li><strong>Technical indicators</strong> were removed from action space.</li>
-  <li>Comparison against classical method of pair trading strategy reveals an improvemnt respect to <strong>phase 1</strong> but still without outperforming classical methods.</li>
-</ul>
-
-<h3 id="-key-results">📊 Key Results</h3>
-<ul>
-  <li>Both A2C and PPO <strong>partially outperformed</strong> the benchmark.</li>
-  <li>PPO showed faster convergence and lower drawdowns.</li>
-  <li>Bounded action space for each of the bands in pair trading strategy improve the learning process</li>
-</ul>
+<p>Risk management, when done well, is not about preventing you from taking positions. It is about understanding what you own, what it can do to your capital in bad conditions, and how much of that you can truly afford to absorb. That distinction matters enormously in portfolio management, and it matters even more in the specific corner of the field I care about most: <strong>market risk</strong>.</p>
 
 <hr />
 
-<h2 id="-summary-of-contributions">🔁 Summary of Contributions</h2>
+<h2 id="what-is-market-risk">What is market risk?</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Feature</th>
-      <th>Phase 1</th>
-      <th>Phase 2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Environment Design</td>
-      <td>✅ Custom built</td>
-      <td>✅ Reused and validated</td>
-    </tr>
-    <tr>
-      <td>DRL Algorithms Tested</td>
-      <td>A2C, PPO, DDPG</td>
-      <td>A2C, PPO</td>
-    </tr>
-    <tr>
-      <td>Dataset</td>
-      <td>S&amp;P500 subset, 2018–2023</td>
-      <td>S&amp;P500 subset, 2018–2023</td>
-    </tr>
-    <tr>
-      <td>Reward Design</td>
-      <td>Portfolio Value, including costs</td>
-      <td>Portfolio Value, including costs</td>
-    </tr>
-    <tr>
-      <td>Benchmark Comparison</td>
-      <td>✅ Yes, (mean-reversion)</td>
-      <td>✅ Yes (mean-reversion)</td>
-    </tr>
-    <tr>
-      <td>Real-world Pair Trading Viability</td>
-      <td>No outperforms classical method</td>
-      <td>Partially outperforms classical method</td>
-    </tr>
-  </tbody>
-</table>
+<p>Let us start from first principles. When you hold a financial instrument (a stock, a bond, a derivative, a currency position), its value changes over time in response to movements in the broader market. Those movements can be driven by interest rate changes, equity index swings, foreign exchange fluctuations, commodity price shifts, or volatility expansions. The potential loss arising from any of those adverse price movements is what practitioners call <strong>market risk</strong>.</p>
+
+<p>It sits under the wider umbrella of financial risk, which also includes credit risk (the risk that a counterparty defaults), operational risk (internal processes failing), and liquidity risk (the risk of not being able to exit a position without moving the market against yourself). Each category deserves its own serious treatment, and I plan to get there. But market risk is where I feel most at home, so it gets to go first.</p>
+
+<p>What makes market risk particularly interesting in portfolio management is that it is not just about individual asset losses. It is about how those assets behave <strong>together</strong>. A portfolio of 50 stocks is not simply 50 separate risks added up. Correlations, concentration, and tail dependencies mean the aggregate behaviour can be far more dangerous than the sum of its parts suggests on a calm trading day.</p>
 
 <hr />
 
-<h2 id="-future-directions">🔮 Future Directions</h2>
+<h2 id="the-cost-of-not-having-a-framework">The cost of not having a framework</h2>
+
+<p>History is unfortunately generous with examples of what happens when market risk is poorly understood or deliberately ignored.</p>
+
+<p>The collapse of <strong>Long-Term Capital Management (LTCM)</strong> in 1998 is probably the most cited academic case. A fund run by Nobel laureates and decorated traders, with leverage ratios that in calm markets looked like arbitrage genius, and in stressed markets looked like a loaded weapon pointed inward. When correlations between asset classes broke down during the Russian default crisis, positions that were modelled as independent blew up simultaneously. The Federal Reserve had to orchestrate a private bailout to prevent contagion across the broader financial system.</p>
+
+<p>A decade later, the <strong>2008 global financial crisis</strong> showed the same dynamic at systemic scale. Mortgage-backed securities were rated as low-risk instruments because historical default correlations were estimated in a period of stable and rising house prices. When that assumption collapsed, so did the models, and with them trillions of dollars in portfolio value across institutions that believed they had adequate risk controls in place.</p>
+
+<p>These are not anomalies. They are what happens when a framework for measuring and limiting market risk is either absent, miscalibrated, or (and this is the most dangerous case) present on paper but not actually used to constrain decisions.</p>
+
+<p>For an individual investor or a smaller portfolio manager, the consequences are less systemic but no less painful. A portfolio without risk controls can turn a temporary drawdown into a permanent loss of capital, particularly when leverage is involved. And in today’s environment, leverage is accessible to almost everyone.</p>
+
+<hr />
+
+<h2 id="the-metrics-that-actually-matter">The metrics that actually matter</h2>
+
+<p>Risk management is only as useful as the tools it uses to quantify exposure. Here are the ones you will encounter most frequently in a market risk context, along with an honest assessment of what each one does (and does not) tell you.</p>
+
+<h3 id="volatility-σ">Volatility (σ)</h3>
+
+<p>The most fundamental measure. Volatility quantifies how much an asset’s returns deviate from their average over a given period. It is typically expressed as an annualised standard deviation. High volatility means large price swings in both directions. In portfolio terms, the overall portfolio volatility is not just a weighted average of individual asset volatilities because correlation between assets plays a central role.</p>
+
+<p>It is a fast and intuitive metric, but volatility alone is symmetric: it treats upside surprises and downside losses equally. That is not how investors experience returns, which is why it is rarely used in isolation in professional practice.</p>
+
+<h4 id="historical-volatility-vs-implied-volatility">Historical Volatility vs. Implied Volatility</h4>
+
+<p><strong>Historical volatility (HV)</strong> is computed from past price movements. It reflects what actually happened over a backward-looking window (30 days, 60 days, etc.). It is backward-looking and purely descriptive.</p>
+
+<p><strong>Implied volatility (IV)</strong> is extracted from the market prices of options themselves. It represents what the market <em>expects</em> volatility to be going forward. If an option is traded at a certain price, you can reverse-engineer the volatility assumption baked into that price using models like Black-Scholes. It is forward-looking and expectation-based.</p>
+
+<p><strong>Why derivatives (especially options) use implied volatility:</strong></p>
+
+<p>Options are fundamentally bets on future volatility. A call option becomes more valuable if market participants expect large price swings ahead, regardless of what actually happened historically. Historical volatility is stale information by the time an option is priced. Implied volatility reflects current market consensus about future uncertainty, incorporating all available information and sentiment.</p>
+
+<h3 id="value-at-risk-var">Value at Risk (VaR)</h3>
+
+<p>VaR is the most widely used risk metric in financial institutions and is likely the one you will encounter most often in regulatory and internal reporting. The concept is deceptively simple: given a confidence level (typically 95% or 99%) and a time horizon (one day, ten days), VaR answers the question: <em>what is the maximum loss I should not expect to exceed in X% of scenarios?</em></p>
+
+<p>For example, a one-day 99% VaR of €500,000 means that on 99 out of 100 trading days, losses should not exceed that amount. The remaining 1% of days is where things get interesting.</p>
+
+<p>There are three main approaches to computing VaR:</p>
+
 <ul>
-  <li>Introduce <strong>multi-agent frameworks</strong> for long/short coordination.</li>
-  <li>Use <strong>microstructure features</strong> (e.g., order book signals, bid/ask spreads).</li>
-  <li>Impact analysis of including <strong>technical indicators</strong>.</li>
-  <li>Use of <strong>transformers</strong> architecture.</li>
+  <li><strong>Historical simulation:</strong> Use the actual historical distribution of returns to estimate future losses. Simple to understand, no distributional assumption required, but highly sensitive to the historical window chosen.</li>
+  <li><strong>Parametric (variance-covariance) VaR:</strong> Assume returns follow a normal distribution and compute the quantile analytically. Fast and elegant, but dangerous in fat-tailed environments (which markets almost always are).</li>
+  <li><strong>Monte Carlo simulation:</strong> Generate thousands of synthetic return scenarios using a model and compute the loss distribution from those. Flexible and powerful, but computationally heavy and model-dependent.</li>
 </ul>
 
+<p>VaR is useful precisely because it gives a number. A single, communicable figure that executives and regulators can reason about. But it has a well-known technical blind spot: it says nothing about <strong>what losses look like beyond the threshold</strong>. Two portfolios can share the same VaR while having dramatically different tail behaviours.</p>
+
+<h3 id="expected-shortfall-cvar">Expected Shortfall (CVaR)</h3>
+
+<p>Expected Shortfall (also known as Conditional VaR, or CVaR) addresses exactly the blind spot of VaR. Instead of asking what the worst loss is in 99% of scenarios, it asks: <em>given that we are already in the worst 1% of scenarios, what is the average loss we should expect?</em></p>
+
+<p>This makes it a <strong>coherent risk measure</strong> in the technical sense: it respects the mathematical properties that a well-behaved risk metric should have (including sub-additivity, which means diversification always reduces risk). The Basel III and Basel IV regulatory frameworks progressively shifted from VaR to Expected Shortfall as the primary capital requirement metric for market risk, specifically because of this property.</p>
+
+<p>For a portfolio manager, CVaR is the more honest metric. It forces you to think about what happens in genuinely bad markets, not just the edge of bad markets.</p>
+
+<h3 id="beta-β">Beta (β)</h3>
+
+<p>Beta measures how much a portfolio (or a single asset) moves relative to a benchmark, typically the overall market. A beta of 1 means the portfolio moves in lockstep with the market. A beta of 1.5 means it amplifies market movements by 50% in both directions. A beta of 0.5 implies half the market sensitivity.</p>
+
+<p>Beta is a central concept in the Capital Asset Pricing Model (CAPM) and in factor-based investing more broadly. In risk management, it helps isolate the portion of portfolio risk that is systematic (driven by broad market exposure, which cannot be diversified away) versus idiosyncratic (specific to individual holdings, which can be reduced through diversification).</p>
+
+<p>Managing beta deliberately is one of the most direct levers a portfolio manager has to control market risk exposure.</p>
+
+<h3 id="maximum-drawdown-mdd">Maximum Drawdown (MDD)</h3>
+
+<p>Maximum drawdown measures the largest peak-to-trough decline in a portfolio’s value over a given period. It is the closest market risk metric to what investors actually feel in their stomach during a crisis. A portfolio that has experienced a 40% drawdown needs a subsequent return of approximately 67% just to get back to the prior peak.</p>
+
+<p>For strategies that may carry systematic biases (trend-following, momentum, leveraged strategies), maximum drawdown is an essential metric to combine with VaR and CVaR. It grounds the conversation in real trajectory rather than distributional abstractions.</p>
+
+<h3 id="the-sharpe-ratio-and-its-risk-adjusted-cousins">The Sharpe Ratio (and its risk-adjusted cousins)</h3>
+
+<p>Strictly speaking, the Sharpe ratio is a performance metric, but in portfolio management, it lives comfortably inside the risk management conversation. It measures the excess return earned per unit of volatility:</p>
+
+\[\text{Sharpe} = \frac{R_p - R_f}{\sigma_p}\]
+
+<p>Where $R_p$ is the portfolio return, $R_f$ is the risk-free rate, and $\sigma_p$ is the portfolio’s standard deviation of returns. A higher Sharpe ratio means you are being better compensated for the risk you are taking.</p>
+
+<p>Its cousins include the <strong>Sortino ratio</strong> (which uses downside deviation instead of total standard deviation, penalising only negative volatility) and the <strong>Calmar ratio</strong> (which uses maximum drawdown in the denominator). Each tells a slightly different story, and together they give a richer picture of risk-adjusted performance than any single number alone.</p>
+
 <hr />
 
-<h2 id="-resources">📂 Resources</h2>
-<ul>
-  <li>📜 Paper 1: <a href="https://link.springer.com/chapter/10.1007/978-3-031-74595-9_3" target="_blank" rel="noopener">Experimental Framework</a></li>
-  <li>📜 Paper 2: <a href="https://link.springer.com/epdf/10.1007/s42979-025-03854-0" target="_blank" rel="noopener">Comparative DRL Study</a></li>
-  <li>🧠 Code &amp; data (coming soon / available on request)</li>
-</ul>
+<h2 id="a-word-on-liquidity-risk">A word on liquidity risk</h2>
+
+<p>No discussion of market risk in portfolio management is complete without at least acknowledging <strong>liquidity risk</strong>, because the two are far more entangled than they appear in textbooks.</p>
+
+<p>Liquidity risk refers to the risk of being unable to exit a position at, or near, the prevailing market price without causing (or absorbing) significant price impact. In quiet markets, it is easy to underestimate. In stressed markets, it becomes the dominant risk.</p>
+
+<p>Two key dimensions define it in practice:</p>
+
+<p><strong>Market liquidity risk</strong> is the risk that an asset’s bid-ask spread widens dramatically, or that market depth (the available volume of buy and sell orders at various price levels) evaporates when you actually need to transact. A position that looks perfectly liquid on a normal trading day can become nearly untradeable in a crisis, precisely because every other market participant is trying to do the same thing at the same time.</p>
+
+<p><strong>Funding liquidity risk</strong> is the risk that you are unable to meet your obligations (margin calls, redemption requests, collateral requirements) even though your assets have intrinsic value. This is what ultimately killed LTCM: not that its positions were wrong, but that it could not survive long enough for the market to recognise that.</p>
+
+<p>The standard tool for integrating market and liquidity risk is <strong>Liquidity-Adjusted VaR (LVaR)</strong>, which modifies the standard VaR calculation to account for the additional loss that could arise from being forced to unwind a position over a stressed timeframe rather than instantaneously. It is a more conservative and more honest number, and unsurprisingly, it is the one regulators increasingly prefer.</p>
 
 <hr />
 
-<h2 id="-full-references-">📚 Full References 📢</h2>
-<ol class="bibliography"><li><span id="quintero2024reinforcement">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2024). Reinforcement Learning Model Applied in a Pair Trading Strategy. In J. C. Figueroa-García, F. S. Garay-Rairán, G. J. Hernández-Pérez, &amp; Y. Díaz-Gutierrez (Eds.), <i>Applied Computer Science in Engineering</i> (Vol. 2094, pp. 29–42). Springer Nature Switzerland. https://doi.org/10.1007/978-3-031-74595-9_3</span></li>
-<li><span id="quintero2025deep">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2025). Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO. <i>SN Computer Science</i>, <i>6</i>(3), 348. https://doi.org/10.1007/s42979-025-03854-0</span></li></ol>
-<!-- <ol class="bibliography"><li><span id="quintero2024reinforcement">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2024). Reinforcement Learning Model Applied in a Pair Trading Strategy. In J. C. Figueroa-García, F. S. Garay-Rairán, G. J. Hernández-Pérez, &amp; Y. Díaz-Gutierrez (Eds.), <i>Applied Computer Science in Engineering</i> (Vol. 2094, pp. 29–42). Springer Nature Switzerland. https://doi.org/10.1007/978-3-031-74595-9_3</span></li>
-<li><span id="quintero2025deep">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2025). Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO. <i>SN Computer Science</i>, <i>6</i>(3), 348. https://doi.org/10.1007/s42979-025-03854-0</span></li></ol>
-<ol class="bibliography"><li><span id="quintero2024reinforcement">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2024). Reinforcement Learning Model Applied in a Pair Trading Strategy. In J. C. Figueroa-García, F. S. Garay-Rairán, G. J. Hernández-Pérez, &amp; Y. Díaz-Gutierrez (Eds.), <i>Applied Computer Science in Engineering</i> (Vol. 2094, pp. 29–42). Springer Nature Switzerland. https://doi.org/10.1007/978-3-031-74595-9_3</span></li>
-<li><span id="quintero2025deep">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2025). Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO. <i>SN Computer Science</i>, <i>6</i>(3), 348. https://doi.org/10.1007/s42979-025-03854-0</span></li></ol>
-<h2 class="bibliography">2024</h2>
-<ol class="bibliography"><li><span id="quintero2024reinforcement">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2024). Reinforcement Learning Model Applied in a Pair Trading Strategy. In J. C. Figueroa-García, F. S. Garay-Rairán, G. J. Hernández-Pérez, &amp; Y. Díaz-Gutierrez (Eds.), <i>Applied Computer Science in Engineering</i> (Vol. 2094, pp. 29–42). Springer Nature Switzerland. https://doi.org/10.1007/978-3-031-74595-9_3</span></li></ol>
-<h2 class="bibliography">2025</h2>
-<ol class="bibliography"><li><span id="quintero2025deep">Quintero, C., Leon, D., Sandoval, J., &amp; Hernandez, G. (2025). Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO. <i>SN Computer Science</i>, <i>6</i>(3), 348. https://doi.org/10.1007/s42979-025-03854-0</span></li></ol> -->
+<h2 id="why-this-matters-beyond-the-trading-floor">Why this matters beyond the trading floor</h2>
+
+<p>It is tempting to think that all of this is relevant only to institutional asset managers, investment banks, or hedge funds with dedicated risk teams. But the logic applies at any scale.</p>
+
+<p>If you manage a personal investment portfolio, understanding how correlated your positions are, what your implicit beta to the equity market is, and whether your liquidity assumptions hold under stress is not a professional luxury. It is the basic intellectual hygiene that separates a portfolio that weathers a crisis from one that forces painful decisions at the worst possible moment.</p>
+
+<p>The frameworks described here do not require a Bloomberg terminal or a team of quants to use meaningfully. Many can be approximated with open-source tools, historical data, and a clear head. Future posts in this series will go deeper into the implementation side, including concrete examples in Python and references to the <a href="https://www.garp.org/frm" target="_blank" rel="noopener">FRM curriculum</a> for those who want a rigorous foundation.</p>
+
+<hr />
+
+<p>Hope this was a useful starting point. If you have questions or want to explore any of these topics further, do not hesitate to reach out via LinkedIn. I am always happy to discuss.</p>
 
                 </div>
 
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
               
             
           

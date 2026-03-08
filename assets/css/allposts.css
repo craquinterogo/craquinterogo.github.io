@@ -1,0 +1,347 @@
+/* ============================================================
+   Blog — All Posts  |  Minimalist Redesign
+   Palette: dark #1a1a1a · bg-alt #242424 · gold #d4af37
+   ============================================================ */
+
+/* ── Custom properties (mirrors _vars.scss palette) ───────── */
+:root {
+  --c-bg:         #1a1a1a;
+  --c-bg-alt:     #242424;
+  --c-fg:         #e8e8e8;
+  --c-fg-muted:   rgba(232, 232, 232, 0.72);  /* raised from 0.48 for legibility */
+  --c-fg-light:   rgba(232, 232, 232, 0.20);
+  --c-gold:       #d4af37;
+  --c-gold-dim:   rgba(212, 175, 55, 0.18);
+  --c-gold-faint: rgba(212, 175, 55, 0.07);
+  --c-border:     rgba(212, 175, 55, 0.14);
+  --radius:       3px;
+  --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+  --dur:          0.22s;
+  --font-mono:    'Courier New', 'Consolas', monospace;
+}
+
+/* ── Blog wrapper ─────────────────────────────────────────── */
+.blog-container {
+  /* Use the full width granted by the theme's .inner container (65em).
+     No inner max-width cap — we want every pixel available. */
+  width: 100%;
+  padding: 0 0 4rem;
+}
+
+/* ── Category tab navigation ──────────────────────────────── */
+.cat-nav {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  border-bottom: 1px solid var(--c-border);
+  margin-bottom: 2.8rem;
+  overflow-x: auto;
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE/Edge */
+  scroll-behavior: smooth;
+  position: relative;
+}
+.cat-nav::-webkit-scrollbar { display: none; }
+
+/* fade-out right edge hint for horizontal scroll */
+.cat-nav::after {
+  content: '';
+  position: sticky;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 2.5rem;
+  flex-shrink: 0;
+  background: linear-gradient(to right, transparent, var(--c-bg));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+.cat-nav.is-scrollable::after { opacity: 1; }
+
+.cat-nav__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.65rem 1.1rem 0.7rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--c-fg-muted);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  bottom: -1px;                /* sits on top of nav border */
+  transition: color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+  outline: none;
+}
+.cat-nav__btn:hover,
+.cat-nav__btn:focus-visible {
+  color: var(--c-fg);
+}
+.cat-nav__btn:focus-visible {
+  outline: 2px solid var(--c-gold);
+  outline-offset: 2px;
+}
+.cat-nav__btn.is-active {
+  color: var(--c-gold);
+  border-bottom-color: var(--c-gold);
+}
+
+/* post count badge */
+.cat-nav__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.05em 0.42em;
+  background: var(--c-gold-dim);
+  color: var(--c-gold);
+  border-radius: 20px;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0;
+  min-width: 1.4em;
+  transition: background var(--dur) var(--ease);
+}
+.cat-nav__btn.is-active .cat-nav__count {
+  background: rgba(212, 175, 55, 0.28);
+}
+
+/* ── Post panels ──────────────────────────────────────────── */
+.post-panels { position: relative; }
+
+.post-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--dur) var(--ease),
+              transform var(--dur) var(--ease);
+}
+.post-panel.is-active {
+  display: block;
+  animation: panelIn var(--dur) var(--ease) forwards;
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Post list ────────────────────────────────────────────── */
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* Two-column grid on wider screens */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 3.2rem;
+  align-items: start;
+}
+
+/* ── Individual post entry ────────────────────────────────── */
+.post-entry {
+  display: grid;
+  grid-template-columns: 8.8rem 1fr;  /* wider to fit Mon DD, YYYY */
+  gap: 0 1.8rem;
+  padding: 1.4rem 0 1.4rem 0.8rem;
+  border-bottom: 1px solid var(--c-border);
+  /* Left accent via border — works cleanly in a CSS grid column */
+  border-left: 2px solid transparent;
+  border-left-color: transparent;
+  transition: border-left-color 0.26s var(--ease);
+}
+.post-entry:hover,
+.post-entry:focus-within {
+  border-left-color: var(--c-gold);
+}
+
+.post-entry:last-child {
+  border-bottom: none;
+}
+
+/* Date column */
+.post-entry__date {
+  display: block;
+  padding-top: 0.22rem;
+  font-family: var(--font-mono);
+  font-size: 0.71rem;
+  color: var(--c-fg-muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Content column */
+.post-entry__body { min-width: 0; }
+
+.post-entry__title {
+  margin: 0 0 0.45rem;
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.post-entry__title a {
+  color: var(--c-fg);
+  text-decoration: none;
+  border-bottom: none;
+  transition: color var(--dur) var(--ease);
+}
+.post-entry__title a:hover,
+.post-entry__title a:focus-visible {
+  color: var(--c-gold);
+  outline: none;
+}
+
+.post-entry__excerpt {
+  margin: 0 0 0.7rem;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--c-fg-muted);
+}
+
+/* Footer: tags + read link */
+.post-entry__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.post-entry__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.post-tag {
+  display: inline-block;
+  padding: 0.1em 0.6em;
+  background: var(--c-gold-faint);
+  border: 1px solid var(--c-border);
+  color: var(--c-fg-muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  transition: color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              background var(--dur) var(--ease);
+}
+.post-entry:hover .post-tag,
+.post-entry:focus-within .post-tag {
+  color: var(--c-gold);
+  border-color: rgba(212, 175, 55, 0.35);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.post-entry__readmore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-fg-light);
+  text-decoration: none;
+  border-bottom: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color var(--dur) var(--ease),
+              gap var(--dur) var(--ease);
+}
+.post-entry__readmore .arrow {
+  display: inline-block;
+  transition: transform var(--dur) var(--ease);
+}
+.post-entry:hover .post-entry__readmore,
+.post-entry:focus-within .post-entry__readmore {
+  color: var(--c-gold);
+  gap: 0.55em;
+}
+.post-entry:hover .post-entry__readmore .arrow,
+.post-entry:focus-within .post-entry__readmore .arrow {
+  transform: translateX(3px);
+}
+
+/* ── Empty state ──────────────────────────────────────────── */
+.post-panel__empty {
+  padding: 2.8rem 0 2rem;
+  text-align: center;
+  color: var(--c-fg-light);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+.post-panel__empty::before {
+  content: '—';
+  display: block;
+  font-size: 1.3rem;
+  margin-bottom: 0.7rem;
+  color: var(--c-border);
+}
+
+/* ── Year dividers ────────────────────────────────────────── */
+.year-marker {
+  /* Span across both grid columns so the divider is always full-width */
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 2rem 0 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--c-gold);
+  text-transform: uppercase;
+}
+.year-marker::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--c-border);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+
+/* Collapse to single column below ~900px */
+@media (max-width: 900px) {
+  .post-list {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+  .year-marker {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 680px) {
+  .cat-nav__btn {
+    padding: 0.55rem 0.85rem 0.65rem;
+    font-size: 0.72rem;
+  }
+
+  .post-entry {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+    padding: 1.2rem 0 1.2rem 0.6rem;
+  }
+  .post-entry__date {
+    font-size: 0.67rem;
+    margin-bottom: 0.35rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .blog-container { padding-bottom: 3rem; }
+  .cat-nav { margin-bottom: 2rem; }
+}
