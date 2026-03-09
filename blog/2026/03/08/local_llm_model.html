@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Just another post of local LLM models | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="/" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="/">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Artificial Intelligence
+            </h4>
+            <button class="collapse-toggle" aria-label="Toggle related posts">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              
+              
+              
+                <p style="font-size:0.78rem;color:rgba(232,232,232,0.4);margin:0">No other posts yet.</p>
+              
+              <div class="sidebar-category-link">
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button class="collapse-toggle" aria-label="Toggle table of contents">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile toggles -->
+    <button id="sidebar-left-toggle"  class="sidebar-toggle sidebar-toggle--left"  aria-label="Toggle related posts"    aria-expanded="false"><i class="fa fa-folder"   aria-hidden="true"></i></button>
+    <button id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-label="Toggle table of contents" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#artificial-intelligence">Artificial Intelligence</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Just another post of local LLM models</span>
+                    </div>
+                  
+
+                  <h1>Just another post of local LLM models</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2026-03-08T00:00:00+01:00">March 08, 2026</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">LLM models</span>
+                      
+                        <span class="post-tag-pill">artificial intelligence</span>
+                      
+                        <span class="post-tag-pill">Llama.cpp</span>
+                      
+                        <span class="post-tag-pill">Inference</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="/assets/images/01_post_images/006_artificial_intelligence/llm_entry_post.png"
+                    alt="Just another post of local LLM models"
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <div class="post-body" id="post-body-content">
+                  <blockquote>
+  <p><strong>Note:</strong> This entire experiment runs on <strong>CPU only</strong> — no GPU required. If you have a modest machine and want to experiment with large language models without cloud costs or privacy concerns, this guide is for you.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Running large language models (LLMs) locally has become increasingly accessible thanks to efficient inference engines and quantization techniques. While cloud-based APIs like OpenAI or Anthropic are convenient, there are compelling reasons to run models on your own hardware:</p>
+
+<ul>
+  <li><strong>Privacy</strong>: your prompts and data never leave your machine.</li>
+  <li><strong>Cost</strong>: no per-token billing after the initial setup.</li>
+  <li><strong>Offline use</strong>: no internet dependency once the model is downloaded.</li>
+  <li><strong>Control</strong>: full control over model parameters, context size, and prompt formatting.</li>
+</ul>
+
+<p>This post documents my personal experiment running <strong>Mistral 7B Instruct v0.3</strong>, in its quantized GGUF form Q6_K, using <strong>Llama.cpp</strong> as the inference engine, entirely on CPU. I’ll walk through every step: setting up the environment, downloading the model, running inference, and sharing honest observations about performance and quality.</p>
+
+<hr />
+
+<h2 id="setup--requirements">Setup &amp; Requirements</h2>
+
+<p>Before diving in, here is the hardware and software environment used for this experiment:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CPU</td>
+      <td>AMD Ryzen 7 / Intel Core i7 (any modern multi-core)</td>
+    </tr>
+    <tr>
+      <td>RAM</td>
+      <td>16 GB minimum (Q6_K ~6.5 GB loaded)</td>
+    </tr>
+    <tr>
+      <td>Storage</td>
+      <td>~5 GB free for the model file</td>
+    </tr>
+    <tr>
+      <td>OS</td>
+      <td>Linux (Ubuntu 22.04)</td>
+    </tr>
+    <tr>
+      <td>Python</td>
+      <td>3.10+</td>
+    </tr>
+    <tr>
+      <td>Build tools</td>
+      <td><code class="language-plaintext highlighter-rouge">cmake</code>, <code class="language-plaintext highlighter-rouge">make</code>, <code class="language-plaintext highlighter-rouge">gcc</code> / <code class="language-plaintext highlighter-rouge">clang</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>The experiment was conducted entirely on CPU. Performance will vary depending on the number of cores and clock speed, but even a mid-range laptop can produce coherent responses — just at a slower tokens-per-second rate than a GPU setup.</p>
+</blockquote>
+
+<p>Install the required build tools if not already present:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> build-essential cmake git python3-pip
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="what-is-llamacpp">What is Llama.cpp?</h2>
+
+<p><a href="https://github.com/ggerganov/llama.cpp" target="_blank" rel="noopener">Llama.cpp</a> is an open-source C/C++ inference engine created by <a href="https://github.com/ggerganov" target="_blank" rel="noopener">Georgi Gerganov</a>. It was originally built to run Meta’s LLaMA models on consumer hardware, and has since grown into a universal LLM runtime supporting dozens of model architectures</p>
+
+<p>Llama.cpp is the go-to choice for CPU-based LLM inference. It requires no GPU, being heavily optimized for CPU execution through AVX2 and AVX-512 intrinsics, which allow it to extract maximum performance from consumer hardware. The use of GGUF quantized models dramatically reduces memory requirements, making it accessible even on machines with limited RAM. Beyond raw performance, Llama.cpp offers excellent cross-platform support, running seamlessly on Linux, macOS, and Windows. The project maintains active development, with new model architectures and quantization formats gaining support rapidly. Perhaps most importantly, it provides a flexible interface, as users can interact via the command line, deploy a server mode with an OpenAI-compatible REST API, or integrate it into Python applications using the <code class="language-plaintext highlighter-rouge">llama-cpp-python</code> bindings.</p>
+
+<p>The native format Llama.cpp uses is <strong>GGUF</strong> (GPT-Generated Unified Format), which bundles weights, tokenizer, and metadata into a single portable file.</p>
+
+<hr />
+
+<h2 id="what-is-mistral-7b-and-why-quantize-it">What is Mistral 7B and Why Quantize It?</h2>
+
+<p><strong>Mistral 7B</strong> is a 7-billion-parameter language model released by Mistral AI. Despite its relatively modest parameter count compared to models like LLaMA 70B or GPT-4, it is remarkably capable at instruction-following, coding assistance, and summarisation tasks. The <strong>Instruct v0.3</strong> variant is the latest refinement of the instruct series, fine-tuned for instruction-following using a chat-style prompt format and updated tokenizer support.</p>
+
+<h3 id="why-quantize">Why quantize?</h3>
+
+<p>A full-precision (FP16) Mistral 7B model requires roughly <strong>14 GB of RAM</strong>, which is impractical for most consumer machines, especially on CPU. Quantization reduces the bit-width used to represent each weight:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Quantization</th>
+      <th>File size</th>
+      <th>RAM usage</th>
+      <th>Quality loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FP16</td>
+      <td>~14 GB</td>
+      <td>~14 GB</td>
+      <td>None (reference)</td>
+    </tr>
+    <tr>
+      <td>Q8_0</td>
+      <td>~7.7 GB</td>
+      <td>~8 GB</td>
+      <td>Minimal</td>
+    </tr>
+    <tr>
+      <td><strong>Q6_K</strong></td>
+      <td><strong>~5.9 GB</strong></td>
+      <td><strong>~6.5 GB</strong></td>
+      <td><strong>Very low (near-lossless)</strong></td>
+    </tr>
+    <tr>
+      <td>Q4_K_M</td>
+      <td>~4.4 GB</td>
+      <td>~5 GB</td>
+      <td>Low</td>
+    </tr>
+    <tr>
+      <td>Q2_K</td>
+      <td>~2.9 GB</td>
+      <td>~3.5 GB</td>
+      <td>Noticeable</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Q6_K</strong> uses 6-bit weights with the K-quant scheme, sitting just below Q8_0 in precision while remaining significantly smaller than FP16. It is the best choice when RAM allows it and quality is a priority, which is exactly the case in this experiment on a 16 GB machine.</p>
+
+<hr />
+
+<h2 id="installing-llamacpp-cpu-build-with-cmake">Installing Llama.cpp (CPU build with CMake)</h2>
+
+<p>Clone the repository and build using CMake following <a href="https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md" target="_blank" rel="noopener">Llama.cpp Instructions</a>. The flags below target a <strong>pure CPU build</strong> — no CUDA, no Metal, no OpenCL.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Clone the repository</span>
+git clone https://github.com/ggml-org/llama.cpp
+<span class="nb">cd </span>llama.cpp
+
+<span class="c"># Create and enter the build directory</span>
+cmake <span class="nt">--build</span> build <span class="nt">--config</span> Release <span class="nt">-j</span> 8
+</code></pre></div></div>
+
+<p>After compilation, the main binary will be located at <code class="language-plaintext highlighter-rouge">build/bin/llama-cli</code> (older builds may produce <code class="language-plaintext highlighter-rouge">./main</code> directly in the root). You can verify the build succeeded with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/bin/llama-cli <span class="nt">--version</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>CPU note:</strong> The build automatically detects and enables AVX, AVX2, and AVX-512 instruction sets when available. These SIMD extensions significantly improve token generation speed on modern CPUs without any GPU involvement.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="downloading-the-quantized-model-via-hugging-face">Downloading the Quantized Model via Hugging Face</h2>
+
+<h3 id="what-is-hugging-face">What is Hugging Face?</h3>
+
+<p><a href="https://huggingface.co">Hugging Face</a> is the de-facto hub for open-source machine learning models, datasets, and tooling. It hosts hundreds of thousands of model repositories — including quantized GGUF variants maintained by the community. Think of it as GitHub, but specifically designed for AI assets.</p>
+
+<h3 id="why-use-huggingface-cli">Why use <code class="language-plaintext highlighter-rouge">huggingface-cli</code>?</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">huggingface-cli</code> is the official command-line interface for the Hugging Face Hub. Compared to a plain <code class="language-plaintext highlighter-rouge">wget</code> or browser download, it offers:</p>
+
+<ul>
+  <li><strong>Resumable downloads</strong>: interrupted transfers continue from where they stopped.</li>
+  <li><strong>Integrity verification</strong>: checksums are validated automatically.</li>
+  <li><strong>Authentication support</strong>: required for gated or private models.</li>
+  <li><strong>Selective file download</strong>: download only specific files from a multi-file repository (essential for GGUF repos, which often contain multiple quantization variants).</li>
+</ul>
+
+<h3 id="installation">Installation</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>huggingface_hub
+</code></pre></div></div>
+
+<h3 id="download-the-q6_k-gguf-model">Download the Q6_K GGUF model</h3>
+
+<p>The quantized models are hosted by <a href="https://huggingface.co/TheBloke">TheBloke</a>, a prolific community contributor who provides GGUF conversions for virtually every popular open-source model.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.3-GGUF <span class="se">\</span>
+    mistral-7b-instruct-v0.3.Q6_K.gguf <span class="se">\</span>
+    <span class="nt">--local-dir</span> <span class="s2">"/&lt;...&gt;/genAI_models"</span> <span class="se">\</span>
+    <span class="nt">--local-dir-use-symlinks</span> False
+</code></pre></div></div>
+
+<p>Breaking down the command:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Argument</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TheBloke/Mistral-7B-Instruct-v0.3-GGUF</code></td>
+      <td>Repository ID on Hugging Face</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mistral-7b-instruct-v0.3.Q6_K.gguf</code></td>
+      <td>Specific file to download (Q6_K variant)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--local-dir</code></td>
+      <td>Target directory for the file (external drive in this case)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--local-dir-use-symlinks False</code></td>
+      <td>Write the actual file, not a symlink to the HF cache</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Using <code class="language-plaintext highlighter-rouge">--local-dir-use-symlinks False</code> is especially important when saving to an external drive or any location outside your home directory, as it ensures the full file is written directly to the target path.</p>
+</blockquote>
+
+<p>Once complete, verify the download:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-lh</span> <span class="s2">"/&lt;...&gt;/genAI_models/mistral-7b-instruct-v0.3.Q6_K.gguf"</span>
+<span class="c"># Expected: ~5.9 GB</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Tip : if <code class="language-plaintext highlighter-rouge">huggingface-cli</code> is not found:</strong> In practice I ran into issues where the <code class="language-plaintext highlighter-rouge">huggingface-cli</code> entry point was missing even with <code class="language-plaintext highlighter-rouge">huggingface_hub</code> installed in a virtual environment. In that case, use the Python API directly, it is equivalent and always works as long as the package itself is importable:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="sh">"</span><span class="s">
+from huggingface_hub import hf_hub_download
+hf_hub_download(
+    repo_id=</span><span class="sh">'</span><span class="s">bartowski/Mistral-7B-Instruct-v0.3-GGUF</span><span class="sh">'</span><span class="s">,
+    filename=</span><span class="sh">'</span><span class="s">Mistral-7B-Instruct-v0.3-Q6_K.gguf</span><span class="sh">'</span><span class="s">,
+    local_dir=</span><span class="sh">'</span><span class="s">/&lt;...&gt;/genAI_models</span><span class="sh">'</span><span class="s">
+)
+</span><span class="sh">"</span>
+</code></pre></div>  </div>
+
+  <p>Note that in <code class="language-plaintext highlighter-rouge">huggingface_hub</code> v1.6.0+ the <code class="language-plaintext highlighter-rouge">local_dir_use_symlinks</code> argument is deprecated and can be omitted — symlinks are no longer used by default. Also note that <code class="language-plaintext highlighter-rouge">bartowski</code> is the correct community GGUF publisher for Mistral v0.3, as TheBloke has not published a v0.3 conversion.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="running-the-model">Running the Model</h2>
+
+<p>With the model downloaded and Llama.cpp built, we can run our first inference. From inside the <code class="language-plaintext highlighter-rouge">llama.cpp</code> directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/bin/llama-cli <span class="se">\</span>
+    <span class="nt">-m</span> <span class="s2">"/&lt;...&gt;/genAI_models/mistral-7b-instruct-v0.3.Q6_K.gguf"</span> <span class="se">\</span>
+    <span class="nt">-n</span> 256 <span class="se">\</span>
+    <span class="nt">-c</span> 4096 <span class="se">\</span>
+    <span class="nt">--temp</span> 0.7 <span class="se">\</span>
+    <span class="nt">--repeat-penalty</span> 1.1 <span class="se">\</span>
+    <span class="nt">-p</span> <span class="s2">"[INST] Explain what a neural network is in simple terms. [/INST]"</span>
+</code></pre></div></div>
+
+<p>Key parameters explained:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Flag</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-m</code></td>
+      <td>Path to the GGUF model file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-n 256</code></td>
+      <td>Maximum number of tokens to generate</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-c 4096</code></td>
+      <td>Context window size (how much text the model “sees”)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--temp 0.7</code></td>
+      <td>Temperature: controls randomness (0 = deterministic, 1 = creative)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--repeat-penalty 1.1</code></td>
+      <td>Penalises repetitive outputs</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-p</code></td>
+      <td>The prompt string</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong>Mistral Instruct format:</strong> Mistral Instruct models expect prompts wrapped in <code class="language-plaintext highlighter-rouge">[INST]</code> and <code class="language-plaintext highlighter-rouge">[/INST]</code> tags. Omitting these tags will still produce output, but adherence to instructions degrades noticeably.</p>
+</blockquote>
+
+<p>For interactive multi-turn conversation, use the <code class="language-plaintext highlighter-rouge">-i</code> flag with <code class="language-plaintext highlighter-rouge">--interactive-first</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/bin/llama-cli <span class="se">\</span>
+    <span class="nt">-m</span> <span class="s2">"/&lt;...&gt;/genAI_models/mistral-7b-instruct-v0.3.Q6_K.gguf"</span> <span class="se">\</span>
+    <span class="nt">-c</span> 4096 <span class="se">\</span>
+    <span class="nt">--temp</span> 0.7 <span class="se">\</span>
+    <span class="nt">-i</span> <span class="nt">--interactive-first</span> <span class="se">\</span>
+    <span class="nt">--in-prefix</span> <span class="s2">"[INST] "</span> <span class="se">\</span>
+    <span class="nt">--in-suffix</span> <span class="s2">" [/INST]"</span>
+</code></pre></div></div>
+
+<h3 id="example-output">Example Output</h3>
+
+<p>Here’s a screenshot of Llama.cpp running inference on Mistral 7B:</p>
+
+<p><img src="/assets/images/04_llm_and_mcp/02_01_llama_cpp.png" alt="Llama Inference Example" /></p>
+
+<hr />
+
+<h2 id="experiment-what-i-tested">Experiment: What I Tested</h2>
+
+<p>Once everything was running, I wanted to put the model through its paces across a few different types of tasks, not a rigorous benchmark though, but a practical feel for what it could actually do on a CPU with no GPU assistance.</p>
+
+<p>I started with straightforward conceptual questions, the kind you might ask when learning a subject: things like asking the model to explain what quantization means in the context of neural networks, or to walk through the difference between supervised and unsupervised learning. These gave me a quick baseline for how articulate and accurate the responses were before moving on to anything more demanding.</p>
+
+<p>From there I shifted to coding tasks, which is where I personally care most about the output quality. I kept the prompts relevant to quantitative finance, for instance asking for a Python function to compute a simple moving average from a price series, or for an example of resampling OHLCV data to weekly frequency using pandas. These are simple but representative of the kind of day-to-day scripting a quant developer actually does. Stepping back and looking at the results through a quant researcher’s lens, what struck me most was not the raw speed, which is admittedly modest on CPU, but the model’s ability to reason coherently about financial concepts without any fine-tuning or domain-specific prompting. A local model like this could realistically serve as a private research assistant: drafting the boilerplate of a strategy description, explaining statistical concepts to non-technical stakeholders, or rapidly prototyping the skeleton of an analysis script before the researcher fills in the domain-specific logic. That alone makes the CPU performance trade-off worthwhile for a significant class of research workflows.</p>
+
+<p>Finally I tested summarisation: I fed the model a short paragraph of financial text and asked it to distil the key points into three concise bullet points. This is a task where instruction-following matters as much as language quality, so it was a good stress-test for the <code class="language-plaintext highlighter-rouge">[INST]</code> prompt format.</p>
+
+<p>All prompts were run at a temperature of 0.7 with a 256-token output ceiling. To get the most out of the available hardware, I passed <code class="language-plaintext highlighter-rouge">-t $(nproc)</code> to saturate all CPU threads during inference.</p>
+
+<hr />
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>Running Mistral 7B Instruct v0.3 locally on CPU via Llama.cpp is entirely feasible with reasonable useful outputs. The Q6_K quantization delivers near-lossless quality at a manageable file size (~5.9 GB), making it an excellent choice when you have 16 GB of RAM and want output as close to the full-precision model as possible.</p>
+
+<p>What stands out most is that no GPU is required to experiment meaningfully with 7B-parameter models. The combination of Llama.cpp and GGUF has matured into a reliable, well-tested stack for local inference. The main trade-off you’ll encounter is speed: expect 4–8 tokens per second on CPU, which is acceptable for experimentation and research but falls short of production throughput. For a developer or researcher iterating on ideas, however, that latency is often negligible compared to the privacy and cost benefits.</p>
+
+<p>Looking ahead, I’m planning to explore the full quality and speed curve by testing other quantization levels like Q4_K_M and Q8_0 against the Q6_K baseline for quant tasks. I’m also curious about running Llama.cpp in HTTP server mode to expose an OpenAI-compatible local API endpoint, which would make integration into existing workflows seamless. Finally, a side-by-side comparison of Mistral 7B against other similarly-sized models (LLaMA 3 8B, Gemma 2 9B), under identical CPU conditions would help clarify which models offer the best bang for buck in the local inference space.</p>
+
+<p>If you have a spare afternoon and a reasonably modern laptop, I encourage giving this a try. The barrier to entry for local LLM experimentation has never been lower.</p>
+
+                </div>
+
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/assets/js/jquery.scrollex.min.js"></script>
+	<script src="/assets/js/skel.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/assets/js/main.js"></script>
+
+
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── Dual sidebar toggles (mobile) ───────────────── */
+        function makeSidebarToggle(toggleId, sidebarId, overlayId) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+
+          toggle.addEventListener('click', function () {
+            var open = sidebar.classList.toggle('active');
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+          overlay.addEventListener('click', function () {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        }
+
+        makeSidebarToggle('sidebar-left-toggle',  'sidebar-left',  'sidebar-left-overlay');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay');
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
+            }
+          });
+        });
+
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            var nums    = [0, 0, 0, 0];
+            var tocNums = [0, 0, 0, 0];
+            var html    = '<ul class="toc-list">';
+
+            headings.forEach(function (h) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              h.innerHTML  = '<span class="section-number">' + numStr + '.</span> ' + rawText;
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              }
+              tocNums[level]++;
+              for (var j = level + 1; j < 4; j++) tocNums[j] = 0;
+              var tocNum   = tocNums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              html += '<li class="toc-level-' + (level + 1) + '">'
+                + '<a href="#' + h.id + '">'
+                + '<span class="toc-number">' + tocNum + '.</span> ' + rawText
+                + '</a></li>';
+            });
+
+            html += '</ul>';
+            tocNav.innerHTML = html;
+            if (tocSect) tocSect.style.display = 'block';
+          } else {
+            if (tocSect) tocSect.style.display = 'none';
+          }
+        }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                var active = tocNav.querySelector('a[href="#' + entry.target.id + '"]');
+                if (active) active.setAttribute('data-active', '');
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>
