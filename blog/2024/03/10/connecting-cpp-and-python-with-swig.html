@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Pricing a European option in C++ from Python with SWIG | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="/" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="/">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Quantitative Development
+            </h4>
+            <button class="collapse-toggle" aria-label="Toggle related posts">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              
+              
+              
+                <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/12/07/git-repository-hard-disk" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/01_post_images/004_quant_developer/005_What_is_a_Git_Repository.jpg" alt="Private GIT repositories for small or private projects." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Private GIT repositories for small or pri...</h5>
+                          
+                            <span class="recent-post-date">Dec 07, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/10/29/questdb-for-timeseries" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" alt="QuestDB, an alternative for storing your financial time series." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>QuestDB, an alternative for storing your ...</h5>
+                          
+                            <span class="recent-post-date">Oct 29, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/08/10/quantlib-setup" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Setting QuantLib up in my laptop, again. An amazing tool for quants." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Setting QuantLib up in my laptop, again. ...</h5>
+                          
+                            <span class="recent-post-date">Aug 10, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/06/29/ai-agents-for-quants" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/04_llm_and_mcp/jarvis_.jpg" alt="What about AI Agents for Quants?" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>What about AI Agents for Quants?</h5>
+                          
+                            <span class="recent-post-date">Jun 29, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+              <div class="sidebar-category-link">
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button class="collapse-toggle" aria-label="Toggle table of contents">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile toggles -->
+    <button id="sidebar-left-toggle"  class="sidebar-toggle sidebar-toggle--left"  aria-label="Toggle related posts"    aria-expanded="false"><i class="fa fa-folder"   aria-hidden="true"></i></button>
+    <button id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-label="Toggle table of contents" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#quantitative-development">Quantitative Development</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Pricing a European option in C++ from Python wi...</span>
+                    </div>
+                  
+
+                  <h1>Pricing a European option in C++ from Python with SWIG</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2024-03-10T00:00:00-06:00">March 10, 2024</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">C++</span>
+                      
+                        <span class="post-tag-pill">Python</span>
+                      
+                        <span class="post-tag-pill">SWIG</span>
+                      
+                        <span class="post-tag-pill">quantitative finance</span>
+                      
+                        <span class="post-tag-pill">options</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="/assets/images/01_post_images/004_quant_developer/00_circuit.jpg"
+                    alt="Pricing a European option in C++ from Python with SWIG"
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <div class="post-body" id="post-body-content">
+                  <p>Suppose you have an option pricer written in C++, but the people testing it work in Python notebooks. Rewriting the formula in Python would leave you with two implementations to maintain. Instead, we can keep the calculation in C++ and expose a small interface to Python. <a href="https://www.swig.org/" target="_blank" rel="noopener">SWIG</a> generates the glue for that interface.</p>
+
+<p>I’ll use the <a href="https://github.com/craquinterogo/quantitative_finance/tree/master/Derivatives" target="_blank" rel="noopener">Derivatives example in my quantitative finance repository</a>. Its <a href="https://github.com/craquinterogo/quantitative_finance/tree/master/Derivatives/src" target="_blank" rel="noopener"><code class="language-plaintext highlighter-rouge">src</code> folder</a> contains <code class="language-plaintext highlighter-rouge">Options.h</code>, <code class="language-plaintext highlighter-rouge">Options.cpp</code>, <code class="language-plaintext highlighter-rouge">Options.i</code>, and <code class="language-plaintext highlighter-rouge">setup.py</code>; the <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Derivatives/OptionsFromCpp.ipynb" target="_blank" rel="noopener">Python notebook</a> calls the resulting module. The goal is to understand both the financial calculation and what happens between a C++ class and <code class="language-plaintext highlighter-rouge">import Options</code>.</p>
+
+<h2 id="the-option-we-are-pricing">The option we are pricing</h2>
+
+<nav class="workflow-progress" aria-label="Option pricing workflow, step 1 of 5">
+  <ol style="--flow-count: 5">
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#the-option-we-are-pricing" aria-current="step">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Model</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#from-source-code-to-a-python-module">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#tell-swig-what-to-expose">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">SWIG</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compile-the-extension">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Extension</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#check-the-result-from-python">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Python</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The C++ class <code class="language-plaintext highlighter-rouge">quantero::European</code> takes the spot price $S$, strike $K$, continuously compounded risk-free rate $r$, volatility $\sigma$, time to expiry $T$ in years, and a sign $\psi$. Set $\psi=1$ for a call and $\psi=-1$ for a put. This example assumes a European option with no dividends or foreign interest rate.</p>
+
+\[d_1 = \frac{\ln(S/K) + (r + \sigma^2/2)T}{\sigma\sqrt{T}},
+\qquad d_2 = d_1 - \sigma\sqrt{T}\]
+
+<p>The <code class="language-plaintext highlighter-rouge">valuation()</code> method implements the call and put in one expression:</p>
+
+\[V_{\psi} = \psi S\,N(\psi d_1) - \psi K e^{-rT}N(\psi d_2),
+\qquad \psi \in \{1,-1\}.\]
+
+<p>Here $N(x)$ is the standard normal cumulative distribution function (CDF). The implementation in <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Derivatives/src/Options.cpp" target="_blank" rel="noopener"><code class="language-plaintext highlighter-rouge">Options.cpp</code></a> uses the error function rather than Boost:</p>
+
+\[F(x;\mu,\sigma) = \frac{1}{2}\left[1 + \operatorname{erf}\left(\frac{x-\mu}{\sigma\sqrt{2}}\right)\right],
+\qquad N(x)=F(x;0,1).\]
+
+<p>This distinction matters when building the example: <strong>the current option pricler does not require Boost</strong> for the nor CDF. Older installation notes in the repository describe a Boost-based version of the CDF; installing Boost is unnecessary for the code linked above.</p>
+
+<h2 id="from-source-code-to-a-python-module">From source code to a Python module</h2>
+
+<nav class="workflow-progress" aria-label="Option pricing workflow, step 2 of 5">
+  <ol style="--flow-count: 5">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#the-option-we-are-pricing">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Model</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#from-source-code-to-a-python-module" aria-current="step">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#tell-swig-what-to-expose">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">SWIG</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compile-the-extension">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Extension</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#check-the-result-from-python">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Python</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>A C++ build usually involves preprocessing headers, compiling source into object files, assembling machine code, and linking objects into a program or library. See this <a href="https://www.toptal.com/c-plus-plus/c-plus-plus-understanding-compilation" target="_blank" rel="noopener">compilation overview</a> for a longer explanation. From the repository’s <code class="language-plaintext highlighter-rouge">Derivatives/src</code> directory, you can inspect an intermediate object without creating the Python extension:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">g++ -c Options.cpp -o Options.o
+nm -C Options.o
+objdump -d Options.o
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">nm -C</code> displays demangled C++ symbols, including methods of <code class="language-plaintext highlighter-rouge">quantero::European</code>; <code class="language-plaintext highlighter-rouge">objdump -d</code> shows machine instructions. An object file is <strong>not</strong> a Python module. Nor can we link this particular source directly into an executable with <code class="language-plaintext highlighter-rouge">g++ Options.cpp -o options</code>: there is no <code class="language-plaintext highlighter-rouge">main()</code> function. For Python, we need a wrapper and a shared extension library instead.</p>
+
+<h2 id="tell-swig-what-to-expose">Tell SWIG what to expose</h2>
+
+<nav class="workflow-progress" aria-label="Option pricing workflow, step 3 of 5">
+  <ol style="--flow-count: 5">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#the-option-we-are-pricing">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Model</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#from-source-code-to-a-python-module">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#tell-swig-what-to-expose" aria-current="step">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">SWIG</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compile-the-extension">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Extension</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#check-the-result-from-python">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Python</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The repository already provides <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Derivatives/src/Options.i" target="_blank" rel="noopener"><code class="language-plaintext highlighter-rouge">Options.i</code></a>:</p>
+
+<pre><code class="language-swig">%module Options
+
+%{
+#include "Options.h"
+%}
+
+%include "Options.h"
+</code></pre>
+
+<p>The <code class="language-plaintext highlighter-rouge">%{ ... %}</code> block inserts the header into the generated C++ wrapper so it can compile. <code class="language-plaintext highlighter-rouge">%include "Options.h"</code> tells SWIG which declarations to expose to Python. The module name determines the Python import name. SWIG presents this C++ namespace’s <code class="language-plaintext highlighter-rouge">European</code> class as <code class="language-plaintext highlighter-rouge">Options.European</code>, as you can see in the notebook.</p>
+
+<blockquote>
+  <p><strong>Hint: expose only what Python needs.</strong> Put <code class="language-plaintext highlighter-rouge">%ignore</code> directives <strong>before</strong> <code class="language-plaintext highlighter-rouge">%include "Options.h"</code> to exclude individual functions or whole classes. For example, adding <code class="language-plaintext highlighter-rouge">%ignore quantero::N;</code> there keeps the CDF helper in C++ while exposing <code class="language-plaintext highlighter-rouge">European</code> and its public <code class="language-plaintext highlighter-rouge">valuation()</code> method. In a larger header, <code class="language-plaintext highlighter-rouge">%ignore quantero::SomeInternalClass;</code> would similarly hide that class. This changes the Python API, not the C++ implementation; rebuild the wrapper after editing the interface.</p>
+</blockquote>
+
+<p>On Linux, install a C++ compiler, Python development headers, SWIG, and Python build tooling for your chosen interpreter. For example, on Debian or Ubuntu:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">sudo apt-get update
+sudo apt-get install build-essential python3-dev python3-venv swig
+git clone https://github.com/craquinterogo/quantitative_finance.git
+cd quantitative_finance/Derivatives/src
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install setuptools
+swig -c++ -python Options.i
+</span></code></pre></div></div>
+
+<p>The last command generates <code class="language-plaintext highlighter-rouge">Options_wrap.cxx</code>, which bridges Python calls to C++, and <code class="language-plaintext highlighter-rouge">Options.py</code>, the Python-facing proxy. It does <strong>not</strong> compile the extension yet.</p>
+
+<h2 id="compile-the-extension">Compile the extension</h2>
+
+<nav class="workflow-progress" aria-label="Option pricing workflow, step 4 of 5">
+  <ol style="--flow-count: 5">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#the-option-we-are-pricing">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Model</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#from-source-code-to-a-python-module">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#tell-swig-what-to-expose">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">SWIG</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#compile-the-extension" aria-current="step">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Extension</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#check-the-result-from-python">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Python</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The repository’s <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Derivatives/src/setup.py" target="_blank" rel="noopener"><code class="language-plaintext highlighter-rouge">setup.py</code></a> specifies the two C++ sources, <code class="language-plaintext highlighter-rouge">Options_wrap.cxx</code> and <code class="language-plaintext highlighter-rouge">Options.cpp</code>, and names the native module <code class="language-plaintext highlighter-rouge">_Options</code>. Its older <code class="language-plaintext highlighter-rouge">distutils.core</code> import predates the removal of <code class="language-plaintext highlighter-rouge">distutils</code> from the Python standard library. If you are updating that file for a current Python environment, use <code class="language-plaintext highlighter-rouge">setuptools</code> with the same module and sources:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">setuptools</span> <span class="kn">import</span> <span class="n">Extension</span><span class="p">,</span> <span class="n">setup</span>
+
+<span class="nf">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="sh">"</span><span class="s">Options</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="sh">"</span><span class="s">0.1</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">ext_modules</span><span class="o">=</span><span class="p">[</span>
+        <span class="nc">Extension</span><span class="p">(</span><span class="sh">"</span><span class="s">_Options</span><span class="sh">"</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">Options_wrap.cxx</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Options.cpp</span><span class="sh">"</span><span class="p">])</span>
+    <span class="p">],</span>
+    <span class="n">py_modules</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">Options</span><span class="sh">"</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Run this from <code class="language-plaintext highlighter-rouge">Derivatives/src</code> with the virtual environment active:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">python setup.py build_ext --inplace
+</span><span class="gp">python -c "import Options;</span><span class="w"> </span>print<span class="o">(</span>Options.European<span class="o">(</span>100, 100, 0.05, 0.20, 1, 1<span class="o">)</span>.valuation<span class="o">())</span><span class="s2">"
+</span></code></pre></div></div>
+
+<p>The printed call premium should be about <code class="language-plaintext highlighter-rouge">10.4506</code>. <code class="language-plaintext highlighter-rouge">build_ext --inplace</code> puts the compiled <code class="language-plaintext highlighter-rouge">_Options</code> extension next to <code class="language-plaintext highlighter-rouge">Options.py</code>, so Python can import both from the current directory. On Linux the extension has a platform-tagged <code class="language-plaintext highlighter-rouge">.so</code> suffix; on Windows it is normally <code class="language-plaintext highlighter-rouge">.pyd</code>, not a generic <code class="language-plaintext highlighter-rouge">.dll</code>. A prebuilt extension is tied to its operating system, architecture, and Python ABI, so distribute or rebuild it for the environment where it will run.</p>
+
+<h2 id="check-the-result-from-python">Check the result from Python</h2>
+
+<nav class="workflow-progress" aria-label="Option pricing workflow, step 5 of 5">
+  <ol style="--flow-count: 5">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#the-option-we-are-pricing">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Model</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#from-source-code-to-a-python-module">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#tell-swig-what-to-expose">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">SWIG</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#compile-the-extension">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Extension</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#check-the-result-from-python" aria-current="step">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Python</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>In a notebook whose working directory can import <code class="language-plaintext highlighter-rouge">Options.py</code> and its matching <code class="language-plaintext highlighter-rouge">_Options</code> extension, try both signs:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">Options</span>
+
+<span class="n">call</span> <span class="o">=</span> <span class="n">Options</span><span class="p">.</span><span class="nc">European</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">put</span> <span class="o">=</span> <span class="n">Options</span><span class="p">.</span><span class="nc">European</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Call: </span><span class="si">{</span><span class="n">call</span><span class="p">.</span><span class="nf">valuation</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 10.4506
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Put:  </span><span class="si">{</span><span class="n">put</span><span class="p">.</span><span class="nf">valuation</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>   <span class="c1"># 5.5735
+</span></code></pre></div></div>
+
+<p>These inputs also give a useful financial check: call-put parity implies $C-P=S-Ke^{-rT}$, about $4.8771$ here. This helps catch a pricing mistake independently of whether SWIG built successfully.</p>
+
+<p>For this small project, <code class="language-plaintext highlighter-rouge">setup.py</code> handles the extension build; CMake is optional, not another required step. The repository also has a <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> that declares an executable from <code class="language-plaintext highlighter-rouge">Options.cpp</code>, but that target needs a <code class="language-plaintext highlighter-rouge">main()</code> before it can link. If you later add a C++ command-line driver, CMake becomes useful for managing that separate executable. The important boundary today is simpler: <strong>C++ owns the formula, SWIG exposes its declarations, and the compiled extension lets Python call the same implementation</strong>.</p>
+
+                </div>
+
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/assets/js/jquery.scrollex.min.js"></script>
+	<script src="/assets/js/skel.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
+
+
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── Dual sidebar toggles (mobile) ───────────────── */
+        function makeSidebarToggle(toggleId, sidebarId, overlayId) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+
+          toggle.addEventListener('click', function () {
+            var open = sidebar.classList.toggle('active');
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+          overlay.addEventListener('click', function () {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        }
+
+        makeSidebarToggle('sidebar-left-toggle',  'sidebar-left',  'sidebar-left-overlay');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay');
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
+            }
+          });
+        });
+
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            var nums    = [0, 0, 0, 0];
+            var tocNums = [0, 0, 0, 0];
+            var html    = '<ul class="toc-list">';
+
+            headings.forEach(function (h) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              h.innerHTML  = '<span class="section-number">' + numStr + '.</span> ' + rawText;
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              }
+              tocNums[level]++;
+              for (var j = level + 1; j < 4; j++) tocNums[j] = 0;
+              var tocNum   = tocNums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              html += '<li class="toc-level-' + (level + 1) + '">'
+                + '<a href="#' + h.id + '">'
+                + '<span class="toc-number">' + tocNum + '.</span> ' + rawText
+                + '</a></li>';
+            });
+
+            html += '</ul>';
+            tocNav.innerHTML = html;
+            if (tocSect) tocSect.style.display = 'block';
+          } else {
+            if (tocSect) tocSect.style.display = 'none';
+          }
+        }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                var active = tocNav.querySelector('a[href="#' + entry.target.id + '"]');
+                if (active) active.setAttribute('data-active', '');
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>

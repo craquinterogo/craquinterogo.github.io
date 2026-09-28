@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Extreme Value Theory for Value at Risk, from returns to the tail | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="/" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="/">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Risk Management
+            </h4>
+            <button class="collapse-toggle" aria-label="Toggle related posts">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              
+              
+              
+                <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/12/13/market-risk-management" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/01_post_images/005_risk_management/001_market-risk.png" alt="Market Risk and Portfolio Management (Why It Actually Matters)" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Market Risk and Portfolio Management (Why...</h5>
+                          
+                            <span class="recent-post-date">Dec 13, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2020/06/23/cornish-fisher-var" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/01_post_images/005_risk_management/001_market-risk.png" alt="Cornish-Fisher VaR when a normal quantile is not enough" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Cornish-Fisher VaR when a normal quantile...</h5>
+                          
+                            <span class="recent-post-date">Jun 23, 2020</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+              <div class="sidebar-category-link">
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button class="collapse-toggle" aria-label="Toggle table of contents">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile toggles -->
+    <button id="sidebar-left-toggle"  class="sidebar-toggle sidebar-toggle--left"  aria-label="Toggle related posts"    aria-expanded="false"><i class="fa fa-folder"   aria-hidden="true"></i></button>
+    <button id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-label="Toggle table of contents" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#risk-management">Risk Management</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Extreme Value Theory for Value at Risk, from re...</span>
+                    </div>
+                  
+
+                  <h1>Extreme Value Theory for Value at Risk, from returns to the tail</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2020-01-05T00:00:00-06:00">January 05, 2020</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">market risk</span>
+                      
+                        <span class="post-tag-pill">VaR</span>
+                      
+                        <span class="post-tag-pill">extreme value theory</span>
+                      
+                        <span class="post-tag-pill">generalized Pareto</span>
+                      
+                        <span class="post-tag-pill">Python</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="/assets/images/01_post_images/005_risk_management/001_market-risk.png"
+                    alt="Extreme Value Theory for Value at Risk, from returns to the tail"
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <div class="post-body" id="post-body-content">
+                  <blockquote>
+  <p><strong>Scope:</strong> This is an educational, one-stock, one-day risk example, not an investment recommendation or a production VaR model.</p>
+</blockquote>
+
+<p>When a desk asks for a 99% one-day Value at Risk (VaR), the difficult question is not how to calculate a percentile. It is what we believe about losses we have barely observed. A normal model spends its statistical budget describing the whole return distribution; Extreme Value Theory (EVT) asks whether we can model the far tail more directly. The <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Risk/Market/VaR/EVT_ExtremeValueTheory.ipynb" target="_blank" rel="noopener">AXP EVT notebook</a> in my <a href="https://github.com/craquinterogo/quantitative_finance/tree/master/Risk/Market/VaR" target="_blank" rel="noopener">market-risk examples</a> is a useful way to work through that question, including where judgment enters the calculation.</p>
+
+<p>We will use <em>peaks over threshold</em> (POT): select unusually large daily losses, fit a generalized Pareto distribution (GPD) to their excesses, and extrapolate to a loss quantile. The GPD approximation is an asymptotic result, not a promise that every empirical tail follows it <a class="citation" href="#Coles2001EVT">(Coles, 2001)</a>.</p>
+
+<h2 id="start-with-daily-prices">Start with daily prices</h2>
+
+<nav class="workflow-progress" aria-label="EVT VaR workflow, step 1 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#start-with-daily-prices" aria-current="step">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#turn-returns-into-losses">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Losses</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#choose-the-tail-threshold">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Threshold</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#fit-the-exceedances">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">GPD</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#extrapolate-a-tail-quantile">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Tail VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compare-with-normal-var">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The notebook reads <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Risk/Market/VaR/datasource/AXP%20Historical%20Data.csv" target="_blank" rel="noopener">historical American Express (AXP) prices</a>, sourced from <a href="https://www.investing.com/equities/american-express" target="_blank" rel="noopener">Investing.com</a>, sorts dates, computes percentage changes in the closing price, and keeps roughly the last year of observations ending around January 2020. The stock is an illustration, not a deliberately selected stress portfolio. The notebook uses simple daily returns in <strong>percentage points</strong>, so a loss of $2$ in the calculations below means a 2% price move, not two dollars.</p>
+
+\[r_t = 100\left(\frac{P_t}{P_{t-1}} - 1\right).\]
+
+<p>The order matters: sort the prices before computing returns. For a live risk process we would also check corporate actions, missing sessions, the price field’s formatting, and whether adjusted prices are required. None of that is resolved by the tail estimator itself.</p>
+
+<h2 id="turn-returns-into-losses">Turn returns into losses</h2>
+
+<nav class="workflow-progress" aria-label="EVT VaR workflow, step 2 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#start-with-daily-prices">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#turn-returns-into-losses" aria-current="step">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Losses</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#choose-the-tail-threshold">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Threshold</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#fit-the-exceedances">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">GPD</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#extrapolate-a-tail-quantile">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Tail VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compare-with-normal-var">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The notebook’s histogram and descriptive statistics show a negative skew of about $-0.35$ and pandas <em>excess</em> kurtosis of about $1.52$. Normal data have excess kurtosis zero (ordinary kurtosis three). This is motivation to inspect the left tail, <strong>not</strong> proof that a specific EVT distribution fits it: kurtosis alone cannot establish tail shape.</p>
+
+<p>For the downside analysis define a positive loss magnitude $L_t=-r_t$ on days with $r_t&lt;0$. Only those days enter the GPD fit, but the frequency of threshold exceedances must later be measured against <strong>all</strong> valid trading-day returns. Otherwise we would estimate a quantile conditional on a down day, not an unconditional one-day VaR.</p>
+
+<h2 id="choose-the-tail-threshold">Choose the tail threshold</h2>
+
+<nav class="workflow-progress" aria-label="EVT VaR workflow, step 3 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#start-with-daily-prices">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#turn-returns-into-losses">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Losses</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#choose-the-tail-threshold" aria-current="step">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Threshold</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#fit-the-exceedances">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">GPD</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#extrapolate-a-tail-quantile">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Tail VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compare-with-normal-var">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>For a candidate threshold $u$, a mean residual life plot shows the average loss <em>above</em> that threshold:</p>
+
+\[e(u) = E[L-u\mid L&gt;u].\]
+
+<p>Above a suitable threshold, an approximately straight mean-excess curve can support a GPD tail approximation. The <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Risk/Market/VaR/EVT_ExtremeValueTheory.ipynb" target="_blank" rel="noopener">notebook’s threshold sweep</a> checks 40 candidates and visually selects $u\approx0.560314$ percentage points; its displayed table has about 57 losses beyond that threshold. This choice is <strong>graphical</strong>, not an optimized or independently validated cutoff. Lower thresholds bring more observations but more approximation bias; higher thresholds reduce bias while increasing estimation uncertainty <a class="citation" href="#ScarrottMacDonald2012">(Scarrott &amp; MacDonald, 2012)</a>.</p>
+
+<p>For a production estimate I would also inspect parameter stability, exceedance counts, residual diagnostics, and sensitivity of VaR to several plausible thresholds. With just a year’s daily prices, there are not many extremes to work with.</p>
+
+<h2 id="fit-the-exceedances">Fit the exceedances</h2>
+
+<nav class="workflow-progress" aria-label="EVT VaR workflow, step 4 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#start-with-daily-prices">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#turn-returns-into-losses">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Losses</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#choose-the-tail-threshold">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Threshold</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#fit-the-exceedances" aria-current="step">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">GPD</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#extrapolate-a-tail-quantile">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Tail VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compare-with-normal-var">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Fit the nonnegative excesses $Y=L-u$ conditional on $L&gt;u$. With GPD shape $\xi$ and scale $\beta&gt;0$, the usual CDF is</p>
+
+\[G(y) = 1-\left(1+\frac{\xi y}{\beta}\right)^{-1/\xi},
+\quad y\geq0,\quad 1+\xi y/\beta&gt;0.\]
+
+<p>At $\xi=0$ the limit is exponential. Positive $\xi$ indicates a heavier, unbounded fitted tail; negative $\xi$ implies a finite endpoint. The <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Risk/Market/VaR/EVT_ExtremeValueTheory.ipynb" target="_blank" rel="noopener"><code class="language-plaintext highlighter-rouge">scipy.stats.genpareto</code> fit in the notebook</a> reports shape $0.0884$, scale $0.6723$, and location $0.5661$, in return percentage points where applicable.</p>
+
+<blockquote>
+  <p><strong>Modeling caveat:</strong> The notebook fits the <em>raw losses above</em> $u$ with a <strong>free location</strong>, then uses that estimated location in its VaR formula. That is not the same as fixing $u$ and fitting the excesses $L-u$ with location zero. To implement the standard POT construction consistently, fit the exceedances with <code class="language-plaintext highlighter-rouge">genpareto.fit(excesses, floc=0)</code> and use the selected threshold $u$ in the quantile formula. The numerical results shown later are the notebook’s original outputs, <strong>not</strong> outputs from this corrected fit.</p>
+</blockquote>
+
+<h2 id="extrapolate-a-tail-quantile">Extrapolate a tail quantile</h2>
+
+<nav class="workflow-progress" aria-label="EVT VaR workflow, step 5 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#start-with-daily-prices">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#turn-returns-into-losses">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Losses</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#choose-the-tail-threshold">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Threshold</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#fit-the-exceedances">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">GPD</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#extrapolate-a-tail-quantile" aria-current="step">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Tail VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compare-with-normal-var">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Let $N$ be the number of valid daily returns and $N_u$ the number of losses exceeding $u$. Above the threshold, the POT survival probability is approximately</p>
+
+\[\Pr(L&gt;x) \approx \frac{N_u}{N}
+\left(1+\frac{\xi(x-u)}{\beta}\right)^{-1/\xi},\qquad x&gt;u.\]
+
+<p>For tail probability $\alpha$ (confidence $1-\alpha$), solve $\Pr(L&gt;\operatorname{VaR}_{1-\alpha})=\alpha$:</p>
+
+\[\operatorname{VaR}_{1-\alpha}^{\mathrm{POT}}
+= u+\frac{\beta}{\xi}
+\left[\left(\frac{N_u}{N\alpha}\right)^{\xi}-1\right],
+\qquad 0&lt;\alpha&lt;\frac{N_u}{N}.\]
+
+<p>When $\xi\to0$, the added term tends to $\beta\log[N_u/(N\alpha)]$. Keep units consistent: this is a <strong>one-day percentage loss</strong>; multiplying a percentage by an exposure or changing the horizon requires further assumptions. Also drop the first <code class="language-plaintext highlighter-rouge">NaN</code> return before counting $N$: the notebook uses the number of price rows, which can include one row without a valid return.</p>
+
+<h2 id="compare-with-normal-var">Compare with normal VaR</h2>
+
+<nav class="workflow-progress" aria-label="EVT VaR workflow, step 6 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#start-with-daily-prices">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#turn-returns-into-losses">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Losses</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#choose-the-tail-threshold">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Threshold</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#fit-the-exceedances">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">GPD</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#extrapolate-a-tail-quantile">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Tail VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#compare-with-normal-var" aria-current="step">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>For a baseline, the notebook fits a normal distribution to all daily returns. If $r\sim N(\mu_r,\sigma_r^2)$, the positive loss convention gives</p>
+
+\[\operatorname{VaR}_{1-\alpha}^{\mathrm{normal}}
+= -\left(\mu_r+\sigma_r\Phi^{-1}(\alpha)\right).\]
+
+<p>The notebook’s <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Risk/Market/VaR/datasource/results/EVT/evt_results.csv" target="_blank" rel="noopener">saved comparison</a> includes these illustrative one-day figures (percentage loss):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Tail probability $\alpha$</th>
+      <th style="text-align: left">Confidence</th>
+      <th style="text-align: right">Notebook EVT VaR</th>
+      <th style="text-align: right">Normal VaR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">0.5%</td>
+      <td style="text-align: left">99.5%</td>
+      <td style="text-align: right">3.610%</td>
+      <td style="text-align: right">2.672%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">1%</td>
+      <td style="text-align: left">99%</td>
+      <td style="text-align: right">2.977%</td>
+      <td style="text-align: right">2.403%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">5%</td>
+      <td style="text-align: left">95%</td>
+      <td style="text-align: right">1.649%</td>
+      <td style="text-align: right">1.667%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The difference is largest at the highest confidence shown, and it changes sign near 95%. EVT is not <em>automatically</em> more conservative at every confidence level: the estimated tail, threshold, sample, and sign convention all matter. In particular, these EVT figures inherit the free-location fitting caveat above and should not be mistaken for a validated POT recalculation.</p>
+
+<p>For a desk, I would treat the model comparison as the start of a conversation, not the final limit. Repeat the analysis over different windows, test exceedances out of sample, report parameter uncertainty, and compare with historical and stress-scenario losses. VaR describes a quantile, not the size of losses <strong>beyond</strong> it; expected shortfall and stress tests provide complementary views of that exposure.</p>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="Coles2001EVT">Coles, S. (2001). <i>An Introduction to Statistical Modeling of Extreme Values</i>. Springer. https://doi.org/10.1007/978-1-4471-3675-0</span></li>
+<li><span id="ScarrottMacDonald2012">Scarrott, C., &amp; MacDonald, A. (2012). A Review of Extreme Value Threshold Estimation and Uncertainty Quantification. <i>REVSTAT - Statistical Journal</i>, <i>10</i>(1), 33–60.</span></li></ol>
+
+                </div>
+
+              
+            
+          
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/assets/js/jquery.scrollex.min.js"></script>
+	<script src="/assets/js/skel.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
+
+
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── Dual sidebar toggles (mobile) ───────────────── */
+        function makeSidebarToggle(toggleId, sidebarId, overlayId) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+
+          toggle.addEventListener('click', function () {
+            var open = sidebar.classList.toggle('active');
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+          overlay.addEventListener('click', function () {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        }
+
+        makeSidebarToggle('sidebar-left-toggle',  'sidebar-left',  'sidebar-left-overlay');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay');
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
+            }
+          });
+        });
+
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            var nums    = [0, 0, 0, 0];
+            var tocNums = [0, 0, 0, 0];
+            var html    = '<ul class="toc-list">';
+
+            headings.forEach(function (h) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              h.innerHTML  = '<span class="section-number">' + numStr + '.</span> ' + rawText;
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              }
+              tocNums[level]++;
+              for (var j = level + 1; j < 4; j++) tocNums[j] = 0;
+              var tocNum   = tocNums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              html += '<li class="toc-level-' + (level + 1) + '">'
+                + '<a href="#' + h.id + '">'
+                + '<span class="toc-number">' + tocNum + '.</span> ' + rawText
+                + '</a></li>';
+            });
+
+            html += '</ul>';
+            tocNav.innerHTML = html;
+            if (tocSect) tocSect.style.display = 'block';
+          } else {
+            if (tocSect) tocSect.style.display = 'none';
+          }
+        }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                var active = tocNav.querySelector('a[href="#' + entry.target.id + '"]');
+                if (active) active.setAttribute('data-active', '');
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>

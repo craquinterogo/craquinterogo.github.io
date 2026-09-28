@@ -295,6 +295,22 @@
         </li>
       
         <li class="recent-post-item">
+          <a href="/blog/2024/03/10/connecting-cpp-and-python-with-swig" class="recent-post-link">
+            
+              <div class="recent-post-image">
+                <img src="/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Pricing a European option in C++ from Python with SWIG" />
+              </div>
+            
+            <div class="recent-post-content">
+              <h5>Pricing a European option in C++ from...</h5>
+              
+                <span class="recent-post-date">Mar 10, 2024</span>
+              
+            </div>
+          </a>
+        </li>
+      
+        <li class="recent-post-item">
           <a href="/blog/2023/08/13/how_to_become_a_quant" class="recent-post-link">
             
               <div class="recent-post-image">
@@ -337,6 +353,38 @@
               <h5>Welcome to My Quantitative Finance Blog</h5>
               
                 <span class="recent-post-date">Mar 10, 2022</span>
+              
+            </div>
+          </a>
+        </li>
+      
+        <li class="recent-post-item">
+          <a href="/blog/2020/06/23/cornish-fisher-var" class="recent-post-link">
+            
+              <div class="recent-post-image">
+                <img src="/assets/images/01_post_images/005_risk_management/001_market-risk.png" alt="Cornish-Fisher VaR when a normal quantile is not enough" />
+              </div>
+            
+            <div class="recent-post-content">
+              <h5>Cornish-Fisher VaR when a normal quan...</h5>
+              
+                <span class="recent-post-date">Jun 23, 2020</span>
+              
+            </div>
+          </a>
+        </li>
+      
+        <li class="recent-post-item">
+          <a href="/blog/2020/01/05/extreme-value-theory-var" class="recent-post-link">
+            
+              <div class="recent-post-image">
+                <img src="/assets/images/01_post_images/005_risk_management/001_market-risk.png" alt="Extreme Value Theory for Value at Risk, from returns to the tail" />
+              </div>
+            
+            <div class="recent-post-content">
+              <h5>Extreme Value Theory for Value at Ris...</h5>
+              
+                <span class="recent-post-date">Jan 05, 2020</span>
               
             </div>
           </a>
@@ -574,6 +622,46 @@
 	<script src="/assets/js/util.js"></script>
 	<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
 
 
     <script>

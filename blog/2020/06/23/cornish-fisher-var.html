@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Cornish-Fisher VaR when a normal quantile is not enough | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="/" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="/">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Risk Management
+            </h4>
+            <button class="collapse-toggle" aria-label="Toggle related posts">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              
+              
+              
+                <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/12/13/market-risk-management" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/01_post_images/005_risk_management/001_market-risk.png" alt="Market Risk and Portfolio Management (Why It Actually Matters)" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Market Risk and Portfolio Management (Why...</h5>
+                          
+                            <span class="recent-post-date">Dec 13, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2020/01/05/extreme-value-theory-var" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="/assets/images/01_post_images/005_risk_management/001_market-risk.png" alt="Extreme Value Theory for Value at Risk, from returns to the tail" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Extreme Value Theory for Value at Risk, f...</h5>
+                          
+                            <span class="recent-post-date">Jan 05, 2020</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+              <div class="sidebar-category-link">
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button class="collapse-toggle" aria-label="Toggle table of contents">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile toggles -->
+    <button id="sidebar-left-toggle"  class="sidebar-toggle sidebar-toggle--left"  aria-label="Toggle related posts"    aria-expanded="false"><i class="fa fa-folder"   aria-hidden="true"></i></button>
+    <button id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-label="Toggle table of contents" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#risk-management">Risk Management</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Cornish-Fisher VaR when a normal quantile is no...</span>
+                    </div>
+                  
+
+                  <h1>Cornish-Fisher VaR when a normal quantile is not enough</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2020-06-23T00:00:00-05:00">June 23, 2020</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">market risk</span>
+                      
+                        <span class="post-tag-pill">VaR</span>
+                      
+                        <span class="post-tag-pill">Cornish-Fisher</span>
+                      
+                        <span class="post-tag-pill">backtesting</span>
+                      
+                        <span class="post-tag-pill">Python</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="/assets/images/01_post_images/005_risk_management/001_market-risk.png"
+                    alt="Cornish-Fisher VaR when a normal quantile is not enough"
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <div class="post-body" id="post-body-content">
+                  <blockquote>
+  <p><strong>Scope:</strong> This is an educational single-stock, one-day risk example, not a production VaR model or an investment recommendation.</p>
+</blockquote>
+
+<p>In the <a href="/blog/2020/01/05/extreme-value-theory-var" target="_blank" rel="noopener">earlier EVT example</a>, I modeled unusually large losses by fitting a distribution above a threshold. There is another route when we want to keep the familiar normal-VaR machinery but acknowledge that observed returns are skewed and more heavy-tailed than a Gaussian. The <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Risk/Market/VaR/Modified_CornishFisher.ipynb" target="_blank" rel="noopener">Cornish-Fisher notebook</a> in my <a href="https://github.com/craquinterogo/quantitative_finance/tree/master/Risk/Market/VaR" target="_blank" rel="noopener">VaR examples</a> takes that route and then tries several exception backtests.</p>
+
+<p>The attraction is speed: adjust a normal quantile using estimated skewness and excess kurtosis rather than fitting an entire alternative distribution. But the correction is an <em>approximation</em>, especially fragile in the tails. The useful question is not simply whether it produces a bigger VaR, but whether its assumptions and forecasts withstand scrutiny <a class="citation" href="#AmedeeBarthelemyMaillard2018">(Amédée-Manesme et al., 2019)</a>.</p>
+
+<h2 id="start-with-axp-returns">Start with AXP returns</h2>
+
+<nav class="workflow-progress" aria-label="Cornish-Fisher VaR workflow, step 1 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#start-with-axp-returns" aria-current="step">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#measure-asymmetry-and-tails">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Moments</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#adjust-the-normal-quantile">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Quantile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#calculate-modified-var">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compare-three-risk-estimates">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#check-forecast-exceptions">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Backtest</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The notebook loads the <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Risk/Market/VaR/datasource/AXP%20Historical%20Data.csv" target="_blank" rel="noopener">American Express (AXP) price CSV</a>, sorts prices by date, and computes simple daily returns in <strong>percentage points</strong>:</p>
+
+\[r_t = 100\left(\frac{P_t}{P_{t-1}}-1\right).\]
+
+<p>It first inspects the full available history, then uses the <strong>last 252 price rows</strong> for its headline Cornish-Fisher estimate. The separate backtesting section returns to the longer history and rolls a 252-observation window. That change of sample is easy to miss when reading the plots; it matters when interpreting a cross-model comparison. A first return is undefined after <code class="language-plaintext highlighter-rouge">pct_change()</code>, and should be excluded from moment and window counts.</p>
+
+<h2 id="measure-asymmetry-and-tails">Measure asymmetry and tails</h2>
+
+<nav class="workflow-progress" aria-label="Cornish-Fisher VaR workflow, step 2 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#start-with-axp-returns">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#measure-asymmetry-and-tails" aria-current="step">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Moments</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#adjust-the-normal-quantile">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Quantile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#calculate-modified-var">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compare-three-risk-estimates">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#check-forecast-exceptions">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Backtest</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The long-history descriptive output in the <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Risk/Market/VaR/Modified_CornishFisher.ipynb" target="_blank" rel="noopener">notebook</a> shows skewness about $-0.386$ and excess kurtosis about $7.12$. The last-252-row slice instead has skewness about $-0.338$ and excess kurtosis about $1.59$. Those are materially different descriptions of the same asset over different windows, which is a warning against treating moment estimates as permanent properties of a return process.</p>
+
+<p>Write $S$ for sample skewness and $K$ for sample <strong>excess</strong> kurtosis (ordinary kurtosis minus three). Negative $S$ means the return distribution leans toward downside observations; positive $K$ suggests more weight in its extremes than a normal reference. Neither statistic alone proves which distribution generated the data, and fourth-moment estimates are particularly sensitive to outliers.</p>
+
+<h2 id="adjust-the-normal-quantile">Adjust the normal quantile</h2>
+
+<nav class="workflow-progress" aria-label="Cornish-Fisher VaR workflow, step 3 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#start-with-axp-returns">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#measure-asymmetry-and-tails">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Moments</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#adjust-the-normal-quantile" aria-current="step">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Quantile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#calculate-modified-var">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compare-three-risk-estimates">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#check-forecast-exceptions">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Backtest</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>At lower-tail probability $\alpha$, let $z_\alpha=\Phi^{-1}(\alpha)$ be the standard normal quantile. The expansion used in the notebook modifies it to</p>
+
+\[z_{\mathrm{CF},\alpha}
+= z_\alpha + \frac{S}{6}(z_\alpha^2-1)
++ \frac{K}{24}(z_\alpha^3-3z_\alpha)
+- \frac{S^2}{36}(2z_\alpha^3-5z_\alpha).\]
+
+<p>Notice the last term: squaring skewness does not make its effect disappear. For a negative-tail quantile, the combination of terms can substantially move a 99% or 99.5% threshold. Cornish-Fisher is a truncated expansion, not a universally valid new distribution; at extreme probabilities or with unstable moment estimates it can behave poorly <a class="citation" href="#AmedeeBarthelemyMaillard2018">(Amédée-Manesme et al., 2019)</a>.</p>
+
+<h2 id="calculate-modified-var">Calculate modified VaR</h2>
+
+<nav class="workflow-progress" aria-label="Cornish-Fisher VaR workflow, step 4 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#start-with-axp-returns">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#measure-asymmetry-and-tails">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Moments</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#adjust-the-normal-quantile">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Quantile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#calculate-modified-var" aria-current="step">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compare-three-risk-estimates">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#check-forecast-exceptions">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Backtest</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The notebook’s <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Risk/Market/VaR/Modified_CornishFisher.ipynb" target="_blank" rel="noopener"><code class="language-plaintext highlighter-rouge">modified_var</code> calculation</a> also rescales sample volatility; it does <strong>not</strong> simply substitute $z_{\mathrm{CF}}$ for $z$ in normal VaR:</p>
+
+\[\sigma_{\mathrm{CF}} = \frac{\sigma_r}{\sqrt{1+K^2/96+25S^4/1296-KS^2/36}},
+\qquad
+\operatorname{VaR}_{1-\alpha}^{\mathrm{CF}}
+= -\left(\mu_r+\sigma_{\mathrm{CF}}z_{\mathrm{CF},\alpha}\right).\]
+
+<p>Here $\mu_r$ and $\sigma_r$ are the sample mean and standard deviation of returns in percentage points. The minus sign turns a negative return quantile into a <strong>positive loss threshold</strong>. A 99% one-day VaR of $2.96\%$ means that, under the fitted model, the loss is expected to exceed about 2.96% on 1% of days; it says nothing about how large those exceptional losses will be.</p>
+
+<blockquote>
+  <p><strong>Parameter caveat:</strong> The notebook feeds <em>observed</em> $S$ and $K$ directly into the expansion. Work on corrected Cornish-Fisher methods distinguishes the expansion’s parameters from the moments of the resulting distribution; the notebook discusses this issue but its headline VaR values use the direct plug-in approach <a class="citation" href="#AmedeeBarthelemyMaillard2018">(Amédée-Manesme et al., 2019)</a>. The figures below are that implementation’s outputs, not corrected-parameter estimates.</p>
+</blockquote>
+
+<h2 id="compare-three-risk-estimates">Compare three risk estimates</h2>
+
+<nav class="workflow-progress" aria-label="Cornish-Fisher VaR workflow, step 5 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#start-with-axp-returns">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#measure-asymmetry-and-tails">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Moments</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#adjust-the-normal-quantile">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Quantile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#calculate-modified-var">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#compare-three-risk-estimates" aria-current="step">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#check-forecast-exceptions">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Backtest</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The notebook joins its Cornish-Fisher values to the <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Risk/Market/VaR/datasource/results/EVT/evt_results.csv" target="_blank" rel="noopener">saved EVT and normal VaR comparison</a>. A few one-day values (positive percentage loss) make the scale tangible:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Tail probability $\alpha$</th>
+      <th style="text-align: left">Confidence</th>
+      <th style="text-align: right">Cornish-Fisher</th>
+      <th style="text-align: right">Normal</th>
+      <th style="text-align: right">EVT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">0.5%</td>
+      <td style="text-align: left">99.5%</td>
+      <td style="text-align: right">3.533%</td>
+      <td style="text-align: right">2.672%</td>
+      <td style="text-align: right">3.610%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">1%</td>
+      <td style="text-align: left">99%</td>
+      <td style="text-align: right">2.958%</td>
+      <td style="text-align: right">2.403%</td>
+      <td style="text-align: right">2.977%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The larger Cornish-Fisher estimate relative to normal VaR here follows from this window’s observed moments; it is not a law of the method. <strong>These columns are not a controlled horse race</strong>: the EVT notebook uses roughly the last calendar year, whereas this notebook takes 252 price rows for its Cornish-Fisher estimate, and the EVT calculation has its own <a href="/blog/2020/01/05/extreme-value-theory-var#fit-the-exceedances" target="_blank" rel="noopener">free-location fitting caveat</a>. Before ranking models, estimate all of them on the same valid dates with the same return and loss conventions.</p>
+
+<h2 id="check-forecast-exceptions">Check forecast exceptions</h2>
+
+<nav class="workflow-progress" aria-label="Cornish-Fisher VaR workflow, step 6 of 6">
+  <ol style="--flow-count: 6">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#start-with-axp-returns">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Prices</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#measure-asymmetry-and-tails">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Moments</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#adjust-the-normal-quantile">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Quantile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#calculate-modified-var">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">VaR</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#compare-three-risk-estimates">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Compare</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#check-forecast-exceptions" aria-current="step">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Backtest</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The second half of the <a href="https://github.com/craquinterogo/quantitative_finance/blob/master/Risk/Market/VaR/Modified_CornishFisher.ipynb" target="_blank" rel="noopener">notebook’s backtest</a> computes rolling forecasts at tail probabilities 5%, 3%, 2%, and 1%. An exception is a return below the predicted lower return quantile, equivalently a loss above positive VaR:</p>
+
+\[I_{t+1}=\mathbf{1}\{ -r_{t+1} &gt; \operatorname{VaR}_{t,1-\alpha} \},
+\qquad \widehat{p}=\frac{x}{T},\]
+
+<p>where $x$ exceptions occur in $T$ evaluated forecasts. A calibrated model should have an exception rate near $\alpha$. The proportion-of-failures (POF) test compares $\widehat p$ with $\alpha$; under its usual asymptotic null, the likelihood-ratio statistic has one degree of freedom <a class="citation" href="#Kupiec1995VaR">(Kupiec, 1995)</a>:</p>
+
+\[LR_{\mathrm{POF}} = -2\log\left[
+\frac{\alpha^x(1-\alpha)^{T-x}}
+{\widehat p^x(1-\widehat p)^{T-x}}
+\right] \;\overset{H_0}{\sim}\; \chi^2_1.\]
+
+<p>The notebook also plots time-until-first-failure (TUFF) and a mixed statistic intended to probe the spacing between exceptions. These complement the simple exception count: a VaR model might achieve the right total number of breaches but cluster them in stress periods. The notebook concludes that its tests look more favorable at smaller tail probabilities, particularly around 1%; that is an observation from this experiment, not proof of calibration.</p>
+
+<blockquote>
+  <p><strong>Backtesting caveat:</strong> The notebook’s rolling estimate is placed on a row that is also used in that row’s 252-return fit. For a genuine one-step-ahead test, compute the risk estimate using information available through $t$, <strong>shift the forecast to $t+1$</strong>, and only then compare it with $r_{t+1}$. The code also uses rolling sums of breach flags, some with a negative shift for plotting. Without carefully aligning forecasts, observations, and evaluation windows, test conclusions may reflect look-ahead bias. Few 1% breaches in a 252-day window also mean low power; failure to reject is not model validation.</p>
+</blockquote>
+
+<p>Cornish-Fisher is useful as a transparent sensitivity check beside normal VaR, not a replacement for tail diagnostics, stress testing, or expected shortfall. Its signal depends on a short window’s third and fourth moments, the correction can misbehave far into the tail, and a backtest must respect time ordering. Those checks are where a quick quantile approximation becomes a risk measure we can begin to trust.</p>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="AmedeeBarthelemyMaillard2018">Amédée-Manesme, C.-O., Barthélémy, F., &amp; Maillard, D. (2019). Computation of the corrected Cornish–Fisher expansion using the response surface methodology: application to VaR and CVaR. <i>Annals of Operations Research</i>, <i>281</i>(1–2), 423–453. https://doi.org/10.1007/s10479-018-2792-4</span></li>
+<li><span id="Kupiec1995VaR">Kupiec, P. H. (1995). Techniques for Verifying the Accuracy of Risk Measurement Models. <i>The Journal of Derivatives</i>, <i>3</i>(2), 73–84. https://doi.org/10.3905/jod.1995.407942</span></li></ol>
+
+                </div>
+
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/assets/js/jquery.scrollex.min.js"></script>
+	<script src="/assets/js/skel.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
+
+
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── Dual sidebar toggles (mobile) ───────────────── */
+        function makeSidebarToggle(toggleId, sidebarId, overlayId) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+
+          toggle.addEventListener('click', function () {
+            var open = sidebar.classList.toggle('active');
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+          overlay.addEventListener('click', function () {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        }
+
+        makeSidebarToggle('sidebar-left-toggle',  'sidebar-left',  'sidebar-left-overlay');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay');
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
+            }
+          });
+        });
+
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            var nums    = [0, 0, 0, 0];
+            var tocNums = [0, 0, 0, 0];
+            var html    = '<ul class="toc-list">';
+
+            headings.forEach(function (h) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              h.innerHTML  = '<span class="section-number">' + numStr + '.</span> ' + rawText;
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              }
+              tocNums[level]++;
+              for (var j = level + 1; j < 4; j++) tocNums[j] = 0;
+              var tocNum   = tocNums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              html += '<li class="toc-level-' + (level + 1) + '">'
+                + '<a href="#' + h.id + '">'
+                + '<span class="toc-number">' + tocNum + '.</span> ' + rawText
+                + '</a></li>';
+            });
+
+            html += '</ul>';
+            tocNav.innerHTML = html;
+            if (tocSect) tocSect.style.display = 'block';
+          } else {
+            if (tocSect) tocSect.style.display = 'none';
+          }
+        }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                var active = tocNav.querySelector('a[href="#' + entry.target.id + '"]');
+                if (active) active.setAttribute('data-active', '');
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>

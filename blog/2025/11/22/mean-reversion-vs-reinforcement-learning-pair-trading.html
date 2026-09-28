@@ -251,7 +251,7 @@
                     
                       <span class="post-meta__item">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                        <time datetime="2025-11-22T00:00:00+01:00">November 22, 2025</time>
+                        <time datetime="2025-11-22T00:00:00-06:00">November 22, 2025</time>
                       </span>
                       <span class="post-meta__sep" aria-hidden="true">·</span>
                     
@@ -1218,7 +1218,7 @@ For episode_i = 1 to episodes:
 <li><span id="Minsky77">Minsky, H. (1979). The financial instability hypothesis: An interpretation of Keynes an alternative to ’standard’ theory. <i>Nebraska Journal of Economics, Business</i>, <i>16</i>(1), 5–18.</span></li>
 <li><span id="Chan">Chan, E. (2013). <i>Algorithmic trading: winning strategies and their rationale</i>. Wiley Trading Series.</span></li>
 <li><span id="Vidyamurthy">Vidyamurthi, G. (2004). <i>Pairs trading: Quantitative methods and analysis</i>. Wiley Finance.</span></li>
-<li><span id="Krauss">Krauss, C. (2015). <i>Statistical arbitrage pairs trading strategies: Review and outlook</i> (No. 9; Number 9). Institut für Wirtschaftspolitik und Quantitative Wirtschaftsforschung, Nürnberg - Working Paper.</span></li>
+<li><span id="Krauss">Krauss, C. (2015). <i>Statistical arbitrage pairs trading strategies: Review and outlook</i> (No. 9; Issue 9). Institut für Wirtschaftspolitik und Quantitative Wirtschaftsforschung, Nürnberg - Working Paper.</span></li>
 <li><span id="Elton">Elton, E., Brown, S., Gruber, M., &amp; Goetzman, W. (2014). <i>Modern portfolio theory and investment analysis</i>. Wiley.</span></li>
 <li><span id="AitSahalia">Ait-Sahala, Y. (2002). Maximum likelihood estimation of discretely sampled diffusions: A closed-form approximation approach. <i>Econometrica</i>, <i>70</i>(1), 223–262.</span></li>
 <li><span id="Mejia">Mejía, C. (2018). Calibration of exponential Ornstein-Uhlenbeck process when spot prices are visible through the maximum log-likelihood method. Example with gold prices. <i>Spring Open Journal: Advances in Difference Equations</i>, 269.</span></li>
@@ -1227,6 +1227,18 @@ For episode_i = 1 to episodes:
 
                 </div>
 
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
               
             
           
@@ -1467,6 +1479,46 @@ For episode_i = 1 to episodes:
 	<script src="/assets/js/util.js"></script>
 	<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
 
 
     <script>

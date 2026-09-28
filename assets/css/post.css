@@ -344,6 +344,68 @@ body.layout-post #contact {
 }
 .post-body h2 { border-bottom: 1px solid var(--c-border); padding-bottom: 0.4rem; }
 
+.post-body .workflow-progress {
+  margin: 0.8rem 0 1.8rem;
+  overflow-x: auto;
+}
+.post-body .workflow-progress ol {
+  display: grid;
+  grid-template-columns: repeat(var(--flow-count), minmax(0, 1fr));
+  min-width: max(100%, calc(var(--flow-count) * 5.6rem));
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.post-body .workflow-progress__step {
+  position: relative;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+.post-body .workflow-progress__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 0.85rem;
+  left: calc(50% + 1rem);
+  width: calc(100% - 2rem);
+  height: 2px;
+  background: var(--c-border-hard);
+}
+.post-body .workflow-progress__step.is-done::after { background: var(--c-gold); }
+.post-body .workflow-progress__step a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--c-fg-muted);
+  border: 0;
+  text-decoration: none;
+}
+.post-body .workflow-progress__step a:hover,
+.post-body .workflow-progress__step a:focus-visible { color: var(--c-gold); }
+.post-body .workflow-progress__number {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid var(--c-border-hard);
+  border-radius: 50%;
+  background: var(--c-bg);
+  font-size: 0.7rem;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+.post-body .workflow-progress__step.is-current .workflow-progress__number {
+  background: var(--c-gold);
+  border-color: var(--c-gold);
+  color: var(--c-bg);
+  font-weight: 700;
+}
+.post-body .workflow-progress__step.is-done .workflow-progress__number { border-color: var(--c-gold); color: var(--c-gold); }
+.post-body .workflow-progress__step.is-current .workflow-progress__label { color: var(--c-fg-strong); font-weight: 700; }
+.post-body .workflow-progress__label { font-size: 0.75rem; line-height: 1.25; }
+
 /* Section numbering colour */
 .post-body .section-number { color: var(--c-gold); margin-right: 0.25em; }
 
