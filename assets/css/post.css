@@ -406,6 +406,29 @@ body.layout-post #contact {
 .post-body .workflow-progress__step.is-current .workflow-progress__label { color: var(--c-fg-strong); font-weight: 700; }
 .post-body .workflow-progress__label { font-size: 0.75rem; line-height: 1.25; }
 
+.post-body .quant-timeline {
+  border-left: 2px solid var(--c-border-hard);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+.post-body .quant-timeline h3 {
+  position: relative;
+  margin: 2.2rem 0 0.8rem;
+  color: var(--c-gold);
+}
+.post-body .quant-timeline h3::before {
+  content: '';
+  position: absolute;
+  left: calc(-1.5rem - 6px);
+  top: 0.55rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-gold);
+}
+.post-body .quant-timeline h3:first-child { margin-top: 0; }
+.post-body .quant-timeline p { margin-bottom: 0.9rem; }
+
 /* Section numbering colour */
 .post-body .section-number { color: var(--c-gold); margin-right: 0.25em; }
 
