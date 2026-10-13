@@ -394,6 +394,7 @@ git clone https://github.com/ggml-org/llama.cpp
 <span class="nb">cd </span>llama.cpp
 
 <span class="c"># Create and enter the build directory</span>
+cmake <span class="nt">-B</span> build
 cmake <span class="nt">--build</span> build <span class="nt">--config</span> Release <span class="nt">-j</span> 8
 </code></pre></div></div>
 
@@ -567,6 +568,47 @@ hf_hub_download(
 <p>Here’s a screenshot of Llama.cpp running inference on Mistral 7B:</p>
 
 <p><img src="/assets/images/04_llm_and_mcp/02_01_llama_cpp.png" alt="Llama Inference Example" /></p>
+
+<hr />
+
+<h2 id="running-llamacpp-as-a-local-server">Running Llama.cpp as a Local Server</h2>
+
+<p>The command-line interface is useful for one-off prompts, while <code class="language-plaintext highlighter-rouge">llama-server</code> keeps the model loaded and makes it available through a local web interface and an OpenAI-compatible HTTP API. This lets other local applications send prompts to the model without loading it again for every request.</p>
+
+<p>From the directory containing the <code class="language-plaintext highlighter-rouge">llama-server</code> executable, start the server with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./llama-server <span class="se">\</span>
+    <span class="nt">-m</span> <span class="s2">"/&lt;...&gt;/genAI_models/Mistral-7B-Instruct-v0.3-GGUF/Mistral-7B-Instruct-v0.3-Q6_K.gguf"</span> <span class="se">\</span>
+    <span class="nt">--host</span> 127.0.0.1 <span class="se">\</span>
+    <span class="nt">--port</span> 8080 <span class="se">\</span>
+    <span class="nt">-c</span> 8192
+</code></pre></div></div>
+
+<p>If you built Llama.cpp with CMake as above, the executable is typically at <code class="language-plaintext highlighter-rouge">build/bin/llama-server</code>, so you can either run it from that directory or use its path from the repository root:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/bin/llama-server <span class="se">\</span>
+    <span class="nt">-m</span> <span class="s2">"/&lt;...&gt;/genAI_models/Mistral-7B-Instruct-v0.3-GGUF/Mistral-7B-Instruct-v0.3-Q6_K.gguf"</span> <span class="se">\</span>
+    <span class="nt">--host</span> 127.0.0.1 <span class="se">\</span>
+    <span class="nt">--port</span> 8080 <span class="se">\</span>
+    <span class="nt">-c</span> 8192
+</code></pre></div></div>
+
+<p>The server loads the model at startup and prints its listening address when it is ready. Keep that terminal open while using the service. On the same computer, open <a href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> in a browser to use the web interface. The <code class="language-plaintext highlighter-rouge">127.0.0.1</code> host binding makes the service accessible only from your own machine; it does not expose the model to other devices on your network.</p>
+
+<p>Applications can also send requests to the OpenAI-compatible chat completions endpoint. For example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://127.0.0.1:8080/v1/chat/completions <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+        "messages": [
+            {"role": "user", "content": "Explain what a neural network is in simple terms."}
+        ],
+        "temperature": 0.7,
+        "max_tokens": 256
+    }'</span>
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">--port 8080</code> selects the local port and <code class="language-plaintext highlighter-rouge">-c 8192</code> sets the context window. To stop the service, return to its terminal and press <code class="language-plaintext highlighter-rouge">Ctrl+C</code>.</p>
 
 <hr />
 
