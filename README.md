@@ -38,6 +38,25 @@ Due to sometimes the cache folder may be constrained by the OS, i.e. Ubuntu, a s
 > bundle exec jekyll build --destination /home/donnetoo/GIT/craquinterogo.github.io
 ```
 
+## Deploying to GitHub Pages
+
+This repository contains the source; `craquinterogo.github.io` contains the
+generated site. Build with Bundler using the command above, then commit and push
+the generated output from the publishing repository, including the hidden
+`.nojekyll` file at its root. In the publishing repository's **Settings > Pages**,
+use **Deploy from a branch** and select the branch containing that output and
+the **/ (root)** folder.
+
+Jekyll-Scholar runs during the local build. GitHub Pages' built-in Jekyll build
+does not support it. The source `.nojekyll` file is explicitly included by
+`_config.yml` so every build copies it into the output and tells GitHub Pages
+to serve the generated files without rebuilding them.
+
+If deployment reports `Unknown tag 'cite'`, check that `.nojekyll` was committed
+to the publishing repository's selected branch and folder. The Scholar setup
+guide is excluded from the output so its literal Liquid examples are not
+published as site content.
+
 # Forty - Jekyll Theme
 
 ## Blog category navigation
