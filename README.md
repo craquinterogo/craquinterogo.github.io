@@ -40,6 +40,33 @@ Due to sometimes the cache folder may be constrained by the OS, i.e. Ubuntu, a s
 
 # Forty - Jekyll Theme
 
+## Blog category navigation
+
+The All Posts and My Posts pages share the category browser in
+[`_layouts/allposts.html`](./_layouts/allposts.html), styled by
+[`assets/css/allposts.css`](./assets/css/allposts.css). Categories appear in a
+four-column grid on desktop and a two-column grid between 681px and 900px,
+with wrapping labels and post counts instead of horizontal scrolling. At 680px
+or less, a compact native dropdown lists all categories with their post counts.
+The dropdown and grid stay in sync when resizing or rotating a device.
+Selecting a category filters the post list and preserves its URL hash for direct
+links. Keyboard users can move between grid categories with Left/Right arrows,
+Home, and End, or use native dropdown controls on small screens; Tab moves into
+the selected post panel. Reduced-motion preferences are respected.
+
+## Post reading layout
+
+[`assets/css/post.css`](./assets/css/post.css) gives posts a responsive article
+canvas up to 1200px wide. Prose, headings, code blocks, tables, and figures share
+the full canvas width, with larger system-font text and generous line spacing.
+Long code and tables scroll within their own
+keyboard-focusable containers instead of widening the page.
+
+The contents sidebar remains visible at 1200px and above. Related posts remain
+visible at 1600px and above. Below those thresholds, labeled buttons open the
+respective drawers; Escape or the backdrop closes them. The post template
+preserves inline heading formatting when generating its numbered contents list.
+
 A Jekyll version of the "Forty" theme by [HTML5 UP](https://html5up.net/).
 
 ![Forty Theme](assets/images/forty.jpg "Forty Theme")

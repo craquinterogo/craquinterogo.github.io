@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="850" viewBox="0 0 1000 850" role="img" aria-labelledby="title description">
+  <title id="title">A timeout can leave an order outcome unknown</title>
+  <desc id="description">A client persists an intent and sends an order to a broker. The broker may accept it, but the acknowledgment is lost. A local timeout leaves the outcome unknown, not necessarily rejected. A blind retry with a fresh identifier risks another order. Safer recovery follows the counterparty's rules, restores the session, reconciles orders and fills, and resumes after exposure is understood.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#d4af37"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="850" rx="8" fill="#242424"/>
+  <g font-family="system-ui, sans-serif" text-anchor="middle" fill="#e8e8e8">
+    <text x="500" y="48" font-size="28" font-weight="600">No acknowledgment does not mean no order</text>
+    <text x="500" y="82" fill="#bcbcbc" font-size="21">The local view and the remote outcome can diverge.</text>
+    <g fill="#393222" stroke="#d4af37" stroke-width="2">
+      <rect x="58" y="112" width="270" height="66" rx="7"/>
+      <rect x="672" y="112" width="270" height="66" rx="7"/>
+    </g>
+    <text x="193" y="154" font-size="24" font-weight="600">Trading application</text>
+    <text x="807" y="154" font-size="24" font-weight="600">Broker</text>
+    <g fill="none" stroke="#929292" stroke-width="2" stroke-dasharray="6 7">
+      <path d="M193 180 L193 480"/>
+      <path d="M807 180 L807 480"/>
+    </g>
+    <g font-size="21">
+      <text x="500" y="221">Persist intent and identifier; send order</text>
+      <text x="807" y="299">May accept the order</text>
+      <text x="500" y="348">Acknowledgment fails to arrive</text>
+    </g>
+    <g fill="none" stroke="#d4af37" stroke-width="2.5" marker-end="url(#arrow)">
+      <path d="M195 247 L797 247"/>
+      <path d="M805 375 L570 375" stroke-dasharray="7 6"/>
+    </g>
+    <path d="M530 362 L552 388 M552 362 L530 388" fill="none" stroke="#e8a36e" stroke-width="4"/>
+    <rect x="58" y="420" width="474" height="64" rx="7" fill="#393222" stroke="#e8a36e" stroke-width="2"/>
+    <text x="295" y="460" font-size="23" font-weight="600">Timeout: outcome UNKNOWN</text>
+    <g fill="#2e2e2e">
+      <rect x="28" y="520" width="458" height="234" rx="10"/>
+      <rect x="514" y="520" width="458" height="234" rx="10"/>
+    </g>
+    <text x="257" y="564" fill="#e8a36e" font-size="24" font-weight="600">Risky shortcut</text>
+    <text x="743" y="564" fill="#d4af37" font-size="24" font-weight="600">Recovery by the actual contract</text>
+    <g font-size="21">
+      <text x="257" y="607">Assume rejection.</text>
+      <text x="257" y="642">Send again with a fresh identifier.</text>
+      <text x="257" y="701" fill="#e8a36e">Possible result: duplicate exposure.</text>
+      <text x="743" y="607">Restore session and reconcile state.</text>
+      <text x="743" y="642">Check orders, fills, and identifiers.</text>
+      <text x="743" y="677">Use supported replay / retry rules.</text>
+      <text x="743" y="712" fill="#d4af37">Resume when exposure is understood.</text>
+    </g>
+    <text x="500" y="795" font-size="21">Neither a binary format nor a reliable byte stream resolves this on its own.</text>
+    <text x="500" y="828" fill="#bcbcbc" font-size="18">Illustrative failure scenario, not a complete FIX session sequence or recovery procedure.</text>
+  </g>
+</svg>

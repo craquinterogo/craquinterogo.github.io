@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
     Forty by HTML5 UP — All Posts layout
-    Minimalist redesign: timeline list · tab navigation · dark-gold palette
+    Minimalist redesign: timeline list · category grid · dark-gold palette
 -->
 <html lang="en">
 
@@ -129,129 +129,175 @@
             
 
             <!-- ── Category tab navigation ───────────────── -->
-            <nav class="cat-nav" role="tablist" aria-label="Post categories">
-              
+            <div class="category-browser">
+              <div class="category-browser__header">
+                <h2 id="category-heading">Browse by topic</h2>
+                <p>Select a category to filter posts.</p>
+              </div>
+              <select
+                class="category-browser__select"
+                id="category-select"
+                aria-labelledby="category-heading"
+                aria-controls="tab-general"
+              >
                 
+                  
+                  <option value="general">General (5)</option>
                 
-                <button
-                  class="cat-nav__btn is-active"
-                  role="tab"
-                  aria-selected="true"
-                  aria-controls="tab-general"
-                  id="btn-general"
-                  data-tab="general"
-                  tabindex="0"
-                >
-                  General
-                  <span class="cat-nav__count" aria-label="5 posts">5</span>
-                </button>
-              
+                  
+                  <option value="portfolio-management">Portfolio Management (1)</option>
                 
+                  
+                  <option value="artificial-intelligence">Artificial Intelligence (2)</option>
                 
-                <button
-                  class="cat-nav__btn"
-                  role="tab"
-                  aria-selected="false"
-                  aria-controls="tab-portfolio-management"
-                  id="btn-portfolio-management"
-                  data-tab="portfolio-management"
-                  tabindex="-1"
-                >
-                  Portfolio Management
-                  <span class="cat-nav__count" aria-label="1 posts">1</span>
-                </button>
-              
+                  
+                  <option value="quantitative-development">Quantitative Development (5)</option>
                 
+                  
+                  <option value="quantitative-finance">Quantitative Finance (1)</option>
                 
-                <button
-                  class="cat-nav__btn"
-                  role="tab"
-                  aria-selected="false"
-                  aria-controls="tab-artificial-intelligence"
-                  id="btn-artificial-intelligence"
-                  data-tab="artificial-intelligence"
-                  tabindex="-1"
-                >
-                  Artificial Intelligence
-                  <span class="cat-nav__count" aria-label="1 posts">1</span>
-                </button>
-              
+                  
+                  <option value="algorithmic-trading">Algorithmic Trading (3)</option>
                 
+                  
+                  <option value="risk-management">Risk Management (3)</option>
                 
-                <button
-                  class="cat-nav__btn"
-                  role="tab"
-                  aria-selected="false"
-                  aria-controls="tab-quantitative-development"
-                  id="btn-quantitative-development"
-                  data-tab="quantitative-development"
-                  tabindex="-1"
-                >
-                  Quantitative Development
-                  <span class="cat-nav__count" aria-label="5 posts">5</span>
-                </button>
-              
+                  
+                  <option value="economic-analysis">Economic Analysis (0)</option>
                 
+              </select>
+              <div class="cat-nav" role="tablist" aria-labelledby="category-heading">
                 
-                <button
-                  class="cat-nav__btn"
-                  role="tab"
-                  aria-selected="false"
-                  aria-controls="tab-quantitative-finance"
-                  id="btn-quantitative-finance"
-                  data-tab="quantitative-finance"
-                  tabindex="-1"
-                >
-                  Quantitative Finance
-                  <span class="cat-nav__count" aria-label="1 posts">1</span>
-                </button>
-              
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn is-active"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="tab-general"
+                    id="btn-general"
+                    data-tab="general"
+                    tabindex="0"
+                  >
+                    <span class="cat-nav__label">General</span>
+                    <span class="cat-nav__count" aria-label="5 posts">5</span>
+                  </button>
                 
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-portfolio-management"
+                    id="btn-portfolio-management"
+                    data-tab="portfolio-management"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Portfolio Management</span>
+                    <span class="cat-nav__count" aria-label="1 posts">1</span>
+                  </button>
                 
-                <button
-                  class="cat-nav__btn"
-                  role="tab"
-                  aria-selected="false"
-                  aria-controls="tab-algorithmic-trading"
-                  id="btn-algorithmic-trading"
-                  data-tab="algorithmic-trading"
-                  tabindex="-1"
-                >
-                  Algorithmic Trading
-                  <span class="cat-nav__count" aria-label="2 posts">2</span>
-                </button>
-              
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-artificial-intelligence"
+                    id="btn-artificial-intelligence"
+                    data-tab="artificial-intelligence"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Artificial Intelligence</span>
+                    <span class="cat-nav__count" aria-label="2 posts">2</span>
+                  </button>
                 
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-quantitative-development"
+                    id="btn-quantitative-development"
+                    data-tab="quantitative-development"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Quantitative Development</span>
+                    <span class="cat-nav__count" aria-label="5 posts">5</span>
+                  </button>
                 
-                <button
-                  class="cat-nav__btn"
-                  role="tab"
-                  aria-selected="false"
-                  aria-controls="tab-risk-management"
-                  id="btn-risk-management"
-                  data-tab="risk-management"
-                  tabindex="-1"
-                >
-                  Risk Management
-                  <span class="cat-nav__count" aria-label="3 posts">3</span>
-                </button>
-              
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-quantitative-finance"
+                    id="btn-quantitative-finance"
+                    data-tab="quantitative-finance"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Quantitative Finance</span>
+                    <span class="cat-nav__count" aria-label="1 posts">1</span>
+                  </button>
                 
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-algorithmic-trading"
+                    id="btn-algorithmic-trading"
+                    data-tab="algorithmic-trading"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Algorithmic Trading</span>
+                    <span class="cat-nav__count" aria-label="3 posts">3</span>
+                  </button>
                 
-                <button
-                  class="cat-nav__btn"
-                  role="tab"
-                  aria-selected="false"
-                  aria-controls="tab-economic-analysis"
-                  id="btn-economic-analysis"
-                  data-tab="economic-analysis"
-                  tabindex="-1"
-                >
-                  Economic Analysis
-                  <span class="cat-nav__count" aria-label="0 posts">0</span>
-                </button>
-              
-            </nav>
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-risk-management"
+                    id="btn-risk-management"
+                    data-tab="risk-management"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Risk Management</span>
+                    <span class="cat-nav__count" aria-label="3 posts">3</span>
+                  </button>
+                
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-economic-analysis"
+                    id="btn-economic-analysis"
+                    data-tab="economic-analysis"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Economic Analysis</span>
+                    <span class="cat-nav__count" aria-label="0 posts">0</span>
+                  </button>
+                
+              </div>
+            </div>
 
             <!-- ── Post panels ────────────────────────────── -->
             <div class="post-panels">
@@ -602,6 +648,54 @@
                           
                             <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2026</li>
                             
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2026-10-11T00:00:00-05:00"
+                            >Oct 11, 2026</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2026/10/11/from-ai-winters-to-transformers">Before the 'AI' hype: AI winters, tiny transistors, and the road to Transformers</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">AI did not suddenly appear in a chat window. Its road to Transformers runs through ambitious summers, disappointing winters, tiny silicon switches, and a surprising assist from computer graphics.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">artificial intelligence</span>
+                                    
+                                      <span class="post-tag">AI history</span>
+                                    
+                                      <span class="post-tag">deep learning</span>
+                                    
+                                      <span class="post-tag">semiconductors</span>
+                                    
+                                      <span class="post-tag">NLP</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2026/10/11/from-ai-winters-to-transformers"
+                                  aria-label="Read full post: Before the 'AI' hype: AI winters, tiny transistors, and the road to Transformers"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
                           
 
                           <li class="post-entry">
@@ -986,6 +1080,65 @@
                   
                     <ul class="post-list" aria-label="Algorithmic Trading posts">
                       
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2026</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2026-10-19T00:00:00-05:00"
+                            >Oct 19, 2026</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2026/10/19/trading-protocols-from-json-to-sbe">The plumbing behind the trade: JSON, Protobuf, FIX, and SBE</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">A trading signal is only the beginning. Follow an order through JSON, Protobuf, FIX, and SBE, and discover why readable messages, fast decoding, and reliable recovery all belong in the P&L conversation.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">algorithmic-trading</span>
+                                    
+                                      <span class="post-tag">trading-systems</span>
+                                    
+                                      <span class="post-tag">market-microstructure</span>
+                                    
+                                      <span class="post-tag">IBKR</span>
+                                    
+                                      <span class="post-tag">JSON</span>
+                                    
+                                      <span class="post-tag">Protobuf</span>
+                                    
+                                      <span class="post-tag">FIX</span>
+                                    
+                                      <span class="post-tag">SBE</span>
+                                    
+                                      <span class="post-tag">execution</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2026/10/19/trading-protocols-from-json-to-sbe"
+                                  aria-label="Read full post: The plumbing behind the trade: JSON, Protobuf, FIX, and SBE"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
                       
                         
 
@@ -1529,9 +1682,10 @@
       'use strict';
 
       document.addEventListener('DOMContentLoaded', function () {
-        var nav     = document.querySelector('.cat-nav');
         var buttons = Array.prototype.slice.call(document.querySelectorAll('.cat-nav__btn'));
         var panels  = document.querySelectorAll('.post-panel');
+        var select  = document.getElementById('category-select');
+        var compact = window.matchMedia('(max-width: 680px)');
 
         if (!buttons.length) return;
 
@@ -1550,8 +1704,8 @@
             p.classList.toggle('is-active', p.id === 'tab-' + target);
           });
 
-          /* Scroll active button into view on the tab strip */
-          btn.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+          select.value = target;
+          select.setAttribute('aria-controls', 'tab-' + target);
 
           /* Persist selected tab in URL hash (no page jump) */
           try {
@@ -1563,6 +1717,19 @@
         var hash    = location.hash.replace('#', '');
         var initial = hash ? buttons.find(function (b) { return b.dataset.tab === hash; }) : null;
         if (initial) activate(initial);
+
+        select.addEventListener('change', function () {
+          activate(buttons.find(function (btn) { return btn.dataset.tab === select.value; }));
+        });
+
+        function updatePresentation() {
+          panels.forEach(function (panel) {
+            panel.setAttribute('role', compact.matches ? 'region' : 'tabpanel');
+          });
+        }
+
+        compact.addEventListener('change', updatePresentation);
+        updatePresentation();
 
         /* ── Click handlers ──────────────────────────────── */
         buttons.forEach(function (btn) {
@@ -1586,21 +1753,6 @@
           });
         });
 
-        /* ── Scroll-fade hint on tab bar ─────────────────── */
-        function updateHint() {
-          if (!nav) return;
-          var scrollable = nav.scrollWidth > nav.clientWidth + 2;
-          var atEnd      = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 4;
-          nav.classList.toggle('is-scrollable', scrollable && !atEnd);
-        }
-
-        if (nav) {
-          nav.addEventListener('scroll', updateHint, { passive: true });
-          updateHint();
-          if (typeof ResizeObserver !== 'undefined') {
-            new ResizeObserver(updateHint).observe(nav);
-          }
-        }
       });
     }());
     </script>

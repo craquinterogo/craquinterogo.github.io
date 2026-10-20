@@ -153,6 +153,14 @@
     
       
         
+      
+    
+      
+        
+      
+    
+      
+        
           
           
           
@@ -166,7 +174,7 @@
               <i class="fa fa-folder" aria-hidden="true"></i>
               Portfolio Management
             </h4>
-            <button class="collapse-toggle" aria-label="Toggle related posts">
+            <button type="button" class="collapse-toggle" aria-label="Toggle related posts" aria-controls="related-posts-content" aria-expanded="true">
               <i class="fa fa-chevron-down" aria-hidden="true"></i>
             </button>
           </div>
@@ -194,7 +202,7 @@
         <div class="sidebar-section toc-section">
           <div class="sidebar-section-header" data-target="toc-content">
             <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
-            <button class="collapse-toggle" aria-label="Toggle table of contents">
+            <button type="button" class="collapse-toggle" aria-label="Toggle table of contents" aria-controls="toc-content" aria-expanded="true">
               <i class="fa fa-chevron-down" aria-hidden="true"></i>
             </button>
           </div>
@@ -205,9 +213,9 @@
       </div>
     </aside>
 
-    <!-- Mobile toggles -->
-    <button id="sidebar-left-toggle"  class="sidebar-toggle sidebar-toggle--left"  aria-label="Toggle related posts"    aria-expanded="false"><i class="fa fa-folder"   aria-hidden="true"></i></button>
-    <button id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-label="Toggle table of contents" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+    <!-- On-demand navigation for narrower reading layouts -->
+    <button type="button" id="sidebar-left-toggle" class="sidebar-toggle sidebar-toggle--left" aria-controls="sidebar-left" aria-expanded="false"><i class="fa fa-folder" aria-hidden="true"></i>Related</button>
+    <button type="button" id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-controls="sidebar-right" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i>Contents</button>
 
     <!-- Mobile overlays -->
     <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
@@ -218,6 +226,14 @@
       <section id="one">
         <div class="inner">
 
+          
+            
+              
+            
+          
+            
+              
+            
           
             
               
@@ -313,7 +329,7 @@
                 
 
                 <!-- Post body -->
-                <div class="post-body" id="post-body-content">
+                <article class="post-body" id="post-body-content" aria-label="Article content">
                   <p>For a long time people though the only way to participate in capital markets is staying long periods in front to a screen, looking at line plots and a massive amount of financial figures. Even more extended when talking about cryptocurrencies, a market where any person with access to the internet is allowed to participate. Some decades ago the trading of financial assets was conducted on a trading floor in person, but fortunately this is no longer the case. It is also true that sophisticated financial products have evolved so that today a more diversified type of assets are available, and ready for assessing and investment.</p>
 
 <p>Assets available in capital markets have been evolving to meet the needs of market participants not only in terms of payoffs, but also in terms of investment strategies. Notwithstanding, not always the constraint to participate in capital markets lies on access or diversity of assets, but also time and knowledge. That’s why some sophisticated assets are exclusively granted to trade across <strong>specialized professionals</strong> with dedicated time and experience, for instance in derivatives market. But market has changed and now there are venues granting retail investors to participate remotely. A good example can be read in figure 1-1 of book titled <a href="https://www.amazon.com/Algorithmic-Trading-DMA-introduction-strategies/dp/0956399207" target="_blank" rel="noopener">Algorithmic Trading &amp; DMA</a> written by Johnson B., where different market connection are depicted because of different type of participants.</p>
@@ -523,7 +539,7 @@
 This content is provided for informational purposes only and does not constitute investment advice, financial recommendations, or an offer to buy or sell any financial instruments. Always conduct your own research and consult with a qualified financial advisor before making investment decisions.</p>
 </blockquote>
 
-                </div>
+                </article>
 
               
             
@@ -820,6 +836,7 @@ This content is provided for informational purposes only and does not constitute
             bar.style.width = pct + '%';
           }
           document.addEventListener('scroll', updateProgress, { passive: true });
+          window.addEventListener('resize', updateProgress);
           updateProgress();
         }
 
@@ -831,27 +848,60 @@ This content is provided for informational purposes only and does not constitute
           rtVal.textContent = mins;
         }
 
-        /* ── Dual sidebar toggles (mobile) ───────────────── */
-        function makeSidebarToggle(toggleId, sidebarId, overlayId) {
+        /* ── On-demand sidebars ──────────────────────────── */
+        var drawers = [];
+        function makeSidebarToggle(toggleId, sidebarId, overlayId, query) {
           var sidebar = document.getElementById(sidebarId);
           var toggle  = document.getElementById(toggleId);
           var overlay = document.getElementById(overlayId);
           if (!sidebar || !toggle || !overlay) return;
+          var compact = window.matchMedia(query);
 
-          toggle.addEventListener('click', function () {
-            var open = sidebar.classList.toggle('active');
+          function setOpen(open, restoreFocus) {
+            sidebar.classList.toggle('active', open);
             overlay.classList.toggle('active', open);
             toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            sidebar.inert = compact.matches && !open;
+            if (open) sidebar.querySelector('button, a').focus();
+            else if (restoreFocus) toggle.focus();
+          }
+
+          drawers.push(function () { setOpen(false, false); });
+          toggle.addEventListener('click', function () {
+            var open = !sidebar.classList.contains('active');
+            drawers.forEach(function (close) { close(); });
+            setOpen(open, !open);
           });
-          overlay.addEventListener('click', function () {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-            toggle.setAttribute('aria-expanded', 'false');
+          overlay.addEventListener('click', function () { setOpen(false, true); });
+          sidebar.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && compact.matches) setOpen(false, true);
           });
+          sidebar.addEventListener('click', function (event) {
+            if (compact.matches && event.target.closest('#toc-sidebar-nav a')) setOpen(false, true);
+          });
+          compact.addEventListener('change', function () { setOpen(false, false); });
+          setOpen(false, false);
         }
 
-        makeSidebarToggle('sidebar-left-toggle',  'sidebar-left',  'sidebar-left-overlay');
-        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay');
+        makeSidebarToggle('sidebar-left-toggle', 'sidebar-left', 'sidebar-left-overlay', '(max-width: 1599px)');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay', '(max-width: 1199px)');
+
+        /* Keep wide technical content scrollable without widening the page. */
+        if (body) {
+          body.querySelectorAll('pre').forEach(function (pre) {
+            pre.tabIndex = 0;
+            pre.setAttribute('aria-label', 'Code sample');
+          });
+          body.querySelectorAll('table').forEach(function (table) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'post-table-scroll';
+            wrapper.tabIndex = 0;
+            wrapper.setAttribute('role', 'region');
+            wrapper.setAttribute('aria-label', 'Scrollable table');
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+          });
+        }
 
         /* ── Collapsible sidebar sections ────────────────── */
         document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
@@ -860,6 +910,7 @@ This content is provided for informational purposes only and does not constitute
             var icon    = hdr.querySelector('.collapse-toggle .fa');
             if (!content) return;
             var isExpanded = content.classList.toggle('expanded');
+            hdr.querySelector('.collapse-toggle').setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
             content.classList.toggle('collapsed', !isExpanded);
             if (icon) {
               icon.classList.toggle('fa-chevron-down',  isExpanded);
@@ -877,8 +928,8 @@ This content is provided for informational purposes only and does not constitute
           var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
           if (headings.length > 2) {
             var nums    = [0, 0, 0, 0];
-            var tocNums = [0, 0, 0, 0];
-            var html    = '<ul class="toc-list">';
+            var list = document.createElement('ul');
+            list.className = 'toc-list';
 
             headings.forEach(function (h) {
               var level    = parseInt(h.tagName[1], 10) - 1;
@@ -886,24 +937,34 @@ This content is provided for informational purposes only and does not constitute
               for (var i = level + 1; i < 4; i++) nums[i] = 0;
               var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
               var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
-              h.innerHTML  = '<span class="section-number">' + numStr + '.</span> ' + rawText;
+              if (h.firstChild && h.firstChild.nodeType === Node.TEXT_NODE) {
+                h.firstChild.textContent = h.firstChild.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
+              }
+              var number = document.createElement('span');
+              number.className = 'section-number';
+              number.textContent = numStr + '. ';
+              h.insertBefore(number, h.firstChild);
               if (!h.id) {
                 h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
               }
-              tocNums[level]++;
-              for (var j = level + 1; j < 4; j++) tocNums[j] = 0;
-              var tocNum   = tocNums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
-              html += '<li class="toc-level-' + (level + 1) + '">'
-                + '<a href="#' + h.id + '">'
-                + '<span class="toc-number">' + tocNum + '.</span> ' + rawText
-                + '</a></li>';
+              var item = document.createElement('li');
+              item.className = 'toc-level-' + (level + 1);
+              var link = document.createElement('a');
+              link.setAttribute('href', '#' + h.id);
+              var tocNumber = document.createElement('span');
+              tocNumber.className = 'toc-number';
+              tocNumber.textContent = numStr + '. ';
+              link.appendChild(tocNumber);
+              link.appendChild(document.createTextNode(rawText));
+              item.appendChild(link);
+              list.appendChild(item);
             });
 
-            html += '</ul>';
-            tocNav.innerHTML = html;
+            tocNav.appendChild(list);
             if (tocSect) tocSect.style.display = 'block';
           } else {
             if (tocSect) tocSect.style.display = 'none';
+            document.body.classList.add('has-no-toc');
           }
         }
 

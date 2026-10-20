@@ -145,6 +145,14 @@
     
       
         
+      
+    
+      
+        
+      
+    
+      
+        
           
           
           
@@ -158,7 +166,7 @@
               <i class="fa fa-folder" aria-hidden="true"></i>
               Quantitative Development
             </h4>
-            <button class="collapse-toggle" aria-label="Toggle related posts">
+            <button type="button" class="collapse-toggle" aria-label="Toggle related posts" aria-controls="related-posts-content" aria-expanded="true">
               <i class="fa fa-chevron-down" aria-hidden="true"></i>
             </button>
           </div>
@@ -252,7 +260,7 @@
         <div class="sidebar-section toc-section">
           <div class="sidebar-section-header" data-target="toc-content">
             <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
-            <button class="collapse-toggle" aria-label="Toggle table of contents">
+            <button type="button" class="collapse-toggle" aria-label="Toggle table of contents" aria-controls="toc-content" aria-expanded="true">
               <i class="fa fa-chevron-down" aria-hidden="true"></i>
             </button>
           </div>
@@ -263,9 +271,9 @@
       </div>
     </aside>
 
-    <!-- Mobile toggles -->
-    <button id="sidebar-left-toggle"  class="sidebar-toggle sidebar-toggle--left"  aria-label="Toggle related posts"    aria-expanded="false"><i class="fa fa-folder"   aria-hidden="true"></i></button>
-    <button id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-label="Toggle table of contents" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+    <!-- On-demand navigation for narrower reading layouts -->
+    <button type="button" id="sidebar-left-toggle" class="sidebar-toggle sidebar-toggle--left" aria-controls="sidebar-left" aria-expanded="false"><i class="fa fa-folder" aria-hidden="true"></i>Related</button>
+    <button type="button" id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-controls="sidebar-right" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i>Contents</button>
 
     <!-- Mobile overlays -->
     <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
@@ -276,6 +284,14 @@
       <section id="one">
         <div class="inner">
 
+          
+            
+              
+            
+          
+            
+              
+            
           
             
               
@@ -359,7 +375,7 @@
                 
 
                 <!-- Post body -->
-                <div class="post-body" id="post-body-content">
+                <article class="post-body" id="post-body-content" aria-label="Article content">
                   <p>Recently I’ve decided to run the maintainance of my laptop, just to remove files I no longer use and that are hidden because I moved somewhere and I don’t remember where. Naturally, every time I have to set it up again. That’s why this post is a reminder of how to setting up the <a href="https://www.quantlib.org/docs.shtml" target="_blank" rel="noopener">QuantLib</a> library, since I think is one of the most nice libraries in scope of quantitative finance. This library covers different instruments, pricing engines and more, developed by following an architecture that has evolved over time, as pointed out in <a href="https://leanpub.com/implementingquantlib/" target="_blank" rel="noopener">Luigi Ballabio’s book</a>. I strongly encorage the readers to read the book, where Luigi walk you throug design patterns and reasoning for implementing them. In my opinion this approach, although far from being perfect, is a really good approximation to the <a href="https://math.ucr.edu/home/baez/physics/General/occam.html" target="_blank" rel="noopener">Occam’s Razor</a>, where parsimony is our allie. Different concepts are discussed in there. Concepts that I’d like to dive deep into later on in another post. At the moment, let’s see how to use the library if you love, as I do, dive into details of quantitative finance via well designed tools.</p>
 
 <h1 id="quantlib">QuantLib</h1>
@@ -710,7 +726,7 @@
 
 <p>Hope this information is useful for you. Any doubt not hesitate reaching me out via LinkedIn, I’ll be really happy to help.</p>
 
-                </div>
+                </article>
 
               
             
@@ -1015,6 +1031,7 @@
             bar.style.width = pct + '%';
           }
           document.addEventListener('scroll', updateProgress, { passive: true });
+          window.addEventListener('resize', updateProgress);
           updateProgress();
         }
 
@@ -1026,27 +1043,60 @@
           rtVal.textContent = mins;
         }
 
-        /* ── Dual sidebar toggles (mobile) ───────────────── */
-        function makeSidebarToggle(toggleId, sidebarId, overlayId) {
+        /* ── On-demand sidebars ──────────────────────────── */
+        var drawers = [];
+        function makeSidebarToggle(toggleId, sidebarId, overlayId, query) {
           var sidebar = document.getElementById(sidebarId);
           var toggle  = document.getElementById(toggleId);
           var overlay = document.getElementById(overlayId);
           if (!sidebar || !toggle || !overlay) return;
+          var compact = window.matchMedia(query);
 
-          toggle.addEventListener('click', function () {
-            var open = sidebar.classList.toggle('active');
+          function setOpen(open, restoreFocus) {
+            sidebar.classList.toggle('active', open);
             overlay.classList.toggle('active', open);
             toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            sidebar.inert = compact.matches && !open;
+            if (open) sidebar.querySelector('button, a').focus();
+            else if (restoreFocus) toggle.focus();
+          }
+
+          drawers.push(function () { setOpen(false, false); });
+          toggle.addEventListener('click', function () {
+            var open = !sidebar.classList.contains('active');
+            drawers.forEach(function (close) { close(); });
+            setOpen(open, !open);
           });
-          overlay.addEventListener('click', function () {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-            toggle.setAttribute('aria-expanded', 'false');
+          overlay.addEventListener('click', function () { setOpen(false, true); });
+          sidebar.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && compact.matches) setOpen(false, true);
           });
+          sidebar.addEventListener('click', function (event) {
+            if (compact.matches && event.target.closest('#toc-sidebar-nav a')) setOpen(false, true);
+          });
+          compact.addEventListener('change', function () { setOpen(false, false); });
+          setOpen(false, false);
         }
 
-        makeSidebarToggle('sidebar-left-toggle',  'sidebar-left',  'sidebar-left-overlay');
-        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay');
+        makeSidebarToggle('sidebar-left-toggle', 'sidebar-left', 'sidebar-left-overlay', '(max-width: 1599px)');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay', '(max-width: 1199px)');
+
+        /* Keep wide technical content scrollable without widening the page. */
+        if (body) {
+          body.querySelectorAll('pre').forEach(function (pre) {
+            pre.tabIndex = 0;
+            pre.setAttribute('aria-label', 'Code sample');
+          });
+          body.querySelectorAll('table').forEach(function (table) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'post-table-scroll';
+            wrapper.tabIndex = 0;
+            wrapper.setAttribute('role', 'region');
+            wrapper.setAttribute('aria-label', 'Scrollable table');
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+          });
+        }
 
         /* ── Collapsible sidebar sections ────────────────── */
         document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
@@ -1055,6 +1105,7 @@
             var icon    = hdr.querySelector('.collapse-toggle .fa');
             if (!content) return;
             var isExpanded = content.classList.toggle('expanded');
+            hdr.querySelector('.collapse-toggle').setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
             content.classList.toggle('collapsed', !isExpanded);
             if (icon) {
               icon.classList.toggle('fa-chevron-down',  isExpanded);
@@ -1072,8 +1123,8 @@
           var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
           if (headings.length > 2) {
             var nums    = [0, 0, 0, 0];
-            var tocNums = [0, 0, 0, 0];
-            var html    = '<ul class="toc-list">';
+            var list = document.createElement('ul');
+            list.className = 'toc-list';
 
             headings.forEach(function (h) {
               var level    = parseInt(h.tagName[1], 10) - 1;
@@ -1081,24 +1132,34 @@
               for (var i = level + 1; i < 4; i++) nums[i] = 0;
               var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
               var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
-              h.innerHTML  = '<span class="section-number">' + numStr + '.</span> ' + rawText;
+              if (h.firstChild && h.firstChild.nodeType === Node.TEXT_NODE) {
+                h.firstChild.textContent = h.firstChild.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
+              }
+              var number = document.createElement('span');
+              number.className = 'section-number';
+              number.textContent = numStr + '. ';
+              h.insertBefore(number, h.firstChild);
               if (!h.id) {
                 h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
               }
-              tocNums[level]++;
-              for (var j = level + 1; j < 4; j++) tocNums[j] = 0;
-              var tocNum   = tocNums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
-              html += '<li class="toc-level-' + (level + 1) + '">'
-                + '<a href="#' + h.id + '">'
-                + '<span class="toc-number">' + tocNum + '.</span> ' + rawText
-                + '</a></li>';
+              var item = document.createElement('li');
+              item.className = 'toc-level-' + (level + 1);
+              var link = document.createElement('a');
+              link.setAttribute('href', '#' + h.id);
+              var tocNumber = document.createElement('span');
+              tocNumber.className = 'toc-number';
+              tocNumber.textContent = numStr + '. ';
+              link.appendChild(tocNumber);
+              link.appendChild(document.createTextNode(rawText));
+              item.appendChild(link);
+              list.appendChild(item);
             });
 
-            html += '</ul>';
-            tocNav.innerHTML = html;
+            tocNav.appendChild(list);
             if (tocSect) tocSect.style.display = 'block';
           } else {
             if (tocSect) tocSect.style.display = 'none';
+            document.body.classList.add('has-no-toc');
           }
         }
 

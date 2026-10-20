@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1040" viewBox="0 0 1000 1040" role="img" aria-labelledby="title description">
+  <title id="title">CPU versus GPU: why parallel arithmetic helps AI</title>
+  <desc id="description">Side-by-side conceptual comparison. A CPU has a smaller number of complex, flexible cores suited to varied tasks and decisions. A GPU has many arithmetic lanes suited to similar operations on large arrays. For neural networks, many input and weight multiplications and additions can be grouped into parallel work. The CPU organizes the application and a GPU can accelerate large numerical batches. CPUs also execute work in parallel; a GPU advantage depends on workload size, memory movement, and software. Blocks illustrate design emphasis, not actual core counts or equivalent cores, and the diagram is not a speed benchmark.</desc>
+  <defs>
+    <pattern id="lanes" x="580" y="230" width="36" height="42" patternUnits="userSpaceOnUse">
+      <rect x="3" y="3" width="28" height="34" rx="3" fill="#554923" stroke="#d4af37" stroke-width="1.5"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#d4af37"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="1040" rx="8" fill="#242424"/>
+  <g font-family="system-ui, sans-serif">
+    <text x="36" y="48" fill="#e8e8e8" font-size="28" font-weight="600">CPU and GPU: different strengths, shared work</text>
+    <text x="36" y="82" fill="#bcbcbc" font-size="21">AI needs both flexible decisions and large amounts of repeated arithmetic.</text>
+    <g fill="#2e2e2e">
+      <rect x="28" y="110" width="458" height="442" rx="10"/>
+      <rect x="514" y="110" width="458" height="442" rx="10"/>
+    </g>
+    <g text-anchor="middle" fill="#e8e8e8">
+      <text x="257" y="150" font-size="26" font-weight="600">CPU: flexible generalist</text>
+      <text x="743" y="150" font-size="26" font-weight="600">GPU: parallel number cruncher</text>
+      <g font-size="20" fill="#bcbcbc">
+        <text x="257" y="184">Fewer, more complex cores</text>
+        <text x="743" y="184">Many arithmetic lanes</text>
+      </g>
+    </g>
+    <g stroke="#d4af37" stroke-width="2">
+      <rect x="94" y="212" width="326" height="206" rx="8" fill="#242424"/>
+      <rect x="580" y="212" width="326" height="206" rx="8" fill="#242424"/>
+      <g fill="#393222">
+        <rect x="116" y="230" width="130" height="74" rx="5"/>
+        <rect x="268" y="230" width="130" height="74" rx="5"/>
+        <rect x="116" y="326" width="130" height="74" rx="5"/>
+        <rect x="268" y="326" width="130" height="74" rx="5"/>
+      </g>
+    </g>
+    <rect x="580" y="230" width="324" height="168" fill="url(#lanes)"/>
+    <g text-anchor="middle" fill="#e8e8e8" font-size="20">
+      <text x="181" y="275">Core</text>
+      <text x="333" y="275">Core</text>
+      <text x="181" y="371">Core</text>
+      <text x="333" y="371">Core</text>
+      <text x="257" y="453" font-weight="600">Good fit: varied tasks and branching</text>
+      <text x="257" y="486">Run the program, handle decisions,</text>
+      <text x="257" y="517">prepare data, coordinate other devices.</text>
+      <text x="743" y="453" font-weight="600">Good fit: similar operations at scale</text>
+      <text x="743" y="486">Apply related instructions to many</text>
+      <text x="743" y="517">numbers, keeping many lanes busy.</text>
+    </g>
+    <text x="500" y="585" text-anchor="middle" fill="#bcbcbc" font-size="18">Conceptual blocks, not actual core counts. A GPU lane is not equivalent to a CPU core.</text>
+    <rect x="28" y="608" width="944" height="262" rx="10" fill="#2e2e2e"/>
+    <text x="500" y="647" text-anchor="middle" fill="#e8e8e8" font-size="25" font-weight="600">Why neural networks offer so much parallel work</text>
+    <g fill="#393222" stroke="#d4af37" stroke-width="2">
+      <rect x="56" y="680" width="240" height="100" rx="6"/>
+      <rect x="368" y="680" width="264" height="100" rx="6"/>
+      <rect x="704" y="680" width="240" height="100" rx="6"/>
+    </g>
+    <g fill="none" stroke="#d4af37" stroke-width="2.5" marker-end="url(#arrow)">
+      <path d="M298 730 L357 730"/>
+      <path d="M634 730 L693 730"/>
+    </g>
+    <g text-anchor="middle" fill="#e8e8e8" font-size="21">
+      <text x="176" y="720" font-weight="600">Inputs + weights</text>
+      <text x="176" y="752">Arrays of numbers</text>
+      <text x="500" y="720" font-weight="600">Multiply and add</text>
+      <text x="500" y="752">Many pieces at once</text>
+      <text x="824" y="720" font-weight="600">Layer outputs</text>
+      <text x="824" y="752">Combine partial results</text>
+      <text x="500" y="816">Matrix operations group this work into batches a GPU can accelerate.</text>
+      <text x="500" y="848" fill="#bcbcbc" font-size="19">Training repeats related arithmetic to compute gradients and update weights.</text>
+    </g>
+    <g text-anchor="middle" fill="#e8e8e8">
+      <text x="500" y="909" font-size="23" font-weight="600">More parallel work, not magic speed for every task</text>
+      <g font-size="20">
+        <text x="500" y="945">CPUs also work in parallel. Small or branch-heavy jobs may suit them better.</text>
+        <text x="500" y="978">GPU gains depend on enough work, memory bandwidth, data transfers, and software.</text>
+      </g>
+      <text x="500" y="1016" fill="#bcbcbc" font-size="18">Design emphasis only: not a chip floor plan, timing chart, or performance benchmark.</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1040" viewBox="0 0 900 1040" role="img" aria-labelledby="title description">
+  <title id="title">Vacuum tubes and transistors: two ways to control electricity</title>
+  <desc id="description">A vacuum triode heats a cathode to release electrons into a vacuum. A voltage on a wire grid controls how many electrons reach the collecting plate. A later MOS transistor instead uses a gate voltage across an insulating layer to control a conducting channel in a solid semiconductor between source and drain. Both control electrical flow, but the transistor needs no heated cathode or vacuum enclosure. These are simplified diagrams, not to scale, with power supplies and wiring omitted.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#d4af37"/>
+    </marker>
+  </defs>
+  <rect width="900" height="1040" rx="8" fill="#242424"/>
+  <g font-family="system-ui, sans-serif">
+    <text x="36" y="48" fill="#e8e8e8" font-size="27" font-weight="600">Two ways to control electricity</text>
+    <text x="36" y="82" fill="#bcbcbc" font-size="21">Think of a valve: a control signal regulates electrical flow.</text>
+    <rect x="28" y="112" width="844" height="368" rx="10" fill="#2e2e2e"/>
+    <text x="52" y="150" fill="#e8e8e8" font-size="24" font-weight="600">1. Vacuum tube (triode): electrons cross an empty space</text>
+    <rect x="110" y="208" width="670" height="164" rx="54" fill="#242424" stroke="#929292" stroke-width="2"/>
+    <text x="445" y="236" text-anchor="middle" fill="#bcbcbc" font-size="19">Inside a glass enclosure: a vacuum</text>
+    <g fill="none" stroke-width="3">
+      <path d="M195 354 L195 325 L208 316 L182 307 L208 298 L182 289 L195 280 L195 260" stroke="#e8a36e"/>
+      <path d="M255 260 L255 332" stroke="#e8a36e" stroke-width="9"/>
+      <path d="M450 252 L450 340" stroke="#d4af37" stroke-width="5" stroke-dasharray="7 9"/>
+      <path d="M660 260 L660 332" stroke="#e8e8e8" stroke-width="9"/>
+      <path d="M285 294 L424 294 M474 294 L635 294" stroke="#d4af37" marker-end="url(#arrow)"/>
+      <path d="M255 196 L255 252 M660 196 L660 252" stroke="#929292" stroke-width="1.5"/>
+      <path d="M450 415 L450 350" stroke="#d4af37" marker-end="url(#arrow)"/>
+    </g>
+    <g fill="#e8e8e8" text-anchor="middle" font-size="21">
+      <text x="255" y="189">Hot cathode</text>
+      <text x="660" y="189">Collecting plate</text>
+      <text x="354" y="280">Electrons</text>
+      <text x="195" y="398" fill="#e8a36e">Heater</text>
+      <text x="450" y="444">Grid voltage controls the flow</text>
+    </g>
+    <rect x="28" y="500" width="844" height="366" rx="10" fill="#2e2e2e"/>
+    <text x="52" y="538" fill="#e8e8e8" font-size="24" font-weight="600">2. MOS transistor: a gate controls a path inside a solid</text>
+    <text x="450" y="578" text-anchor="middle" fill="#bcbcbc" font-size="20">A later design used in chips, not the 1947 point-contact device</text>
+    <rect x="130" y="703" width="640" height="91" rx="6" fill="#393222" stroke="#929292" stroke-width="2"/>
+    <rect x="160" y="703" width="145" height="40" fill="#554923" stroke="#d4af37" stroke-width="2"/>
+    <rect x="595" y="703" width="145" height="40" fill="#554923" stroke="#d4af37" stroke-width="2"/>
+    <rect x="305" y="714" width="290" height="12" fill="#d4af37"/>
+    <rect x="325" y="688" width="250" height="14" fill="#bcbcbc"/>
+    <rect x="325" y="660" width="250" height="27" fill="#554923" stroke="#d4af37" stroke-width="2"/>
+    <g fill="none" stroke-width="1.5" stroke="#929292">
+      <path d="M232 652 L232 695 M668 652 L668 695"/>
+      <path d="M802 679 L750 679 L578 695"/>
+      <path d="M450 610 L450 652" stroke="#d4af37" stroke-width="2.5" marker-end="url(#arrow)"/>
+    </g>
+    <g fill="#e8e8e8" text-anchor="middle" font-size="21">
+      <text x="450" y="605">Control voltage</text>
+      <text x="232" y="642">Source</text>
+      <text x="668" y="642">Drain</text>
+      <text x="450" y="680" font-size="19">Gate</text>
+      <text x="802" y="664" font-size="18">Insulator</text>
+      <text x="450" y="772" font-size="20">Solid semiconductor</text>
+      <text x="450" y="826">Gate voltage makes the channel conduct more or less.</text>
+    </g>
+    <text x="450" y="898" text-anchor="middle" fill="#e8e8e8" font-size="22" font-weight="600">Same job, different machinery</text>
+    <g text-anchor="middle" fill="#e8e8e8" font-size="21">
+      <text x="450" y="934">Both can amplify signals or act as electronic switches.</text>
+      <text x="450" y="966">Transistors need no heated cathode or vacuum enclosure.</text>
+      <text x="450" y="1005" fill="#bcbcbc" font-size="18">Simplified, not to scale. Power supplies and most wiring are omitted.</text>
+    </g>
+  </g>
+</svg>

@@ -189,6 +189,14 @@
     
       
         
+      
+    
+      
+        
+      
+    
+      
+        
           
           
           
@@ -202,7 +210,7 @@
               <i class="fa fa-folder" aria-hidden="true"></i>
               Quantitative Finance
             </h4>
-            <button class="collapse-toggle" aria-label="Toggle related posts">
+            <button type="button" class="collapse-toggle" aria-label="Toggle related posts" aria-controls="related-posts-content" aria-expanded="true">
               <i class="fa fa-chevron-down" aria-hidden="true"></i>
             </button>
           </div>
@@ -230,7 +238,7 @@
         <div class="sidebar-section toc-section">
           <div class="sidebar-section-header" data-target="toc-content">
             <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
-            <button class="collapse-toggle" aria-label="Toggle table of contents">
+            <button type="button" class="collapse-toggle" aria-label="Toggle table of contents" aria-controls="toc-content" aria-expanded="true">
               <i class="fa fa-chevron-down" aria-hidden="true"></i>
             </button>
           </div>
@@ -241,9 +249,9 @@
       </div>
     </aside>
 
-    <!-- Mobile toggles -->
-    <button id="sidebar-left-toggle"  class="sidebar-toggle sidebar-toggle--left"  aria-label="Toggle related posts"    aria-expanded="false"><i class="fa fa-folder"   aria-hidden="true"></i></button>
-    <button id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-label="Toggle table of contents" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+    <!-- On-demand navigation for narrower reading layouts -->
+    <button type="button" id="sidebar-left-toggle" class="sidebar-toggle sidebar-toggle--left" aria-controls="sidebar-left" aria-expanded="false"><i class="fa fa-folder" aria-hidden="true"></i>Related</button>
+    <button type="button" id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-controls="sidebar-right" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i>Contents</button>
 
     <!-- Mobile overlays -->
     <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
@@ -254,6 +262,14 @@
       <section id="one">
         <div class="inner">
 
+          
+            
+              
+            
+          
+            
+              
+            
           
             
               
@@ -385,7 +401,7 @@
                 
 
                 <!-- Post body -->
-                <div class="post-body" id="post-body-content">
+                <article class="post-body" id="post-body-content" aria-label="Article content">
                   <p>What does a <em>quant</em> actually do? One person might estimate the risk of a portfolio, another might price an option, and a third might test whether a trading signal survives transaction costs. They share a habit: describe a financial question in terms of data, uncertainty, and a model whose assumptions can be challenged. <strong>Quantitative finance</strong> is the use of mathematics, statistics, economics, and computation to make those descriptions useful for investment, pricing, and risk decisions. It is not synonymous with automated trading, nor is it a promise that markets obey elegant equations.</p>
 
 <p>There was no single birthday for the field. Probability and insurance mathematics came before the models below, and traders priced options long before a modern formula existed. This selective timeline follows influential <em>published</em> contributions to modern financial modeling, not claims that their authors invented every underlying idea. Each milestone includes a bibliographic reference with pages or a named section to help you check the account; journal articles do not have book chapters.</p>
@@ -503,28 +519,28 @@
 
 <h2 id="references">References</h2>
 
-<ol class="bibliography"><li><span id="Bachelier1900Speculation">Bachelier, L. (1900). Théorie de la spéculation. <i>Annales Scientifiques De l’École Normale Supérieure</i>, <i>17</i>, 21–86. https://doi.org/10.24033/asens.476</span></li>
-<li><span id="Nobel1997Options">The Royal Swedish Academy of Sciences. (1997). <i>The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel 1997: Advanced Information</i>. https://www.nobelprize.org/prizes/economic-sciences/1997/advanced-information/</span></li>
-<li><span id="Markowitz1952Portfolio">Markowitz, H. (1952). Portfolio Selection. <i>The Journal of Finance</i>, <i>7</i>(1), 77–91. https://doi.org/10.1111/j.1540-6261.1952.tb01525.x</span></li>
-<li><span id="Nobel1990Finance">The Royal Swedish Academy of Sciences. (1990). <i>The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel 1990: Press Release</i>. https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/</span></li>
-<li><span id="ModiglianiMiller1958">Modigliani, F., &amp; Miller, M. H. (1958). The Cost of Capital, Corporation Finance and the Theory of Investment. <i>The American Economic Review</i>, <i>48</i>(3), 261–297. https://www.jstor.org/stable/1809766</span></li>
-<li><span id="Sharpe1964CAPM">Sharpe, W. F. (1964). Capital Asset Prices: A Theory of Market Equilibrium under Conditions of Risk. <i>The Journal of Finance</i>, <i>19</i>(3), 425–442. https://doi.org/10.1111/j.1540-6261.1964.tb02865.x</span></li>
+<ol class="bibliography"><li><span id="Bachelier1900Speculation">Bachelier, L. (1900). Théorie de la spéculation. <i>Annales Scientifiques De l’École Normale Supérieure</i>, <i>17</i>, 21–86. <a href="https://doi.org/10.24033/asens.476" target="_blank" rel="noopener noreferrer">https://doi.org/10.24033/asens.476</a></span></li>
+<li><span id="Nobel1997Options">The Royal Swedish Academy of Sciences. (1997). <i>The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel 1997: Advanced Information</i>. <a href="https://www.nobelprize.org/prizes/economic-sciences/1997/advanced-information/" target="_blank" rel="noopener noreferrer">https://www.nobelprize.org/prizes/economic-sciences/1997/advanced-information/</a></span></li>
+<li><span id="Markowitz1952Portfolio">Markowitz, H. (1952). Portfolio Selection. <i>The Journal of Finance</i>, <i>7</i>(1), 77–91. <a href="https://doi.org/10.1111/j.1540-6261.1952.tb01525.x" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/j.1540-6261.1952.tb01525.x</a></span></li>
+<li><span id="Nobel1990Finance">The Royal Swedish Academy of Sciences. (1990). <i>The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel 1990: Press Release</i>. <a href="https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/" target="_blank" rel="noopener noreferrer">https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/</a></span></li>
+<li><span id="ModiglianiMiller1958">Modigliani, F., &amp; Miller, M. H. (1958). The Cost of Capital, Corporation Finance and the Theory of Investment. <i>The American Economic Review</i>, <i>48</i>(3), 261–297. <a href="https://www.jstor.org/stable/1809766" target="_blank" rel="noopener noreferrer">https://www.jstor.org/stable/1809766</a></span></li>
+<li><span id="Sharpe1964CAPM">Sharpe, W. F. (1964). Capital Asset Prices: A Theory of Market Equilibrium under Conditions of Risk. <i>The Journal of Finance</i>, <i>19</i>(3), 425–442. <a href="https://doi.org/10.1111/j.1540-6261.1964.tb02865.x" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/j.1540-6261.1964.tb02865.x</a></span></li>
 <li><span id="Fama:1970">Fama, E. (1970). Efficient capital markets: A review of theory and empirical work. <i>Journal of Finance</i>, <i>25</i>(2), 383–417.</span></li>
-<li><span id="Nobel2013AssetPrices">The Royal Swedish Academy of Sciences. (2013). <i>The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel 2013: Press Release</i>. https://www.nobelprize.org/prizes/economic-sciences/2013/press-release/</span></li>
-<li><span id="BlackScholes1973">Black, F., &amp; Scholes, M. (1973). The Pricing of Options and Corporate Liabilities. <i>Journal of Political Economy</i>, <i>81</i>(3), 637–654. https://doi.org/10.1086/260062</span></li>
-<li><span id="Merton1973Options">Merton, R. C. (1973). Theory of Rational Option Pricing. <i>The Bell Journal of Economics and Management Science</i>, <i>4</i>(1), 141–183. https://www.jstor.org/stable/3003143</span></li>
-<li><span id="CoxRossRubinstein1979">Cox, J. C., Ross, S. A., &amp; Rubinstein, M. (1979). Option Pricing: A Simplified Approach. <i>Journal of Financial Economics</i>, <i>7</i>(3), 229–263. https://doi.org/10.1016/0304-405X(79)90015-1</span></li>
-<li><span id="HarrisonKreps1979">Harrison, J. M., &amp; Kreps, D. M. (1979). Martingales and Arbitrage in Multiperiod Securities Markets. <i>Journal of Economic Theory</i>, <i>20</i>(3), 381–408. https://doi.org/10.1016/0022-0531(79)90043-7</span></li>
-<li><span id="HarrisonPliska1981">Harrison, J. M., &amp; Pliska, S. R. (1981). Martingales and Stochastic Integrals in the Theory of Continuous Trading. <i>Stochastic Processes and Their Applications</i>, <i>11</i>(3), 215–260. https://doi.org/10.1016/0304-4149(81)90026-0</span></li>
-<li><span id="HarrisonPliska1983">Harrison, J. M., &amp; Pliska, S. R. (1983). A Stochastic Calculus Model of Continuous Trading: Complete Markets. <i>Stochastic Processes and Their Applications</i>, <i>15</i>(3), 313–316. https://doi.org/10.1016/0304-4149(83)90038-8</span></li>
-<li><span id="HendershottJonesMenkveld2011">Hendershott, T., Jones, C. M., &amp; Menkveld, A. J. (2011). Does Algorithmic Trading Improve Liquidity? <i>The Journal of Finance</i>, <i>66</i>(1), 1–33. https://doi.org/10.1111/j.1540-6261.2010.01624.x</span></li>
-<li><span id="LopezDePrado2018">López de Prado, M. (2018). <i>Advances in Financial Machine Learning</i>. John Wiley and Sons. https://www.wiley.com/en-us/Advances+in+Financial+Machine+Learning-p-9781119482086</span></li>
+<li><span id="Nobel2013AssetPrices">The Royal Swedish Academy of Sciences. (2013). <i>The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel 2013: Press Release</i>. <a href="https://www.nobelprize.org/prizes/economic-sciences/2013/press-release/" target="_blank" rel="noopener noreferrer">https://www.nobelprize.org/prizes/economic-sciences/2013/press-release/</a></span></li>
+<li><span id="BlackScholes1973">Black, F., &amp; Scholes, M. (1973). The Pricing of Options and Corporate Liabilities. <i>Journal of Political Economy</i>, <i>81</i>(3), 637–654. <a href="https://doi.org/10.1086/260062" target="_blank" rel="noopener noreferrer">https://doi.org/10.1086/260062</a></span></li>
+<li><span id="Merton1973Options">Merton, R. C. (1973). Theory of Rational Option Pricing. <i>The Bell Journal of Economics and Management Science</i>, <i>4</i>(1), 141–183. <a href="https://www.jstor.org/stable/3003143" target="_blank" rel="noopener noreferrer">https://www.jstor.org/stable/3003143</a></span></li>
+<li><span id="CoxRossRubinstein1979">Cox, J. C., Ross, S. A., &amp; Rubinstein, M. (1979). Option Pricing: A Simplified Approach. <i>Journal of Financial Economics</i>, <i>7</i>(3), 229–263. <a href="https://doi.org/10.1016/0304-405X(79)90015-1" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/0304-405X(79)90015-1</a></span></li>
+<li><span id="HarrisonKreps1979">Harrison, J. M., &amp; Kreps, D. M. (1979). Martingales and Arbitrage in Multiperiod Securities Markets. <i>Journal of Economic Theory</i>, <i>20</i>(3), 381–408. <a href="https://doi.org/10.1016/0022-0531(79)90043-7" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/0022-0531(79)90043-7</a></span></li>
+<li><span id="HarrisonPliska1981">Harrison, J. M., &amp; Pliska, S. R. (1981). Martingales and Stochastic Integrals in the Theory of Continuous Trading. <i>Stochastic Processes and Their Applications</i>, <i>11</i>(3), 215–260. <a href="https://doi.org/10.1016/0304-4149(81)90026-0" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/0304-4149(81)90026-0</a></span></li>
+<li><span id="HarrisonPliska1983">Harrison, J. M., &amp; Pliska, S. R. (1983). A Stochastic Calculus Model of Continuous Trading: Complete Markets. <i>Stochastic Processes and Their Applications</i>, <i>15</i>(3), 313–316. <a href="https://doi.org/10.1016/0304-4149(83)90038-8" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/0304-4149(83)90038-8</a></span></li>
+<li><span id="HendershottJonesMenkveld2011">Hendershott, T., Jones, C. M., &amp; Menkveld, A. J. (2011). Does Algorithmic Trading Improve Liquidity? <i>The Journal of Finance</i>, <i>66</i>(1), 1–33. <a href="https://doi.org/10.1111/j.1540-6261.2010.01624.x" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/j.1540-6261.2010.01624.x</a></span></li>
+<li><span id="LopezDePrado2018">López de Prado, M. (2018). <i>Advances in Financial Machine Learning</i>. John Wiley and Sons. <a href="https://www.wiley.com/en-us/Advances+in+Financial+Machine+Learning-p-9781119482086" target="_blank" rel="noopener noreferrer">https://www.wiley.com/en-us/Advances+in+Financial+Machine+Learning-p-9781119482086</a></span></li>
 <li><span id="Hull2018Derivatives">Hull, J. C. (2018). <i>Options, Futures, and Other Derivatives</i> (10th ed.). Pearson.</span></li>
 <li><span id="Shreve2004VolumeI">Shreve, S. E. (2004). <i>Stochastic Calculus for Finance I: The Binomial Asset Pricing Model</i>. Springer.</span></li>
-<li><span id="Shreve2004VolumeII">Shreve, S. E. (2004). <i>Stochastic Calculus for Finance II: Continuous-Time Models</i>. Springer. https://doi.org/10.1007/978-0-387-22527-2</span></li>
+<li><span id="Shreve2004VolumeII">Shreve, S. E. (2004). <i>Stochastic Calculus for Finance II: Continuous-Time Models</i>. Springer. <a href="https://doi.org/10.1007/978-0-387-22527-2" target="_blank" rel="noopener noreferrer">https://doi.org/10.1007/978-0-387-22527-2</a></span></li>
 <li><span id="GrinoldKahn1999">Grinold, R. C., &amp; Kahn, R. N. (1999). <i>Active Portfolio Management: A Quantitative Approach for Producing Superior Returns and Controlling Risk</i> (2nd ed.). McGraw-Hill.</span></li></ol>
 
-                </div>
+                </article>
 
               
             
@@ -785,6 +801,7 @@
             bar.style.width = pct + '%';
           }
           document.addEventListener('scroll', updateProgress, { passive: true });
+          window.addEventListener('resize', updateProgress);
           updateProgress();
         }
 
@@ -796,27 +813,60 @@
           rtVal.textContent = mins;
         }
 
-        /* ── Dual sidebar toggles (mobile) ───────────────── */
-        function makeSidebarToggle(toggleId, sidebarId, overlayId) {
+        /* ── On-demand sidebars ──────────────────────────── */
+        var drawers = [];
+        function makeSidebarToggle(toggleId, sidebarId, overlayId, query) {
           var sidebar = document.getElementById(sidebarId);
           var toggle  = document.getElementById(toggleId);
           var overlay = document.getElementById(overlayId);
           if (!sidebar || !toggle || !overlay) return;
+          var compact = window.matchMedia(query);
 
-          toggle.addEventListener('click', function () {
-            var open = sidebar.classList.toggle('active');
+          function setOpen(open, restoreFocus) {
+            sidebar.classList.toggle('active', open);
             overlay.classList.toggle('active', open);
             toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            sidebar.inert = compact.matches && !open;
+            if (open) sidebar.querySelector('button, a').focus();
+            else if (restoreFocus) toggle.focus();
+          }
+
+          drawers.push(function () { setOpen(false, false); });
+          toggle.addEventListener('click', function () {
+            var open = !sidebar.classList.contains('active');
+            drawers.forEach(function (close) { close(); });
+            setOpen(open, !open);
           });
-          overlay.addEventListener('click', function () {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-            toggle.setAttribute('aria-expanded', 'false');
+          overlay.addEventListener('click', function () { setOpen(false, true); });
+          sidebar.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && compact.matches) setOpen(false, true);
           });
+          sidebar.addEventListener('click', function (event) {
+            if (compact.matches && event.target.closest('#toc-sidebar-nav a')) setOpen(false, true);
+          });
+          compact.addEventListener('change', function () { setOpen(false, false); });
+          setOpen(false, false);
         }
 
-        makeSidebarToggle('sidebar-left-toggle',  'sidebar-left',  'sidebar-left-overlay');
-        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay');
+        makeSidebarToggle('sidebar-left-toggle', 'sidebar-left', 'sidebar-left-overlay', '(max-width: 1599px)');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay', '(max-width: 1199px)');
+
+        /* Keep wide technical content scrollable without widening the page. */
+        if (body) {
+          body.querySelectorAll('pre').forEach(function (pre) {
+            pre.tabIndex = 0;
+            pre.setAttribute('aria-label', 'Code sample');
+          });
+          body.querySelectorAll('table').forEach(function (table) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'post-table-scroll';
+            wrapper.tabIndex = 0;
+            wrapper.setAttribute('role', 'region');
+            wrapper.setAttribute('aria-label', 'Scrollable table');
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+          });
+        }
 
         /* ── Collapsible sidebar sections ────────────────── */
         document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
@@ -825,6 +875,7 @@
             var icon    = hdr.querySelector('.collapse-toggle .fa');
             if (!content) return;
             var isExpanded = content.classList.toggle('expanded');
+            hdr.querySelector('.collapse-toggle').setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
             content.classList.toggle('collapsed', !isExpanded);
             if (icon) {
               icon.classList.toggle('fa-chevron-down',  isExpanded);
@@ -842,8 +893,8 @@
           var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
           if (headings.length > 2) {
             var nums    = [0, 0, 0, 0];
-            var tocNums = [0, 0, 0, 0];
-            var html    = '<ul class="toc-list">';
+            var list = document.createElement('ul');
+            list.className = 'toc-list';
 
             headings.forEach(function (h) {
               var level    = parseInt(h.tagName[1], 10) - 1;
@@ -851,24 +902,34 @@
               for (var i = level + 1; i < 4; i++) nums[i] = 0;
               var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
               var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
-              h.innerHTML  = '<span class="section-number">' + numStr + '.</span> ' + rawText;
+              if (h.firstChild && h.firstChild.nodeType === Node.TEXT_NODE) {
+                h.firstChild.textContent = h.firstChild.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
+              }
+              var number = document.createElement('span');
+              number.className = 'section-number';
+              number.textContent = numStr + '. ';
+              h.insertBefore(number, h.firstChild);
               if (!h.id) {
                 h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
               }
-              tocNums[level]++;
-              for (var j = level + 1; j < 4; j++) tocNums[j] = 0;
-              var tocNum   = tocNums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
-              html += '<li class="toc-level-' + (level + 1) + '">'
-                + '<a href="#' + h.id + '">'
-                + '<span class="toc-number">' + tocNum + '.</span> ' + rawText
-                + '</a></li>';
+              var item = document.createElement('li');
+              item.className = 'toc-level-' + (level + 1);
+              var link = document.createElement('a');
+              link.setAttribute('href', '#' + h.id);
+              var tocNumber = document.createElement('span');
+              tocNumber.className = 'toc-number';
+              tocNumber.textContent = numStr + '. ';
+              link.appendChild(tocNumber);
+              link.appendChild(document.createTextNode(rawText));
+              item.appendChild(link);
+              list.appendChild(item);
             });
 
-            html += '</ul>';
-            tocNav.innerHTML = html;
+            tocNav.appendChild(list);
             if (tocSect) tocSect.style.display = 'block';
           } else {
             if (tocSect) tocSect.style.display = 'none';
+            document.body.classList.add('has-no-toc');
           }
         }
 
