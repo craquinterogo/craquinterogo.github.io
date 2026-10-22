@@ -414,7 +414,7 @@
 
 <p>In the previous post I explained how to compile QuantLib in debug mode. In this one, I want to close the loop with a realistic test: pricing a European FX option in C++, linking against the debug QuantLib installation, and running the code from VS Code with breakpoints and variable inspection.</p>
 
-<p>The example uses the Garman-Kohlhagen setup, which in QuantLib is represented through a Black-Scholes-Merton process where the foreign interest rate behaves like a continuous dividend yield. This is a good test case because it is simple enough to run quickly but rich enough to inspect curves, volatility structures, and pricing engine internals while debugging.</p>
+<p>The example uses QuantLib’s <code class="language-plaintext highlighter-rouge">GarmanKohlagenProcess</code>, which models the domestic and foreign interest rates directly for an FX option. This is a good test case because it is simple enough to run quickly but rich enough to inspect curves, volatility structures, and pricing engine internals while debugging.</p>
 
 <h2 id="scenario-and-model-assumptions">Scenario and model assumptions</h2>
 
@@ -435,7 +435,7 @@
   <li>domestic discount curve,</li>
   <li>foreign discount curve,</li>
   <li>flat Black volatility,</li>
-  <li><code class="language-plaintext highlighter-rouge">BlackScholesMertonProcess</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">GarmanKohlagenProcess</code>,</li>
   <li><code class="language-plaintext highlighter-rouge">AnalyticEuropeanEngine</code>.</li>
 </ul>
 
@@ -485,8 +485,8 @@
     <span class="n">Handle</span><span class="o">&lt;</span><span class="n">BlackVolTermStructure</span><span class="o">&gt;</span> <span class="n">volCurve</span><span class="p">(</span>
         <span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">BlackConstantVol</span><span class="o">&gt;</span><span class="p">(</span><span class="n">valuationDate</span><span class="p">,</span> <span class="n">calendar</span><span class="p">,</span> <span class="n">vol</span><span class="p">,</span> <span class="n">dc</span><span class="p">));</span>
 
-    <span class="n">ext</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">BlackScholesMertonProcess</span><span class="o">&gt;</span> <span class="n">process</span> <span class="o">=</span>
-        <span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">BlackScholesMertonProcess</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spotHandle</span><span class="p">,</span> <span class="n">foreignCurve</span><span class="p">,</span> <span class="n">domesticCurve</span><span class="p">,</span> <span class="n">volCurve</span><span class="p">);</span>
+    <span class="n">ext</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">GarmanKohlagenProcess</span><span class="o">&gt;</span> <span class="n">process</span> <span class="o">=</span>
+        <span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">GarmanKohlagenProcess</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spotHandle</span><span class="p">,</span> <span class="n">foreignCurve</span><span class="p">,</span> <span class="n">domesticCurve</span><span class="p">,</span> <span class="n">volCurve</span><span class="p">);</span>
 
     <span class="n">ext</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">StrikedTypePayoff</span><span class="o">&gt;</span> <span class="n">payoff</span> <span class="o">=</span>
         <span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">PlainVanillaPayoff</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Option</span><span class="o">::</span><span class="n">Call</span><span class="p">,</span> <span class="n">strike</span><span class="p">);</span>
@@ -719,6 +719,52 @@
 <h2 id="closing-note">Closing note</h2>
 
 <p>This example is intentionally compact, but it is already enough to validate your full debug workflow end to end: code, model, build, runtime linking, and IDE debugging using QuantLib. Once this is stable, extending to smile surfaces, local vol, or even custom engines becomes much easier because you can inspect every layer with confidence.</p>
+
+<h2 id="alternative-compile-and-run-from-the-command-line">Alternative: compile and run from the command line</h2>
+
+<p>VS Code is convenient for inspecting the calculation, but it is not required to build or run it. You can use the same CMake project from a terminal and obtain the same option value and risk measures. This is also a useful diagnostic: if the example runs from the terminal but not from VS Code, the next place to investigate is the IDE’s launch configuration rather than the pricing model.</p>
+
+<p>The commands below follow the <strong>Linux</strong> setup used throughout this post. They assume that CMake, a C++17 compiler, and a build tool are available, QuantLib is installed under <code class="language-plaintext highlighter-rouge">$HOME/quantlib-debug-install</code>, and Boost is available through your existing vcpkg installation. No files from <code class="language-plaintext highlighter-rouge">.vscode</code> are needed for this route.</p>
+
+<h3 id="1-configure-the-project">1. Configure the project</h3>
+
+<p>Open a terminal in the folder containing <code class="language-plaintext highlighter-rouge">main.cpp</code> and <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>. Replace the example vcpkg path below with the actual location of your <code class="language-plaintext highlighter-rouge">vcpkg</code> directory before running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-S</span> <span class="nb">.</span> <span class="nt">-B</span> build <span class="se">\</span>
+  <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Debug <span class="se">\</span>
+  <span class="nt">-DCMAKE_TOOLCHAIN_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/vcpkg/scripts/buildsystems/vcpkg.cmake"</span> <span class="se">\</span>
+  <span class="nt">-DVCPKG_TARGET_TRIPLET</span><span class="o">=</span>x64-linux
+</code></pre></div></div>
+
+<p>Configuration checks the compiler and dependencies and generates the build instructions; it does not yet compile the program. Here, <code class="language-plaintext highlighter-rouge">-S .</code> selects the current folder as the source directory, while <code class="language-plaintext highlighter-rouge">-B build</code> keeps generated files in a separate <code class="language-plaintext highlighter-rouge">build</code> directory. Use the same vcpkg toolchain and triplet as in the VS Code workflow. If an existing build directory was configured with a different toolchain, use a fresh directory, such as <code class="language-plaintext highlighter-rouge">build-cli</code>, consistently in all commands below.</p>
+
+<h3 id="2-compile-the-executable">2. Compile the executable</h3>
+
+<p>Once configuration finishes successfully, build the example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">--build</span> build <span class="nt">--parallel</span> 2
+</code></pre></div></div>
+
+<p>This compiles <code class="language-plaintext highlighter-rouge">main.cpp</code> and links the executable against the debug QuantLib library specified in <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>. The parallelism limit of two is a modest starting point; adjust it to the resources available on your machine. After editing the C++ code, run this build command again before executing the program.</p>
+
+<h3 id="3-run-the-pricing-calculation">3. Run the pricing calculation</h3>
+
+<p>After a successful build, run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/fx_option_debug
+</code></pre></div></div>
+
+<p>The CMake configuration above embeds a runtime search path (<code class="language-plaintext highlighter-rouge">BUILD_RPATH</code>) pointing to your QuantLib installation, so a separate library-path setting should not normally be necessary. If the loader reports that it cannot find <code class="language-plaintext highlighter-rouge">libQuantLib.so</code>, first verify the installation path. To explicitly supply that directory for this invocation, use:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/quantlib-debug-install/lib</span><span class="k">${</span><span class="nv">LD_LIBRARY_PATH</span>:+:<span class="nv">$LD_LIBRARY_PATH</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  ./build/fx_option_debug
+</code></pre></div></div>
+
+<p>This sets the library search path only for the program being launched and preserves any existing entries.</p>
+
+<p>The output reports the call option’s NPV, delta, gamma, vega, theta, and rho. With EURUSD quoted as USD per EUR, the NPV is expressed in <strong>USD per EUR of notional</strong>, not as the premium for an entire trade. Multiply it by the EUR notional to obtain the model premium in USD. QuantLib’s vega is quoted per unit change in volatility, so multiply it by <code class="language-plaintext highlighter-rouge">0.01</code> for an approximate sensitivity to a one-percentage-point volatility increase. Likewise, multiply rho by <code class="language-plaintext highlighter-rouge">0.0001</code> for an approximate sensitivity to a one-basis-point increase in the domestic USD rate, holding the foreign curve fixed. Theta is annualized, not a one-day cash P&amp;L.</p>
+
+<p>These are local model sensitivities, not guarantees of realized profit or loss. Running from the terminal changes only how the program is launched: the market inputs, Garman-Kohlhagen process, analytic engine, and resulting prices remain the same as in the VS Code workflow.</p>
 
                 </article>
 
