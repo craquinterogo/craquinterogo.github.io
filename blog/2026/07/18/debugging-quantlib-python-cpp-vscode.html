@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Debugging QuantLib across Python and C++ in VS Code | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	
+	
+	<meta name="description" content="Configure debugpy and GDB in VS Code, then follow a QuantLib pricing calculation from Python into C++ and back without losing the breakpoint sequence." />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Debugging QuantLib across Python and C++ in VS Code" />
+	<meta property="og:description" content="Configure debugpy and GDB in VS Code, then follow a QuantLib pricing calculation from Python into C++ and back without losing the breakpoint sequence." />
+	<meta property="og:url" content="https://craquinterogo.github.io/blog/2026/07/18/debugging-quantlib-python-cpp-vscode" />
+	<meta name="twitter:title" content="Debugging QuantLib across Python and C++ in VS Code" />
+	<meta name="twitter:description" content="Configure debugpy and GDB in VS Code, then follow a QuantLib pricing calculation from Python into C++ and back without losing the breakpoint sequence." />
+	
+	
+	<meta property="og:image" content="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" />
+	<meta property="og:image:alt" content="Debugging QuantLib across Python and C++ in VS Code" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" />
+	<meta name="twitter:image:alt" content="Debugging QuantLib across Python and C++ in VS Code" />
+	
+	
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="https://craquinterogo.github.io//" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io//">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Quantitative Development
+            </h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle related posts" aria-controls="related-posts-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              
+              
+              
+                <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/07/05/debugging-european-fx-option-quantlib-vscode" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" alt="Debugging a European FX option in QuantLib C++ with VS Code." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Debugging a European FX option in QuantLi...</h5>
+                          
+                            <span class="recent-post-date">Jul 05, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/06/20/quantlib-debug-build-and-swig-components" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Compiling QuantLib in Debug Mode and wiring components into SWIG - Python." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Compiling QuantLib in Debug Mode and wiri...</h5>
+                          
+                            <span class="recent-post-date">Jun 20, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/12/07/git-repository-hard-disk" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/005_What_is_a_Git_Repository.jpg" alt="Private GIT repositories for small or private projects." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Private GIT repositories for small or pri...</h5>
+                          
+                            <span class="recent-post-date">Dec 07, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/10/29/questdb-for-timeseries" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" alt="QuestDB, an alternative for storing your financial time series." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>QuestDB, an alternative for storing your ...</h5>
+                          
+                            <span class="recent-post-date">Oct 29, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/08/10/quantlib-setup" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Setting QuantLib up in my laptop, again. An amazing tool for quants." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Setting QuantLib up in my laptop, again. ...</h5>
+                          
+                            <span class="recent-post-date">Aug 10, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/06/29/ai-agents-for-quants" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/04_llm_and_mcp/jarvis_.jpg" alt="What about AI Agents for Quants?" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>What about AI Agents for Quants?</h5>
+                          
+                            <span class="recent-post-date">Jun 29, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2024/03/10/connecting-cpp-and-python-with-swig" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Pricing a European option in C++ from Python with SWIG" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Pricing a European option in C++ from Pyt...</h5>
+                          
+                            <span class="recent-post-date">Mar 10, 2024</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+              <div class="sidebar-category-link">
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle table of contents" aria-controls="toc-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- On-demand navigation for narrower reading layouts -->
+    <button type="button" id="sidebar-left-toggle" class="sidebar-toggle sidebar-toggle--left" aria-controls="sidebar-left" aria-expanded="false"><i class="fa fa-folder" aria-hidden="true"></i>Related</button>
+    <button type="button" id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-controls="sidebar-right" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i>Contents</button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#quantitative-development">Quantitative Development</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Debugging QuantLib across Python and C++ in VS ...</span>
+                    </div>
+                  
+
+                  <h1>Debugging QuantLib across Python and C++ in VS Code</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2026-07-18T00:00:00-05:00">July 18, 2026</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">quantitative finance</span>
+                      
+                        <span class="post-tag-pill">QuantLib</span>
+                      
+                        <span class="post-tag-pill">SWIG</span>
+                      
+                        <span class="post-tag-pill">Python</span>
+                      
+                        <span class="post-tag-pill">C++</span>
+                      
+                        <span class="post-tag-pill">VS Code</span>
+                      
+                        <span class="post-tag-pill">debugging</span>
+                      
+                        <span class="post-tag-pill">GDB</span>
+                      
+                        <span class="post-tag-pill">debugpy</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg"
+                    alt="Debugging QuantLib across Python and C++ in VS Code"
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <article class="post-body" id="post-body-content" aria-label="Article content">
+                  <h2 id="1-start-with-the-vs-code-setup">1. Start with the VS Code setup</h2>
+
+<p>For this example, the essential project structure is:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>QuantLib_Debug/
+├── .vscode/
+│   └── launch.json
+└── test_debug.py
+</code></pre></div></div>
+
+<p>Install the <strong>Python</strong>, <strong>Python Debugger</strong>, and <strong>Microsoft C/C++</strong> extensions. The Python Debugger extension provides the <code class="language-plaintext highlighter-rouge">debugpy</code> session, while the C/C++ extension connects VS Code to GDB for native debugging.</p>
+
+<p>If installing extensions is new to you, watch <a href="https://www.youtube.com/watch?v=SKcZ3cwX8lA" target="_blank" rel="noopener noreferrer">Using extensions in Visual Studio Code</a>, the video featured in the <a href="https://code.visualstudio.com/docs/introvideos/extend" target="_blank" rel="noopener noreferrer">official VS Code introductory tutorial</a>. It demonstrates how to find extensions, install them from the Extensions view, and disable them when they are not needed. On Linux, open that view with <strong>Ctrl+Shift+X</strong>, search for each extension, check its publisher, and select <strong>Install</strong>.</p>
+
+<p>This walkthrough targets <strong>Linux with GDB</strong>. It assumes that you have already built QuantLib and its SWIG Python extension with debug information, installed the resulting wheel in a virtual environment, and retained the source files that match those builds. The <a href="/blog/2026/06/20/quantlib-debug-build-and-swig-components" target="_blank" rel="noopener noreferrer">QuantLib Debug build and SWIG setup</a> explains that preparation. If you want to establish the native side first, the <a href="/blog/2026/07/05/debugging-european-fx-option-quantlib-vscode" target="_blank" rel="noopener noreferrer">C++ European FX option example</a> provides a separate test.</p>
+
+<p>The objective here is different: <strong>start with a Python pricing call, stop inside QuantLib’s C++ engine, and return to Python in a predictable order</strong>.</p>
+
+<blockquote>
+  <p><strong>Verification scope.</strong> The accompanying example’s README reports native GDB checks confirming that the debug QuantLib library loads, the matching QuantLib and generated SWIG sources are found, and the pricing-engine breakpoint is reached for both pricing calls. It also states that the full interactive two-debugger workflow still needs to be exercised in VS Code. The sequence below follows that documented workflow, rather than claiming an end-to-end interactive test that has not been completed.</p>
+</blockquote>
+
+<h3 id="select-the-interpreter-and-check-the-paths">Select the interpreter and check the paths</h3>
+
+<p>Use <strong>Python: Select Interpreter</strong> from the Command Palette and select the environment containing your debug-enabled QuantLib package.</p>
+
+<p>The original example uses these paths:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Example path</th>
+      <th>What to verify</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Python interpreter</td>
+      <td><code class="language-plaintext highlighter-rouge">/&lt;path-to-your-venv-folder&gt;/test_debug_quantlib/bin/python</code></td>
+      <td>This environment contains the intended QuantLib wheel.</td>
+    </tr>
+    <tr>
+      <td>GDB</td>
+      <td><code class="language-plaintext highlighter-rouge">/usr/bin/gdb</code></td>
+      <td>GDB is installed and available to the C/C++ extension.</td>
+    </tr>
+    <tr>
+      <td>QuantLib debug libraries</td>
+      <td><code class="language-plaintext highlighter-rouge">$HOME/quantlib-debug-install/lib</code></td>
+      <td>This directory contains the debug build of <code class="language-plaintext highlighter-rouge">libQuantLib.so</code>.</td>
+    </tr>
+    <tr>
+      <td>QuantLib source tree</td>
+      <td><code class="language-plaintext highlighter-rouge">$HOME/GIT/QuantLib</code></td>
+      <td>These sources match the compiled debug library.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Replace the user-specific paths with your own throughout the configuration below. Selecting an interpreter in the editor does not override an explicit <code class="language-plaintext highlighter-rouge">python</code> path in a launch configuration, so keep the two aligned.</p>
+
+<h3 id="configure-two-sessions-for-one-process">Configure two sessions for one process</h3>
+
+<p>We need two views of the calculation, not two copies of the script. One session follows the Python statements that construct and reprice the option. The other inspects the compiled C++ code that performs the calculation. Both target <strong>the same Python process</strong>.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">debugpy</code> provides the Python debugging implementation.</strong> The Python Debugger extension uses it to manage Python breakpoints, display Python variables and stack frames, and step through <code class="language-plaintext highlighter-rouge">test_debug.py</code>. In this experiment, it lets us pause before each <code class="language-plaintext highlighter-rouge">NPV()</code> call and control when the spot quote changes. It does not provide source-level stepping through QuantLib’s compiled C++ implementation. See the <a href="https://code.visualstudio.com/docs/python/debugging" target="_blank" rel="noopener noreferrer">official Python debugging guide</a> and the <a href="https://github.com/microsoft/debugpy" target="_blank" rel="noopener noreferrer">debugpy documentation</a> for configuration and implementation details.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">cppdbg</code> selects the Microsoft C/C++ extension’s native-debugging integration.</strong> It is a configuration type, not the underlying debugger’s name. With <code class="language-plaintext highlighter-rouge">"MIMode": "gdb"</code>, this integration uses <strong>GDB</strong> to attach to the Python process and inspect native execution in the SWIG extension and QuantLib library. Debug symbols and matching source files let GDB relate compiled instructions to C++ statements and variables. Its role here is to stop inside <code class="language-plaintext highlighter-rouge">AnalyticEuropeanEngine::calculate()</code>, where the option’s value is calculated. The <a href="https://code.visualstudio.com/docs/cpp/launch-json-reference" target="_blank" rel="noopener noreferrer">C/C++ configuration reference</a> describes the VS Code settings, and the <a href="https://sourceware.org/gdb/current/onlinedocs/gdb/" target="_blank" rel="noopener noreferrer">GDB manual</a> explains the native debugger.</p>
+
+<p>The diagram separates the debugging connections from the pricing call path. The sessions do not hand control directly to one another. We switch to the appropriate session when its breakpoint is reached.</p>
+
+<pre><code class="language-mermaid">flowchart TB
+  UI["VS Code&lt;br/&gt;Run and Debug / CALL STACK"]
+  PYDBG["Python session&lt;br/&gt;debugpy"]
+  CPPDBG["C/C++ session&lt;br/&gt;cppdbg integration"]
+  GDB["GDB&lt;br/&gt;Native debugger"]
+
+  UI -. "Python debug commands" .-&gt; PYDBG
+  UI -. "Native debug commands" .-&gt; CPPDBG
+  CPPDBG -. "GDB/MI" .-&gt; GDB
+
+  subgraph PROCESS["One Python process - the same PID"]
+    PY["test_debug.py&lt;br/&gt;Build option, call NPV, update spot"]
+    SWIG["Compiled SWIG extension&lt;br/&gt;Python-to-C++ boundary"]
+    QL["QuantLib C++ library&lt;br/&gt;AnalyticEuropeanEngine::calculate()"]
+    PY --&gt;|"option.NPV()"| SWIG
+    SWIG --&gt;|"Native pricing calls"| QL
+    QL --&gt;|"Calculated result"| SWIG
+    SWIG --&gt;|"Return value"| PY
+  end
+
+  PYDBG -. "Python breakpoints and stepping" .-&gt; PY
+  GDB -. "Native breakpoints and inspection" .-&gt; SWIG
+  GDB -. "Native breakpoints and stepping" .-&gt; QL
+</code></pre>
+
+<p><em>Solid arrows show application calls and returns. Dashed arrows show debugging connections. This is a conceptual view, not a complete map of debugger processes or QuantLib’s internal calls.</em></p>
+
+<p>When Python pauses before <code class="language-plaintext highlighter-rouge">option.NPV()</code>, its debugger controls the next Python step. If GDB then stops inside the pricing engine, that Python step remains unfinished until the native call returns. Continuing the C++ session allows the calculation to finish so Python can reach its next stop.</p>
+
+<p>Create <code class="language-plaintext highlighter-rouge">.vscode/launch.json</code> with the following two configurations:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1. Python (debugpy)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debugpy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"python"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/&lt;path-to-your-venv-folder&gt;/test_debug_quantlib/bin/python"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/test_debug.py"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cwd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"LD_LIBRARY_PATH"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${env:HOME}/quantlib-debug-install/lib"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"PYTHONUNBUFFERED"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"stopOnEntry"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"justMyCode"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2. GDB attach to Python"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cppdbg"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attach"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/&lt;path-to-your-venv-folder&gt;/test_debug_quantlib/bin/python"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"processId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${command:pickProcess}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MIMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gdb"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"miDebuggerPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/bin/gdb"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"setupCommands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enable pretty-printing"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-enable-pretty-printing"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"ignoreFailures"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow pending breakpoints"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"set breakpoint pending on"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"ignoreFailures"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This is the Python-launch and GDB-attach subset of the example’s configuration. The separate GDB-only launch and compound launch are intentionally omitted because neither is needed for the sequential workflow.</p>
+
+<p>Several settings matter to the handoff:</p>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">stopOnEntry: true</code></strong> pauses Python before the script imports QuantLib, giving you time to attach GDB before the pricing code runs.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code></strong> directs the launched process toward the debug QuantLib library. It does not create debug symbols or guarantee that the installed extension is the correct build.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">justMyCode: false</code></strong> allows Python-level inspection beyond your script. It does not turn Python stepping into C++ stepping.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">set breakpoint pending on</code></strong> lets a native breakpoint wait for the QuantLib shared library to load.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">processId</code></strong> opens a process picker. You must select the actual script process, not a debug adapter or launcher.</li>
+</ul>
+
+<p>Leave fork-following commands disabled for this example. You will attach directly to the script’s PID, so following a newly created child is unnecessary. Also leave <code class="language-plaintext highlighter-rouge">set stop-on-solib-events 1</code> disabled, as shared-library loading stops would interrupt the intended sequence.</p>
+
+<p>The VS Code Python Debugger extension supplies <code class="language-plaintext highlighter-rouge">debugpy</code> for this launch workflow. A separate terminal command using <code class="language-plaintext highlighter-rouge">python -m debugpy</code> would require that module to be available to the selected interpreter.</p>
+
+<h3 id="understand-the-control-model-before-pressing-f5">Understand the control model before pressing F5</h3>
+
+<p><strong>There are two independent debug sessions attached to the same operating-system process. There is no unified mixed-language stepper.</strong></p>
+
+<p>Python’s debugger understands Python frames. GDB understands native frames in the compiled extension and QuantLib library. Breakpoints provide the handoff between those views.</p>
+
+<p>This distinction explains the most important rule in the walkthrough:</p>
+
+<blockquote>
+  <p><strong>Before continuing or stepping, select the session and frame that own the current stop. When GDB has stopped the process, resume the C++ session first. Python cannot finish a pricing call while its process is suspended by GDB.</strong></p>
+</blockquote>
+
+<h2 id="2-the-goal-follow-one-option-through-two-pricing-calls">2. The goal: follow one option through two pricing calls</h2>
+
+<p>The example deliberately keeps the financial setup small. It constructs a European call with a strike of 100, an initial spot of 100, a flat dividend yield of 2%, a flat risk-free rate of 5%, and constant volatility of 20%. The evaluation date is May 15, 1998, and exercise is on May 17, 1999.</p>
+
+<p>QuantLib represents these inputs through a <code class="language-plaintext highlighter-rouge">BlackScholesMertonProcess</code>, then uses <code class="language-plaintext highlighter-rouge">AnalyticEuropeanEngine</code> to calculate the option value. This is an analytical pricing example, not a calibration exercise or a trading recommendation.</p>
+
+<p>Save the following as <code class="language-plaintext highlighter-rouge">test_debug.py</code> in the workspace root:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">QuantLib</span> <span class="k">as</span> <span class="n">ql</span>
+
+
+<span class="k">def</span> <span class="nf">build_option</span><span class="p">():</span>
+    <span class="n">today</span> <span class="o">=</span> <span class="n">ql</span><span class="p">.</span><span class="nc">Date</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">ql</span><span class="p">.</span><span class="n">May</span><span class="p">,</span> <span class="mi">1998</span><span class="p">)</span>
+    <span class="n">ql</span><span class="p">.</span><span class="n">Settings</span><span class="p">.</span><span class="nf">instance</span><span class="p">().</span><span class="n">evaluationDate</span> <span class="o">=</span> <span class="n">today</span>
+
+    <span class="n">payoff</span> <span class="o">=</span> <span class="n">ql</span><span class="p">.</span><span class="nc">PlainVanillaPayoff</span><span class="p">(</span><span class="n">ql</span><span class="p">.</span><span class="n">Option</span><span class="p">.</span><span class="n">Call</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)</span>
+    <span class="n">exercise</span> <span class="o">=</span> <span class="n">ql</span><span class="p">.</span><span class="nc">EuropeanExercise</span><span class="p">(</span><span class="n">ql</span><span class="p">.</span><span class="nc">Date</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="n">ql</span><span class="p">.</span><span class="n">May</span><span class="p">,</span> <span class="mi">1999</span><span class="p">))</span>
+    <span class="n">option</span> <span class="o">=</span> <span class="n">ql</span><span class="p">.</span><span class="nc">VanillaOption</span><span class="p">(</span><span class="n">payoff</span><span class="p">,</span> <span class="n">exercise</span><span class="p">)</span>
+
+    <span class="n">spot</span> <span class="o">=</span> <span class="n">ql</span><span class="p">.</span><span class="nc">SimpleQuote</span><span class="p">(</span><span class="mf">100.0</span><span class="p">)</span>
+    <span class="n">dividend</span> <span class="o">=</span> <span class="n">ql</span><span class="p">.</span><span class="nc">FlatForward</span><span class="p">(</span><span class="n">today</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">ql</span><span class="p">.</span><span class="nc">Actual365Fixed</span><span class="p">())</span>
+    <span class="n">risk_free</span> <span class="o">=</span> <span class="n">ql</span><span class="p">.</span><span class="nc">FlatForward</span><span class="p">(</span><span class="n">today</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">ql</span><span class="p">.</span><span class="nc">Actual365Fixed</span><span class="p">())</span>
+    <span class="n">volatility</span> <span class="o">=</span> <span class="n">ql</span><span class="p">.</span><span class="nc">BlackConstantVol</span><span class="p">(</span><span class="n">today</span><span class="p">,</span> <span class="n">ql</span><span class="p">.</span><span class="nc">TARGET</span><span class="p">(),</span> <span class="mf">0.20</span><span class="p">,</span> <span class="n">ql</span><span class="p">.</span><span class="nc">Actual365Fixed</span><span class="p">())</span>
+
+    <span class="n">process</span> <span class="o">=</span> <span class="n">ql</span><span class="p">.</span><span class="nc">BlackScholesMertonProcess</span><span class="p">(</span>
+        <span class="n">ql</span><span class="p">.</span><span class="nc">QuoteHandle</span><span class="p">(</span><span class="n">spot</span><span class="p">),</span>
+        <span class="n">ql</span><span class="p">.</span><span class="nc">YieldTermStructureHandle</span><span class="p">(</span><span class="n">dividend</span><span class="p">),</span>
+        <span class="n">ql</span><span class="p">.</span><span class="nc">YieldTermStructureHandle</span><span class="p">(</span><span class="n">risk_free</span><span class="p">),</span>
+        <span class="n">ql</span><span class="p">.</span><span class="nc">BlackVolTermStructureHandle</span><span class="p">(</span><span class="n">volatility</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">ql</span><span class="p">.</span><span class="nc">AnalyticEuropeanEngine</span><span class="p">(</span><span class="n">process</span><span class="p">)</span>
+    <span class="n">option</span><span class="p">.</span><span class="nf">setPricingEngine</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">option</span><span class="p">,</span> <span class="n">spot</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">option</span><span class="p">,</span> <span class="n">spot</span> <span class="o">=</span> <span class="nf">build_option</span><span class="p">()</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Initial NPV:</span><span class="sh">"</span><span class="p">,</span> <span class="n">option</span><span class="p">.</span><span class="nc">NPV</span><span class="p">())</span>
+
+    <span class="c1"># Change an input and price again so breakpoints in QuantLib pricing code
+</span>    <span class="c1"># are hit from a second, easy-to-repeat call.
+</span>    <span class="n">spot</span><span class="p">.</span><span class="nf">setValue</span><span class="p">(</span><span class="mf">105.0</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Repriced NPV:</span><span class="sh">"</span><span class="p">,</span> <span class="n">option</span><span class="p">.</span><span class="nc">NPV</span><span class="p">())</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="nf">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">NPV()</code> returns the option’s net present value. For debugging, the important feature is not the complexity of the payoff but the <strong>two calls separated by a change to a live input</strong>.</p>
+
+<p>QuantLib can reuse cached results when nothing has changed. Calling <code class="language-plaintext highlighter-rouge">NPV()</code> twice without changing an input may therefore skip the pricing engine on the second call. Updating the <code class="language-plaintext highlighter-rouge">SimpleQuote</code> invalidates the dependent calculation, giving us a second opportunity to stop inside the engine.</p>
+
+<p>The README records the following expected output:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Initial NPV: 9.25485869123328
+Repriced NPV: 12.416641769134362
+</code></pre></div></div>
+
+<p>The increase is consistent with raising spot for this vanilla call under the stated assumptions. Matching the output is useful, but it does not prove that either debugger has reached the intended code. We will verify that through the breakpoint sequence.</p>
+
+<h2 id="3-place-breakpoints-on-both-sides-of-the-boundary">3. Place breakpoints on both sides of the boundary</h2>
+
+<h3 id="python-breakpoints">Python breakpoints</h3>
+
+<p>Set these three breakpoints in <code class="language-plaintext highlighter-rouge">test_debug.py</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Line in the supplied script</th>
+      <th>Statement</th>
+      <th>Why stop here?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>32</td>
+      <td><code class="language-plaintext highlighter-rouge">print("Initial NPV:", option.NPV())</code></td>
+      <td>Pause immediately before the first pricing call.</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td><code class="language-plaintext highlighter-rouge">spot.setValue(105.0)</code></td>
+      <td>Observe the input change that triggers recalculation.</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td><code class="language-plaintext highlighter-rouge">print("Repriced NPV:", option.NPV())</code></td>
+      <td>Pause immediately before the second pricing call.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A Python line breakpoint stops <strong>before that line executes</strong>. If you edit the script, locate the statements rather than relying on the original line numbers.</p>
+
+<h2 id="4-start-python-then-attach-gdb">4. Start Python, then attach GDB</h2>
+
+<h3 id="step-1-launch-only-the-python-session">Step 1. Launch only the Python session</h3>
+
+<p>Open <strong>Run and Debug</strong>, select <strong>1. Python (debugpy)</strong>, and press <strong>F5</strong>. Because <code class="language-plaintext highlighter-rouge">stopOnEntry</code> is enabled, Python should pause before the script starts executing its pricing setup.</p>
+
+<p><strong>Checkpoint:</strong> VS Code should show a paused Python session and a highlighted entry statement. Leave it paused while you identify the process and attach GDB.</p>
+
+<p>Use this sequential startup rather than the compound launch included in the original project. Starting both sessions concurrently does not guarantee that the script process is ready when the native process picker opens.</p>
+
+<h3 id="step-2-identify-the-actual-python-process">Step 2. Identify the actual Python process</h3>
+
+<p>In <strong>CALL STACK</strong>, select a frame belonging to <strong>1. Python (debugpy)</strong>. A frame represents a particular function call in the paused program. With that Python context selected, enter the following expression in the <strong>Debug Console</strong>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">__import__</span><span class="p">(</span><span class="sh">"</span><span class="s">os</span><span class="sh">"</span><span class="p">).</span><span class="nf">getpid</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Record the returned number. It is the <strong>process identifier (PID)</strong> of the Python interpreter running this script, and it is the identifier you will select when attaching GDB.</p>
+
+<p>Do not choose a process merely because its name contains <code class="language-plaintext highlighter-rouge">python</code>. VS Code may also be running Python debug adapters or launchers, and attaching to one of those would not expose the option’s calculation.</p>
+
+<h3 id="step-3-attach-the-native-debugger">Step 3. Attach the native debugger</h3>
+
+<p>Keep the Python session paused, then:</p>
+
+<ol>
+  <li>Select <strong>2. GDB attach to Python</strong> in the launch configuration list.</li>
+  <li>Open the Command Palette and run <strong>Debug: Start Debugging</strong>.</li>
+  <li>In the process picker, choose the entry whose PID matches the number recorded in Step 2.</li>
+</ol>
+
+<p>You should now see both sessions in <strong>CALL STACK</strong>. From this point onward, the <strong>Python session</strong> means <code class="language-plaintext highlighter-rouge">1. Python (debugpy)</code>, and the <strong>C++ session</strong> means <code class="language-plaintext highlighter-rouge">2. GDB attach to Python</code>.</p>
+
+<p>GDB may pause the process immediately after attaching. If it does, select a frame in the <strong>C++ session</strong> and press <strong>Continue</strong> once. This releases GDB’s native stop. It does not require Python to advance past its separate entry pause.</p>
+
+<p>Before moving on, the intended state is:</p>
+
+<ul>
+  <li><strong>Python is paused at entry</strong>, ready for you to continue the script.</li>
+  <li><strong>GDB is attached to that same PID and is running</strong>, ready to stop when the native breakpoint is reached.</li>
+</ul>
+
+<p>If this is not the state you see, resolve the attachment or pause state before continuing. It is easier to establish the correct starting point than to recover after a pricing call has already run.</p>
+
+<h3 id="step-4-setting-the-first-c-breakpoint">Step 4. Setting the first C++ breakpoint</h3>
+
+<p>Once GDB is attached to the Python PID and running, select the <strong>Python session</strong> and continue to the first pricing breakpoint, line 32 in the supplied script:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Initial NPV:</span><span class="sh">"</span><span class="p">,</span> <span class="n">option</span><span class="p">.</span><span class="nc">NPV</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Press <strong>F11 (Step Into)</strong>, or select <strong>Step Into</strong> on the debug toolbar. With the Python session selected, this follows <code class="language-plaintext highlighter-rouge">option.NPV()</code> into the generated Python wrapper, <code class="language-plaintext highlighter-rouge">QuantLib.py</code>. If necessary, keep stepping until execution is paused <strong>before</strong> this statement:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="n">_QuantLib</span><span class="p">.</span><span class="nc">Instrument_NPV</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This line marks the boundary we want to inspect. <code class="language-plaintext highlighter-rouge">QuantLib.py</code> provides the Python-facing method, while <code class="language-plaintext highlighter-rouge">_QuantLib</code> is the compiled extension module. Calling its <code class="language-plaintext highlighter-rouge">Instrument_NPV</code> function transfers execution to the native binding generated by <strong>SWIG</strong>, before QuantLib’s C++ instrument and pricing logic run.</p>
+
+<p>The corresponding C++ binding is in the generated wrapper source, <code class="language-plaintext highlighter-rouge">quantlib_wrap.cpp</code> (the filename’s capitalization can vary with the build). In this build, the native entry point is named <strong><code class="language-plaintext highlighter-rouge">_wrap_Instrument_NPV</code></strong>. Notice the naming connection: the Python call to <strong><code class="language-plaintext highlighter-rouge">_QuantLib.Instrument_NPV(self)</code></strong> maps to the SWIG wrapper <strong><code class="language-plaintext highlighter-rouge">_wrap_Instrument_NPV</code></strong>. The leading underscore in <code class="language-plaintext highlighter-rouge">_QuantLib</code> matters because this is the extension module, not the top-level <code class="language-plaintext highlighter-rouge">QuantLib</code> package.</p>
+
+<p>This gives us a native starting point <strong>without first knowing which pricing engine the instrument will use</strong>. We identify the boundary from the Python call in front of us, rather than guessing where to place a breakpoint deeper in QuantLib.</p>
+
+<p>Before proceeding, confirm that the wrapper displayed in the editor belongs to the running environment. With a Python frame selected and GDB running, evaluate these expressions individually in the <strong>Python session’s Debug Console</strong>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">__import__</span><span class="p">(</span><span class="sh">"</span><span class="s">sys</span><span class="sh">"</span><span class="p">).</span><span class="n">executable</span>
+<span class="n">ql</span><span class="p">.</span><span class="n">__file__</span>
+<span class="nf">__import__</span><span class="p">(</span><span class="sh">"</span><span class="s">QuantLib._QuantLib</span><span class="sh">"</span><span class="p">,</span> <span class="n">fromlist</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">_QuantLib</span><span class="sh">"</span><span class="p">]).</span><span class="n">__file__</span>
+</code></pre></div></div>
+
+<p>They identify the Python interpreter, the Python wrapper, and the compiled extension actually loaded by the process. The second expression assumes that the selected frame has the script’s <code class="language-plaintext highlighter-rouge">ql</code> import available. If you are inside <code class="language-plaintext highlighter-rouge">QuantLib.py</code>, select the calling frame in <code class="language-plaintext highlighter-rouge">test_debug.py</code> to evaluate it, then return to the wrapper frame.</p>
+
+<p>In the environment comparison behind this example, a wrapper opened from <code class="language-plaintext highlighter-rouge">general</code> differed from the one used by the launch configuration’s <code class="language-plaintext highlighter-rouge">test_debug_quantlib</code> interpreter. A location such as line 16598 in one wrapper is therefore not a reliable breakpoint location in the other. <strong>Use the files reported by the running process</strong>, not simply a similarly named file already open in VS Code.</p>
+
+<p>To stop at that native entry point without searching the generated C++ file:</p>
+
+<ol>
+  <li>Leave Python paused before the <code class="language-plaintext highlighter-rouge">return</code> statement.</li>
+  <li>Switch to the <strong>C++ session</strong>. If GDB is running, use <strong>Pause</strong>, not <strong>Stop</strong>. Stop would end the debugging session rather than temporarily suspend execution.</li>
+  <li>With the C++ session selected, enter the following in its <strong>Debug Console</strong>:</li>
+</ol>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-exec tbreak _wrap_Instrument_NPV
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">tbreak</code> creates a <strong>temporary breakpoint</strong>, which GDB automatically removes after it is hit. The symbol name comes from this generated binding, so it should not be assumed to be identical in every SWIG build. If GDB cannot resolve it, check the loaded extension’s symbols and matching generated source.</p>
+
+<p>For the repeatable engine stops used later in this walkthrough, also keep a regular breakpoint enabled inside <code class="language-plaintext highlighter-rouge">AnalyticEuropeanEngine::calculate()</code> in <code class="language-plaintext highlighter-rouge">ql/pricingengines/vanilla/analyticeuropeanengine.cpp</code>. Alternatively, add the function breakpoint <code class="language-plaintext highlighter-rouge">QuantLib::AnalyticEuropeanEngine::calculate() const</code> in VS Code’s <strong>BREAKPOINTS</strong> view. This is a convenience for this known example, not a prerequisite for discovering the engine through native stepping. Unlike the temporary wrapper breakpoint, the regular engine breakpoint remains available for both pricing calls.</p>
+
+<p>Finally, <strong>Continue the C++ session</strong>. This releases the native pause while Python remains paused at the wrapper’s <code class="language-plaintext highlighter-rouge">return</code> statement. We are now ready to execute that statement and catch its entry into C++.</p>
+
+<p><strong>Checkpoint:</strong> Python is paused in <code class="language-plaintext highlighter-rouge">QuantLib.py</code>, GDB is running on the same PID, and the temporary SWIG-entry breakpoint is armed. Setting the breakpoint does not itself execute the Python call.</p>
+
+<h2 id="5-follow-the-first-python-to-c-handoff">5. Follow the first Python-to-C++ handoff</h2>
+
+<h3 id="step-5-execute-the-wrapper-call-and-stop-in-c">Step 5. Execute the wrapper call and stop in C++</h3>
+
+<p>With the <strong>Python session selected</strong>, press <strong>F10 (Step Over)</strong>.</p>
+
+<p>This executes the call to <code class="language-plaintext highlighter-rouge">_QuantLib.Instrument_NPV(self)</code>. <strong>Step Over does not disable GDB’s breakpoints.</strong> GDB should first stop at <code class="language-plaintext highlighter-rouge">_wrap_Instrument_NPV</code> in the generated C++ wrapper. Select the <strong>C++ session/frame</strong> to inspect that entry point. The temporary breakpoint is removed after this hit.</p>
+
+<p>The wrapper is the language boundary, not the pricing engine itself. At this stop, you can either continue the <strong>C++ session</strong> directly to the regular engine breakpoint or follow the intervening implementation as described below.</p>
+
+<h4 id="follow-the-wrapper-into-quantlib">Follow the wrapper into QuantLib</h4>
+
+<p>The generated wrapper first converts and checks the Python arguments. The important native call in this build is:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">Real</span><span class="p">)((</span><span class="n">Instrument</span> <span class="k">const</span> <span class="o">*</span><span class="p">)</span><span class="n">arg1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NPV</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>In plain language, the wrapper has recovered a pointer to the underlying C++ instrument and is asking that instrument for its value. There are two ways to reach the implementation behind this call:</p>
+
+<ul>
+  <li><strong>Inspect the conversion work:</strong> use <strong>F10 in the C++ session</strong> until the call above is the next statement to execute, then press <strong>F11</strong> to enter <code class="language-plaintext highlighter-rouge">NPV()</code>.</li>
+  <li><strong>Skip the conversion work:</strong> while stopped in the wrapper, set another temporary breakpoint in the <strong>C++ session’s Debug Console</strong>, then continue that session:</li>
+</ul>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-exec tbreak QuantLib::Instrument::NPV
+</code></pre></div></div>
+
+<p>With matching symbols and sources, GDB should stop in <code class="language-plaintext highlighter-rouge">Instrument::NPV()</code>. Its implementation is:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="n">Real</span> <span class="n">Instrument</span><span class="o">::</span><span class="n">NPV</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">calculate</span><span class="p">();</span>
+    <span class="n">QL_REQUIRE</span><span class="p">(</span><span class="n">NPV_</span> <span class="o">!=</span> <span class="n">Null</span><span class="o">&lt;</span><span class="n">Real</span><span class="o">&gt;</span><span class="p">(),</span> <span class="s">"NPV not provided"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">NPV_</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The method requests the calculation, checks that a value was supplied, and returns it. From here, <strong>F11 is native C++ stepping</strong>, not a Python command crossing the language boundary automatically. Step into <code class="language-plaintext highlighter-rouge">calculate()</code> to follow the instrument’s calculation logic.</p>
+
+<p>For this unexpired option when recalculation is required, the relevant path is:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python: option.NPV()
+    -&gt; Python wrapper: _QuantLib.Instrument_NPV(self)
+    -&gt; C++ SWIG wrapper: _wrap_Instrument_NPV(...)
+    -&gt; QuantLib::Instrument::NPV()
+    -&gt; Instrument::calculate()
+    -&gt; LazyObject::calculate()
+    -&gt; Instrument::performCalculations()
+    -&gt; engine_-&gt;calculate()
+    -&gt; AnalyticEuropeanEngine::calculate()
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">LazyObject</code> manages whether a cached result can be reused. <code class="language-plaintext highlighter-rouge">performCalculations()</code> prepares the engine’s arguments, invokes the engine, and retrieves its results. At <strong><code class="language-plaintext highlighter-rouge">engine_-&gt;calculate()</code></strong>, press <strong>F11</strong> to follow the virtual call to the engine actually attached to the instrument. A virtual call selects the concrete implementation at runtime, so <strong>you do not need to know its class name beforehand</strong>.</p>
+
+<p>The path is conditional rather than universal. An expired instrument can take the expiry branch, while a cached or frozen calculation can bypass the engine. Compiler inlining and the available debug information can also affect which source-level stops GDB exposes.</p>
+
+<p>Whether you stepped through the calls or continued to the regular breakpoint, the next shared checkpoint is the pricing engine:</p>
+
+<p><strong>Checkpoint:</strong> VS Code should show a native stop in the engine’s C++ source. Select that frame in the <strong>C++ session</strong> before inspecting variables or stepping further.</p>
+
+<p>You can now inspect <code class="language-plaintext highlighter-rouge">this</code>, the current engine object, and expand its available members. As you advance through the function, inspect local variables after the statements that initialize them. This is where you can connect the Python model inputs to the quantities used by the pricing implementation.</p>
+
+<p>Use <strong>F10</strong> to execute the next C++ statement without entering a called function, or <strong>F11</strong> to step into a C++ function when its source is available. For the first pass, keep the investigation short so that the return to Python remains easy to follow.</p>
+
+<p>The Python session may still appear to be running. That does not mean it has passed the pricing line. Its step-over is waiting for a native call that GDB has suspended.</p>
+
+<blockquote>
+  <p><strong>Avoid calling <code class="language-plaintext highlighter-rouge">option.NPV()</code> from Watches or the Debug Console during this exercise.</strong> Evaluating it can trigger another calculation or use a cached result, making it harder to interpret the intended sequence. Inspect existing values rather than introducing extra pricing calls.</p>
+</blockquote>
+
+<h3 id="step-6-let-the-native-calculation-return">Step 6. Let the native calculation return</h3>
+
+<p>With the <strong>C++ session selected</strong>, press <strong>Continue</strong>.</p>
+
+<p>This allows the native calculation to finish and return its result through the SWIG wrapper. Python can then complete its pending step in <code class="language-plaintext highlighter-rouge">QuantLib.py</code>. Select the <strong>Python session</strong> and use <strong>Continue</strong> to reach the next explicit Python breakpoint:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">spot</span><span class="p">.</span><span class="nf">setValue</span><span class="p">(</span><span class="mf">105.0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Checkpoint:</strong> the spot-update statement should now be highlighted in Python. It has not executed yet. Select the <strong>Python session/frame</strong> before issuing the next step.</p>
+
+<p>If another native breakpoint interrupts the return, inspect that stop and continue the C++ session first. Do not try to finish the Python step while GDB still holds the process paused.</p>
+
+<h2 id="6-change-spot-and-repeat-the-handoff">6. Change spot and repeat the handoff</h2>
+
+<h3 id="step-7-execute-the-input-update">Step 7. Execute the input update</h3>
+
+<p>Check that Python is paused at <code class="language-plaintext highlighter-rouge">spot.setValue(105.0)</code>, then press <strong>F10</strong> with the <strong>Python session selected</strong>.</p>
+
+<p>The quote changes from 100.0 to 105.0. Python should then pause before the second pricing statement:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Repriced NPV:</span><span class="sh">"</span><span class="p">,</span> <span class="n">option</span><span class="p">.</span><span class="nc">NPV</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p><strong>Checkpoint:</strong> the input update has executed, but the repricing call has not. Changing the observable quote invalidates the dependent cached calculation. The next <code class="language-plaintext highlighter-rouge">NPV()</code> request should therefore run the engine again, rather than simply return the previous result.</p>
+
+<h3 id="step-8-enter-the-pricing-engine-a-second-time">Step 8. Enter the pricing engine a second time</h3>
+
+<p>Press <strong>F10</strong> again with the <strong>Python session selected</strong>.</p>
+
+<p>GDB should stop inside <code class="language-plaintext highlighter-rouge">AnalyticEuropeanEngine::calculate()</code> again. Select the <strong>C++ session/frame</strong> and, if useful, follow the same statements you inspected during the first call. Comparing the same point in both calculations is more informative than comparing variables at different stages of initialization.</p>
+
+<p>When you are ready, press <strong>Continue</strong> in the <strong>C++ session</strong> so the repricing call can finish. If Python pauses after its pending step completes, select the <strong>Python session</strong> and continue to program exit.</p>
+
+<p><strong>Completion check:</strong> you should have observed two engine breakpoint hits, one for each explicit pricing call, with the Python spot update between them. Compare the program output with the expected values shown earlier. Numerical output alone does not confirm that you followed the intended native path.</p>
+
+<p>The intended sequence is:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python: initial NPV line
+    -&gt; Python: QuantLib.py wrapper
+    -&gt; C++: temporary SWIG-entry breakpoint
+    -&gt; C++: pricing engine, first call
+    -&gt; Python: spot update
+    -&gt; Python: repricing line
+    -&gt; C++: pricing engine, second call
+    -&gt; Python: completion
+</code></pre></div></div>
+
+<p>The following checklist summarizes who owns each action:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Current stop</th>
+      <th>Session to select</th>
+      <th>Action</th>
+      <th>Expected next stop</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Python entry, with GDB attached and running</td>
+      <td>Python</td>
+      <td>Continue</td>
+      <td>Initial NPV line</td>
+    </tr>
+    <tr>
+      <td>Initial NPV line</td>
+      <td>Python</td>
+      <td>F11</td>
+      <td>Python wrapper in QuantLib.py</td>
+    </tr>
+    <tr>
+      <td>Python wrapper, with the temporary native breakpoint armed and GDB running</td>
+      <td>Python</td>
+      <td>F10</td>
+      <td>C++ SWIG entry point</td>
+    </tr>
+    <tr>
+      <td>SWIG entry point</td>
+      <td>C++</td>
+      <td>Continue</td>
+      <td>C++ pricing engine</td>
+    </tr>
+    <tr>
+      <td>First engine calculation</td>
+      <td>C++, then Python</td>
+      <td>Continue C++, then continue Python after its step completes</td>
+      <td>Python spot update</td>
+    </tr>
+    <tr>
+      <td>Spot update</td>
+      <td>Python</td>
+      <td>F10</td>
+      <td>Python repricing line</td>
+    </tr>
+    <tr>
+      <td>Repricing line</td>
+      <td>Python</td>
+      <td>F10</td>
+      <td>C++ pricing engine again</td>
+    </tr>
+    <tr>
+      <td>Second engine calculation</td>
+      <td>C++</td>
+      <td>Continue</td>
+      <td>Python completes its pending step</td>
+    </tr>
+    <tr>
+      <td>Python paused after repricing</td>
+      <td>Python</td>
+      <td>Continue</td>
+      <td>Program exit</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="7-keep-the-breakpoint-sequence-intact">7. Keep the breakpoint sequence intact</h2>
+
+<p>When the sequence becomes confusing, first check which debugger owns the current stop. A pricing call can look stalled simply because the other session is waiting for you to resume it.</p>
+
+<ol>
+  <li><strong>Check the selected session and frame before F5, F10, or F11.</strong> The command applies to the selected debugging context.</li>
+  <li><strong>Resume C++ first whenever GDB owns the stop.</strong> Python cannot complete a call while its process is suspended.</li>
+  <li><strong>Do not expect F11 to bridge Python and C++ automatically.</strong> Place a breakpoint in the destination language and switch sessions when it is hit.</li>
+  <li><strong>Keep both debuggers attached to the same PID.</strong> If you restart Python, obtain the new PID and reattach GDB.</li>
+  <li><strong>Avoid extra stops while learning the sequence.</strong> Shared-library event stops and unrelated breakpoints can make the handoff harder to follow.</li>
+  <li><strong>Remember QuantLib’s caching behavior.</strong> A repeated request is not necessarily a repeated engine calculation.</li>
+</ol>
+
+<p>The GDB-only configuration in the original project is useful when you want to investigate C++ execution without managing a Python debugger. It does not activate Python breakpoints, so it is not a substitute for this two-session workflow.</p>
+
+<h2 id="8-troubleshooting-the-setup">8. Troubleshooting the setup</h2>
+
+<h3 id="the-c-breakpoint-never-becomes-verified">The C++ breakpoint never becomes verified</h3>
+
+<p>Before the QuantLib import, a pending breakpoint can be expected. If it remains unresolved when Python reaches the first NPV line, the import has already happened and it is time to inspect the native setup.</p>
+
+<p>Pause the <strong>C++ session</strong> if it is running, select one of its frames, and enter the following in its <strong>Debug Console</strong>:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-exec info sharedlibrary
+</code></pre></div></div>
+
+<p>Look for the loaded QuantLib library and check its path. A successful Python import only establishes that a package was found. It does not establish that the process loaded your intended debug library.</p>
+
+<p>Confirm that the QuantLib library and SWIG extension contain debug information and that their sources match the builds. Merely opening the expected C++ file in the editor does not connect it to the loaded binary. After these checks, continue the <strong>C++ session</strong> before resuming the Python walkthrough.</p>
+
+<h3 id="gdb-cannot-find-the-source-files">GDB cannot find the source files</h3>
+
+<p>Debug information records the source paths used during compilation. If the source tree has moved, GDB may know the function and line number but be unable to open the file. Add a <code class="language-plaintext highlighter-rouge">sourceFileMap</code> property to the C++ attach configuration to translate the old paths to the current ones. For example:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"sourceFileMap"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"/original/build/location/QuantLib"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/current/source/location/QuantLib"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Replace both example paths with your own, keeping the original build path on the left and the current source location on the right. If needed, add a separate mapping for the QuantLib-SWIG tree containing the generated wrapper. A path mapping locates source files, but it cannot make a different source version match the compiled code.</p>
+
+<h3 id="python-appears-frozen">Python appears frozen</h3>
+
+<p>Look in <strong>CALL STACK</strong> before pressing Continue repeatedly. If the <strong>C++ session is stopped</strong>, the native debugger may be holding the process while Python waits for the pricing call to return. Select the C++ frame and continue that session first.</p>
+
+<p>If both sessions are paused immediately after attaching, first let GDB continue, then select Python and resume from its entry pause.</p>
+
+<h3 id="the-first-engine-breakpoint-hits-but-the-second-does-not">The first engine breakpoint hits, but the second does not</h3>
+
+<p>Check the sequence in order: did Python execute <code class="language-plaintext highlighter-rouge">spot.setValue(105.0)</code>, did it reach the repricing statement, and did you press F10 in the Python session? Then confirm that GDB is still attached to the same PID, is running, and has its engine breakpoint enabled.</p>
+
+<p>Do not use repeated calls with unchanged inputs as the test. Cached results can bypass the engine even when the debugger is working correctly.</p>
+
+<h3 id="attaching-gdb-is-denied">Attaching GDB is denied</h3>
+
+<p>An attachment error can occur before any QuantLib code is involved. Check that the selected PID belongs to the intended Python process, then check process ownership and the machine’s Linux <code class="language-plaintext highlighter-rouge">ptrace</code> policy. The example’s README records <code class="language-plaintext highlighter-rouge">ptrace_scope</code> as <code class="language-plaintext highlighter-rouge">0</code> on its inspected machine, but that observation does not establish permission on another system.</p>
+
+<p>Follow your system’s approved debugging policy rather than broadly weakening security settings to make an attach succeed.</p>
+
+<h2 id="the-result-an-explainable-path-from-python-to-the-pricing-engine">The result: an explainable path from Python to the pricing engine</h2>
+
+<p>The useful outcome is not simply having two debusg sessions open. It is being able to stop before a financial calculation, inspect the native implementation that produces it, and return to the Python code that consumes the result.</p>
+
+<p>Python builds the instrument and changes its inputs. The SWIG extension connects those calls to QuantLib. The C++ pricing engine calculates the result. Boundary breakpoints and explicit session selection let you inspect each layer without expecting one debugger to understand them all.</p>
+
+<p>Once both pricing calls follow the intended sequence, you have a repeatable starting point for investigating custom instruments, pricing engines, and binding behavior. That establishes visibility into the implementation, not proof that a model’s assumptions or outputs are economically correct.</p>
+
+                </article>
+
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="https://craquinterogo.github.io/assets/js/jquery.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrolly.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrollex.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/skel.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="https://craquinterogo.github.io/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="https://craquinterogo.github.io/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
+
+
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          window.addEventListener('resize', updateProgress);
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── On-demand sidebars ──────────────────────────── */
+        var drawers = [];
+        function makeSidebarToggle(toggleId, sidebarId, overlayId, query) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+          var compact = window.matchMedia(query);
+
+          function setOpen(open, restoreFocus) {
+            sidebar.classList.toggle('active', open);
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            sidebar.inert = compact.matches && !open;
+            if (open) sidebar.querySelector('button, a').focus();
+            else if (restoreFocus) toggle.focus();
+          }
+
+          drawers.push(function () { setOpen(false, false); });
+          toggle.addEventListener('click', function () {
+            var open = !sidebar.classList.contains('active');
+            drawers.forEach(function (close) { close(); });
+            setOpen(open, !open);
+          });
+          overlay.addEventListener('click', function () { setOpen(false, true); });
+          sidebar.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && compact.matches) setOpen(false, true);
+          });
+          sidebar.addEventListener('click', function (event) {
+            if (compact.matches && event.target.closest('#toc-sidebar-nav a')) setOpen(false, true);
+          });
+          compact.addEventListener('change', function () { setOpen(false, false); });
+          setOpen(false, false);
+        }
+
+        makeSidebarToggle('sidebar-left-toggle', 'sidebar-left', 'sidebar-left-overlay', '(max-width: 1599px)');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay', '(max-width: 1199px)');
+
+        /* Keep wide technical content scrollable without widening the page. */
+        if (body) {
+          body.querySelectorAll('pre').forEach(function (pre) {
+            pre.tabIndex = 0;
+            pre.setAttribute('aria-label', 'Code sample');
+          });
+          body.querySelectorAll('table').forEach(function (table) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'post-table-scroll';
+            wrapper.tabIndex = 0;
+            wrapper.setAttribute('role', 'region');
+            wrapper.setAttribute('aria-label', 'Scrollable table');
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+          });
+        }
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            hdr.querySelector('.collapse-toggle').setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
+            }
+          });
+        });
+
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            var nums    = [0, 0, 0, 0];
+            var list = document.createElement('ul');
+            list.className = 'toc-list';
+            list.id = 'toc-heading-list';
+            var stack = [];
+            var branches = [];
+
+            function setBranchExpanded(branch, expanded) {
+              branch.children.hidden = !expanded;
+              branch.button.setAttribute('aria-expanded', String(expanded));
+              branch.button.setAttribute('aria-label', (expanded ? 'Collapse' : 'Expand') + ' subsections of ' + branch.text);
+            }
+
+            headings.forEach(function (h, index) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              if (h.firstChild && h.firstChild.nodeType === Node.TEXT_NODE) {
+                h.firstChild.textContent = h.firstChild.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
+              }
+              var number = document.createElement('span');
+              number.className = 'section-number';
+              number.textContent = numStr + '. ';
+              h.insertBefore(number, h.firstChild);
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              }
+              var item = document.createElement('li');
+              item.className = 'toc-level-' + (level + 1);
+              var link = document.createElement('a');
+              link.setAttribute('href', '#' + h.id);
+              var tocNumber = document.createElement('span');
+              tocNumber.className = 'toc-number';
+              tocNumber.textContent = numStr + '. ';
+              link.appendChild(tocNumber);
+              link.appendChild(document.createTextNode(rawText));
+              var row = document.createElement('div');
+              row.className = 'toc-entry';
+              row.appendChild(link);
+              item.appendChild(row);
+
+              while (stack.length && stack[stack.length - 1].level >= level) stack.pop();
+              var parent = stack[stack.length - 1];
+              if (parent && !parent.children) {
+                parent.children = document.createElement('ul');
+                parent.children.className = 'toc-list toc-children';
+                parent.children.id = 'toc-children-' + parent.index;
+                parent.button = document.createElement('button');
+                parent.button.type = 'button';
+                parent.button.className = 'toc-branch-toggle';
+                parent.button.setAttribute('aria-controls', parent.children.id);
+                var chevron = document.createElement('i');
+                chevron.className = 'fa fa-chevron-down';
+                chevron.setAttribute('aria-hidden', 'true');
+                parent.button.appendChild(chevron);
+                parent.row.insertBefore(parent.button, parent.row.firstChild);
+                parent.item.appendChild(parent.children);
+                branches.push(parent);
+                setBranchExpanded(parent, true);
+                parent.button.addEventListener('click', function () {
+                  setBranchExpanded(parent, parent.children.hidden);
+                  updateBulkControls();
+                });
+              }
+              (parent ? parent.children : list).appendChild(item);
+              stack.push({ level: level, index: index, item: item, row: row, text: rawText });
+            });
+
+            var expandAll;
+            var collapseAll;
+            function updateBulkControls() {
+              if (!expandAll) return;
+              expandAll.disabled = branches.every(function (branch) { return !branch.children.hidden; });
+              collapseAll.disabled = branches.every(function (branch) { return branch.children.hidden; });
+            }
+
+            if (branches.length) {
+              var controls = document.createElement('div');
+              controls.className = 'toc-controls';
+              controls.setAttribute('role', 'group');
+              controls.setAttribute('aria-label', 'Table of contents branches');
+              expandAll = document.createElement('button');
+              collapseAll = document.createElement('button');
+              [expandAll, collapseAll].forEach(function (button, index) {
+                button.type = 'button';
+                button.textContent = index === 0 ? 'Expand all' : 'Collapse all';
+                button.setAttribute('aria-controls', list.id);
+                button.addEventListener('click', function () {
+                  branches.forEach(function (branch) { setBranchExpanded(branch, index === 0); });
+                  updateBulkControls();
+                });
+                controls.appendChild(button);
+              });
+              tocNav.appendChild(controls);
+              updateBulkControls();
+            }
+            tocNav.appendChild(list);
+            if (tocSect) tocSect.style.display = 'block';
+          } else {
+            if (tocSect) tocSect.style.display = 'none';
+            document.body.classList.add('has-no-toc');
+          }
+        }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                tocNav.querySelectorAll('.toc-entry').forEach(function (row) { row.removeAttribute('data-active-descendant'); });
+                var active = Array.prototype.find.call(tocLinks, function (link) { return link.getAttribute('href') === '#' + entry.target.id; });
+                if (active) {
+                  active.setAttribute('data-active', '');
+                  var ancestor = active.closest('li').parentElement.closest('li');
+                  while (ancestor) {
+                    ancestor.firstElementChild.setAttribute('data-active-descendant', '');
+                    ancestor = ancestor.parentElement.closest('li');
+                  }
+                }
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>

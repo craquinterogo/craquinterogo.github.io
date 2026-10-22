@@ -171,6 +171,18 @@
     
       
         
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
           
           
           
@@ -194,6 +206,54 @@
               
               
                 <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/07/18/debugging-quantlib-python-cpp-vscode" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Debugging QuantLib across Python and C++ in VS Code" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Debugging QuantLib across Python and C++ ...</h5>
+                          
+                            <span class="recent-post-date">Jul 18, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/07/05/debugging-european-fx-option-quantlib-vscode" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" alt="Debugging a European FX option in QuantLib C++ with VS Code." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Debugging a European FX option in QuantLi...</h5>
+                          
+                            <span class="recent-post-date">Jul 05, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/06/20/quantlib-debug-build-and-swig-components" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Compiling QuantLib in Debug Mode and wiring components into SWIG - Python." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Compiling QuantLib in Debug Mode and wiri...</h5>
+                          
+                            <span class="recent-post-date">Jun 20, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
                   
                     <li class="recent-post-item">
                       <a href="/blog/2025/12/07/git-repository-hard-disk" class="recent-post-link">
@@ -302,6 +362,18 @@
       <section id="one">
         <div class="inner">
 
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
           
             
               
@@ -1143,8 +1215,17 @@
             var nums    = [0, 0, 0, 0];
             var list = document.createElement('ul');
             list.className = 'toc-list';
+            list.id = 'toc-heading-list';
+            var stack = [];
+            var branches = [];
 
-            headings.forEach(function (h) {
+            function setBranchExpanded(branch, expanded) {
+              branch.children.hidden = !expanded;
+              branch.button.setAttribute('aria-expanded', String(expanded));
+              branch.button.setAttribute('aria-label', (expanded ? 'Collapse' : 'Expand') + ' subsections of ' + branch.text);
+            }
+
+            headings.forEach(function (h, index) {
               var level    = parseInt(h.tagName[1], 10) - 1;
               nums[level]++;
               for (var i = level + 1; i < 4; i++) nums[i] = 0;
@@ -1169,10 +1250,66 @@
               tocNumber.textContent = numStr + '. ';
               link.appendChild(tocNumber);
               link.appendChild(document.createTextNode(rawText));
-              item.appendChild(link);
-              list.appendChild(item);
+              var row = document.createElement('div');
+              row.className = 'toc-entry';
+              row.appendChild(link);
+              item.appendChild(row);
+
+              while (stack.length && stack[stack.length - 1].level >= level) stack.pop();
+              var parent = stack[stack.length - 1];
+              if (parent && !parent.children) {
+                parent.children = document.createElement('ul');
+                parent.children.className = 'toc-list toc-children';
+                parent.children.id = 'toc-children-' + parent.index;
+                parent.button = document.createElement('button');
+                parent.button.type = 'button';
+                parent.button.className = 'toc-branch-toggle';
+                parent.button.setAttribute('aria-controls', parent.children.id);
+                var chevron = document.createElement('i');
+                chevron.className = 'fa fa-chevron-down';
+                chevron.setAttribute('aria-hidden', 'true');
+                parent.button.appendChild(chevron);
+                parent.row.insertBefore(parent.button, parent.row.firstChild);
+                parent.item.appendChild(parent.children);
+                branches.push(parent);
+                setBranchExpanded(parent, true);
+                parent.button.addEventListener('click', function () {
+                  setBranchExpanded(parent, parent.children.hidden);
+                  updateBulkControls();
+                });
+              }
+              (parent ? parent.children : list).appendChild(item);
+              stack.push({ level: level, index: index, item: item, row: row, text: rawText });
             });
 
+            var expandAll;
+            var collapseAll;
+            function updateBulkControls() {
+              if (!expandAll) return;
+              expandAll.disabled = branches.every(function (branch) { return !branch.children.hidden; });
+              collapseAll.disabled = branches.every(function (branch) { return branch.children.hidden; });
+            }
+
+            if (branches.length) {
+              var controls = document.createElement('div');
+              controls.className = 'toc-controls';
+              controls.setAttribute('role', 'group');
+              controls.setAttribute('aria-label', 'Table of contents branches');
+              expandAll = document.createElement('button');
+              collapseAll = document.createElement('button');
+              [expandAll, collapseAll].forEach(function (button, index) {
+                button.type = 'button';
+                button.textContent = index === 0 ? 'Expand all' : 'Collapse all';
+                button.setAttribute('aria-controls', list.id);
+                button.addEventListener('click', function () {
+                  branches.forEach(function (branch) { setBranchExpanded(branch, index === 0); });
+                  updateBulkControls();
+                });
+                controls.appendChild(button);
+              });
+              tocNav.appendChild(controls);
+              updateBulkControls();
+            }
             tocNav.appendChild(list);
             if (tocSect) tocSect.style.display = 'block';
           } else {
@@ -1188,8 +1325,16 @@
             entries.forEach(function (entry) {
               if (entry.isIntersecting) {
                 tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
-                var active = tocNav.querySelector('a[href="#' + entry.target.id + '"]');
-                if (active) active.setAttribute('data-active', '');
+                tocNav.querySelectorAll('.toc-entry').forEach(function (row) { row.removeAttribute('data-active-descendant'); });
+                var active = Array.prototype.find.call(tocLinks, function (link) { return link.getAttribute('href') === '#' + entry.target.id; });
+                if (active) {
+                  active.setAttribute('data-active', '');
+                  var ancestor = active.closest('li').parentElement.closest('li');
+                  while (ancestor) {
+                    ancestor.firstElementChild.setAttribute('data-active-descendant', '');
+                    ancestor = ancestor.parentElement.closest('li');
+                  }
+                }
               }
             });
           }, { rootMargin: '-10% 0px -80% 0px' });

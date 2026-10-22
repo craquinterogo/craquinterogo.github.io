@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Compiling QuantLib in Debug Mode and wiring components into SWIG - Python. | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	
+	
+	<meta name="description" content="A practical workflow to build QuantLib in Debug mode, keep symbols for debugging, and expose selected components through QuantLib-SWIG." />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Compiling QuantLib in Debug Mode and wiring components into SWIG - Python." />
+	<meta property="og:description" content="A practical workflow to build QuantLib in Debug mode, keep symbols for debugging, and expose selected components through QuantLib-SWIG." />
+	<meta property="og:url" content="https://craquinterogo.github.io/blog/2026/06/20/quantlib-debug-build-and-swig-components" />
+	<meta name="twitter:title" content="Compiling QuantLib in Debug Mode and wiring components into SWIG - Python." />
+	<meta name="twitter:description" content="A practical workflow to build QuantLib in Debug mode, keep symbols for debugging, and expose selected components through QuantLib-SWIG." />
+	
+	
+	<meta property="og:image" content="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" />
+	<meta property="og:image:alt" content="Compiling QuantLib in Debug Mode and wiring components into SWIG - Python." />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" />
+	<meta name="twitter:image:alt" content="Compiling QuantLib in Debug Mode and wiring components into SWIG - Python." />
+	
+	
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="https://craquinterogo.github.io//" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io//">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Quantitative Development
+            </h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle related posts" aria-controls="related-posts-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              
+              
+              
+                <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/07/18/debugging-quantlib-python-cpp-vscode" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Debugging QuantLib across Python and C++ in VS Code" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Debugging QuantLib across Python and C++ ...</h5>
+                          
+                            <span class="recent-post-date">Jul 18, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/07/05/debugging-european-fx-option-quantlib-vscode" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" alt="Debugging a European FX option in QuantLib C++ with VS Code." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Debugging a European FX option in QuantLi...</h5>
+                          
+                            <span class="recent-post-date">Jul 05, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/12/07/git-repository-hard-disk" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/005_What_is_a_Git_Repository.jpg" alt="Private GIT repositories for small or private projects." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Private GIT repositories for small or pri...</h5>
+                          
+                            <span class="recent-post-date">Dec 07, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/10/29/questdb-for-timeseries" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" alt="QuestDB, an alternative for storing your financial time series." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>QuestDB, an alternative for storing your ...</h5>
+                          
+                            <span class="recent-post-date">Oct 29, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/08/10/quantlib-setup" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Setting QuantLib up in my laptop, again. An amazing tool for quants." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Setting QuantLib up in my laptop, again. ...</h5>
+                          
+                            <span class="recent-post-date">Aug 10, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/06/29/ai-agents-for-quants" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/04_llm_and_mcp/jarvis_.jpg" alt="What about AI Agents for Quants?" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>What about AI Agents for Quants?</h5>
+                          
+                            <span class="recent-post-date">Jun 29, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2024/03/10/connecting-cpp-and-python-with-swig" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Pricing a European option in C++ from Python with SWIG" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Pricing a European option in C++ from Pyt...</h5>
+                          
+                            <span class="recent-post-date">Mar 10, 2024</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+              <div class="sidebar-category-link">
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle table of contents" aria-controls="toc-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- On-demand navigation for narrower reading layouts -->
+    <button type="button" id="sidebar-left-toggle" class="sidebar-toggle sidebar-toggle--left" aria-controls="sidebar-left" aria-expanded="false"><i class="fa fa-folder" aria-hidden="true"></i>Related</button>
+    <button type="button" id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-controls="sidebar-right" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i>Contents</button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#quantitative-development">Quantitative Development</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Compiling QuantLib in Debug Mode and wiring com...</span>
+                    </div>
+                  
+
+                  <h1>Compiling QuantLib in Debug Mode and wiring components into SWIG - Python.</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2026-06-20T00:00:00-05:00">June 20, 2026</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">technology</span>
+                      
+                        <span class="post-tag-pill">quantitative finance</span>
+                      
+                        <span class="post-tag-pill">QuantLib</span>
+                      
+                        <span class="post-tag-pill">SWIG</span>
+                      
+                        <span class="post-tag-pill">C++</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg"
+                    alt="Compiling QuantLib in Debug Mode and wiring components into SWIG - Python."
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <article class="post-body" id="post-body-content" aria-label="Article content">
+                  <p>When experimenting with pricing engines, term structures, or custom instruments in QuantLib, I usually want more than a fast binary. I want debuggability. That means line information, symbols, and a build that lets me inspect internal state step by step, both from C++ and from the Python wrapper.</p>
+
+<p>This post captures my preferred setup to compile QuantLib in <code class="language-plaintext highlighter-rouge">Debug</code> mode and then connect that build to QuantLib-SWIG so selected components can be consumed from Python.</p>
+
+<h1 id="quantlib-main-layers">QuantLib Main Layers</h1>
+<p>Before diving into compilation stages, it helps to keep QuantLib architecture in mind. The <a href="https://github.com/lballabio/QuantLib" target="_blank" rel="noopener">engine core</a> is implemented in C++, for instance instruments, term structures, pricing engines, calendars, and numerical methods live there. On top of that, <a href="https://github.com/lballabio/QuantLib-SWIG" target="_blank" rel="noopener">QuantLib-SWIG</a>, provides the language binding layer that maps selected C++ classes and methods into Python-accessible objects. Other programming languages are also supported, such as Java, R, Scala and C#.</p>
+
+<p><a href="https://www.swig.org/" target="_blank" rel="noopener">SWIG (Simplified Wrapper and Interface Generator)</a> is a tool that reads interface definitions and generates the glue code required for high-level languages to call C/C++ code. In practice for QuantLib, it acts as a translator between C++ types and Python objects in our example. <strong>That is why users can often install and consume QuantLib from Python with <code class="language-plaintext highlighter-rouge">pip</code>, while still relying on the C++ core under the hood</strong>. Below a brief plog showing the flow of code construction and communication.</p>
+
+<pre><code class="language-mermaid">flowchart RL
+  U[Quant Developer]
+
+  subgraph PyLayer[Python Layer]
+    P1[Research notebooks]
+    P2[Trading and risk scripts]
+    P3[pip package QuantLib]
+  end
+
+  subgraph BindLayer["Binding Layer (SWIG)"]
+    S1[SWIG interface files .i]
+    S2[Generated wrapper code]
+    S3[Python extension module]
+  end
+
+  subgraph CoreLayer["QuantLib (C++ Core)"]
+    C1[Instruments and cashflows]
+    C2[Term structures and models]
+    C3[Pricing engines and solvers]
+    C4["Shared Library (_Quantlib.*.so)"]
+  end
+
+  U --&gt; P1
+  U --&gt; P2
+  P1 --&gt; P3
+  P2 --&gt; P3
+
+  P3 --&gt; S3
+  S1 --&gt; S2 --&gt; S3
+
+  C1 --&gt; C4
+  C2 --&gt; C4
+  C3 --&gt; C4
+  C4 --&gt; S3
+
+  S3 --&gt; P1
+  S3 --&gt; P2
+
+  classDef user fill:#2d1e46,stroke:#c8a8ff,stroke-width:2px,color:#f5ecff;
+  classDef py fill:#12324a,stroke:#8fd3ff,stroke-width:2px,color:#eaf7ff;
+  classDef bind fill:#2b3a1b,stroke:#aeea86,stroke-width:2px,color:#f2ffe8;
+  classDef core fill:#4a2a18,stroke:#ffbe8b,stroke-width:2px,color:#fff2e8;
+  classDef core_lib fill:#F54927,stroke:#F52800,stroke-width:2px,color:#fff2e8;
+
+  class U user;
+  class P1,P2,P3 py;
+  class S1,S2,S3 bind;
+  class C1,C2,C3 core;
+  class C4 core_lib;
+</code></pre>
+
+<p>The most important idea in this diagram is the round-trip loop: Python code calls into wrapped interfaces, those interfaces execute C++ QuantLib logic, and results come back to Python for analysis and orchestration. Performance-critical logic stays in C++, while productivity and experimentation remain in Python.</p>
+
+<h2 id="the-evidence">The Evidence</h2>
+
+<p>Checking this architecture seems to be easy in Python layer, reason why I would suggest to you to install QuantLib in python, for instance using <a href="https://pypi.org/project/QuantLib/" target="_blank" rel="noopener"><code class="language-plaintext highlighter-rouge">pip</code></a>, as shown below.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">pip install QuantLib
+</span></code></pre></div></div>
+
+<p>Then start a python instance and type the following lines.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="n">QuantLib</span> <span class="k">as</span> <span class="n">ql</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ql</span><span class="p">.</span><span class="n">__file__</span>
+</code></pre></div></div>
+
+<p>This displays the location of the root module in your machine, like <code class="language-plaintext highlighter-rouge">/.../python3.13/site-packages/QuantLib/QuantLib.py</code>. You can remove <code class="language-plaintext highlighter-rouge">/QuantLib.py</code> from the string and you’ll get the path folder where the library is installed. Thus, the purpose is to check the content of the library just installed. You’ll see a directory tree like this below.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">├── __init__.py
+├── __pycache__
+│   ├── __init__.cpython-313.pyc
+│   └── QuantLib.cpython-313.pyc
+├── _QuantLib.abi3.so
+└── QuantLib.py
+</span></code></pre></div></div>
+
+<p>The shared library <code class="language-plaintext highlighter-rouge">_QuantLib.abi3.so</code> can be easily identified, together with the file that supports the pythonic definitions, for those objects available in the shared library. But don’t worry if you are curious and you see the very large <code class="language-plaintext highlighter-rouge">QuantLib.py</code> file. Fortunately, that’s the type of files SWIG helps to built by means the <code class="language-plaintext highlighter-rouge">*.i</code> interface files.</p>
+
+<p>Hope this has convinced you of the architecture from the Python perspective, then lets start the journey from the core.</p>
+
+<h1 id="c-core">C++ Core</h1>
+
+<p>Unlike the previous post <a href="https://cristian-quintero.kruk-ai.com/blog/2025/08/10/quantlib-setup" target="_blank" rel="noopener">installing QuantLib</a>, this occasion the post is focused on <strong>debugging the library</strong>. Thereby, before jumping into the setup details, it is useful to visualize what really happens when C++ code is compiled. The pipeline is deterministic:</p>
+
+<ol>
+  <li>the <strong>preprocessor</strong> expands directives and headers,</li>
+  <li>the <strong>compiler</strong> translates units into assembly,</li>
+  <li>the <strong>assembler</strong> emits object files, and</li>
+  <li>the <strong>linker</strong> resolves symbols across objects and libraries to produce the final binary.</li>
+</ol>
+
+<pre><code class="language-mermaid">flowchart TB
+  subgraph Inputs[Source Inputs]
+    S1[main.cpp]
+    S2[pricing_engine.cpp]
+    H1[quantlib headers .hpp]
+    H2[project headers .hpp]
+  end
+
+  subgraph PP[1. Preprocessor]
+    P1[Expand #include]
+    P2[Expand #define]
+    P3[Conditional blocks #if #ifdef]
+    TU["Preprocessed translation units (.ii)"]
+  end
+
+  subgraph C[2. Compiler]
+    C1[Parse and type-check]
+    C2[Template instantiation]
+    C3[Optimization level O0 in Debug]
+    ASM["Assembly files (.s)"]
+  end
+
+  subgraph A[3. Assembler]
+    A1[Encode instructions]
+    A2[Generate relocation entries]
+    OBJ["Object files (.o)"]
+  end
+
+  subgraph L[4. Linker]
+    L1[Resolve external symbols]
+    L2[Merge sections text data bss]
+    L3[Bind shared libs and static libs]
+    OUT["Executable or shared library (.so or .dll)"]
+  end
+
+  subgraph DebugArtifacts[Debug Artifacts]
+    D1[DWARF debug info -g]
+    D2[Line mapping source to machine code]
+    D3[Symbol tables for gdb lldb]
+  end
+
+  S1 --&gt; P1
+  S2 --&gt; P1
+  H1 --&gt; P1
+  H2 --&gt; P1
+
+  P1 --&gt; P2 --&gt; P3 --&gt; TU
+  TU --&gt; C1 --&gt; C2 --&gt; C3 --&gt; ASM
+  ASM --&gt; A1 --&gt; A2 --&gt; OBJ
+  OBJ --&gt; L1 --&gt; L2 --&gt; L3 --&gt; OUT
+
+  D1 --&gt; L
+  D2 --&gt; L
+  D3 --&gt; L
+
+  classDef inputs fill:#1f2a44,stroke:#8fb8ff,stroke-width:2px,color:#eef4ff;
+  classDef stage fill:#20331e,stroke:#9ee38f,stroke-width:2px,color:#ecffe7;
+  classDef artifact fill:#3a2415,stroke:#ffc081,stroke-width:2px,color:#fff1e2;
+  classDef debug fill:#3a1e35,stroke:#ff9fd8,stroke-width:2px,color:#ffeefe;
+
+  class S1,S2,H1,H2 inputs;
+  class P1,P2,P3,C1,C2,C3,A1,A2,L1,L2,L3 stage;
+  class TU,ASM,OBJ,OUT artifact;
+  class D1,D2,D3 debug;
+</code></pre>
+
+<p>The key practical idea is this: when you compile with debug flags, the final artifact is not only machine code. It also carries metadata that maps execution back to your source files, so breakpoints, stack traces, and variable inspection become meaningful.</p>
+
+<h2 id="why-debug-mode-for-quantlib">Why Debug mode for QuantLib?</h2>
+
+<p>Release builds are great for benchmarks and production since they’re lean and fast. But when you’re in the thick of R&amp;D (Research and Development), they’re like debugging with one eye closed. <strong>A debug build, on the other hand, gives you full visibility into what’s happening under the hood</strong>.</p>
+
+<p>Imagine you’re building a custom pricing model and something is not behaving as expected. With debug symbols in place, you can step through your code, watch object lifetimes unfold, and inspect intermediate values as they flow through your pricing paths. You can validate your assumptions about how your custom extensions interact with QuantLib’s internals, catch logic bugs <em>before</em> they cascade into production, and verify that your SWIG bindings are actually exporting what you think they are.</p>
+
+<p>Yes, debug builds are slower. But that transparency is worth every millisecond when you’re trying to understand what went wrong, or worse, when you’re not even sure if something is wrong yet.</p>
+
+<h2 id="1-build-quantlib-in-debug-mode">1. Build QuantLib in Debug mode</h2>
+
+<p>The first step is compiling and installing a debug copy of QuantLib into a dedicated folder. Keeping a separate prefix avoids collisions with your existing release install. First create a folder in an accessible folder within your computer. Avoid creating it within paths in Cloud folders like OneDrive, GoogleSites. This example will use the folder <code class="language-plaintext highlighter-rouge">/quantlib-debug-install</code> located at <code class="language-plaintext highlighter-rouge">$HOME</code> level in Linux. Similar analogy can be applied in Windows win <code class="language-plaintext highlighter-rouge">C:/users/&lt;your-user&gt;</code>. Then the commands below can be executed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1) Clone (or reuse) QuantLib source</span>
+<span class="nb">cd</span> <span class="nv">$HOME</span>/GIT
+git clone https://github.com/lballabio/QuantLib.git
+<span class="nb">cd </span>QuantLib
+
+<span class="c"># 2) Configure a debug build directory</span>
+cmake <span class="nt">-S</span> <span class="nb">.</span> <span class="nt">-B</span> build <span class="se">\</span>
+  <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Debug <span class="se">\</span>
+  <span class="nt">-DBUILD_SHARED_LIBS</span><span class="o">=</span>ON <span class="se">\</span>
+  <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="nv">$HOME</span>/quantlib-debug-install
+
+<span class="c"># 2) [Alternative] Configure a debug build directory when Boost is in your VCPKG package manager</span>
+cmake <span class="nt">-S</span> <span class="nb">.</span> <span class="nt">-B</span> build
+  <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Debug
+  <span class="nt">-DCMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>/&lt;path-to-vcpkg&gt;/vcpkg/scripts/buildsystems/vcpkg.cmake
+  <span class="nt">-DCMAKE_CXX_FLAGS_DEBUG</span><span class="o">=</span><span class="s2">"-g -save-temps=obj"</span>
+  <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="nv">$HOME</span>/quantlib-debug-install
+
+<span class="c"># 3) Compile</span>
+cmake <span class="nt">--build</span> build <span class="nt">-j</span><span class="si">$(</span><span class="nb">nproc</span><span class="si">)</span>
+
+<span class="c"># 4) Install</span>
+cmake <span class="nt">--install</span> build
+</code></pre></div></div>
+
+<h3 id="commands-explanation">Commands Explanation</h3>
+
+<p>Below the step by step description of commans above.</p>
+
+<h4 id="step-1-clone-or-reuse-quantlib-source">Step 1. Clone (or reuse) QuantLib source</h4>
+<p>This step retrieves the full QuantLib source tree from the official repository and places your terminal inside the project root. Practically, this gives you access to the top-level <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> and all C++ sources that will be configured and compiled in the next steps. If you already have a local clone, you can reuse it and only update it as needed.</p>
+
+<h4 id="step-2-configure-the-build-directory">Step 2. Configure the build directory</h4>
+<p><strong>This step does not compile anything yet</strong>. Instead, it prepares the build system files inside the <code class="language-plaintext highlighter-rouge">build</code> folder. The parameter <code class="language-plaintext highlighter-rouge">-DCMAKE_BUILD_TYPE=Debug</code> enables debug-oriented compilation flags, <code class="language-plaintext highlighter-rouge">-DBUILD_SHARED_LIBS=ON</code> requests shared library generation, and <code class="language-plaintext highlighter-rouge">-DCMAKE_INSTALL_PREFIX=...</code> defines where headers and libraries will be installed. In the VCPKG alternative, <code class="language-plaintext highlighter-rouge">-DCMAKE_TOOLCHAIN_FILE</code> tells CMake where to resolve dependencies from VCPKG (i.e., <a href="https://www.boost.org/" target="_blank" rel="noopener">Boost</a>), and <code class="language-plaintext highlighter-rouge">-DCMAKE_CXX_FLAGS_DEBUG="-g -save-temps=obj"</code> keeps debug symbols and intermediate artifacts for inspection.</p>
+
+<p>To check any flag and/or variable used during compilation/installation, such as <code class="language-plaintext highlighter-rouge">CMAKE_INSTALL_PREFIX</code>, you can check its value in <code class="language-plaintext highlighter-rouge">/build/CMakeCache.txt</code> file. This file is created once the command is run. The value of this variable must coincide with the folder we have created for debuging purpose, namely, <code class="language-plaintext highlighter-rouge">CMAKE_INSTALL_PREFIX:PATH=/&lt;path-to-your-home&gt;/quantlib-debug-install</code>.</p>
+
+<p><a id="step-3-compile"></a></p>
+<h4 id="step-3-compile">Step 3. Compile</h4>
+<p>This step runs the actual compilation process by invoking the generator configured in the previous step (for example Makefiles or Ninja). <code class="language-plaintext highlighter-rouge">cmake --build build</code> compiles QuantLib targets, while <code class="language-plaintext highlighter-rouge">-j$(nproc)</code> uses all available CPU cores to reduce total build time. At this stage you should expect object files, dependency files, and the resulting QuantLib shared library to be produced under the build tree.</p>
+
+<p>It is the most time consuming step, as it will compile all the C++ codes leveraged in parallel processes. In this case, used as a reference, the compilation took 15 minutes. This stage creates all the artifacts by c++ file, listed in <a href="#generated-artifacts">below in Generated Artifacts</a>. At this stage, all the artifacts are stored in <code class="language-plaintext highlighter-rouge">/build</code> folder, <strong>but not installed yet</strong>.</p>
+
+<h4 id="step-4-install">Step 4. Install</h4>
+<p>This step copies the build outputs from the build tree into the installation prefix defined earlier. In practice, headers go to <code class="language-plaintext highlighter-rouge">include</code>, libraries go to <code class="language-plaintext highlighter-rouge">lib</code>, and any additional artifacts are placed in their corresponding install folders. Using <code class="language-plaintext highlighter-rouge">sudo</code> may be required depending on target path permissions, but if your prefix is under <code class="language-plaintext highlighter-rouge">$HOME</code> you can usually install without elevated privileges.</p>
+
+<p>At this stage, three folders should have been created within <code class="language-plaintext highlighter-rouge">/quantlib-debug-install</code> folder. They are described below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Folder</th>
+      <th>What it contains</th>
+      <th>Why it matters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">bin</code></td>
+      <td>Executable helper tools installed by the project/build system (if any are generated for your platform/configuration).</td>
+      <td>Useful when QuantLib or related tooling exposes command-line utilities. <strong>This includes the exposure to SWIG interfaces compilation.</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">include</code></td>
+      <td>Public header files, mainly under <code class="language-plaintext highlighter-rouge">include/ql/...</code>, used by external C++ projects at compile time.</td>
+      <td>Required to compile your own C++ code that includes QuantLib headers.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lib</code></td>
+      <td>Compiled libraries such as <code class="language-plaintext highlighter-rouge">libQuantLib.so</code> (or platform equivalent), plus related library metadata/symlinks.</td>
+      <td>Required at link and runtime so your applications can call QuantLib implementations. <strong>This will contain the debug symbols</strong>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Execute to validate quickly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nv">$HOME</span>/quantlib-debug-install
+<span class="nb">ls</span> <span class="nv">$HOME</span>/quantlib-debug-install/lib
+</code></pre></div></div>
+
+<h4 id="copying-binaries">Copying Binaries</h4>
+<p>On Unix-like operating systems, you need to copy the binaries generated in <code class="language-plaintext highlighter-rouge">/quantlib-debug-install/bin</code> folder to the system folder <code class="language-plaintext highlighter-rouge">/usr/local/lib</code>. This step is <strong>critical</strong> because it allows the system and build tools to properly locate and link against the QuantLib libraries. More importantly, <strong>this enables QuantLib-SWIG to successfully compile the Python library</strong>, as the SWIG build process needs to resolve the QuantLib dependencies during the Python extension module generation.</p>
+
+<p>To copy the libraries and binaries:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo cp</span> <span class="nt">-r</span> <span class="nv">$HOME</span>/quantlib-debug-install/bin/<span class="k">*</span> /usr/local/bin/
+<span class="nb">sudo cp</span> <span class="nt">-r</span> <span class="nv">$HOME</span>/quantlib-debug-install/include/<span class="k">*</span> /usr/local/include/
+<span class="nb">sudo </span>ldconfig  <span class="c"># Update the system's library cache</span>
+</code></pre></div></div>
+
+<p>This ensures that when QuantLib-SWIG attempts to build the Python bindings, it can find the necessary <code class="language-plaintext highlighter-rouge">.so</code> files and headers without additional configuration, allowing the Python extension modules to compile and link correctly.</p>
+
+<p><a id="generated-artifacts"></a></p>
+<h3 id="generated-artifacts">Generated Artifacts</h3>
+
+<p>The installation creates intermediate files in <code class="language-plaintext highlighter-rouge">\build</code> folder, like those ones with extension <code class="language-plaintext highlighter-rouge">.ii</code>, <code class="language-plaintext highlighter-rouge">.o</code>, <code class="language-plaintext highlighter-rouge">.s</code>, and <code class="language-plaintext highlighter-rouge">.o.d</code>, as described in Step 3. Each file has a purpose, as described in table below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>File extension</th>
+      <th>Build stage</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.ii</code></td>
+      <td>Preprocessing</td>
+      <td>Preprocessed C++ source after expanding <code class="language-plaintext highlighter-rouge">#include</code>, macros, and conditional directives. Useful to inspect what the compiler really receives.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.s</code></td>
+      <td>Compilation</td>
+      <td>Assembly output generated by the compiler from the translation unit. Useful to inspect low-level code generation.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.o</code></td>
+      <td>Assembling</td>
+      <td>Object file containing machine code and symbol/relocation info for one translation unit, later consumed by the linker.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.o.d</code></td>
+      <td>Dependency generation</td>
+      <td>Make-style dependency file listing headers used by the source file, so incremental builds know what must be rebuilt when headers change.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Back to <a href="#step-3-compile">Step 3. Compile</a>.</p>
+
+<h3 id="install_manifesttxt-and-a-proper-uninstall">install_manifest.txt and a proper uninstall</h3>
+
+<p>After running <code class="language-plaintext highlighter-rouge">cmake --install build</code>, CMake writes a file named <code class="language-plaintext highlighter-rouge">install_manifest.txt</code> inside your build directory (for example <code class="language-plaintext highlighter-rouge">build/install_manifest.txt</code>). This file contains one installed path per line and acts as the authoritative list of what the install step copied into your system or install prefix.</p>
+
+<p>Because CMake does not create a universal <code class="language-plaintext highlighter-rouge">cmake --uninstall</code> command by default, the safest uninstall approach <strong>(If required)</strong> is to use this manifest as input. Always preview first, then remove, not both at same time.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Preview what will be removed:</span>
+<span class="nb">sudo </span>xargs <span class="nt">-a</span> /build/install_manifest.txt <span class="nt">-I</span><span class="o">{}</span> <span class="nb">echo rm</span> <span class="nt">-v</span> <span class="s2">"{}"</span>
+
+<span class="c"># 2. Remove installed files:</span>
+<span class="nb">sudo </span>xargs <span class="nt">-a</span> /build/install_manifest.txt <span class="nb">rm</span> <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p>Run these commands from the same build folder where <code class="language-plaintext highlighter-rouge">install_manifest.txt</code> exists, or provide the full path to the manifest file.</p>
+
+<h1 id="3-swig-and-quantlib-swig">3. SWIG and QuantLib-SWIG</h1>
+
+<p>Now comes the Python bridge. Before diving into the build, it’s important to understand what SWIG does and why it’s essential for QuantLib’s Python ecosystem.</p>
+
+<h2 id="what-is-swig">What is SWIG?</h2>
+
+<p><strong>SWIG</strong> (Simplified Wrapper and Interface Generator) is a tool that automatically generates language bindings for C++ libraries. QuantLib is a large, mature C++ library with hundreds of classes, enums, and functions. Writing Python bindings manually would be impractical and error-prone. SWIG solves this by:</p>
+
+<ul>
+  <li><strong>Reading C++ headers and interface files</strong> (<code class="language-plaintext highlighter-rouge">.i</code> or <code class="language-plaintext highlighter-rouge">.hpp</code>) that describe the library’s API</li>
+  <li><strong>Generating wrapper code</strong> that translates Python function calls into C++ calls</li>
+  <li><strong>Creating compiled extension modules</strong> (<code class="language-plaintext highlighter-rouge">.so</code> files on Linux) that Python can import</li>
+  <li><strong>Handling type conversions</strong> between Python and C++ (e.g., Python floats to C++ doubles)</li>
+</ul>
+
+<h2 id="why-swig-for-quantlib">Why SWIG for QuantLib?</h2>
+
+<p>QuantLib’s Python module (accessible via <code class="language-plaintext highlighter-rouge">import QuantLib</code>) is <strong>entirely built by SWIG</strong>. Without it we could only use QuantLib from C++ applications, therefore there would be no <code class="language-plaintext highlighter-rouge">QuantLib.EuropeanOption</code>, <code class="language-plaintext highlighter-rouge">QuantLib.BlackScholesProcess</code>, or other Python classes.</p>
+
+<p><strong>SWIG bridges the 20-year investment in C++ financial models into the Python ecosystem</strong>, allowing quants to prototype and backtest strategies in Python while leveraging a battle-tested C++ engine. Below a brief summary of the process followed to create the Python wheel, eventually installed via <a href="https://pypi.org/project/QuantLib/" target="_blank" rel="noopener">PIP</a>.</p>
+
+<pre><code class="language-mermaid">flowchart TB
+  subgraph QLCore[QuantLib C++ Debug Install]
+    QH[Headers include/ql/*.hpp]
+    QL[Library lib/libQuantLib.so]
+    QCfg[quantlib-config in bin/]
+  end
+
+  subgraph SWIGSpec[QuantLib-SWIG Interface Layer]
+    IRoot[SWIG/*.i root modules]
+    IComp[Component *.i includes]
+    IGlue[Typemaps and glue directives]
+  end
+
+  subgraph BuildSteps[Wrapper Build Pipeline]
+    Cfg[./configure in Python/]
+    SWIGRun[swig reads .i and C++ headers]
+    WrapCpp[Generated C++ wrapper source\nQuantLib_wrap.cpp]
+    Compile[Compile wrapper C++]
+    Link[Link extension against libQuantLib.so]
+  end
+
+  subgraph PyArtifacts[Python Package Artifacts]
+    Ext[_QuantLib*.so extension module]
+    PyFile[QuantLib.py high-level API]
+    Init[__init__.py package entry]
+    Meta[dist-info metadata\nMETADATA WHEEL RECORD]
+  end
+
+  subgraph WheelOut[Wheel Output]
+    Whl[QuantLib-&lt;ver&gt;-*.whl]
+  end
+
+  IRoot --&gt; IComp --&gt; IGlue
+  IGlue --&gt; SWIGRun
+  QH --&gt; SWIGRun
+  QCfg --&gt; Cfg --&gt; SWIGRun
+  SWIGRun --&gt; WrapCpp --&gt; Compile --&gt; Link
+  QL --&gt; Link
+  Link --&gt; Ext
+  SWIGRun --&gt; PyFile
+  Ext --&gt; Whl
+  PyFile --&gt; Whl
+  Init --&gt; Whl
+  Meta --&gt; Whl
+
+  classDef core fill:#1f2a44,stroke:#8fb8ff,stroke-width:2px,color:#eef4ff;
+  classDef iface fill:#25351f,stroke:#9ee38f,stroke-width:2px,color:#ecffe7;
+  classDef build fill:#3f2d1c,stroke:#ffc081,stroke-width:2px,color:#fff1e2;
+  classDef py fill:#2f1f3d,stroke:#d8a8ff,stroke-width:2px,color:#f7edff;
+  classDef out fill:#4a1f1f,stroke:#ff9b9b,stroke-width:2px,color:#fff0f0;
+
+  class QH,QL,QCfg core;
+  class IRoot,IComp,IGlue iface;
+  class Cfg,SWIGRun,WrapCpp,Compile,Link build;
+  class Ext,PyFile,Init,Meta py;
+  class Whl out;
+</code></pre>
+
+<blockquote>
+  <p><strong>📌 What are <code class="language-plaintext highlighter-rouge">.i</code> files?</strong></p>
+
+  <p>SWIG interface files (<code class="language-plaintext highlighter-rouge">.i</code> files) are text files that specify <strong>which C++ classes, functions, and types</strong> should be exposed to Python. They act as a “contract” between C++ and Python:</p>
+  <ul>
+    <li>They tell SWIG <em>what to wrap</em> <strong>(not everything in the C++ library is wrapped)</strong></li>
+    <li>They define how C++ types map to Python equivalents (e.g., <code class="language-plaintext highlighter-rouge">QuantLib::Rate</code> → <code class="language-plaintext highlighter-rouge">float</code>)</li>
+    <li>They can customize behavior with typemaps, directors, and docstrings</li>
+    <li>QuantLib-SWIG uses <code class="language-plaintext highlighter-rouge">.i</code> files in the <code class="language-plaintext highlighter-rouge">SWIG/</code> subfolder to describe the entire QuantLib API</li>
+  </ul>
+
+  <p>During the wrapper build, SWIG reads these <code class="language-plaintext highlighter-rouge">.i</code> files and generates intermediate C++ wrapper code, which is then compiled into <code class="language-plaintext highlighter-rouge">.so</code> shared libraries that Python can import.</p>
+</blockquote>
+
+<h2 id="building-quantlib-swig-in-debug-mode">Building QuantLib-SWIG in Debug mode</h2>
+
+<p>The key rule is consistency. Thus, SWIG wrappers should be generated and linked against the same QuantLib install (headers + library) that you compiled in debug mode when creating the <code class="language-plaintext highlighter-rouge">/quantlib-debug-install</code> folder and its content, since installation must be discoverable during SWIG wrapper build.</p>
+
+<p><strong>The QuantLib-SWIG repository root is not CMake-based (no root <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>), so the wrapper build should follow its Autotools/Python flow</strong>. In order to have an isolated environment for QuantLib testing and debug, I have created a python environment, and suggest the reader to do the same. The virtual environment has two purposes: isolation for <strong>wheels</strong> creation, and isolated testing enfironment, in which the created wheel in this step will be installed. For the sake of this example, I’ve created it in <code class="language-plaintext highlighter-rouge">/&lt;path-to-your-venv-folder&gt;/test_debug_quantlib</code> path. Clearly the name of the venv is <code class="language-plaintext highlighter-rouge">test_debug_quantlib</code>.</p>
+
+<p>As we’re interested only on python codes now, lets dissable any other supported programming language, by executing the command below. This requires the virtual environment <code class="language-plaintext highlighter-rouge">test_debug_quantlib</code> is activated. This step will create a <code class="language-plaintext highlighter-rouge">MakeFile</code> within <code class="language-plaintext highlighter-rouge">QuantLib-SWIG/Python</code> folder, with the configuration for creating the wrapper.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./configure <span class="nt">--disable-csharp</span> <span class="nt">--disable-java</span> <span class="nt">--disable-r</span> <span class="nt">--disable-scala</span> <span class="nv">PYTHON</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span>which python<span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>If you get into the <code class="language-plaintext highlighter-rouge">MakeFile</code> just created, there is a key value which determines the environment in which the python wheel will be built. It’s <code class="language-plaintext highlighter-rouge">PYTHON = /&lt;path-to-your-venv-folder&gt;/test_debug_quantlib/bin/python</code>. Once we’ve told QuantLib-SWIG we are interested only in Python bindings, we can proceed with the wrapper generation, by executing the commands below.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Firstly, clone the official repository.</span>
+<span class="nb">cd</span> <span class="nv">$HOME</span>/GIT
+git clone https://github.com/lballabio/QuantLib-SWIG.git
+<span class="nb">cd </span>QuantLib-SWIG
+
+<span class="c"># 1) Activate your VENV</span>
+<span class="nb">source</span> /&lt;path-to-your-venv-folder&gt;/test_debug_quantlib/bin/activate
+
+<span class="c"># 1.1) Install build library</span>
+pip <span class="nb">install </span>build
+
+<span class="c"># 2) Setting the debug flags on, and Boost library path for letting the linker to search</span>
+<span class="nb">export </span><span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">"-g3 -O0 -fno-omit-frame-pointer"</span>
+<span class="nb">export </span><span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">"-g"</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/quantlib-debug-install/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">VCPKG_BOOST_INC</span><span class="o">=</span>/&lt;path-to-vcpkg-folder&gt;/vcpkg/installed/x64-linux/include
+<span class="c"># export VCPKG_BOOST_INC=/home/donnetoo/GIT/vcpkg/installed/x64-linux/include</span>
+
+<span class="c"># 3) Force Make to use the python VENV (being in the VENV activated)</span>
+<span class="c"># This avoids to explicitely tell the linker where to look for the shared libraries by means LD_LIBRARY_PATH.</span>
+<span class="c"># export LD_LIBRARY_PATH=$HOME/quantlib-debug-install/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH} # &lt;&lt; ONLY if working outside the VENV [NOT TESTED]</span>
+make <span class="nt">-C</span> Python <span class="nv">PYTHON</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span>python <span class="nt">-c</span> <span class="s1">'import sys; print(sys.executable)'</span><span class="si">)</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">"-g3 -O0 -fno-omit-frame-pointer -I</span><span class="nv">$VCPKG_BOOST_INC</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">"-Wl,-rpath,</span><span class="nv">$HOME</span><span class="s2">/quantlib-debug-install/lib"</span>
+
+<span class="c"># 3.1) Force Make to use the VENV [Optional] (being in the VENV activated) - Linker Search Paths</span>
+make <span class="nt">-C</span> Python <span class="nv">PYTHON</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span>python <span class="nt">-c</span> <span class="s1">'import sys; print(sys.executable)'</span><span class="si">)</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">"-g3 -O0 -fno-omit-frame-pointer -I</span><span class="nv">$VCPKG_BOOST_INC</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">"-L/&lt;path-to-vcpkg-folder&gt;/vcpkg/installed/x64-linux/lib -Wl,-rpath,/&lt;path-to-vcpkg-folder&gt;/vcpkg/installed/x64-linux/lib"</span>
+</code></pre></div></div>
+
+<p>For debugging, the key in this step lies in the <code class="language-plaintext highlighter-rouge">CXXFLAGS</code>. Each is described in table below for technical references. Without this flags, the the generation of the wrapper cannot understand the codes we are generating are aimed to debug, namely, would not include debug symbols.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Flag</th>
+      <th>Purpose</th>
+      <th>Practical effect in this workflow</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-g3</code></td>
+      <td>Emit rich debug symbols.</td>
+      <td>Enables detailed source-level debugging in tools such as GDB, including macro-level debug info.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-O0</code></td>
+      <td>Disable compiler optimizations.</td>
+      <td>Preserves source-like execution flow, making breakpoints, stepping, and variable inspection more reliable.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-fno-omit-frame-pointer</code></td>
+      <td>Keep frame pointers in generated code.</td>
+      <td>Improves call stack readability and backtrace quality during debugging/profiling.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-I$VCPKG_BOOST_INC</code></td>
+      <td>Add an extra header include path.</td>
+      <td>Allows the compiler to resolve Boost headers from your VCPKG installation.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For successful linkage, <code class="language-plaintext highlighter-rouge">LDFLAGS</code> is equally important because it controls where the linker looks for libraries during build time and which runtime lookup paths are embedded into the generated extension module.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>LDFLAGS variant</th>
+      <th>What it does</th>
+      <th>Practical effect in this workflow</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-Wl,-rpath,$HOME/quantlib-debug-install/lib</code></td>
+      <td>Passes an <code class="language-plaintext highlighter-rouge">rpath</code> directive to the linker (<code class="language-plaintext highlighter-rouge">-Wl,</code> forwards options to <code class="language-plaintext highlighter-rouge">ld</code>) so the produced Python extension records <code class="language-plaintext highlighter-rouge">$HOME/quantlib-debug-install/lib</code> as a runtime library search path.</td>
+      <td>Helps <code class="language-plaintext highlighter-rouge">_QuantLib*.so</code> find <code class="language-plaintext highlighter-rouge">libQuantLib.so</code> from your debug install at import time, reducing dependency on manually exporting <code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-L/&lt;path-to-vcpkg-folder&gt;/vcpkg/installed/x64-linux/lib -Wl,-rpath,/&lt;path-to-vcpkg-folder&gt;/vcpkg/installed/x64-linux/lib</code></td>
+      <td><code class="language-plaintext highlighter-rouge">-L...</code> adds a link-time search directory for resolving dependent libraries, while the <code class="language-plaintext highlighter-rouge">rpath</code> part embeds that same directory for runtime resolution.</td>
+      <td>Ensures dependencies provided by VCPKG can be found both when linking and later when Python loads the extension.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>At this stage, the commands just executed will create two folders within <code class="language-plaintext highlighter-rouge">QuantLib-SWIG/Python</code>: <code class="language-plaintext highlighter-rouge">/build</code> and <code class="language-plaintext highlighter-rouge">/dist</code>. In practice, <code class="language-plaintext highlighter-rouge">build</code> is the working area for intermediate artifacts created during compilation, while <code class="language-plaintext highlighter-rouge">dist</code> is the delivery area for distributable packages.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Folder</th>
+      <th>Typical contents</th>
+      <th>Why it matters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/build</code></td>
+      <td>Temporary and intermediate artifacts such as generated wrapper C/C++ sources, object files, and packaging staging trees (for example <code class="language-plaintext highlighter-rouge">lib.*</code>, <code class="language-plaintext highlighter-rouge">temp.*</code>, <code class="language-plaintext highlighter-rouge">bdist.*</code>).</td>
+      <td>Useful for troubleshooting compile/link issues and checking what SWIG generated before packaging.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/dist</code></td>
+      <td>Final distributable artifacts, typically wheel files like <code class="language-plaintext highlighter-rouge">QuantLib-&lt;version&gt;-*.whl</code> (and sometimes source archives, depending on the invoked packaging command).</td>
+      <td>This is the folder you use to install or share the package artifact.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Voila!!, habemus python wheel with debug symbols!</strong></p>
+
+<h1 id="the-python-thing">The Python thing</h1>
+<p>At this point, you have built QuantLib and its Python bindings with debug symbols, allowing you to trace execution from Python into the C++ implementation. The next step is to install the generated wheel in your Python environment and inspect the files that connect the two layers.</p>
+
+<h2 id="installing-the-just-created-wheel">Installing the just created Wheel</h2>
+
+<p>As said before, the wheel object, which is used to install libraries in python environment is created within the <code class="language-plaintext highlighter-rouge">/build</code> folder. Then the next step is to install it in our testing and debugging environment with the command below (In my case it has generated the wheel with name <em>quantlib-1.43rc0-cp39-abi3-linux_x86_64.whl</em>).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>Python/dist/quantlib-1.43rc0-cp39-abi3-linux_x86_64.whl
+</code></pre></div></div>
+
+<p>Once installed, you can check it is correctly installed by listing the libraries instaled in the testing and debugging environment with</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip list
+</code></pre></div></div>
+
+<p>You should see something like the prompt below, in which it’s possible to identify QuantLib version 1.43rc0 is installed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>└─<span class="nv">$ </span>pip list              
+Package         Version
+<span class="nt">---------------</span> <span class="nt">-------</span>
+build           1.5.0
+packaging       26.2
+pip             26.1.2
+pyproject_hooks 1.2.0
+QuantLib        1.43rc0
+</code></pre></div></div>
+
+<h2 id="lets-dive-into-the-installation">Let’s dive into the installation</h2>
+<p>Python libraries installed in virtual environments are located within a subfolder named <code class="language-plaintext highlighter-rouge">&lt;path-to-your-virtual-env&gt;/test_debug_quantlib/lib/python3.13/site-packages/</code>. This allows to take a look on its content. Thus, you should normally see <code class="language-plaintext highlighter-rouge">_QuantLib*.so</code> and <code class="language-plaintext highlighter-rouge">QuantLib.py</code> within the library <code class="language-plaintext highlighter-rouge">/QuantLib</code>, which are the outputs of the SWIG wrapper pipeline. Easy to check.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>└─<span class="nv">$ </span><span class="nb">ls</span> &lt;path-to-your-virtual-env&gt;/test_debug_quantlib/lib/python3.13/site-packages/QuantLib
+__init__.py  __pycache__  _QuantLib.abi3.so  QuantLib.py
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">_QuantLib*.so</code> file corresponds to the shared library with C++ codes wrapped by SWIG, whereas <code class="language-plaintext highlighter-rouge">QuantLib.py</code> contains the pythond escriptors to the C++ codes. How we can infer that?. Pretty easy. LEt’s get back to the folder where you installed QuantLib-SWIG. During the wrapper generation command execution we said a folder named <code class="language-plaintext highlighter-rouge">/dist</code> was created. If you get back to that folder you’ll see something like the prompt below.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>└─<span class="nv">$ </span><span class="nb">ls </span>Python/build/lib.linux-x86_64-cpython-313/QuantLib 
+__init__.py  _QuantLib.abi3.so  QuantLib.py
+</code></pre></div></div>
+
+<p>Not for nothing are the same files wrapped in wheel files for distribution, and the same we can see in the <code class="language-plaintext highlighter-rouge">/site-package</code> folder.</p>
+
+<h1 id="point-your-c-test-project-to-the-debug-install">Point your C++ test project to the Debug install</h1>
+<p>Aimed to test whether all this effort really works, I want to present two cases below.</p>
+
+<h2 id="pure-c-test-project">Pure C++ test project</h2>
+<p>To keep this post focused, I moved the full end-to-end testing walkthrough to a dedicated article where the whole workflow is implemented around a <strong>European FX option</strong> in C++:</p>
+
+<p><a href="/blog/2026/07/05/debugging-european-fx-option-quantlib-vscode" target="_blank" rel="noopener">Debugging a European FX option in QuantLib C++ with VS Code</a></p>
+
+<p>That companion post includes a complete example with:</p>
+
+<ol>
+  <li>full <code class="language-plaintext highlighter-rouge">main.cpp</code> code (Garman-Kohlhagen setup in QuantLib),</li>
+  <li><code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> explicitly linked to <code class="language-plaintext highlighter-rouge">$HOME/quantlib-debug-install</code>,</li>
+  <li>VS Code <code class="language-plaintext highlighter-rouge">tasks.json</code> and <code class="language-plaintext highlighter-rouge">launch.json</code> configured for debug execution,</li>
+  <li>practical guidance on breakpoints, runtime linking, and symbol inspection.</li>
+</ol>
+
+<p>Use it as the validation template for this section: once that FX option runs and debugs correctly, your local QuantLib debug environment is correctly wired.</p>
+
+<h2 id="combined-python-and-c-debug">Combined Python and C++ Debug</h2>
+
+<p>The next step is to follow a Python pricing call into QuantLib’s C++ engine and back. The companion post <a href="/blog/2026/07/18/debugging-quantlib-python-cpp-vscode">Debugging QuantLib across Python and C++ in VS Code</a> starts with the VS Code configuration, introduces <code class="language-plaintext highlighter-rouge">test_debug.py</code>, and walks through the two-debugger handoff for initial pricing and repricing. It explains how to keep the breakpoint sequence intact by attaching both debuggers to the same process and selecting the appropriate session before stepping or continuing.</p>
+
+                </article>
+
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="https://craquinterogo.github.io/assets/js/jquery.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrolly.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrollex.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/skel.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="https://craquinterogo.github.io/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="https://craquinterogo.github.io/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
+
+
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          window.addEventListener('resize', updateProgress);
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── On-demand sidebars ──────────────────────────── */
+        var drawers = [];
+        function makeSidebarToggle(toggleId, sidebarId, overlayId, query) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+          var compact = window.matchMedia(query);
+
+          function setOpen(open, restoreFocus) {
+            sidebar.classList.toggle('active', open);
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            sidebar.inert = compact.matches && !open;
+            if (open) sidebar.querySelector('button, a').focus();
+            else if (restoreFocus) toggle.focus();
+          }
+
+          drawers.push(function () { setOpen(false, false); });
+          toggle.addEventListener('click', function () {
+            var open = !sidebar.classList.contains('active');
+            drawers.forEach(function (close) { close(); });
+            setOpen(open, !open);
+          });
+          overlay.addEventListener('click', function () { setOpen(false, true); });
+          sidebar.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && compact.matches) setOpen(false, true);
+          });
+          sidebar.addEventListener('click', function (event) {
+            if (compact.matches && event.target.closest('#toc-sidebar-nav a')) setOpen(false, true);
+          });
+          compact.addEventListener('change', function () { setOpen(false, false); });
+          setOpen(false, false);
+        }
+
+        makeSidebarToggle('sidebar-left-toggle', 'sidebar-left', 'sidebar-left-overlay', '(max-width: 1599px)');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay', '(max-width: 1199px)');
+
+        /* Keep wide technical content scrollable without widening the page. */
+        if (body) {
+          body.querySelectorAll('pre').forEach(function (pre) {
+            pre.tabIndex = 0;
+            pre.setAttribute('aria-label', 'Code sample');
+          });
+          body.querySelectorAll('table').forEach(function (table) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'post-table-scroll';
+            wrapper.tabIndex = 0;
+            wrapper.setAttribute('role', 'region');
+            wrapper.setAttribute('aria-label', 'Scrollable table');
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+          });
+        }
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            hdr.querySelector('.collapse-toggle').setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
+            }
+          });
+        });
+
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            var nums    = [0, 0, 0, 0];
+            var list = document.createElement('ul');
+            list.className = 'toc-list';
+            list.id = 'toc-heading-list';
+            var stack = [];
+            var branches = [];
+
+            function setBranchExpanded(branch, expanded) {
+              branch.children.hidden = !expanded;
+              branch.button.setAttribute('aria-expanded', String(expanded));
+              branch.button.setAttribute('aria-label', (expanded ? 'Collapse' : 'Expand') + ' subsections of ' + branch.text);
+            }
+
+            headings.forEach(function (h, index) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              if (h.firstChild && h.firstChild.nodeType === Node.TEXT_NODE) {
+                h.firstChild.textContent = h.firstChild.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
+              }
+              var number = document.createElement('span');
+              number.className = 'section-number';
+              number.textContent = numStr + '. ';
+              h.insertBefore(number, h.firstChild);
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              }
+              var item = document.createElement('li');
+              item.className = 'toc-level-' + (level + 1);
+              var link = document.createElement('a');
+              link.setAttribute('href', '#' + h.id);
+              var tocNumber = document.createElement('span');
+              tocNumber.className = 'toc-number';
+              tocNumber.textContent = numStr + '. ';
+              link.appendChild(tocNumber);
+              link.appendChild(document.createTextNode(rawText));
+              var row = document.createElement('div');
+              row.className = 'toc-entry';
+              row.appendChild(link);
+              item.appendChild(row);
+
+              while (stack.length && stack[stack.length - 1].level >= level) stack.pop();
+              var parent = stack[stack.length - 1];
+              if (parent && !parent.children) {
+                parent.children = document.createElement('ul');
+                parent.children.className = 'toc-list toc-children';
+                parent.children.id = 'toc-children-' + parent.index;
+                parent.button = document.createElement('button');
+                parent.button.type = 'button';
+                parent.button.className = 'toc-branch-toggle';
+                parent.button.setAttribute('aria-controls', parent.children.id);
+                var chevron = document.createElement('i');
+                chevron.className = 'fa fa-chevron-down';
+                chevron.setAttribute('aria-hidden', 'true');
+                parent.button.appendChild(chevron);
+                parent.row.insertBefore(parent.button, parent.row.firstChild);
+                parent.item.appendChild(parent.children);
+                branches.push(parent);
+                setBranchExpanded(parent, true);
+                parent.button.addEventListener('click', function () {
+                  setBranchExpanded(parent, parent.children.hidden);
+                  updateBulkControls();
+                });
+              }
+              (parent ? parent.children : list).appendChild(item);
+              stack.push({ level: level, index: index, item: item, row: row, text: rawText });
+            });
+
+            var expandAll;
+            var collapseAll;
+            function updateBulkControls() {
+              if (!expandAll) return;
+              expandAll.disabled = branches.every(function (branch) { return !branch.children.hidden; });
+              collapseAll.disabled = branches.every(function (branch) { return branch.children.hidden; });
+            }
+
+            if (branches.length) {
+              var controls = document.createElement('div');
+              controls.className = 'toc-controls';
+              controls.setAttribute('role', 'group');
+              controls.setAttribute('aria-label', 'Table of contents branches');
+              expandAll = document.createElement('button');
+              collapseAll = document.createElement('button');
+              [expandAll, collapseAll].forEach(function (button, index) {
+                button.type = 'button';
+                button.textContent = index === 0 ? 'Expand all' : 'Collapse all';
+                button.setAttribute('aria-controls', list.id);
+                button.addEventListener('click', function () {
+                  branches.forEach(function (branch) { setBranchExpanded(branch, index === 0); });
+                  updateBulkControls();
+                });
+                controls.appendChild(button);
+              });
+              tocNav.appendChild(controls);
+              updateBulkControls();
+            }
+            tocNav.appendChild(list);
+            if (tocSect) tocSect.style.display = 'block';
+          } else {
+            if (tocSect) tocSect.style.display = 'none';
+            document.body.classList.add('has-no-toc');
+          }
+        }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                tocNav.querySelectorAll('.toc-entry').forEach(function (row) { row.removeAttribute('data-active-descendant'); });
+                var active = Array.prototype.find.call(tocLinks, function (link) { return link.getAttribute('href') === '#' + entry.target.id; });
+                if (active) {
+                  active.setAttribute('data-active', '');
+                  var ancestor = active.closest('li').parentElement.closest('li');
+                  while (ancestor) {
+                    ancestor.firstElementChild.setAttribute('data-active-descendant', '');
+                    ancestor = ancestor.parentElement.closest('li');
+                  }
+                }
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>

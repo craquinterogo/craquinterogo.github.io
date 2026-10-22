@@ -20,13 +20,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	
 	
-	<meta name="description" content="A practical guide to trading APIs, message formats, and session protocols: how their trade-offs affect execution quality, reliability, and P&amp;L." />
+	<meta name="description" content="JSON, Protobuf, and SBE explained through connectivity experiments with IBKR, eToro, Binance, and Kraken, with FIX as session-protocol context." />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="The plumbing behind the trade: JSON, Protobuf, FIX, and SBE" />
-	<meta property="og:description" content="A practical guide to trading APIs, message formats, and session protocols: how their trade-offs affect execution quality, reliability, and P&amp;L." />
+	<meta property="og:description" content="JSON, Protobuf, and SBE explained through connectivity experiments with IBKR, eToro, Binance, and Kraken, with FIX as session-protocol context." />
 	<meta property="og:url" content="https://craquinterogo.github.io/blog/2026/10/19/trading-protocols-from-json-to-sbe" />
 	<meta name="twitter:title" content="The plumbing behind the trade: JSON, Protobuf, FIX, and SBE" />
-	<meta name="twitter:description" content="A practical guide to trading APIs, message formats, and session protocols: how their trade-offs affect execution quality, reliability, and P&amp;L." />
+	<meta name="twitter:description" content="JSON, Protobuf, and SBE explained through connectivity experiments with IBKR, eToro, Binance, and Kraken, with FIX as session-protocol context." />
 	
 	
 	<meta property="og:image" content="https://craquinterogo.github.io/assets/images/01_post_images/007_algorithmic_trading/trading-protocols-cover.png" />
@@ -283,6 +283,12 @@
                       
                         <span class="post-tag-pill">IBKR</span>
                       
+                        <span class="post-tag-pill">eToro</span>
+                      
+                        <span class="post-tag-pill">Binance</span>
+                      
+                        <span class="post-tag-pill">Kraken</span>
+                      
                         <span class="post-tag-pill">JSON</span>
                       
                         <span class="post-tag-pill">Protobuf</span>
@@ -310,7 +316,13 @@
 
                 <!-- Post body -->
                 <article class="post-body" id="post-body-content" aria-label="Article content">
-                  <p>A strategy can look wonderfully intelligent in a notebook. It recognizes a temporary mispricing, calculates a position, and decides to trade. Then it leaves the notebook and meets a less glamorous collection of problems: network connections, broker sessions, message formats, acknowledgments, and the occasional timeout.</p>
+                  <aside aria-label="Important financial disclaimer" style="border: 4px solid var(--c-gold, #d4af37); background-color: var(--c-bg-alt, #242424); color: var(--c-fg, #e8e8e8); padding: 1.25rem; margin: 0 0 2rem;">
+  <p style="font-size: 1.3em; margin-top: 0; color: var(--c-gold, #d4af37);"><strong style="color: inherit;">IMPORTANT: NOT INVESTMENT ADVICE OR A PLATFORM ENDORSEMENT</strong></p>
+  <p><strong>This post describes software-engineering experiments. It is not investment advice, an investment recommendation, or a suggestion to buy, sell, or trade any asset.</strong></p>
+  <p style="margin-bottom: 0;"><strong>It is also not a recommendation to invest through, open an account with, or use Interactive Brokers (IBKR), eToro, Binance, Kraken, or any other broker or exchange mentioned here.</strong> Naming a platform identifies an experimental interface, not an endorsement of its products, safety, suitability, or expected returns. Trading involves risk, including loss of capital.</p>
+</aside>
+
+<p>A strategy can look wonderfully intelligent in a notebook. It recognizes a temporary mispricing, calculates a position, and decides to trade. Then it leaves the notebook and meets a less glamorous collection of problems: network connections, broker sessions, message formats, acknowledgments, and the occasional timeout.</p>
 
 <p>The market does not fill a backtest. It fills an order that actually arrives, passes the relevant checks, and finds someone willing to take the other side.</p>
 
@@ -318,7 +330,45 @@
 
 <p>In my <a href="/blog/2026/10/11/from-ai-winters-to-transformers">recent AI history post</a>, the recurring lesson was that ideas and machinery have to fit each other. Here, the machinery is the conversation between a trading application, its broker, and the market.</p>
 
-<p>Let’s unpack <strong>JSON, Protocol Buffers, FIX, and SBE</strong>, then put WebSockets, gRPC, ITCH, and OUCH on the same map. The aim is not to crown the fanciest acronym. It is to choose an interface we can operate correctly, at the speed and cost our strategy actually needs.</p>
+<p>This post is part of my connectivity experimentation with <strong>Interactive Brokers (IBKR), eToro, Binance, and Kraken</strong>: a set of brokerage platforms and two crypto exchanges, not four interchangeable venues. The common baseline is <strong>REST-style APIs with JSON on all four</strong>. The binary paths explored alongside that baseline are <strong>Protobuf through IBKR’s TWS API and IB Gateway</strong>, and <strong>SBE on supported Binance interfaces</strong>. Here, IB Gateway means IBKR’s gateway application, which is distinct from the gateway used for Web API access.</p>
+
+<p>The subject is the protocols and encodings, not a ranking of those platforms. We will follow <strong>JSON, Protobuf, and SBE</strong> from readable messages to schema-driven binary layouts, then use <strong>FIX</strong> to explain what a trading conversation adds beyond serialization. WebSockets, gRPC, ITCH, and OUCH complete the map without becoming additional claims about what this experiment tested.</p>
+
+<h2 id="the-experiment-at-a-glance-one-baseline-two-binary-paths">The experiment at a glance: one baseline, two binary paths</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Encoding / interface</th>
+      <th>Where it fits in this experiment</th>
+      <th>What that does, and does not, mean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>JSON over REST-style HTTPS APIs</strong></td>
+      <td>IBKR Web API, eToro, Binance, and Kraken.</td>
+      <td>A common integration baseline, not a common order schema, authentication model, or recovery contract.</td>
+    </tr>
+    <tr>
+      <td><strong>Protobuf over the TWS API socket connection</strong></td>
+      <td>IBKR, through a compatible API client connected to TWS or IB Gateway.</td>
+      <td>A separate integration from IBKR Web API JSON. Support depends on matching client and platform versions. It is not automatically gRPC.</td>
+    </tr>
+    <tr>
+      <td><strong>SBE on explicitly supported interfaces</strong></td>
+      <td>Binance Spot interfaces that document SBE support.</td>
+      <td>Supported REST responses and dedicated binary market-data streams have their own contracts. This is not permission to send arbitrary SBE orders to any Binance endpoint.</td>
+    </tr>
+    <tr>
+      <td><strong>FIX</strong></td>
+      <td>Architectural context, including IBKR’s separately onboarded offering.</td>
+      <td>Not an additional path claimed as tested here, nor a format switch on the REST integrations.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This is a map of the interfaces in scope, <strong>not an exhaustive catalog of everything each platform offers</strong>. In particular, eToro and Kraken are represented by their JSON REST paths. Their presence here does not imply Protobuf or SBE support. Nor does the experiment establish a latency winner: the examples below explain formats, not measured cross-platform performance.</p>
 
 <blockquote>
   <p><strong>A reading companion, not a citation at every turn.</strong> Martin Kleppmann’s <em>Designing Data-Intensive Applications</em>, <strong>first edition (2017), Chapter 4, “Encoding and Evolution,”</strong> provides the broader framework for comparing formats and changing schemas. <strong>Chapter 8, “The Trouble with Distributed Systems,”</strong> is particularly useful when we reach timeouts, uncertain outcomes, and unreliable networks. It is not a trading manual, but those problems do not stop at the exchange’s front door <a class="citation" href="#Kleppmann2017DDIA">(Kleppmann, 2017)</a>.</p>
@@ -327,6 +377,12 @@
 <h2 id="why-the-wire-can-reach-the-pl">Why the wire can reach the P&amp;L</h2>
 
 <p>Think of execution quality as everything that happens between <strong>“I want this position”</strong> and <strong>“this is the position I actually obtained.”</strong> A protocol does not create a forecasting edge. It can help preserve that edge, or make it surprisingly expensive to realize.</p>
+
+<p>There is empirical evidence that timing can have economic consequences. In <em>Quantifying the High-Frequency Trading “Arms Race”</em>, Aquilina, Budish, and O’Neill use exchange-message data that include unsuccessful attempts to trade or cancel, making both sides of a speed race visible. Their 2021 BIS working paper finds that latency-arbitrage races account for about <strong>20% of trading volume</strong> in the studied UK equity-market setting, with the most common race duration being <strong>5–10 microseconds</strong>. These findings connect message timing to trading costs, but they do <strong>not</strong> measure retail REST performance or show that SBE beats JSON <a class="citation" href="#AquilinaBudishONeill2021ArmsRace">(Aquilina et al., 2021)</a>.</p>
+
+<p>The complementary lesson is to measure costs rather than assume them. In <em>Trading Costs</em>, Frazzini, Israel, and Moskowitz analyze <strong>$1.7 trillion of live executions across 21 developed equity markets over 19 years</strong>. Their 2018 working paper documents how realized costs vary with trade size, stock characteristics, trade type, time, and exchange, and finds costs substantially below earlier estimates in their sample. That is evidence for context-dependent execution analysis, not a universal cost estimate for these four integrations <a class="citation" href="#FrazziniIsraelMoskowitz2018TradingCosts">(Frazzini et al., 2018)</a>.</p>
+
+<p>The table below translates those concerns into engineering scenarios. It is <strong>not a list of outcomes measured by these papers or by this experiment</strong>. In particular, uncertain outcomes and unsafe retries follow the distributed-systems reasoning in Chapter 8 of the reading companion <a class="citation" href="#Kleppmann2017DDIA">(Kleppmann, 2017)</a>. Incorrect units and fragile reconciliation are implementation risks whose consequences depend on the actual API contract.</p>
 
 <table>
   <thead>
@@ -370,8 +426,6 @@
   </tbody>
 </table>
 
-<p>Here is deliberately simple arithmetic, <strong>not a performance claim</strong>. A one-basis-point deterioration in execution on $1,000,000 of traded notional costs $100. If a strategy expected only two basis points before execution costs, one basis point is a rather expensive implementation detail. Whether a different encoding would recover any of it is an empirical question.</p>
-
 <p>For a daily rebalance, reducing a parser’s work by a few microseconds may be irrelevant. For a latency-sensitive strategy, burst handling and tail latency can matter a great deal. In both cases, sending the wrong order quickly is still sending the wrong order.</p>
 
 <h2 id="first-separate-the-message-from-the-conversation">First, separate the message from the conversation</h2>
@@ -405,25 +459,25 @@
     <tr>
       <td>Transport and protection</td>
       <td>How do bytes travel, and how is the connection protected?</td>
-      <td>TCP, UDP, HTTP, TLS; the exact stack depends on the service.</td>
+      <td>TCP, UDP, HTTP, and TLS, with the exact stack depending on the service.</td>
     </tr>
   </tbody>
 </table>
 
 <p>These are concerns rather than a rigid networking-layer chart. For example, HTTP is an application protocol, REST is an architectural style, and WebSocket adds a framed, bidirectional conversation over TCP.</p>
 
-<p><strong>Serialization</strong> simply means turning structured information into a representation that can be transmitted or stored. JSON is serialized too; binary does not have exclusive rights to that word.</p>
+<p><strong>Serialization</strong> simply means turning structured information into a representation that can be transmitted or stored. JSON is serialized too, so binary does not have exclusive rights to that word.</p>
 
 <figure>
   <a href="/assets/images/01_post_images/007_algorithmic_trading/trading-message-journey.svg" aria-label="Open the trading message journey diagram at full size">
-    <img src="/assets/images/01_post_images/007_algorithmic_trading/trading-message-journey.svg" alt="An order travels from strategy decision through local risk checks, encoding and a client connection, broker processing, and a venue. Reports return to update local state. Encoding is only one part of the path; queues, networks, checks, routing, and recovery also affect outcomes. Three separate IBKR entry paths are Web API with JSON over HTTPS, TWS API with version-dependent Protobuf support over TCP to TWS or IB Gateway, and separately onboarded FIX connectivity." width="1000" height="900" loading="lazy" />
+    <img src="/assets/images/01_post_images/007_algorithmic_trading/trading-message-journey.svg" alt="An order travels from strategy decision through local risk checks, encoding and a client connection, broker processing, and a venue. Reports return to update local state. Encoding is only one part of the path. Queues, networks, checks, routing, and recovery also affect outcomes. Three separate IBKR entry paths are Web API with JSON over HTTPS, TWS API with version-dependent Protobuf support over TCP to TWS or IB Gateway, and separately onboarded FIX connectivity." width="1000" height="900" loading="lazy" />
   </a>
-  <figcaption><strong>Figure 1.</strong> The message format is one part of the trade's journey, not the whole journey. The IBKR paths are alternatives with their own interfaces and requirements, not three encodings that can be switched on the same endpoint. Original conceptual schematic; arrows are not latency measurements. Select the image to enlarge.</figcaption>
+  <figcaption><strong>Figure 1.</strong> The message format is one part of the trade's journey, not the whole journey. The IBKR paths are alternatives with their own interfaces and requirements, not three encodings that can be switched on the same endpoint. This is an original conceptual schematic, and its arrows are not latency measurements. Select the image to enlarge.</figcaption>
 </figure>
 
-<h2 id="json-and-the-ibkr-web-api-start-with-a-message-you-can-read">JSON and the IBKR Web API: start with a message you can read</h2>
+<h2 id="json-the-readable-baseline-across-all-four-integrations">JSON: the readable baseline across all four integrations</h2>
 
-<p><strong>JSON (JavaScript Object Notation)</strong> is a text format for objects, arrays, strings, numbers, and a few other values. Its specification is pleasantly small; for financial applications, <strong>RFC 8259, Section 6</strong>, is especially worth reading because it discusses number interoperability and precision <a class="citation" href="#RFC8259JSON">(Bray, 2017)</a>.</p>
+<p><strong>JSON (JavaScript Object Notation)</strong> is a text format for objects, arrays, strings, numbers, and a few other values. Its specification is pleasantly small. For financial applications, <strong>RFC 8259, Section 6</strong>, is especially worth reading because it discusses number interoperability and precision <a class="citation" href="#RFC8259JSON">(Bray, 2017)</a>.</p>
 
 <p>A simplified order-shaped message might look like this:</p>
 
@@ -434,9 +488,20 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Assume, only for this example, that one tick is $0.01. The price is then $123.45. This is a <strong>teaching example, not an IBKR order request</strong>: a real order needs the broker’s actual field names, instrument identifiers, required attributes, and validation rules.</p>
+<p>Assume, only for this example, that one tick is $0.01. The price is then $123.45. This is a <strong>teaching example, not a valid order request for any of the four platforms</strong>: a real order needs the broker’s or exchange’s actual field names, instrument identifiers, required attributes, and validation rules.</p>
 
-<p>IBKR’s <strong>Web API</strong> uses JSON requests over HTTPS. It gives us a concrete example of a readable message format wrapped in an HTTP-based API. Its order workflow also has brokerage-session requirements and response handling; “I received an HTTP response” is not the same as “my order filled” <a class="citation" href="#IBKRWebAPITrading">(Interactive Brokers, n.d.)</a>.</p>
+<h3 id="same-encoding-different-api-contracts">Same encoding, different API contracts</h3>
+
+<p>In this experiment, JSON is the shared starting point, but each integration has its own dictionary and conversation:</p>
+
+<ul>
+  <li><strong>IBKR Web API:</strong> JSON over HTTPS, with brokerage-session requirements and order-response handling. This is the REST-style route, not the TWS API socket connected to IB Gateway <a class="citation" href="#IBKRWebAPITrading">(Interactive Brokers, n.d.)</a>.</li>
+  <li><strong>eToro Public API:</strong> the JSON REST interface provides the brokerage example alongside IBKR. Instrument identifiers, account permissions, and order/position workflows must follow the <a href="https://api-portal.etoro.com/">eToro API documentation</a>, rather than being inferred from another broker’s request body.</li>
+  <li><strong>Binance Spot REST API:</strong> JSON responses are the baseline, while requests follow each endpoint’s documented parameter encoding. Symbols, filters, request signing, and rate limits remain Binance-specific. The SBE option discussed below does not remove those obligations. The <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api">Spot API documentation</a> defines that contract.</li>
+  <li><strong>Kraken Spot REST API:</strong> JSON responses provide the other crypto-exchange baseline. Pair identifiers, authentication, precision rules, and API-level errors must be handled according to the <a href="https://docs.kraken.com/api/">Kraken API documentation</a>, not treated as Binance-compatible because both return JSON.</li>
+</ul>
+
+<p>The useful commonality is tooling: we can inspect payloads, reproduce requests, and log structured responses. The dangerous assumption is that readable messages make the business rules interchangeable. <strong>An HTTP response is not proof of order acceptance, and order acceptance is not a fill.</strong> Parse the endpoint’s business result and reconcile the resulting order state.</p>
 
 <table>
   <thead>
@@ -469,7 +534,7 @@
 
 <p>For money and identifiers, make the representation explicit. Integer ticks, decimal strings, or a decimal type can be appropriate <strong>when the API contract supports them</strong>. Do not silently change a broker’s numeric field into a string because an article suggested that strings can preserve precision.</p>
 
-<h2 id="protobuf-agree-on-the-dictionary-before-sending-the-message">Protobuf: agree on the dictionary before sending the message</h2>
+<h2 id="protobuf-a-typed-binary-path-through-ibkrs-gateway">Protobuf: a typed binary path through IBKR’s gateway</h2>
 
 <p><strong>Protocol Buffers</strong>, usually shortened to <strong>Protobuf</strong>, is a schema-based serialization system. The sender and receiver agree on numbered, typed fields in a <code class="language-plaintext highlighter-rouge">.proto</code> definition. The wire representation carries compact field keys rather than repeating the full field names.</p>
 
@@ -491,18 +556,13 @@
 
 <p>That is a <strong>seven-byte toy payload</strong>, not the size of a complete trading request. It excludes framing, session metadata, authentication, and network headers. Field keys, variable-length integers, and length-delimited data are described in Google’s <strong>Encoding</strong> guide <a class="citation" href="#ProtobufWireEncoding">(Google, n.d.)</a>.</p>
 
-<figure>
-  <a href="/assets/images/01_post_images/007_algorithmic_trading/trading-message-formats.svg" aria-label="Open the JSON Protobuf FIX and SBE comparison at full size">
-    <img src="/assets/images/01_post_images/007_algorithmic_trading/trading-message-formats.svg" alt="Four representations of an illustrative order with identifier 7, quantity 100, and price 123.45. JSON sends readable field names and values. Protobuf sends field keys and binary values interpreted using a schema. FIX TagValue sends numbered trading fields such as 35=D and 38=100. SBE uses a template header and schema-defined binary field positions. The FIX fragment is incomplete, and the formats are not drawn to byte scale." width="1000" height="1120" loading="lazy" />
-  </a>
-  <figcaption><strong>Figure 2.</strong> Four ways to represent related information. The JSON, Protobuf, and SBE examples use a deliberately small teaching schema; the FIX fragment illustrates standard trading tags but is not a complete order. No panel is an IBKR wire specification, and panel widths do not compare message sizes. Original schematic. Select the image to enlarge.</figcaption>
-</figure>
+<h3 id="from-the-experiments-json-baseline-to-ibkr-protobuf">From the experiment’s JSON baseline to IBKR Protobuf</h3>
 
-<h3 id="where-protobuf-fits-at-ibkr">Where Protobuf fits at IBKR</h3>
+<p>The Protobuf part of this experiment belongs to <strong>IBKR’s TWS API connected to IB Gateway</strong>, with Trader Workstation as the alternative host for that API. The client exchanges messages over a TCP socket with the host application. This is a different connection and client model from sending JSON to an IBKR Web API endpoint, not a change of HTTP content type.</p>
 
-<p>IBKR’s API documentation describes <strong>Protobuf support in the TWS API</strong>, which connects over a TCP socket to <strong>Trader Workstation or IB Gateway</strong>. That is a different path from sending JSON to a Web API endpoint. Support and message coverage depend on the API and TWS/IB Gateway versions: verify the matching release documentation and supplied client rather than assuming every historical client or wrapper implements the same messages <a class="citation" href="#IBKRAPIOverview">(Interactive Brokers, n.d.)</a>.</p>
+<p>IBKR’s API documentation describes <strong>Protobuf support in the TWS API</strong>. Support and message coverage depend on the API and TWS/IB Gateway versions: verify the matching release documentation and supplied client rather than assuming every historical client or wrapper implements the same messages <a class="citation" href="#IBKRAPIOverview">(Interactive Brokers, n.d.)</a>. A reproducible experiment therefore needs the API client version, gateway version, and supported message set recorded together.</p>
 
-<p>Using Protobuf here does <strong>not</strong> imply that the connection is gRPC. Protobuf is an encoding; gRPC is a separate RPC framework that commonly uses it.</p>
+<p>Using Protobuf here does <strong>not</strong> imply that the connection is gRPC. Protobuf is an encoding, whereas gRPC is a separate RPC framework that commonly uses it.</p>
 
 <table>
   <thead>
@@ -531,59 +591,17 @@
   </tbody>
 </table>
 
-<p>One particularly important evolution rule: <strong>do not reuse field numbers</strong>. Also distinguish “not supplied” from “supplied as zero” when the business meaning requires it; suitable field presence rules belong in the schema. Google’s <strong>proto3 Language Guide</strong>, particularly “Assigning Field Numbers” and “Specifying Field Cardinality,” explains these traps <a class="citation" href="#ProtobufSchemaGuide">(Google, n.d.)</a>.</p>
+<p>One particularly important evolution rule: <strong>do not reuse field numbers</strong>. Also distinguish “not supplied” from “supplied as zero” when the business meaning requires it, and encode that distinction through suitable field presence rules in the schema. Google’s <strong>proto3 Language Guide</strong>, particularly “Assigning Field Numbers” and “Specifying Field Cardinality,” explains these traps <a class="citation" href="#ProtobufSchemaGuide">(Google, n.d.)</a>.</p>
 
-<h2 id="fix-the-trading-conversation-not-just-a-compact-envelope">FIX: the trading conversation, not just a compact envelope</h2>
+<h2 id="sbe-predictable-binary-layouts-on-supported-binance-paths">SBE: predictable binary layouts on supported Binance paths</h2>
 
-<p><strong>FIX (Financial Information eXchange)</strong> is an industry standard for communicating trading instructions and events. It gives counterparties a common vocabulary: a new order is not just an arbitrary object that happens to contain a price.</p>
+<p><strong>SBE means Simple Binary Encoding.</strong> Like JSON and Protobuf, it serializes data. Its distinguishing feature is the emphasis on native binary types and predictable field layouts for high-performance systems.</p>
 
-<p>The familiar <strong>FIX TagValue</strong> representation uses numeric tags and textual values:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>35=D | 11=7 | 38=100 | 44=123.45
-</code></pre></div></div>
-
-<p>Here, <code class="language-plaintext highlighter-rouge">35=D</code> identifies a New Order Single, <code class="language-plaintext highlighter-rouge">11</code> is the client order identifier, <code class="language-plaintext highlighter-rouge">38</code> is order quantity, and <code class="language-plaintext highlighter-rouge">44</code> is price. The spaces and pipes are for readers. On the wire, fields use the <strong>SOH control character</strong> as a delimiter. This fragment omits required fields, headers, body length, and checksum; it is <strong>not a sendable FIX message</strong>. The FIX Trading Community’s TagValue standard documents the encoding <a class="citation" href="#FIXTagValueStandard">(FIX Trading Community, 2020)</a>.</p>
-
-<p>The more consequential part is the conversation around those fields. Classic FIX sessions use sequence numbers, logon/logout messages, heartbeats, and recovery procedures. Execution reports communicate order state and fills. A functioning integration needs the counterparty’s supported FIX version, message dictionary, session rules, and business conventions, not just a generic parser.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>FIX strengths</th>
-      <th>FIX trade-offs</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Shared trading vocabulary across many brokers and venues.</td>
-      <td>Each counterparty still has supported subsets, custom fields, and certification requirements.</td>
-    </tr>
-    <tr>
-      <td>Explicit order lifecycle and session-recovery mechanisms.</td>
-      <td>Session state, persistence, replay, and duplicate handling add operational work.</td>
-    </tr>
-    <tr>
-      <td>TagValue is reasonably inspectable once the dictionary is familiar.</td>
-      <td>Text scanning and conversion can cost more than a well-designed binary decoder.</td>
-    </tr>
-    <tr>
-      <td>Mature ecosystem of engines, monitoring, and operations practices.</td>
-      <td>FIX is not a promise of the lowest latency, nor a universal plug-and-play connection.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>IBKR also offers <strong>separately onboarded FIX connectivity</strong>. Its documentation describes an integration process involving its FIX Engineering team, with eligibility and commercial requirements. It is not a free format toggle for an existing Web API application; evaluate the current terms before making it part of the architecture <a class="citation" href="#IBKRFIXConnectivity">(Interactive Brokers, n.d.)</a>.</p>
-
-<p><strong>FIX is not synonymous with TagValue.</strong> FIX business messages can have other encodings. That brings us to the acronym that is easy to transpose.</p>
-
-<h2 id="sbe-not-seb-a-layout-designed-for-predictable-decoding">SBE, not SEB: a layout designed for predictable decoding</h2>
-
-<p><strong>SBE means Simple Binary Encoding.</strong> It is a FIX Trading Community encoding standard designed with high-performance systems in mind. Like JSON and Protobuf, it serializes data; its distinguishing feature is the emphasis on native binary types and predictable field layouts.</p>
+<p>The standard is published by the <strong>FIX Trading Community</strong>, a standards organization. That is why the SBE specification’s citation displays “FIX Trading Community” as its author. <strong>The organization is the source of the standard, but using SBE does not require FIX TagValue messages or a classic FIX session.</strong> In this experiment, Binance defines the supported API or stream around the SBE payload.</p>
 
 <p>Imagine a numbered form rather than a paragraph. For the fixed portion of a message, a decoder already knows where each box begins and what type it contains. It does not need to search for a textual key before reading the value.</p>
 
-<p>The SBE <strong>1.0 specification</strong>, especially <strong>“Field Encoding,” “Message Structure,” and “Schema Extension Mechanism,”</strong> explains both the efficiency goals and the constraints. The message header identifies the template and schema version; repeating groups and variable-length data have additional structure <a class="citation" href="#SBEVersion1Standard">(FIX Trading Community, 2016)</a>.</p>
+<p>The SBE <strong>1.0 specification</strong>, especially <strong>“Field Encoding,” “Message Structure,” and “Schema Extension Mechanism,”</strong> explains both the efficiency goals and the constraints <a class="citation" href="#SBEVersion1Standard">(FIX Trading Community, 2016)</a>. An <strong>SBE binary message header</strong>, not a FIX TagValue header, carries metadata such as the template identifier, schema identifier, schema version, and root block length. These tell the decoder which message layout and version to interpret and how long its fixed root block is. Repeating groups and variable-length data have additional structure beyond that fixed block.</p>
 
 <p>For our toy order, a possible fixed root block would be:</p>
 
@@ -651,7 +669,75 @@
 
 <p>The schema may be described in XML, but that does <strong>not</strong> mean the live messages are XML. The dictionary and the encoded message are different artifacts.</p>
 
-<p>Nor can we point an SBE client at any broker and expect it to understand. The endpoint must explicitly support that encoding, the relevant schema, and the required session or feed protocol. I am not presenting SBE as an IBKR Web API option.</p>
+<h3 id="where-sbe-fits-at-binance">Where SBE fits at Binance</h3>
+
+<p><strong>Binance is the SBE reference in this experiment.</strong> The acronym is <strong>SBE</strong>, not SEB. The important distinction is between selecting a binary response on a supported API and consuming a dedicated binary stream:</p>
+
+<ul>
+  <li><strong>Supported Spot REST responses:</strong> Binance documents an SBE response option negotiated using its prescribed headers and schema/version identifiers. HTTP requests still follow the endpoint’s documented parameters and authentication rules. An SBE response does <strong>not</strong> imply an SBE-encoded request body.</li>
+  <li><strong>SBE market-data streams:</strong> Binance also documents dedicated SBE streaming interfaces. These are a separate path from REST request/response traffic, with their own connection, access, schema, and supported-event requirements. A binary quote update is not an order-entry session.</li>
+</ul>
+
+<p>The <a href="https://developers.binance.com/docs/binance-spot-api-docs/faqs/sbe_faq">Binance SBE FAQ</a> and <a href="https://developers.binance.com/docs/binance-spot-api-docs/sbe-market-data-streams">SBE market-data documentation</a> are the implementation references. Check the exact endpoint, schema version, access requirements, and error behavior before treating a path as available. Documented streaming support is context here, not a claim that every stream was exercised in the experiment.</p>
+
+<p>This makes Binance useful for separating <strong>transport from representation</strong>: a supported REST response can be binary while the surrounding exchange remains HTTP-based. It also creates a cleaner encoding comparison than measuring Binance SBE against another platform’s JSON API, where routing, workload, and infrastructure would confound the result.</p>
+
+<p>Nor can we point an SBE client at any broker and expect it to understand. The endpoint must explicitly support that encoding, the relevant schema, and the required session or feed protocol. <strong>SBE is not presented here as an IBKR, eToro, or Kraken REST option</strong>, and Protobuf support at IBKR does not imply Protobuf support at the other three.</p>
+
+<h2 id="fix-what-a-trading-conversation-adds-beyond-serialization">FIX: what a trading conversation adds beyond serialization</h2>
+
+<p>JSON, Protobuf, and SBE explain how fields become bytes. They do not, by themselves, define how two trading counterparties maintain a session or reconcile missing messages. <strong>FIX (Financial Information eXchange)</strong> supplies an industry-standard vocabulary for trading instructions and events, alongside session mechanisms in classic FIX connectivity.</p>
+
+<p>The familiar <strong>FIX TagValue</strong> representation uses numeric tags and textual values:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>35=D | 11=7 | 38=100 | 44=123.45
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">35=D</code> identifies a New Order Single, <code class="language-plaintext highlighter-rouge">11</code> is the client order identifier, <code class="language-plaintext highlighter-rouge">38</code> is order quantity, and <code class="language-plaintext highlighter-rouge">44</code> is price. The spaces and pipes are for readers. On the wire, fields use the <strong>SOH control character</strong> as a delimiter. Because this fragment omits required fields, headers, body length, and checksum, it is <strong>not a sendable FIX message</strong>. The FIX Trading Community’s TagValue standard documents the encoding <a class="citation" href="#FIXTagValueStandard">(FIX Trading Community, 2020)</a>.</p>
+
+<p>The more consequential part is the conversation around those fields. Classic FIX sessions use sequence numbers, logon/logout messages, heartbeats, and recovery procedures. Execution reports communicate order state and fills. A functioning integration needs the counterparty’s supported FIX version, message dictionary, session rules, and business conventions, not just a generic parser.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>FIX strengths</th>
+      <th>FIX trade-offs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Shared trading vocabulary across many brokers and venues.</td>
+      <td>Each counterparty still has supported subsets, custom fields, and certification requirements.</td>
+    </tr>
+    <tr>
+      <td>Explicit order lifecycle and session-recovery mechanisms.</td>
+      <td>Session state, persistence, replay, and duplicate handling add operational work.</td>
+    </tr>
+    <tr>
+      <td>TagValue is reasonably inspectable once the dictionary is familiar.</td>
+      <td>Text scanning and conversion can cost more than a well-designed binary decoder.</td>
+    </tr>
+    <tr>
+      <td>Mature ecosystem of engines, monitoring, and operations practices.</td>
+      <td>FIX is not a promise of the lowest latency, nor a universal plug-and-play connection.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For a concrete connection to our examples, IBKR offers <strong>separately onboarded FIX connectivity</strong>. Its documentation describes an integration process involving its FIX Engineering team, with eligibility and commercial requirements. This is architectural context, <strong>not a FIX integration claimed as tested in this experiment</strong>, and not a free format toggle for an existing Web API application <a class="citation" href="#IBKRFIXConnectivity">(Interactive Brokers, n.d.)</a>.</p>
+
+<p><strong>FIX is not synonymous with TagValue.</strong> SBE is also a FIX Trading Community standard, but an SBE payload does not automatically bring classic FIX session behavior with it. The interface still has to define the conversation.</p>
+
+<h3 id="the-four-representations-side-by-side">The four representations, side by side</h3>
+
+<p>Now that JSON, Protobuf, SBE, and FIX TagValue have each been introduced, <strong>Figure 2</strong> brings their representations together. Read it as a recap of how fields become bytes, not as a comparison of complete trading sessions or measured performance.</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/007_algorithmic_trading/trading-message-formats.svg" aria-label="Open the JSON Protobuf FIX and SBE comparison at full size">
+    <img src="/assets/images/01_post_images/007_algorithmic_trading/trading-message-formats.svg" alt="Four representations of an illustrative order with identifier 7, quantity 100, and price 123.45. JSON sends readable field names and values. Protobuf sends field keys and binary values interpreted using a schema. FIX TagValue sends numbered trading fields such as 35=D and 38=100. SBE uses a template header and schema-defined binary field positions. The FIX fragment is incomplete, and the formats are not drawn to byte scale." width="1000" height="1120" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 2.</strong> Four ways to represent related information. The JSON, Protobuf, and SBE examples use a deliberately small teaching schema, while the FIX fragment illustrates standard trading tags but is not a complete order. No panel is an IBKR wire specification, and panel widths do not compare message sizes. Original schematic. Select the image to enlarge.</figcaption>
+</figure>
 
 <h2 id="more-names-worth-placing-on-the-map">More names worth placing on the map</h2>
 
@@ -669,13 +755,13 @@
   <tbody>
     <tr>
       <td><strong>WebSocket</strong></td>
-      <td>A persistent, bidirectional framed connection over TCP; messages may be text or binary.</td>
+      <td>A persistent, bidirectional framed connection over TCP, carrying text or binary messages.</td>
       <td>Streaming quotes and events without repeatedly polling an HTTP endpoint.</td>
       <td>Message meaning, feed-gap recovery, or proof that an order executed.</td>
     </tr>
     <tr>
       <td><strong>gRPC</strong></td>
-      <td>Typed remote procedures with unary and streaming calls; commonly Protobuf-based.</td>
+      <td>Typed remote procedures with unary and streaming calls, commonly using Protobuf.</td>
       <td>Internal risk, portfolio, and execution services where supported.</td>
       <td>Automatic exactly-once trading effects or freedom from deadline and retry design.</td>
     </tr>
@@ -702,40 +788,11 @@
 
 <p>For the connection and service distinction, useful primary reading is <strong>RFC 6455, Sections 1 and 5</strong>, and gRPC’s <strong>“Service definition”</strong> and <strong>“RPC life cycle”</strong> documentation <a class="citation" href="#RFC6455WebSocket">(Fette &amp; Melnikov, 2011; The gRPC Authors, n.d.)</a>.</p>
 
-<p>For the venue distinction, Nasdaq’s <strong>TotalView-ITCH 5.0 specification</strong>, especially its <strong>Data Types</strong>, <strong>Add Order</strong>, and <strong>Modify Order</strong> sections, describes the feed; its <strong>OUCH overview</strong> describes order entry. Both require the appropriate access arrangements and surrounding connectivity. An ITCH payload is not inherently a complete reliable delivery system; the selected feed transport and recovery mechanisms matter too <a class="citation" href="#NasdaqITCHSpecification">(Nasdaq, n.d.; Nasdaq, n.d.)</a>.</p>
+<p>For the venue distinction, Nasdaq’s <strong>TotalView-ITCH 5.0 specification</strong>, especially its <strong>Data Types</strong>, <strong>Add Order</strong>, and <strong>Modify Order</strong> sections, describes the feed, while its <strong>OUCH overview</strong> describes order entry. Both require the appropriate access arrangements and surrounding connectivity. An ITCH payload is not inherently a complete reliable delivery system, so the selected feed transport and recovery mechanisms matter too <a class="citation" href="#NasdaqITCHSpecification">(Nasdaq, n.d.; Nasdaq, n.d.)</a>.</p>
 
-<h2 id="the-dangerous-message-is-sometimes-the-one-you-did-not-receive">The dangerous message is sometimes the one you did not receive</h2>
+<h2 id="what-the-experiment-helps-us-choose">What the experiment helps us choose</h2>
 
-<p>Suppose we send an order and the connection breaks before the acknowledgment reaches us.</p>
-
-<p>Did the broker never receive it? Did it accept the order but lose the return connection? Did an execution already happen? Locally, those possibilities can look identical.</p>
-
-<p><strong>A timeout describes what our application observed. It does not prove what the remote system did.</strong> This is where Chapter 8 of the reading companion earns its place beside the broker manual.</p>
-
-<figure>
-  <a href="/assets/images/01_post_images/007_algorithmic_trading/order-timeout-recovery.svg" aria-label="Open the uncertain order outcome diagram at full size">
-    <img src="/assets/images/01_post_images/007_algorithmic_trading/order-timeout-recovery.svg" alt="A client persists an order intent and sends it. A broker may accept it, but the acknowledgment fails to arrive. The client sees a timeout and must mark the outcome unknown rather than rejected. Blindly retrying with a fresh identifier risks a duplicate. Safer recovery follows the broker or venue rules, restores the session, reconciles orders and fills, and resumes only after resolving exposure." width="1000" height="850" loading="lazy" />
-  </a>
-  <figcaption><strong>Figure 3.</strong> Missing acknowledgment does not mean missing order. Serialization cannot resolve an uncertain business outcome; recovery needs identifiers, durable state, and the counterparty's actual rules. Original scenario diagram, not a complete FIX sequence chart. Select the image to enlarge.</figcaption>
-</figure>
-
-<p>Classic FIX sequencing can detect gaps and support recovery, but <strong>session replay is not permission to submit a new economic order</strong>. Persist the relevant identifiers and state, handle permitted retransmissions according to the session rules, and reconcile executions and open orders. REST and proprietary APIs need equivalent business-level thinking even when their recovery mechanisms differ.</p>
-
-<p>A client-generated identifier is useful, but it provides idempotency only if the server’s contract actually enforces the required duplicate behavior and retention scope. A fresh identifier can defeat that protection; reusing an identifier can also be invalid under some interfaces. Follow the specific contract rather than treating an identifier as a magic shield.</p>
-
-<p>Other details deserve equally boring, equally valuable care:</p>
-
-<ul>
-  <li><strong>Price and quantity units:</strong> ticks versus currency amounts, shares versus contracts, and multiplier conventions.</li>
-  <li><strong>State transitions:</strong> transport delivery, broker acceptance, partial fill, full fill, cancel request, and cancel confirmation are different events.</li>
-  <li><strong>Cancel/fill races:</strong> requesting a cancel does not guarantee that the order cannot fill while the cancel is in flight.</li>
-  <li><strong>Feed gaps and slow consumers:</strong> detect missing data and backpressure; do not silently trade from an incomplete book.</li>
-  <li><strong>Protection and audit:</strong> use the interface’s supported authentication and protected connectivity, restrict credentials, and retain useful records without leaking secrets.</li>
-</ul>
-
-<h2 id="which-would-i-choose">Which would I choose?</h2>
-
-<p>Not “which is fastest in a blog post?” First ask <strong>which interface the broker or venue actually offers</strong>, then which one meets the strategy’s requirements.</p>
+<p>The decision is not “which platform should I invest through?” or “which format is fastest in a blog post?” It is <strong>which supported interface fits the engineering requirement</strong>. Within this experiment, the choices can be read as follows:</p>
 
 <table>
   <thead>
@@ -747,41 +804,33 @@
   </thead>
   <tbody>
     <tr>
-      <td>Research strategy or periodic rebalance through IBKR</td>
-      <td>Web API / JSON, or the supported TWS API if its functionality is a better fit.</td>
-      <td>Permissions, sessions, pacing, order responses, precision, and recovery.</td>
+      <td>Readable integration baseline across IBKR, eToro, Binance, and Kraken</td>
+      <td>Each platform’s JSON REST API.</td>
+      <td>Its own permissions, authentication, sessions, rate limits, precision, order results, and recovery rules.</td>
     </tr>
     <tr>
-      <td>Application built around TWS or IB Gateway</td>
-      <td>Official compatible TWS API client, including its supported Protobuf messages.</td>
-      <td>API/platform version pairing, callbacks, disconnections, and local state reconciliation.</td>
+      <td>Typed binary messages through IBKR’s gateway</td>
+      <td>Compatible TWS API client and IB Gateway, using supported Protobuf messages.</td>
+      <td>API/platform version pairing, message coverage, callbacks, disconnections, and state reconciliation.</td>
     </tr>
     <tr>
-      <td>Multi-broker institutional order management</td>
-      <td>Supported FIX integrations.</td>
-      <td>Counterparty dictionaries, certification, commercial terms, replay, and lifecycle semantics.</td>
+      <td>Binary responses on a supported Binance Spot REST endpoint</td>
+      <td>The documented SBE response option.</td>
+      <td>Endpoint coverage, negotiation headers, exact schema/version, errors, and comparable JSON behavior.</td>
     </tr>
     <tr>
-      <td>Internal typed services</td>
-      <td>Protobuf, possibly with gRPC.</td>
-      <td>Schema evolution, deadlines, allocation behavior, retries, and observability.</td>
-    </tr>
-    <tr>
-      <td>Supported low-latency feed or execution path</td>
-      <td>The venue’s prescribed SBE or other native binary interface.</td>
-      <td>Exact schema, access arrangements, transport, loss recovery, and burst behavior.</td>
-    </tr>
-    <tr>
-      <td>Direct Nasdaq integration</td>
-      <td>ITCH for the relevant market data; OUCH for supported order entry.</td>
-      <td>Entitlements, connectivity, session/feed specifications, and operational readiness.</td>
+      <td>Evaluating Binance binary streaming market data</td>
+      <td>The separately documented SBE stream, where accessible. This is not a substitute for REST order entry.</td>
+      <td>Access requirements, supported events, feed continuity, recovery, and burst behavior.</td>
     </tr>
   </tbody>
 </table>
 
-<p>These are starting points, not mutually exclusive architectures. One system might receive a native binary feed, use Protobuf internally, send FIX orders, and publish JSON to a monitoring screen.</p>
+<p>Beyond that experimental scope, FIX can be relevant to separately onboarded institutional connectivity, and Protobuf with gRPC can be useful inside our own services. Those are architectural options, not evidence that all four external APIs support them. The same system may legitimately use several encodings. Consistency belongs in our internal interpretation of orders and events, not in pretending the external contracts are identical.</p>
 
 <h3 id="measure-the-system-not-just-the-serializer">Measure the system, not just the serializer</h3>
+
+<p>To turn these experiments into an encoding comparison, I would first separate local decoding tests from end-to-end API observations. For Binance JSON versus SBE, use equivalent supported endpoints or events and comparable workloads. For IBKR Web API versus TWS API, report a comparison of <strong>different integration paths</strong>, not an isolated JSON-versus-Protobuf benchmark. Comparing eToro or Kraken REST latency with Binance SBE likewise cannot establish that the encoding caused the difference.</p>
 
 <p>Before replacing an encoding, I would collect:</p>
 
@@ -799,7 +848,9 @@
 
 <h2 id="good-plumbing-does-not-predict-the-market-it-preserves-intent">Good plumbing does not predict the market. It preserves intent.</h2>
 
-<p>JSON makes an integration easy to inspect. Protobuf brings typed, compact messages. FIX gives trading counterparties a shared conversation. SBE emphasizes efficient binary layouts. WebSockets, gRPC, ITCH, and OUCH occupy other useful parts of the map.</p>
+<p>In this experiment, <strong>JSON connects the four REST baselines</strong>, <strong>Protobuf identifies the supported IBKR gateway path</strong>, and <strong>SBE identifies the supported Binance binary paths</strong>. Those concrete references help explain the formats without turning them into platform recommendations.</p>
+
+<p>JSON makes an integration easy to inspect. Protobuf brings typed, compact messages. SBE emphasizes efficient binary layouts. FIX illustrates the shared trading conversation and session behavior that encoding alone does not supply. WebSockets, gRPC, ITCH, and OUCH occupy other useful parts of the map.</p>
 
 <p>None is a universal upgrade button. A format that saves decoding time but leaves us unable to recover an order has optimized the wrong problem.</p>
 
@@ -809,17 +860,17 @@
 
 <h2 id="references">References</h2>
 
-<p>The diagrams and numerical examples are original teaching illustrations, not measured latency results or production-ready broker messages. API coverage and commercial terms change; consult the current documentation for the exact interface and versions you deploy.</p>
-
 <ol class="bibliography"><li><span id="Kleppmann2017DDIA">Kleppmann, M. (2017). <i>Designing Data-Intensive Applications</i> (1st ed.). O’Reilly Media. <a href="https://dataintensive.net/" target="_blank" rel="noopener noreferrer">https://dataintensive.net/</a></span></li>
+<li><span id="AquilinaBudishONeill2021ArmsRace">Aquilina, M., Budish, E., &amp; O’Neill, P. (2021). <i>Quantifying the High-Frequency Trading “Arms Race”</i> (BIS Working Papers No. 955; Issue 955). Bank for International Settlements. <a href="https://www.bis.org/publ/work955.htm" target="_blank" rel="noopener noreferrer">https://www.bis.org/publ/work955.htm</a></span></li>
+<li><span id="FrazziniIsraelMoskowitz2018TradingCosts">Frazzini, A., Israel, R., &amp; Moskowitz, T. J. (2018). <i>Trading Costs</i> [Working Paper]. AQR Capital Management. <a href="https://www.aqr.com/Insights/Research/Working-Paper/Trading-Costs" target="_blank" rel="noopener noreferrer">https://www.aqr.com/Insights/Research/Working-Paper/Trading-Costs</a></span></li>
 <li><span id="RFC8259JSON">Bray, T. (2017). <i>The JavaScript Object Notation (JSON) Data Interchange Format</i> (No. RFC 8259; Issue RFC 8259). Internet Engineering Task Force. <a href="https://www.rfc-editor.org/rfc/rfc8259.txt" target="_blank" rel="noopener noreferrer">https://www.rfc-editor.org/rfc/rfc8259.txt</a></span></li>
 <li><span id="IBKRWebAPITrading">Interactive Brokers. <i>Web API: Introduction and Placing Orders</i>. <a href="https://www.interactivebrokers.com/docs/web-api/api/web-api/placing-orders.md" target="_blank" rel="noopener noreferrer">https://www.interactivebrokers.com/docs/web-api/api/web-api/placing-orders.md</a></span></li>
 <li><span id="ProtobufWireEncoding">Google. <i>Protocol Buffers: Encoding</i>. <a href="https://protobuf.dev/programming-guides/encoding/" target="_blank" rel="noopener noreferrer">https://protobuf.dev/programming-guides/encoding/</a></span></li>
 <li><span id="IBKRAPIOverview">Interactive Brokers. <i>IBKR API Overview: Web API, TWS API, and FIX</i>. <a href="https://www.interactivebrokers.com/docs/llms.txt" target="_blank" rel="noopener noreferrer">https://www.interactivebrokers.com/docs/llms.txt</a></span></li>
 <li><span id="ProtobufSchemaGuide">Google. <i>Protocol Buffers: Language Guide (proto3)</i>. <a href="https://protobuf.dev/programming-guides/proto3/" target="_blank" rel="noopener noreferrer">https://protobuf.dev/programming-guides/proto3/</a></span></li>
+<li><span id="SBEVersion1Standard">FIX Trading Community. (2016). <i>Simple Binary Encoding: Version 1.0 Technical Specification</i>. <a href="https://github.com/FIXTradingCommunity/fix-simple-binary-encoding/tree/master/v1-0-STANDARD/doc" target="_blank" rel="noopener noreferrer">https://github.com/FIXTradingCommunity/fix-simple-binary-encoding/tree/master/v1-0-STANDARD/doc</a></span></li>
 <li><span id="FIXTagValueStandard">FIX Trading Community. (2020). <i>FIX TagValue Encoding Standard</i>. <a href="https://fixtrading.org/packages/fix-tagvalue-encoding/" target="_blank" rel="noopener noreferrer">https://fixtrading.org/packages/fix-tagvalue-encoding/</a></span></li>
 <li><span id="IBKRFIXConnectivity">Interactive Brokers. <i>FIX: Introduction</i>. <a href="https://www.interactivebrokers.com/docs/fix/intro.md" target="_blank" rel="noopener noreferrer">https://www.interactivebrokers.com/docs/fix/intro.md</a></span></li>
-<li><span id="SBEVersion1Standard">FIX Trading Community. (2016). <i>Simple Binary Encoding: Version 1.0 Technical Specification</i>. <a href="https://github.com/FIXTradingCommunity/fix-simple-binary-encoding/tree/master/v1-0-STANDARD/doc" target="_blank" rel="noopener noreferrer">https://github.com/FIXTradingCommunity/fix-simple-binary-encoding/tree/master/v1-0-STANDARD/doc</a></span></li>
 <li><span id="RFC6455WebSocket">Fette, I., &amp; Melnikov, A. (2011). <i>The WebSocket Protocol</i> (No. RFC 6455; Issue RFC 6455). Internet Engineering Task Force. <a href="https://www.rfc-editor.org/rfc/rfc6455.txt" target="_blank" rel="noopener noreferrer">https://www.rfc-editor.org/rfc/rfc6455.txt</a></span></li>
 <li><span id="GRPCCoreConcepts">The gRPC Authors. <i>gRPC: Core Concepts, Architecture and Lifecycle</i>. <a href="https://grpc.io/docs/what-is-grpc/core-concepts/" target="_blank" rel="noopener noreferrer">https://grpc.io/docs/what-is-grpc/core-concepts/</a></span></li>
 <li><span id="NasdaqITCHSpecification">Nasdaq. <i>Nasdaq TotalView-ITCH 5.0 Specification</i>. <a href="https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/NQTVITCHspecification.pdf" target="_blank" rel="noopener noreferrer">https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/NQTVITCHspecification.pdf</a></span></li>
@@ -827,6 +878,18 @@
 
                 </article>
 
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
               
             
           
@@ -1256,8 +1319,17 @@
             var nums    = [0, 0, 0, 0];
             var list = document.createElement('ul');
             list.className = 'toc-list';
+            list.id = 'toc-heading-list';
+            var stack = [];
+            var branches = [];
 
-            headings.forEach(function (h) {
+            function setBranchExpanded(branch, expanded) {
+              branch.children.hidden = !expanded;
+              branch.button.setAttribute('aria-expanded', String(expanded));
+              branch.button.setAttribute('aria-label', (expanded ? 'Collapse' : 'Expand') + ' subsections of ' + branch.text);
+            }
+
+            headings.forEach(function (h, index) {
               var level    = parseInt(h.tagName[1], 10) - 1;
               nums[level]++;
               for (var i = level + 1; i < 4; i++) nums[i] = 0;
@@ -1282,10 +1354,66 @@
               tocNumber.textContent = numStr + '. ';
               link.appendChild(tocNumber);
               link.appendChild(document.createTextNode(rawText));
-              item.appendChild(link);
-              list.appendChild(item);
+              var row = document.createElement('div');
+              row.className = 'toc-entry';
+              row.appendChild(link);
+              item.appendChild(row);
+
+              while (stack.length && stack[stack.length - 1].level >= level) stack.pop();
+              var parent = stack[stack.length - 1];
+              if (parent && !parent.children) {
+                parent.children = document.createElement('ul');
+                parent.children.className = 'toc-list toc-children';
+                parent.children.id = 'toc-children-' + parent.index;
+                parent.button = document.createElement('button');
+                parent.button.type = 'button';
+                parent.button.className = 'toc-branch-toggle';
+                parent.button.setAttribute('aria-controls', parent.children.id);
+                var chevron = document.createElement('i');
+                chevron.className = 'fa fa-chevron-down';
+                chevron.setAttribute('aria-hidden', 'true');
+                parent.button.appendChild(chevron);
+                parent.row.insertBefore(parent.button, parent.row.firstChild);
+                parent.item.appendChild(parent.children);
+                branches.push(parent);
+                setBranchExpanded(parent, true);
+                parent.button.addEventListener('click', function () {
+                  setBranchExpanded(parent, parent.children.hidden);
+                  updateBulkControls();
+                });
+              }
+              (parent ? parent.children : list).appendChild(item);
+              stack.push({ level: level, index: index, item: item, row: row, text: rawText });
             });
 
+            var expandAll;
+            var collapseAll;
+            function updateBulkControls() {
+              if (!expandAll) return;
+              expandAll.disabled = branches.every(function (branch) { return !branch.children.hidden; });
+              collapseAll.disabled = branches.every(function (branch) { return branch.children.hidden; });
+            }
+
+            if (branches.length) {
+              var controls = document.createElement('div');
+              controls.className = 'toc-controls';
+              controls.setAttribute('role', 'group');
+              controls.setAttribute('aria-label', 'Table of contents branches');
+              expandAll = document.createElement('button');
+              collapseAll = document.createElement('button');
+              [expandAll, collapseAll].forEach(function (button, index) {
+                button.type = 'button';
+                button.textContent = index === 0 ? 'Expand all' : 'Collapse all';
+                button.setAttribute('aria-controls', list.id);
+                button.addEventListener('click', function () {
+                  branches.forEach(function (branch) { setBranchExpanded(branch, index === 0); });
+                  updateBulkControls();
+                });
+                controls.appendChild(button);
+              });
+              tocNav.appendChild(controls);
+              updateBulkControls();
+            }
             tocNav.appendChild(list);
             if (tocSect) tocSect.style.display = 'block';
           } else {
@@ -1301,8 +1429,16 @@
             entries.forEach(function (entry) {
               if (entry.isIntersecting) {
                 tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
-                var active = tocNav.querySelector('a[href="#' + entry.target.id + '"]');
-                if (active) active.setAttribute('data-active', '');
+                tocNav.querySelectorAll('.toc-entry').forEach(function (row) { row.removeAttribute('data-active-descendant'); });
+                var active = Array.prototype.find.call(tocLinks, function (link) { return link.getAttribute('href') === '#' + entry.target.id; });
+                if (active) {
+                  active.setAttribute('data-active', '');
+                  var ancestor = active.closest('li').parentElement.closest('li');
+                  while (ancestor) {
+                    ancestor.firstElementChild.setAttribute('data-active-descendant', '');
+                    ancestor = ancestor.parentElement.closest('li');
+                  }
+                }
               }
             });
           }, { rootMargin: '-10% 0px -80% 0px' });
