@@ -417,7 +417,7 @@
   SWIG --&gt; PY
 </code></pre>
 
-<p>First prepare the debug-enabled QuantLib environment and VS Code launch configurations. Then run the example in order; focused checkpoints show what to expect at each debugger handoff. Troubleshooting is collected at the end.</p>
+<p>First prepare the debug-enabled QuantLib environment and VS Code launch configurations. Then run the example in order. Focused checkpoints show what to expect at each debugger handoff, and troubleshooting is collected at the end.</p>
 
 <h2 id="1-prerequisites-prepare-vs-code-and-quantlib">1. Prerequisites: prepare VS Code and QuantLib</h2>
 
@@ -592,21 +592,38 @@
 
 <h3 id="understand-the-control-model-before-pressing-f5">Understand the control model before pressing F5</h3>
 
-<p><strong>There are two independent debug sessions attached to the same operating-system process. There is no unified mixed-language stepper.</strong></p>
+<p>Before starting the workflow, keep in mind that Python and GDB run as <strong>two separate debug sessions attached to the same operating-system process</strong>. VS Code does not combine them into one mixed-language debugger. The Python debugger displays Python frames. GDB displays native frames from the compiled extension and QuantLib library. Breakpoints are how you move your investigation from one debugger to the other.</p>
 
-<p>Python’s debugger understands Python frames. GDB understands native frames in the compiled extension and QuantLib library. Breakpoints provide the handoff between those views.</p>
+<p>The overall control flow is:</p>
 
-<p>Once both sessions have been started, use the dropdown on the debug toolbar to switch the active debugging context between <strong>1. Python (debugpy)</strong> and <strong>2. GDB attach to Python</strong>. This is the session selector, not the launch-configuration dropdown shown above: it lets you choose which already-running debugger’s controls and frames to work with. The Call Stack also shows each session’s current status.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Start Python and pause at entry
+    -&gt; Attach GDB to the same Python process
+    -&gt; Continue Python to the first pricing call
+    -&gt; GDB stops at a native breakpoint
+    -&gt; Inspect or step through C++
+    -&gt; Continue GDB so the native call can return
+    -&gt; Resume Python and continue the script
+</code></pre></div></div>
+
+<p>In this workflow, F5 starts or continues the <strong>currently selected</strong> debug session. Before using it, confirm which session and frame are selected. The Python session should be started first and left paused at entry while you attach GDB to its PID. Once both sessions are active, use the debug toolbar dropdown to switch between <strong>1. Python (debugpy)</strong> and <strong>2. GDB attach to Python</strong>. This dropdown selects an active debugging session. It is different from the launch-configuration dropdown used to start or attach a debugger.</p>
+
+<h4 id="how-to-read-the-call-stack">How to read the CALL STACK</h4>
+
+<p>The <strong>CALL STACK</strong> view lists frames for each debug session. It is not a single chronological stack that merges Python and C++ calls. Under <strong>1. Python (debugpy)</strong>, you can follow Python frames such as <code class="language-plaintext highlighter-rouge">test_debug.py</code> and <code class="language-plaintext highlighter-rouge">QuantLib.py</code>. Under <strong>2. GDB attach to Python</strong>, you can inspect native frames such as the SWIG wrapper and QuantLib’s C++ functions when GDB is stopped.</p>
+
+<p>A frame represents a function call at a particular point in that session’s execution. Selecting a frame changes the source location and variables shown by VS Code. Selecting the session determines which debugger receives commands such as Continue, <strong>F10</strong>, and <strong>F11</strong>. Check both the session and the highlighted frame before stepping or inspecting values.</p>
+
+<p>When GDB stops at a C++ breakpoint, the Python call is waiting for the native function to return. Select the C++ session to inspect or continue the native code. After continuing GDB, switch back to the Python session to resume the script. This is why the session names and frame selection matter even though both sessions are attached to the same PID. The Call Stack helps you see which debugger currently owns the stop.</p>
 
 <figure>
   <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/007_vscode_debug_session_switcher.png" alt="VS Code debug toolbar with the Python and GDB sessions listed in the session-switching dropdown and both sessions visible in Call Stack" />
-  <figcaption>After both sessions are running, use the debug toolbar dropdown to switch between the Python and GDB debugging contexts.</figcaption>
+  <figcaption>After both sessions are running, use the debug toolbar dropdown to switch between the Python and GDB debugging contexts. The Call Stack lists the frames belonging to each session.</figcaption>
 </figure>
 
 <p>This distinction explains the most important rule in the walkthrough:</p>
 
 <blockquote>
-  <p><strong>Before continuing or stepping, select the session and frame that own the current stop. When GDB has stopped the process, resume the C++ session first. Python cannot finish a pricing call while its process is suspended by GDB.</strong></p>
+  <p><strong>Before continuing or stepping, select the session and frame that own the current stop. When GDB has stopped the process, resume the C++ session first. Python cannot finish a pricing call while GDB has suspended its process.</strong></p>
 </blockquote>
 
 <h2 id="3-working-example-follow-one-option-through-two-pricing-calls">3. Working example: follow one option through two pricing calls</h2>
@@ -749,7 +766,7 @@ Repriced NPV: 12.416641769134362
 
 <figure>
   <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/008_vscode_debug_console_pid.png" alt="VS Code Debug Console showing the Python process ID returned by the os.getpid expression" />
-  <figcaption>Run the PID expression in the Python Debug Console; the returned number identifies the process to select when attaching GDB.</figcaption>
+  <figcaption>Run the PID expression in the Python Debug Console. The returned number identifies the process to select when attaching GDB.</figcaption>
 </figure>
 
 <p>Do not choose a process merely because its name contains <code class="language-plaintext highlighter-rouge">python</code>. VS Code may also be running Python debug adapters or launchers, and attaching to one of those would not expose the option’s calculation.</p>
@@ -854,7 +871,7 @@ Repriced NPV: 12.416641769134362
   <figcaption>First Python-to-C++ handoff: GDB stops in the SWIG-generated <code>quantlib_wrap.cpp</code> wrapper at <code>_wrap_Instrument_NPV</code>.</figcaption>
 </figure>
 
-<p>The wrapper marks the boundary between Python and C++; it is not the pricing engine itself. From this stop, either continue the <strong>C++ session</strong> to the regular engine breakpoint or follow the intervening implementation as described below.</p>
+<p>The wrapper marks the boundary between Python and C++. It is not the pricing engine itself. From this stop, either continue the <strong>C++ session</strong> to the regular engine breakpoint or follow the intervening implementation as described below.</p>
 
 <h4 id="follow-the-wrapper-into-quantlib">Follow the wrapper into QuantLib</h4>
 
@@ -900,10 +917,10 @@ Repriced NPV: 12.416641769134362
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>The method requests a calculation, verifies that a value was provided, and returns it. From this point, <strong>F11 performs native C++ stepping</strong>; it does not automatically issue a Python command across the language boundary. Step into <code class="language-plaintext highlighter-rouge">calculate()</code> to follow the instrument’s calculation logic.</p>
+<p>The method requests a calculation, verifies that a value was provided, and returns it. From this point, <strong>F11 performs native C++ stepping</strong>. It does not automatically issue a Python command across the language boundary. Step into <code class="language-plaintext highlighter-rouge">calculate()</code> to follow the instrument’s calculation logic.</p>
 
 <h4 id="moving-beyond-header-files-in-c-debugging">Moving beyond header files in C++ debugging</h4>
-<p>The QuantLib implementation we have followed so far is in header files such as <code class="language-plaintext highlighter-rouge">.hpp</code> or <code class="language-plaintext highlighter-rouge">.h</code>; the SWIG wrapper is generated binding code. To examine the pricing logic in greater detail, continue into the engine’s <code class="language-plaintext highlighter-rouge">.cpp</code> implementation. In this example, pressing <strong>Step Into (F11)</strong> leads to the code below in <code class="language-plaintext highlighter-rouge">instrument.hpp</code>. The <code class="language-plaintext highlighter-rouge">engine_</code> member identifies the pricing engine used for this calculation.</p>
+<p>The QuantLib implementation we have followed so far is in header files such as <code class="language-plaintext highlighter-rouge">.hpp</code> or <code class="language-plaintext highlighter-rouge">.h</code>. The SWIG wrapper is generated binding code. To examine the pricing logic in greater detail, continue into the engine’s <code class="language-plaintext highlighter-rouge">.cpp</code> implementation. In this example, pressing <strong>Step Into (F11)</strong> leads to the code below in <code class="language-plaintext highlighter-rouge">instrument.hpp</code>. The <code class="language-plaintext highlighter-rouge">engine_</code> member identifies the pricing engine used for this calculation.</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kr">inline</span> <span class="kt">void</span> <span class="n">Instrument</span><span class="o">::</span><span class="n">performCalculations</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
       <span class="n">QL_REQUIRE</span><span class="p">(</span><span class="n">engine_</span><span class="p">,</span> <span class="s">"null pricing engine"</span><span class="p">);</span>
@@ -1114,7 +1131,7 @@ Repriced NPV: 12.416641769134362
   <tbody>
     <tr>
       <td>The next debugger step seems wrong</td>
-      <td>Check the selected session and frame before using F5, F10, or F11. These commands apply only to the selected debugging context. F11 does not automatically cross from Python into C++; set a breakpoint in the destination language and switch sessions when it hits.</td>
+      <td>Check the selected session and frame before using F5, F10, or F11. These commands apply only to the selected debugging context. F11 does not automatically cross from Python into C++. Set a breakpoint in the destination language and switch sessions when it hits.</td>
     </tr>
     <tr>
       <td>Python appears frozen during a pricing call</td>
