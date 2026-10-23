@@ -406,9 +406,22 @@
 
                 <!-- Post body -->
                 <article class="post-body" id="post-body-content" aria-label="Article content">
-                  <h2 id="1-start-with-the-vs-code-setup">1. Start with the VS Code setup</h2>
+                  <p>When a Python pricing call enters a compiled library, the Python debugger can show where the call started, but it cannot step through the C++ calculation. This walkthrough follows one QuantLib option from Python, across its SWIG binding, into <code class="language-plaintext highlighter-rouge">AnalyticEuropeanEngine::calculate()</code>, and back again by using two VS Code debug sessions attached to the same process.</p>
 
-<p>For this example, the essential project structure is:</p>
+<p>The workflow is designed to make that handoff repeatable: pause before each pricing call, let GDB stop in the native engine, then resume C++ so Python can continue. You will see the engine run twice, with a spot update between calls.</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  PY["Python script"] --&gt;|"option.NPV()"| SWIG["SWIG binding"]
+  SWIG --&gt; QL["QuantLib C++ engine"]
+  QL --&gt;|"NPV result"| SWIG
+  SWIG --&gt; PY
+</code></pre>
+
+<p>First prepare the debug-enabled QuantLib environment and VS Code launch configurations. Then run the example in order; focused checkpoints show what to expect at each debugger handoff. Troubleshooting is collected at the end.</p>
+
+<h2 id="1-prerequisites-prepare-vs-code-and-quantlib">1. Prerequisites: prepare VS Code and QuantLib</h2>
+
+<p>For this example, the essential project structure is shown below. The operative system used for this post is any Linux distribution under Debian family such as Ubuntu, Kali or any other.</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>QuantLib_Debug/
 ├── .vscode/
@@ -416,7 +429,7 @@
 └── test_debug.py
 </code></pre></div></div>
 
-<p>Install the <strong>Python</strong>, <strong>Python Debugger</strong>, and <strong>Microsoft C/C++</strong> extensions. The Python Debugger extension provides the <code class="language-plaintext highlighter-rouge">debugpy</code> session, while the C/C++ extension connects VS Code to GDB for native debugging.</p>
+<p>This walkthrough uses two VS Code debugging sessions attached to the same Python process: one follows the Python code, and the other follows execution into QuantLib’s native C++ code. Install the <strong>Python</strong>, <strong>Python Debugger</strong>, and <strong>Microsoft C/C++</strong> extensions to work with both sides. The Python Debugger extension provides the <code class="language-plaintext highlighter-rouge">debugpy</code> session, while the C/C++ extension connects VS Code to <code class="language-plaintext highlighter-rouge">GDB</code> for native debugging.</p>
 
 <p>If installing extensions is new to you, watch <a href="https://www.youtube.com/watch?v=SKcZ3cwX8lA" target="_blank" rel="noopener noreferrer">Using extensions in Visual Studio Code</a>, the video featured in the <a href="https://code.visualstudio.com/docs/introvideos/extend" target="_blank" rel="noopener noreferrer">official VS Code introductory tutorial</a>. It demonstrates how to find extensions, install them from the Extensions view, and disable them when they are not needed. On Linux, open that view with <strong>Ctrl+Shift+X</strong>, search for each extension, check its publisher, and select <strong>Install</strong>.</p>
 
@@ -424,15 +437,25 @@
 
 <p>The objective here is different: <strong>start with a Python pricing call, stop inside QuantLib’s C++ engine, and return to Python in a predictable order</strong>.</p>
 
-<blockquote>
-  <p><strong>Verification scope.</strong> The accompanying example’s README reports native GDB checks confirming that the debug QuantLib library loads, the matching QuantLib and generated SWIG sources are found, and the pricing-engine breakpoint is reached for both pricing calls. It also states that the full interactive two-debugger workflow still needs to be exercised in VS Code. The sequence below follows that documented workflow, rather than claiming an end-to-end interactive test that has not been completed.</p>
-</blockquote>
-
 <h3 id="select-the-interpreter-and-check-the-paths">Select the interpreter and check the paths</h3>
 
-<p>Use <strong>Python: Select Interpreter</strong> from the Command Palette and select the environment containing your debug-enabled QuantLib package.</p>
+<p>To choose the Python environment in VS Code:</p>
 
-<p>The original example uses these paths:</p>
+<ol>
+  <li>Open the project folder that contains <code class="language-plaintext highlighter-rouge">test_debug.py</code>.</li>
+  <li>Open the Command Palette with <strong>Ctrl+Shift+P</strong>.</li>
+  <li>Type <strong>Python: Select Interpreter</strong> and select that command.</li>
+  <li>Choose the virtual environment that contains your debug-enabled QuantLib package. If it is not listed, select <strong>Enter interpreter path…</strong> and browse to the environment’s Python executable.</li>
+</ol>
+
+<p>The interpreter list appears as shown below:</p>
+
+<figure>
+  <img src="https://code.visualstudio.com/assets/docs/python/environments/interpreters-list.png" alt="Python interpreter choices in Visual Studio Code" />
+  <figcaption>Image obtained from the official Visual Studio Code website.</figcaption>
+</figure>
+
+<p>The example uses these paths that you can check manually just by running the command <code class="language-plaintext highlighter-rouge">ls &lt;path-to-check&gt;</code> (they should not be empty):</p>
 
 <table>
   <thead>
@@ -468,9 +491,9 @@
 
 <p>Replace the user-specific paths with your own throughout the configuration below. Selecting an interpreter in the editor does not override an explicit <code class="language-plaintext highlighter-rouge">python</code> path in a launch configuration, so keep the two aligned.</p>
 
-<h3 id="configure-two-sessions-for-one-process">Configure two sessions for one process</h3>
+<h2 id="2-configure-the-two-debugger-sessions">2. Configure the two debugger sessions</h2>
 
-<p>We need two views of the calculation, not two copies of the script. One session follows the Python statements that construct and reprice the option. The other inspects the compiled C++ code that performs the calculation. Both target <strong>the same Python process</strong>.</p>
+<p>We need two views of the calculation, not two copies of the script. One session follows the Python statements that construct and reprice the option. The other inspects the compiled C++ code that performs the calculation. Both target <strong>the same Python process</strong>. An introduction to debugging in VS Code may be found in <a href="https://www.youtube.com/watch?v=06eQ41TuJRs" target="_blank" rel="noopener noreferrer">this Youtube link</a>.</p>
 
 <p><strong><code class="language-plaintext highlighter-rouge">debugpy</code> provides the Python debugging implementation.</strong> The Python Debugger extension uses it to manage Python breakpoints, display Python variables and stack frames, and step through <code class="language-plaintext highlighter-rouge">test_debug.py</code>. In this experiment, it lets us pause before each <code class="language-plaintext highlighter-rouge">NPV()</code> call and control when the spot quote changes. It does not provide source-level stepping through QuantLib’s compiled C++ implementation. See the <a href="https://code.visualstudio.com/docs/python/debugging" target="_blank" rel="noopener noreferrer">official Python debugging guide</a> and the <a href="https://github.com/microsoft/debugpy" target="_blank" rel="noopener noreferrer">debugpy documentation</a> for configuration and implementation details.</p>
 
@@ -507,7 +530,7 @@
 
 <p>When Python pauses before <code class="language-plaintext highlighter-rouge">option.NPV()</code>, its debugger controls the next Python step. If GDB then stops inside the pricing engine, that Python step remains unfinished until the native call returns. Continuing the C++ session allows the calculation to finish so Python can reach its next stop.</p>
 
-<p>Create <code class="language-plaintext highlighter-rouge">.vscode/launch.json</code> with the following two configurations:</p>
+<p>Following the <a href="https://www.youtube.com/watch?v=06eQ41TuJRs" target="_blank" rel="noopener noreferrer">Youtube video</a> mentioned before, let’s create an appropriate <code class="language-plaintext highlighter-rouge">.vscode/launch.json</code> with the following two configurations so that enables us to use both debuggers:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2.0"</span><span class="p">,</span><span class="w">
@@ -573,13 +596,20 @@
 
 <p>Python’s debugger understands Python frames. GDB understands native frames in the compiled extension and QuantLib library. Breakpoints provide the handoff between those views.</p>
 
+<p>Once both sessions have been started, use the dropdown on the debug toolbar to switch the active debugging context between <strong>1. Python (debugpy)</strong> and <strong>2. GDB attach to Python</strong>. This is the session selector, not the launch-configuration dropdown shown above: it lets you choose which already-running debugger’s controls and frames to work with. The Call Stack also shows each session’s current status.</p>
+
+<figure>
+  <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/007_vscode_debug_session_switcher.png" alt="VS Code debug toolbar with the Python and GDB sessions listed in the session-switching dropdown and both sessions visible in Call Stack" />
+  <figcaption>After both sessions are running, use the debug toolbar dropdown to switch between the Python and GDB debugging contexts.</figcaption>
+</figure>
+
 <p>This distinction explains the most important rule in the walkthrough:</p>
 
 <blockquote>
   <p><strong>Before continuing or stepping, select the session and frame that own the current stop. When GDB has stopped the process, resume the C++ session first. Python cannot finish a pricing call while its process is suspended by GDB.</strong></p>
 </blockquote>
 
-<h2 id="2-the-goal-follow-one-option-through-two-pricing-calls">2. The goal: follow one option through two pricing calls</h2>
+<h2 id="3-working-example-follow-one-option-through-two-pricing-calls">3. Working example: follow one option through two pricing calls</h2>
 
 <p>The example deliberately keeps the financial setup small. It constructs a European call with a strike of 100, an initial spot of 100, a flat dividend yield of 2%, a flat risk-free rate of 5%, and constant volatility of 20%. The evaluation date is May 15, 1998, and exercise is on May 17, 1999.</p>
 
@@ -642,7 +672,7 @@ Repriced NPV: 12.416641769134362
 
 <p>The increase is consistent with raising spot for this vanilla call under the stated assumptions. Matching the output is useful, but it does not prove that either debugger has reached the intended code. We will verify that through the breakpoint sequence.</p>
 
-<h2 id="3-place-breakpoints-on-both-sides-of-the-boundary">3. Place breakpoints on both sides of the boundary</h2>
+<h2 id="4-set-breakpoints-on-both-sides-of-the-boundary">4. Set breakpoints on both sides of the boundary</h2>
 
 <h3 id="python-breakpoints">Python breakpoints</h3>
 
@@ -677,11 +707,26 @@ Repriced NPV: 12.416641769134362
 
 <p>A Python line breakpoint stops <strong>before that line executes</strong>. If you edit the script, locate the statements rather than relying on the original line numbers.</p>
 
-<h2 id="4-start-python-then-attach-gdb">4. Start Python, then attach GDB</h2>
+<h2 id="5-run-the-workflow-start-python-then-attach-gdb">5. Run the workflow: start Python, then attach GDB</h2>
 
 <h3 id="step-1-launch-only-the-python-session">Step 1. Launch only the Python session</h3>
 
-<p>Open <strong>Run and Debug</strong>, select <strong>1. Python (debugpy)</strong>, and press <strong>F5</strong>. Because <code class="language-plaintext highlighter-rouge">stopOnEntry</code> is enabled, Python should pause before the script starts executing its pricing setup.</p>
+<p>After saving <code class="language-plaintext highlighter-rouge">launch.json</code>, use these steps to open the launch-configuration list:</p>
+
+<ol>
+  <li>Open <strong>Run and Debug</strong> by clicking its play-and-bug icon in the Activity Bar, or press <strong>Ctrl+Shift+D</strong>.</li>
+  <li>At the top of the Run and Debug panel, click the configuration dropdown. In the screenshot, it currently displays <strong>1. Python (debugpy)</strong>.</li>
+  <li>Choose <strong>1. Python (debugpy)</strong> to launch the Python script, or <strong>2. GDB attach to Python</strong> to attach GDB to the running process.</li>
+</ol>
+
+<p>The screenshot shows the dropdown open with both configurations available.</p>
+
+<figure>
+  <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/006_vscode_debug_configurations.png" alt="VS Code Run and Debug view with the Python and GDB launch configurations in the configuration dropdown" />
+  <figcaption>Run and Debug configuration selector showing the Python and GDB sessions configured above.</figcaption>
+</figure>
+
+<p>Because <code class="language-plaintext highlighter-rouge">stopOnEntry</code> is enabled, Python should pause before the script starts executing its pricing setup.</p>
 
 <p><strong>Checkpoint:</strong> VS Code should show a paused Python session and a highlighted entry statement. Leave it paused while you identify the process and attach GDB.</p>
 
@@ -689,12 +734,23 @@ Repriced NPV: 12.416641769134362
 
 <h3 id="step-2-identify-the-actual-python-process">Step 2. Identify the actual Python process</h3>
 
-<p>In <strong>CALL STACK</strong>, select a frame belonging to <strong>1. Python (debugpy)</strong>. A frame represents a particular function call in the paused program. With that Python context selected, enter the following expression in the <strong>Debug Console</strong>:</p>
+<p>To open the <strong>Debug Console</strong> and run an expression in the paused Python session:</p>
+
+<ol>
+  <li>In the VS Code menu, select <strong>View &gt; Debug Console</strong>. You can also open the Command Palette with <strong>Ctrl+Shift+P</strong>, type <strong>Debug Console</strong>, and select <strong>View: Debug Console</strong>.</li>
+  <li>In <strong>CALL STACK</strong>, select a frame belonging to <strong>1. Python (debugpy)</strong>. A frame represents a particular function call in the paused program.</li>
+  <li>Click the Debug Console prompt and enter this expression:</li>
+</ol>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">__import__</span><span class="p">(</span><span class="sh">"</span><span class="s">os</span><span class="sh">"</span><span class="p">).</span><span class="nf">getpid</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Record the returned number. It is the <strong>process identifier (PID)</strong> of the Python interpreter running this script, and it is the identifier you will select when attaching GDB.</p>
+
+<figure>
+  <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/008_vscode_debug_console_pid.png" alt="VS Code Debug Console showing the Python process ID returned by the os.getpid expression" />
+  <figcaption>Run the PID expression in the Python Debug Console; the returned number identifies the process to select when attaching GDB.</figcaption>
+</figure>
 
 <p>Do not choose a process merely because its name contains <code class="language-plaintext highlighter-rouge">python</code>. VS Code may also be running Python debug adapters or launchers, and attaching to one of those would not expose the option’s calculation.</p>
 
@@ -707,6 +763,13 @@ Repriced NPV: 12.416641769134362
   <li>Open the Command Palette and run <strong>Debug: Start Debugging</strong>.</li>
   <li>In the process picker, choose the entry whose PID matches the number recorded in Step 2.</li>
 </ol>
+
+<p>In the <strong>Attach to process</strong> picker, type or locate the PID recorded from the Python Debug Console and select the matching Python process. Confirm that the process path belongs to the virtual environment used for this walkthrough.</p>
+
+<figure>
+  <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/009_vscode_gdb_process_picker.png" alt="VS Code Attach to process picker showing the Python process selected by its PID" />
+  <figcaption>Select the Python process whose PID matches the number recorded from the Debug Console.</figcaption>
+</figure>
 
 <p>You should now see both sessions in <strong>CALL STACK</strong>. From this point onward, the <strong>Python session</strong> means <code class="language-plaintext highlighter-rouge">1. Python (debugpy)</code>, and the <strong>C++ session</strong> means <code class="language-plaintext highlighter-rouge">2. GDB attach to Python</code>.</p>
 
@@ -721,7 +784,7 @@ Repriced NPV: 12.416641769134362
 
 <p>If this is not the state you see, resolve the attachment or pause state before continuing. It is easier to establish the correct starting point than to recover after a pricing call has already run.</p>
 
-<h3 id="step-4-setting-the-first-c-breakpoint">Step 4. Setting the first C++ breakpoint</h3>
+<h3 id="step-4-set-the-first-c-breakpoint">Step 4. Set the first C++ breakpoint</h3>
 
 <p>Once GDB is attached to the Python PID and running, select the <strong>Python session</strong> and continue to the first pricing breakpoint, line 32 in the supplied script:</p>
 
@@ -758,8 +821,15 @@ Repriced NPV: 12.416641769134362
   <li>With the C++ session selected, enter the following in its <strong>Debug Console</strong>:</li>
 </ol>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-exec tbreak _wrap_Instrument_NPV
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-exec</span> tbreak _wrap_Instrument_NPV
 </code></pre></div></div>
+
+<p>The Debug Console should confirm that GDB set a temporary breakpoint for this symbol. The screenshot shows the command and the resulting confirmation:</p>
+
+<figure>
+  <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/010_vscode_swig_temporary_breakpoint.png" alt="VS Code C++ Debug Console with a temporary breakpoint set on the SWIG _wrap_Instrument_NPV function" />
+  <figcaption>GDB confirms the temporary SWIG-entry breakpoint and shows its source location in the generated wrapper.</figcaption>
+</figure>
 
 <p><code class="language-plaintext highlighter-rouge">tbreak</code> creates a <strong>temporary breakpoint</strong>, which GDB automatically removes after it is hit. The symbol name comes from this generated binding, so it should not be assumed to be identical in every SWIG build. If GDB cannot resolve it, check the loaded extension’s symbols and matching generated source.</p>
 
@@ -769,34 +839,59 @@ Repriced NPV: 12.416641769134362
 
 <p><strong>Checkpoint:</strong> Python is paused in <code class="language-plaintext highlighter-rouge">QuantLib.py</code>, GDB is running on the same PID, and the temporary SWIG-entry breakpoint is armed. Setting the breakpoint does not itself execute the Python call.</p>
 
-<h2 id="5-follow-the-first-python-to-c-handoff">5. Follow the first Python-to-C++ handoff</h2>
+<h2 id="6-follow-the-first-python-to-c-handoff">6. Follow the first Python-to-C++ handoff</h2>
 
 <h3 id="step-5-execute-the-wrapper-call-and-stop-in-c">Step 5. Execute the wrapper call and stop in C++</h3>
 
-<p>With the <strong>Python session selected</strong>, press <strong>F10 (Step Over)</strong>.</p>
+<p>With the <strong>Python session selected</strong>, press <strong>F10 (Step Over)</strong> to execute the current line.</p>
 
-<p>This executes the call to <code class="language-plaintext highlighter-rouge">_QuantLib.Instrument_NPV(self)</code>. <strong>Step Over does not disable GDB’s breakpoints.</strong> GDB should first stop at <code class="language-plaintext highlighter-rouge">_wrap_Instrument_NPV</code> in the generated C++ wrapper. Select the <strong>C++ session/frame</strong> to inspect that entry point. The temporary breakpoint is removed after this hit.</p>
+<p>The current line invokes <code class="language-plaintext highlighter-rouge">_QuantLib.Instrument_NPV(self)</code>. <strong>Step Over does not disable GDB’s breakpoints.</strong> GDB should stop first at <code class="language-plaintext highlighter-rouge">_wrap_Instrument_NPV</code> in the generated C++ wrapper. Select the <strong>C++ session/frame</strong> to inspect this entry point. GDB removes the temporary breakpoint after it is hit.</p>
 
-<p>The wrapper is the language boundary, not the pricing engine itself. At this stop, you can either continue the <strong>C++ session</strong> directly to the regular engine breakpoint or follow the intervening implementation as described below.</p>
+<p>This is the first native C++ stop reached from the Python pricing call. The C++ debugger is paused inside the SWIG-generated <code class="language-plaintext highlighter-rouge">_wrap_Instrument_NPV</code> function in <code class="language-plaintext highlighter-rouge">quantlib_wrap.cpp</code>:</p>
+
+<figure>
+  <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/011_vscode_first_swig_cpp_stop.png" alt="GDB stopped at the _wrap_Instrument_NPV entry point in the generated quantlib_wrap.cpp source file" />
+  <figcaption>First Python-to-C++ handoff: GDB stops in the SWIG-generated <code>quantlib_wrap.cpp</code> wrapper at <code>_wrap_Instrument_NPV</code>.</figcaption>
+</figure>
+
+<p>The wrapper marks the boundary between Python and C++; it is not the pricing engine itself. From this stop, either continue the <strong>C++ session</strong> to the regular engine breakpoint or follow the intervening implementation as described below.</p>
 
 <h4 id="follow-the-wrapper-into-quantlib">Follow the wrapper into QuantLib</h4>
 
-<p>The generated wrapper first converts and checks the Python arguments. The important native call in this build is:</p>
+<p>The generated wrapper first converts and validates the Python arguments. The key native call in this build is:</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">Real</span><span class="p">)((</span><span class="n">Instrument</span> <span class="k">const</span> <span class="o">*</span><span class="p">)</span><span class="n">arg1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NPV</span><span class="p">();</span>
 </code></pre></div></div>
 
-<p>In plain language, the wrapper has recovered a pointer to the underlying C++ instrument and is asking that instrument for its value. There are two ways to reach the implementation behind this call:</p>
+<p>In the <strong>C++ session</strong>, use <strong>Step Over</strong> from the debugger controls (or press <strong>F10</strong>) until execution reaches this call. Alternatively, set a breakpoint on the call and press <strong>Continue (F5)</strong> to run to it. Unlike F10, F5 continues execution until it reaches a breakpoint or another stop condition.</p>
+
+<p>The screenshot shows the debugger paused at this statement:</p>
+
+<figure>
+  <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/012_vscode_wrapper_npv_call.png" alt="GDB paused on the Instrument NPV call inside the generated quantlib_wrap.cpp wrapper" />
+  <figcaption>Step through the SWIG wrapper to reach the call from generated binding code into QuantLib's C++ <code>Instrument::NPV()</code>.</figcaption>
+</figure>
+
+<p>In practical terms, the wrapper has obtained a pointer to the underlying C++ instrument and is requesting its value. You can reach the implementation behind this call in either of two ways:</p>
 
 <ul>
-  <li><strong>Inspect the conversion work:</strong> use <strong>F10 in the C++ session</strong> until the call above is the next statement to execute, then press <strong>F11</strong> to enter <code class="language-plaintext highlighter-rouge">NPV()</code>.</li>
-  <li><strong>Skip the conversion work:</strong> while stopped in the wrapper, set another temporary breakpoint in the <strong>C++ session’s Debug Console</strong>, then continue that session:</li>
+  <li>
+    <p><strong>Inspect the conversion work:</strong> use <strong>F10 in the C++ session</strong> until the call above is the next statement, then press <strong>F11</strong> to enter <code class="language-plaintext highlighter-rouge">NPV()</code>. Execution should stop in QuantLib’s <code class="language-plaintext highlighter-rouge">instrument.hpp</code> header at the inline implementation of <code class="language-plaintext highlighter-rouge">Instrument::NPV()</code>.</p>
+
+    <figure>
+  <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/013_vscode_instrument_npv_header.png" alt="GDB stepping from the SWIG wrapper into Instrument::NPV in the QuantLib instrument.hpp header" />
+  <figcaption>After stepping into the wrapper's <code>NPV()</code> call, the C++ debugger is in the inline <code>Instrument::NPV()</code> implementation in <code>instrument.hpp</code>.</figcaption>
+</figure>
+  </li>
+  <li>
+    <p><strong>Skip the conversion work:</strong> while stopped in the wrapper, set another temporary breakpoint in the <strong>C++ session’s Debug Console</strong>, then continue the session:</p>
+  </li>
 </ul>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-exec tbreak QuantLib::Instrument::NPV
 </code></pre></div></div>
 
-<p>With matching symbols and sources, GDB should stop in <code class="language-plaintext highlighter-rouge">Instrument::NPV()</code>. Its implementation is:</p>
+<p>With matching symbols and source files available, GDB should stop in <code class="language-plaintext highlighter-rouge">Instrument::NPV()</code>. Its implementation is:</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="n">Real</span> <span class="n">Instrument</span><span class="o">::</span><span class="n">NPV</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
     <span class="n">calculate</span><span class="p">();</span>
@@ -805,9 +900,51 @@ Repriced NPV: 12.416641769134362
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>The method requests the calculation, checks that a value was supplied, and returns it. From here, <strong>F11 is native C++ stepping</strong>, not a Python command crossing the language boundary automatically. Step into <code class="language-plaintext highlighter-rouge">calculate()</code> to follow the instrument’s calculation logic.</p>
+<p>The method requests a calculation, verifies that a value was provided, and returns it. From this point, <strong>F11 performs native C++ stepping</strong>; it does not automatically issue a Python command across the language boundary. Step into <code class="language-plaintext highlighter-rouge">calculate()</code> to follow the instrument’s calculation logic.</p>
 
-<p>For this unexpired option when recalculation is required, the relevant path is:</p>
+<h4 id="moving-beyond-header-files-in-c-debugging">Moving beyond header files in C++ debugging</h4>
+<p>The QuantLib implementation we have followed so far is in header files such as <code class="language-plaintext highlighter-rouge">.hpp</code> or <code class="language-plaintext highlighter-rouge">.h</code>; the SWIG wrapper is generated binding code. To examine the pricing logic in greater detail, continue into the engine’s <code class="language-plaintext highlighter-rouge">.cpp</code> implementation. In this example, pressing <strong>Step Into (F11)</strong> leads to the code below in <code class="language-plaintext highlighter-rouge">instrument.hpp</code>. The <code class="language-plaintext highlighter-rouge">engine_</code> member identifies the pricing engine used for this calculation.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kr">inline</span> <span class="kt">void</span> <span class="n">Instrument</span><span class="o">::</span><span class="n">performCalculations</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+      <span class="n">QL_REQUIRE</span><span class="p">(</span><span class="n">engine_</span><span class="p">,</span> <span class="s">"null pricing engine"</span><span class="p">);</span>
+      <span class="n">engine_</span><span class="o">-&gt;</span><span class="n">reset</span><span class="p">();</span>
+      <span class="n">setupArguments</span><span class="p">(</span><span class="n">engine_</span><span class="o">-&gt;</span><span class="n">getArguments</span><span class="p">());</span>
+      <span class="n">engine_</span><span class="o">-&gt;</span><span class="n">getArguments</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">validate</span><span class="p">();</span>
+      <span class="n">engine_</span><span class="o">-&gt;</span><span class="n">calculate</span><span class="p">();</span>
+      <span class="n">fetchResults</span><span class="p">(</span><span class="n">engine_</span><span class="o">-&gt;</span><span class="n">getResults</span><span class="p">());</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>How can we identify the pricing engine in use? The Python code that constructs the instrument can provide a clue, but we can also inspect the engine directly. While paused in the code above, enter the following command in the C++ Debug Console. It calls <code class="language-plaintext highlighter-rouge">get()</code> and prints the object referenced by <code class="language-plaintext highlighter-rouge">engine_</code>. In this example, the output identifies the concrete pricing engine as <code class="language-plaintext highlighter-rouge">QuantLib::AnalyticEuropeanEngine</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-exec</span> print <span class="k">*</span>engine_.get<span class="o">()</span>
+</code></pre></div></div>
+
+<figure>
+  <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/014_vscode_cpp_engine_debugging.png" alt="VS Code paused in Instrument::performCalculations with the C++ debugger inspecting the attached AnalyticEuropeanEngine" />
+  <figcaption>The C++ debugger is stopped in <code>Instrument::performCalculations()</code>, with the attached pricing engine inspected in the Debug Console.</figcaption>
+</figure>
+
+<h4 id="setting-a-breakpoint-in-the-pricing-engines-cpp-file">Setting a breakpoint in the pricing engine’s .cpp file</h4>
+<p>Now that we have identified the engine, we can set a breakpoint in its function and inspect the implementation in a <code class="language-plaintext highlighter-rouge">.cpp</code> file. Enter the command below in the C++ Debug Console. Include <code class="language-plaintext highlighter-rouge">const</code> in the function signature so that GDB can resolve the breakpoint correctly.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-exec</span> <span class="nb">break </span>QuantLib::AnalyticEuropeanEngine::calculate<span class="o">()</span> const
+</code></pre></div></div>
+
+<figure>
+  <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/015_vscode_pricing_engine_breakpoint.png" alt="VS Code C++ Debug Console setting a breakpoint in AnalyticEuropeanEngine::calculate() const" />
+  <figcaption>Set a breakpoint on the const-qualified <code>AnalyticEuropeanEngine::calculate()</code> implementation in the C++ Debug Console.</figcaption>
+</figure>
+
+<p>Next, continue to the breakpoint. The debugger should stop in the pricing engine’s implementation, where you can step through the code and inspect how the calculation proceeds.</p>
+
+<figure>
+  <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/016_vscode_pricing_engine_breakpoint_hit.png" alt="VS Code stopped at the AnalyticEuropeanEngine::calculate breakpoint in analytic_european_engine.cpp" />
+  <figcaption>The C++ debugger reaches the breakpoint in <code>AnalyticEuropeanEngine::calculate()</code> and pauses in the pricing engine's source.</figcaption>
+</figure>
+
+<h4 id="execution-path-through-the-debuggers">Execution path through the debuggers</h4>
+<p>For this unexpired option, when recalculation is required, execution follows this path:</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python: option.NPV()
     -&gt; Python wrapper: _QuantLib.Instrument_NPV(self)
@@ -820,38 +957,38 @@ Repriced NPV: 12.416641769134362
     -&gt; AnalyticEuropeanEngine::calculate()
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">LazyObject</code> manages whether a cached result can be reused. <code class="language-plaintext highlighter-rouge">performCalculations()</code> prepares the engine’s arguments, invokes the engine, and retrieves its results. At <strong><code class="language-plaintext highlighter-rouge">engine_-&gt;calculate()</code></strong>, press <strong>F11</strong> to follow the virtual call to the engine actually attached to the instrument. A virtual call selects the concrete implementation at runtime, so <strong>you do not need to know its class name beforehand</strong>.</p>
+<p><code class="language-plaintext highlighter-rouge">LazyObject</code> determines whether a cached result can be reused. <code class="language-plaintext highlighter-rouge">performCalculations()</code> prepares the engine’s arguments, invokes the engine, and retrieves its results. At <strong><code class="language-plaintext highlighter-rouge">engine_-&gt;calculate()</code></strong>, press <strong>F11</strong> to follow the virtual call to the engine attached to the instrument. Because virtual dispatch selects the concrete implementation at runtime, <strong>you do not need to know the engine’s class name in advance</strong>.</p>
 
-<p>The path is conditional rather than universal. An expired instrument can take the expiry branch, while a cached or frozen calculation can bypass the engine. Compiler inlining and the available debug information can also affect which source-level stops GDB exposes.</p>
+<p>This path depends on the instrument’s state. An expired instrument may take the expiry branch, while a cached or frozen calculation may bypass the engine. Compiler inlining and available debug information can also affect which source-level stops GDB exposes.</p>
 
-<p>Whether you stepped through the calls or continued to the regular breakpoint, the next shared checkpoint is the pricing engine:</p>
+<p>Whether you stepped through the calls or continued to the regular breakpoint, the next checkpoint is the pricing engine:</p>
 
-<p><strong>Checkpoint:</strong> VS Code should show a native stop in the engine’s C++ source. Select that frame in the <strong>C++ session</strong> before inspecting variables or stepping further.</p>
+<p><strong>Checkpoint:</strong> VS Code should be paused in the engine’s C++ source. Before inspecting variables or stepping further, select the relevant frame in the <strong>C++ session</strong>.</p>
 
-<p>You can now inspect <code class="language-plaintext highlighter-rouge">this</code>, the current engine object, and expand its available members. As you advance through the function, inspect local variables after the statements that initialize them. This is where you can connect the Python model inputs to the quantities used by the pricing implementation.</p>
+<p>You can now inspect <code class="language-plaintext highlighter-rouge">this</code>, the current engine object, and its members. As you step through the function, inspect local variables after they are initialized. This helps connect the model inputs created in Python to the quantities used by the pricing implementation.</p>
 
-<p>Use <strong>F10</strong> to execute the next C++ statement without entering a called function, or <strong>F11</strong> to step into a C++ function when its source is available. For the first pass, keep the investigation short so that the return to Python remains easy to follow.</p>
+<p>Use <strong>F10</strong> to execute the next C++ statement without entering a called function, or <strong>F11</strong> to step into a C++ function when its source is available. On the first pass, keep the investigation focused so that the handoff back to Python remains easy to follow.</p>
 
-<p>The Python session may still appear to be running. That does not mean it has passed the pricing line. Its step-over is waiting for a native call that GDB has suspended.</p>
+<p>The Python session may still appear to be running, but this does not mean it has advanced past the pricing line. Its step-over is waiting for the native call that GDB has paused.</p>
 
 <blockquote>
-  <p><strong>Avoid calling <code class="language-plaintext highlighter-rouge">option.NPV()</code> from Watches or the Debug Console during this exercise.</strong> Evaluating it can trigger another calculation or use a cached result, making it harder to interpret the intended sequence. Inspect existing values rather than introducing extra pricing calls.</p>
+  <p><strong>Avoid calling <code class="language-plaintext highlighter-rouge">option.NPV()</code> from Watches or the Debug Console during this exercise.</strong> Evaluating it can trigger another calculation or return a cached result, which can make the intended sequence harder to follow. Inspect existing values instead of introducing additional pricing calls.</p>
 </blockquote>
 
 <h3 id="step-6-let-the-native-calculation-return">Step 6. Let the native calculation return</h3>
 
-<p>With the <strong>C++ session selected</strong>, press <strong>Continue</strong>.</p>
+<p>With the <strong>C++ session selected</strong>, press <strong>Continue</strong> to let the native calculation finish.</p>
 
-<p>This allows the native calculation to finish and return its result through the SWIG wrapper. Python can then complete its pending step in <code class="language-plaintext highlighter-rouge">QuantLib.py</code>. Select the <strong>Python session</strong> and use <strong>Continue</strong> to reach the next explicit Python breakpoint:</p>
+<p>The result returns through the SWIG wrapper, allowing Python to complete its pending step in <code class="language-plaintext highlighter-rouge">QuantLib.py</code>. Select the <strong>Python session</strong> and press <strong>Continue</strong> to reach the next explicit Python breakpoint:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">spot</span><span class="p">.</span><span class="nf">setValue</span><span class="p">(</span><span class="mf">105.0</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><strong>Checkpoint:</strong> the spot-update statement should now be highlighted in Python. It has not executed yet. Select the <strong>Python session/frame</strong> before issuing the next step.</p>
+<p><strong>Checkpoint:</strong> Python should now highlight the spot-update statement. It has not executed yet. Select the <strong>Python session/frame</strong> before taking the next step.</p>
 
-<p>If another native breakpoint interrupts the return, inspect that stop and continue the C++ session first. Do not try to finish the Python step while GDB still holds the process paused.</p>
+<p>If another native breakpoint interrupts the return, inspect it and continue the C++ session first. Do not attempt to complete the Python step while GDB has the process paused.</p>
 
-<h2 id="6-change-spot-and-repeat-the-handoff">6. Change spot and repeat the handoff</h2>
+<h2 id="7-change-spot-and-repeat-the-handoff">7. Change spot and repeat the handoff</h2>
 
 <h3 id="step-7-execute-the-input-update">Step 7. Execute the input update</h3>
 
@@ -955,72 +1092,54 @@ Repriced NPV: 12.416641769134362
   </tbody>
 </table>
 
-<h2 id="7-keep-the-breakpoint-sequence-intact">7. Keep the breakpoint sequence intact</h2>
-
-<p>When the sequence becomes confusing, first check which debugger owns the current stop. A pricing call can look stalled simply because the other session is waiting for you to resume it.</p>
-
-<ol>
-  <li><strong>Check the selected session and frame before F5, F10, or F11.</strong> The command applies to the selected debugging context.</li>
-  <li><strong>Resume C++ first whenever GDB owns the stop.</strong> Python cannot complete a call while its process is suspended.</li>
-  <li><strong>Do not expect F11 to bridge Python and C++ automatically.</strong> Place a breakpoint in the destination language and switch sessions when it is hit.</li>
-  <li><strong>Keep both debuggers attached to the same PID.</strong> If you restart Python, obtain the new PID and reattach GDB.</li>
-  <li><strong>Avoid extra stops while learning the sequence.</strong> Shared-library event stops and unrelated breakpoints can make the handoff harder to follow.</li>
-  <li><strong>Remember QuantLib’s caching behavior.</strong> A repeated request is not necessarily a repeated engine calculation.</li>
-</ol>
-
-<p>The GDB-only configuration in the original project is useful when you want to investigate C++ execution without managing a Python debugger. It does not activate Python breakpoints, so it is not a substitute for this two-session workflow.</p>
-
-<h2 id="8-troubleshooting-the-setup">8. Troubleshooting the setup</h2>
-
-<h3 id="the-c-breakpoint-never-becomes-verified">The C++ breakpoint never becomes verified</h3>
-
-<p>Before the QuantLib import, a pending breakpoint can be expected. If it remains unresolved when Python reaches the first NPV line, the import has already happened and it is time to inspect the native setup.</p>
-
-<p>Pause the <strong>C++ session</strong> if it is running, select one of its frames, and enter the following in its <strong>Debug Console</strong>:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-exec info sharedlibrary
-</code></pre></div></div>
-
-<p>Look for the loaded QuantLib library and check its path. A successful Python import only establishes that a package was found. It does not establish that the process loaded your intended debug library.</p>
-
-<p>Confirm that the QuantLib library and SWIG extension contain debug information and that their sources match the builds. Merely opening the expected C++ file in the editor does not connect it to the loaded binary. After these checks, continue the <strong>C++ session</strong> before resuming the Python walkthrough.</p>
-
-<h3 id="gdb-cannot-find-the-source-files">GDB cannot find the source files</h3>
-
-<p>Debug information records the source paths used during compilation. If the source tree has moved, GDB may know the function and line number but be unable to open the file. Add a <code class="language-plaintext highlighter-rouge">sourceFileMap</code> property to the C++ attach configuration to translate the old paths to the current ones. For example:</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"sourceFileMap"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"/original/build/location/QuantLib"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/current/source/location/QuantLib"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Replace both example paths with your own, keeping the original build path on the left and the current source location on the right. If needed, add a separate mapping for the QuantLib-SWIG tree containing the generated wrapper. A path mapping locates source files, but it cannot make a different source version match the compiled code.</p>
-
-<h3 id="python-appears-frozen">Python appears frozen</h3>
-
-<p>Look in <strong>CALL STACK</strong> before pressing Continue repeatedly. If the <strong>C++ session is stopped</strong>, the native debugger may be holding the process while Python waits for the pricing call to return. Select the C++ frame and continue that session first.</p>
-
-<p>If both sessions are paused immediately after attaching, first let GDB continue, then select Python and resume from its entry pause.</p>
-
-<h3 id="the-first-engine-breakpoint-hits-but-the-second-does-not">The first engine breakpoint hits, but the second does not</h3>
-
-<p>Check the sequence in order: did Python execute <code class="language-plaintext highlighter-rouge">spot.setValue(105.0)</code>, did it reach the repricing statement, and did you press F10 in the Python session? Then confirm that GDB is still attached to the same PID, is running, and has its engine breakpoint enabled.</p>
-
-<p>Do not use repeated calls with unchanged inputs as the test. Cached results can bypass the engine even when the debugger is working correctly.</p>
-
-<h3 id="attaching-gdb-is-denied">Attaching GDB is denied</h3>
-
-<p>An attachment error can occur before any QuantLib code is involved. Check that the selected PID belongs to the intended Python process, then check process ownership and the machine’s Linux <code class="language-plaintext highlighter-rouge">ptrace</code> policy. The example’s README records <code class="language-plaintext highlighter-rouge">ptrace_scope</code> as <code class="language-plaintext highlighter-rouge">0</code> on its inspected machine, but that observation does not establish permission on another system.</p>
-
-<p>Follow your system’s approved debugging policy rather than broadly weakening security settings to make an attach succeed.</p>
-
 <h2 id="the-result-an-explainable-path-from-python-to-the-pricing-engine">The result: an explainable path from Python to the pricing engine</h2>
 
-<p>The useful outcome is not simply having two debusg sessions open. It is being able to stop before a financial calculation, inspect the native implementation that produces it, and return to the Python code that consumes the result.</p>
+<p>The useful outcome is not simply having two debug sessions open. It is being able to stop before a financial calculation, inspect the native implementation that produces it, and return to the Python code that consumes the result.</p>
 
 <p>Python builds the instrument and changes its inputs. The SWIG extension connects those calls to QuantLib. The C++ pricing engine calculates the result. Boundary breakpoints and explicit session selection let you inspect each layer without expecting one debugger to understand them all.</p>
 
 <p>Once both pricing calls follow the intended sequence, you have a repeatable starting point for investigating custom instruments, pricing engines, and binding behavior. That establishes visibility into the implementation, not proof that a model’s assumptions or outputs are economically correct.</p>
+
+<h2 id="8-troubleshooting">8. Troubleshooting</h2>
+
+<p>If the sequence becomes confusing, first check which debugger owns the current stop. A pricing call can look stalled simply because the other session is waiting for you to resume it.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Symptom</th>
+      <th>What to check / do</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The next debugger step seems wrong</td>
+      <td>Check the selected session and frame before using F5, F10, or F11. These commands apply only to the selected debugging context. F11 does not automatically cross from Python into C++; set a breakpoint in the destination language and switch sessions when it hits.</td>
+    </tr>
+    <tr>
+      <td>Python appears frozen during a pricing call</td>
+      <td>Check <strong>CALL STACK</strong>. If GDB has stopped the process, select the C++ frame and continue that session first so the native call can return. If both sessions paused just after attachment, continue GDB, then resume Python from its entry pause.</td>
+    </tr>
+    <tr>
+      <td>The C++ breakpoint is still unverified at the first NPV call</td>
+      <td>A pending breakpoint is expected before QuantLib loads. Once the import has occurred, inspect the loaded library with <code class="language-plaintext highlighter-rouge">-exec info sharedlibrary</code> in the C++ Debug Console. Verify that the intended debug QuantLib library and SWIG extension are loaded, have debug information, and match the available sources.</td>
+    </tr>
+    <tr>
+      <td>GDB finds a function but cannot open its source</td>
+      <td>Add a <code class="language-plaintext highlighter-rouge">sourceFileMap</code> to the C++ attach configuration, mapping the original build path to the current source path. Add another mapping for QuantLib-SWIG if needed. The mapped source must still match the compiled version.</td>
+    </tr>
+    <tr>
+      <td>The first engine breakpoint hits, but the second does not</td>
+      <td>Confirm Python executed <code class="language-plaintext highlighter-rouge">spot.setValue(105.0)</code>, reached the repricing line, and stepped with the Python session selected. Check that GDB is still attached to the same PID, running, and has the engine breakpoint enabled. Unchanged inputs may use cached results and skip recalculation.</td>
+    </tr>
+    <tr>
+      <td>GDB refuses to attach</td>
+      <td>Confirm the selected PID is the script’s Python process, then check process ownership and the machine’s Linux <code class="language-plaintext highlighter-rouge">ptrace</code> policy. Follow the system’s approved debugging policy rather than broadly weakening security settings.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Throughout the workflow, keep both debuggers attached to the same PID, and if Python restarts, get its new PID and reattach GDB. Disable unrelated breakpoints and shared-library event stops while learning the sequence. The GDB-only configuration can help investigate C++ execution, but it does not activate Python breakpoints and is not a replacement for this two-session workflow.</p>
 
                 </article>
 
