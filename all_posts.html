@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — All Posts layout
+    Minimalist redesign: timeline list · category grid · dark-gold palette
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>All posts | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	<link rel="stylesheet" href="/assets/css/allposts.css" />
+	
+	
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body>
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="https://craquinterogo.github.io//" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io//">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- ── Main ─────────────────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          <header class="major">
+            <h1>All Posts</h1>
+          </header>
+
+          <!-- ── Blog container ────────────────────────────── -->
+          <div class="blog-container">
+
+            <details class="blog-about">
+              <summary>About this blog</summary>
+              <div class="blog-about__content">
+                <img
+                  class="blog-about__portrait"
+                  src="/assets/images/yotas.jpg"
+                  alt="Portrait of Cristian Quintero"
+                  width="112"
+                  height="112"
+                />
+                <p>
+                  Hi, I'm Cristian. This is my personal blog, where I share experiments
+                  and personal opinions on topics that interest me professionally.
+                  It's connected to <a href="https://quantero.kruk-ai.com/" target="_blank" rel="noopener noreferrer">Quantero</a>,
+                  my more technical and mathematically rigorous blog, where I explore
+                  quantitative finance, risk, and artificial intelligence in greater depth.
+                </p>
+              </div>
+            </details>
+
+            
+
+            <!-- ── Category tab navigation ───────────────── -->
+            <div class="category-browser">
+              <div class="category-browser__header">
+                <h2 id="category-heading">Browse by topic</h2>
+                <p>Select a category to filter posts.</p>
+              </div>
+              <select
+                class="category-browser__select"
+                id="category-select"
+                aria-labelledby="category-heading"
+                aria-controls="tab-general"
+              >
+                
+                  
+                  <option value="general">General (5)</option>
+                
+                  
+                  <option value="portfolio-management">Portfolio Management (1)</option>
+                
+                  
+                  <option value="artificial-intelligence">Artificial Intelligence (2)</option>
+                
+                  
+                  <option value="quantitative-development">Quantitative Development (8)</option>
+                
+                  
+                  <option value="quantitative-finance">Quantitative Finance (1)</option>
+                
+                  
+                  <option value="algorithmic-trading">Algorithmic Trading (3)</option>
+                
+                  
+                  <option value="risk-management">Risk Management (3)</option>
+                
+                  
+                  <option value="economic-analysis">Economic Analysis (0)</option>
+                
+              </select>
+              <div class="cat-nav" role="tablist" aria-labelledby="category-heading">
+                
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn is-active"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="tab-general"
+                    id="btn-general"
+                    data-tab="general"
+                    tabindex="0"
+                  >
+                    <span class="cat-nav__label">General</span>
+                    <span class="cat-nav__count" aria-label="5 posts">5</span>
+                  </button>
+                
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-portfolio-management"
+                    id="btn-portfolio-management"
+                    data-tab="portfolio-management"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Portfolio Management</span>
+                    <span class="cat-nav__count" aria-label="1 posts">1</span>
+                  </button>
+                
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-artificial-intelligence"
+                    id="btn-artificial-intelligence"
+                    data-tab="artificial-intelligence"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Artificial Intelligence</span>
+                    <span class="cat-nav__count" aria-label="2 posts">2</span>
+                  </button>
+                
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-quantitative-development"
+                    id="btn-quantitative-development"
+                    data-tab="quantitative-development"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Quantitative Development</span>
+                    <span class="cat-nav__count" aria-label="8 posts">8</span>
+                  </button>
+                
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-quantitative-finance"
+                    id="btn-quantitative-finance"
+                    data-tab="quantitative-finance"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Quantitative Finance</span>
+                    <span class="cat-nav__count" aria-label="1 posts">1</span>
+                  </button>
+                
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-algorithmic-trading"
+                    id="btn-algorithmic-trading"
+                    data-tab="algorithmic-trading"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Algorithmic Trading</span>
+                    <span class="cat-nav__count" aria-label="3 posts">3</span>
+                  </button>
+                
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-risk-management"
+                    id="btn-risk-management"
+                    data-tab="risk-management"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Risk Management</span>
+                    <span class="cat-nav__count" aria-label="3 posts">3</span>
+                  </button>
+                
+                  
+                  
+                  <button
+                    type="button"
+                    class="cat-nav__btn"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-economic-analysis"
+                    id="btn-economic-analysis"
+                    data-tab="economic-analysis"
+                    tabindex="-1"
+                  >
+                    <span class="cat-nav__label">Economic Analysis</span>
+                    <span class="cat-nav__count" aria-label="0 posts">0</span>
+                  </button>
+                
+              </div>
+            </div>
+
+            <!-- ── Post panels ────────────────────────────── -->
+            <div class="post-panels">
+              
+                
+                
+
+                <div
+                  class="post-panel is-active"
+                  id="tab-general"
+                  role="tabpanel"
+                  aria-labelledby="btn-general"
+                  tabindex="0"
+                >
+                  
+                    <ul class="post-list" aria-label="General posts">
+                      
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2025</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2025-11-15T00:00:00-06:00"
+                            >Nov 15, 2025</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2025/11/15/latex_in_linux">Getting Started with pdfLaTeX in Linux - A Complete Guide</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Learn how to install and use pdfLaTeX in Linux to create professional documents, academic papers, and reports with proper formatting and typography.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">LaTeX</span>
+                                    
+                                      <span class="post-tag">Linux</span>
+                                    
+                                      <span class="post-tag">pdfLaTeX</span>
+                                    
+                                      <span class="post-tag">academic writing</span>
+                                    
+                                      <span class="post-tag">technical documentation</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2025/11/15/latex_in_linux"
+                                  aria-label="Read full post: Getting Started with pdfLaTeX in Linux - A Complete Guide"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2025-07-26T00:00:00-05:00"
+                            >Jul 26, 2025</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2025/07/26/projext-management_complex-systems_and_agile_desingt-hinking">Project Management, Complex Systems, Agile and Design Thinking.</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Lessons learned so far and how to read them for present and future success. Beyond a misunderstood Software Engineering definition.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">agile</span>
+                                    
+                                      <span class="post-tag">project management</span>
+                                    
+                                      <span class="post-tag">leadership</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2025/07/26/projext-management_complex-systems_and_agile_desingt-hinking"
+                                  aria-label="Read full post: Project Management, Complex Systems, Agile and Design Thinking."
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2023</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2023-08-13T00:00:00-05:00"
+                            >Aug 13, 2023</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2023/08/13/how_to_become_a_quant">To be a Quant</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Many people want to be a quant, because we have read six figure's salary in some job portal. How can I start to prepare myself to be a quant?. Do I need some professional background? ...</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">career</span>
+                                    
+                                      <span class="post-tag">quantitative finance</span>
+                                    
+                                      <span class="post-tag">quant</span>
+                                    
+                                      <span class="post-tag">education</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2023/08/13/how_to_become_a_quant"
+                                  aria-label="Read full post: To be a Quant"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2023-08-06T00:00:00-05:00"
+                            >Aug 06, 2023</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2023/08/06/the_beginning">The Beginning</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">This field, the quantitative finance job market is full of eager people. People eager for getting 6 figures anual checks. I was not different, I'm still working on it though. My goal is not just to have a 6-figures check itself. There are other motivations...</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">personal journey</span>
+                                    
+                                      <span class="post-tag">career transition</span>
+                                    
+                                      <span class="post-tag">quantitative finance</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2023/08/06/the_beginning"
+                                  aria-label="Read full post: The Beginning"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2022</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2022-03-10T00:00:00-06:00"
+                            >Mar 10, 2022</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2022/03/10/welcome-to-my-blog">Welcome to My Quantitative Finance Blog</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Welcome to my quantitative finance blog! Here I share insights, experiences, and knowledge about the fascinating world of quantitative finance. From portfolio management to algorithmic trading, join me on this journey...</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">welcome</span>
+                                    
+                                      <span class="post-tag">introduction</span>
+                                    
+                                      <span class="post-tag">blog</span>
+                                    
+                                      <span class="post-tag">quantitative finance</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2022/03/10/welcome-to-my-blog"
+                                  aria-label="Read full post: Welcome to My Quantitative Finance Blog"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                    </ul>
+                  
+                </div>
+
+              
+                
+                
+
+                <div
+                  class="post-panel"
+                  id="tab-portfolio-management"
+                  role="tabpanel"
+                  aria-labelledby="btn-portfolio-management"
+                  tabindex="0"
+                >
+                  
+                    <ul class="post-list" aria-label="Portfolio Management posts">
+                      
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2025</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2025-07-13T00:00:00-05:00"
+                            >Jul 13, 2025</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2025/05/13/active_and_passive_investing">Active vs Passive Investing in Crypto</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">There are different investment approaches, and being able to identify them helps to decide which suits better for your personal investments. Now, given the rise of cryptos ...</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">passive investing</span>
+                                    
+                                      <span class="post-tag">active investing</span>
+                                    
+                                      <span class="post-tag">investing</span>
+                                    
+                                      <span class="post-tag">portfolio management</span>
+                                    
+                                      <span class="post-tag">cryptocurrency</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2025/05/13/active_and_passive_investing"
+                                  aria-label="Read full post: Active vs Passive Investing in Crypto"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                    </ul>
+                  
+                </div>
+
+              
+                
+                
+
+                <div
+                  class="post-panel"
+                  id="tab-artificial-intelligence"
+                  role="tabpanel"
+                  aria-labelledby="btn-artificial-intelligence"
+                  tabindex="0"
+                >
+                  
+                    <ul class="post-list" aria-label="Artificial Intelligence posts">
+                      
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2026</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2026-10-11T00:00:00-05:00"
+                            >Oct 11, 2026</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2026/10/11/from-ai-winters-to-transformers">Before the 'AI' hype: AI winters, tiny transistors, and the road to Transformers</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">AI did not suddenly appear in a chat window. Its road to Transformers runs through ambitious summers, disappointing winters, tiny silicon switches, and a surprising assist from computer graphics.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">artificial intelligence</span>
+                                    
+                                      <span class="post-tag">AI history</span>
+                                    
+                                      <span class="post-tag">deep learning</span>
+                                    
+                                      <span class="post-tag">semiconductors</span>
+                                    
+                                      <span class="post-tag">NLP</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2026/10/11/from-ai-winters-to-transformers"
+                                  aria-label="Read full post: Before the 'AI' hype: AI winters, tiny transistors, and the road to Transformers"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2026-03-08T00:00:00-06:00"
+                            >Mar 08, 2026</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2026/03/08/local_llm_model">Just another post of local LLM models</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Recurrent post in the internet though, this one shows my personal experiment using a particular inference engine</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">LLM models</span>
+                                    
+                                      <span class="post-tag">artificial intelligence</span>
+                                    
+                                      <span class="post-tag">Llama.cpp</span>
+                                    
+                                      <span class="post-tag">Inference</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2026/03/08/local_llm_model"
+                                  aria-label="Read full post: Just another post of local LLM models"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                    </ul>
+                  
+                </div>
+
+              
+                
+                
+
+                <div
+                  class="post-panel"
+                  id="tab-quantitative-development"
+                  role="tabpanel"
+                  aria-labelledby="btn-quantitative-development"
+                  tabindex="0"
+                >
+                  
+                    <ul class="post-list" aria-label="Quantitative Development posts">
+                      
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2026</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2026-07-18T00:00:00-05:00"
+                            >Jul 18, 2026</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2026/07/18/debugging-quantlib-python-cpp-vscode">Debugging QuantLib across Python and C++ in VS Code</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">A step-by-step Linux workflow for debugging QuantLib through its SWIG Python bindings, with two debugger sessions attached to one process and explicit handoffs at each pricing call.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">quantitative finance</span>
+                                    
+                                      <span class="post-tag">QuantLib</span>
+                                    
+                                      <span class="post-tag">SWIG</span>
+                                    
+                                      <span class="post-tag">Python</span>
+                                    
+                                      <span class="post-tag">C++</span>
+                                    
+                                      <span class="post-tag">VS Code</span>
+                                    
+                                      <span class="post-tag">debugging</span>
+                                    
+                                      <span class="post-tag">GDB</span>
+                                    
+                                      <span class="post-tag">debugpy</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2026/07/18/debugging-quantlib-python-cpp-vscode"
+                                  aria-label="Read full post: Debugging QuantLib across Python and C++ in VS Code"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2026-07-05T00:00:00-05:00"
+                            >Jul 05, 2026</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2026/07/05/debugging-european-fx-option-quantlib-vscode">Debugging a European FX option in QuantLib C++ with VS Code.</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">End-to-end example to price a European FX option with QuantLib in C++, link against a debug build, and debug it in VS Code.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">quantitative finance</span>
+                                    
+                                      <span class="post-tag">QuantLib</span>
+                                    
+                                      <span class="post-tag">C++</span>
+                                    
+                                      <span class="post-tag">VS Code</span>
+                                    
+                                      <span class="post-tag">debugging</span>
+                                    
+                                      <span class="post-tag">FX options</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2026/07/05/debugging-european-fx-option-quantlib-vscode"
+                                  aria-label="Read full post: Debugging a European FX option in QuantLib C++ with VS Code."
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2026-06-20T00:00:00-05:00"
+                            >Jun 20, 2026</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2026/06/20/quantlib-debug-build-and-swig-components">Compiling QuantLib in Debug Mode and wiring components into SWIG - Python.</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">A practical workflow to build QuantLib in Debug mode, keep symbols for debugging, and expose selected components through QuantLib-SWIG.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">technology</span>
+                                    
+                                      <span class="post-tag">quantitative finance</span>
+                                    
+                                      <span class="post-tag">QuantLib</span>
+                                    
+                                      <span class="post-tag">SWIG</span>
+                                    
+                                      <span class="post-tag">C++</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2026/06/20/quantlib-debug-build-and-swig-components"
+                                  aria-label="Read full post: Compiling QuantLib in Debug Mode and wiring components into SWIG - Python."
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2025</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2025-12-07T00:00:00-06:00"
+                            >Dec 07, 2025</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2025/12/07/git-repository-hard-disk">Private GIT repositories for small or private projects.</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">If you have noticed the benefits of GIT and you want to extend its functionality without depending vendors like GitHub, Bitbucket, or any other, this may be ...</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">technology</span>
+                                    
+                                      <span class="post-tag">quantitative development</span>
+                                    
+                                      <span class="post-tag">git</span>
+                                    
+                                      <span class="post-tag">coding</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2025/12/07/git-repository-hard-disk"
+                                  aria-label="Read full post: Private GIT repositories for small or private projects."
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2025-10-29T00:00:00-05:00"
+                            >Oct 29, 2025</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2025/10/29/questdb-for-timeseries">QuestDB, an alternative for storing your financial time series.</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Since some proprietary software to store timeseries may be an impediment for personal projects, QuestDB reveals to be an alaternative I'm testing in ...</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">technology</span>
+                                    
+                                      <span class="post-tag">quantitative finance</span>
+                                    
+                                      <span class="post-tag">QuestDB</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2025/10/29/questdb-for-timeseries"
+                                  aria-label="Read full post: QuestDB, an alternative for storing your financial time series."
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2025-08-10T00:00:00-05:00"
+                            >Aug 10, 2025</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2025/08/10/quantlib-setup">Setting QuantLib up in my laptop, again. An amazing tool for quants.</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">From time to time I do like maintainance and formatting my laptop, but everytime I need to setup many things, on of them is QuantLib, an amazing tool for ...</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">technology</span>
+                                    
+                                      <span class="post-tag">quantitative finance</span>
+                                    
+                                      <span class="post-tag">QuantLib</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2025/08/10/quantlib-setup"
+                                  aria-label="Read full post: Setting QuantLib up in my laptop, again. An amazing tool for quants."
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2025-06-29T00:00:00-05:00"
+                            >Jun 29, 2025</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2025/06/29/ai-agents-for-quants">What about AI Agents for Quants?</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Who does not want an assistant to rely on?, I've been trying it for a while and it seems it is now getting better as tech development evolves ...</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">AI</span>
+                                    
+                                      <span class="post-tag">LLM</span>
+                                    
+                                      <span class="post-tag">technology</span>
+                                    
+                                      <span class="post-tag">quantitative finance</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2025/06/29/ai-agents-for-quants"
+                                  aria-label="Read full post: What about AI Agents for Quants?"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2024</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2024-03-10T00:00:00-06:00"
+                            >Mar 10, 2024</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2024/03/10/connecting-cpp-and-python-with-swig">Pricing a European option in C++ from Python with SWIG</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Follow a European option from its C++ implementation through a SWIG wrapper to a Python notebook.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">C++</span>
+                                    
+                                      <span class="post-tag">Python</span>
+                                    
+                                      <span class="post-tag">SWIG</span>
+                                    
+                                      <span class="post-tag">quantitative finance</span>
+                                    
+                                      <span class="post-tag">options</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2024/03/10/connecting-cpp-and-python-with-swig"
+                                  aria-label="Read full post: Pricing a European option in C++ from Python with SWIG"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                    </ul>
+                  
+                </div>
+
+              
+                
+                
+
+                <div
+                  class="post-panel"
+                  id="tab-quantitative-finance"
+                  role="tabpanel"
+                  aria-labelledby="btn-quantitative-finance"
+                  tabindex="0"
+                >
+                  
+                    <ul class="post-list" aria-label="Quantitative Finance posts">
+                      
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2019</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2019-10-02T00:00:00-05:00"
+                            >Oct 02, 2019</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2019/10/02/what-is-quantitative-finance">What is quantitative finance? A timeline of the ideas behind the models</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">How probability, portfolio choice, asset pricing, and derivatives developed into modern quantitative finance.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">quantitative finance</span>
+                                    
+                                      <span class="post-tag">history</span>
+                                    
+                                      <span class="post-tag">portfolio theory</span>
+                                    
+                                      <span class="post-tag">asset pricing</span>
+                                    
+                                      <span class="post-tag">derivatives</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2019/10/02/what-is-quantitative-finance"
+                                  aria-label="Read full post: What is quantitative finance? A timeline of the ideas behind the models"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                    </ul>
+                  
+                </div>
+
+              
+                
+                
+
+                <div
+                  class="post-panel"
+                  id="tab-algorithmic-trading"
+                  role="tabpanel"
+                  aria-labelledby="btn-algorithmic-trading"
+                  tabindex="0"
+                >
+                  
+                    <ul class="post-list" aria-label="Algorithmic Trading posts">
+                      
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2026</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2026-10-19T00:00:00-05:00"
+                            >Oct 19, 2026</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2026/10/19/trading-protocols-from-json-to-sbe">The plumbing behind the trade: JSON, Protobuf, FIX, and SBE</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Connectivity experiments with IBKR, eToro, Binance, and Kraken provide a practical setting for understanding JSON, Protobuf, and SBE: what each encodes, where it is supported, and why recovery matters as much as decoding speed.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">algorithmic-trading</span>
+                                    
+                                      <span class="post-tag">trading-systems</span>
+                                    
+                                      <span class="post-tag">market-microstructure</span>
+                                    
+                                      <span class="post-tag">IBKR</span>
+                                    
+                                      <span class="post-tag">eToro</span>
+                                    
+                                      <span class="post-tag">Binance</span>
+                                    
+                                      <span class="post-tag">Kraken</span>
+                                    
+                                      <span class="post-tag">JSON</span>
+                                    
+                                      <span class="post-tag">Protobuf</span>
+                                    
+                                      <span class="post-tag">FIX</span>
+                                    
+                                      <span class="post-tag">SBE</span>
+                                    
+                                      <span class="post-tag">execution</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2026/10/19/trading-protocols-from-json-to-sbe"
+                                  aria-label="Read full post: The plumbing behind the trade: JSON, Protobuf, FIX, and SBE"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2025</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2025-11-22T00:00:00-06:00"
+                            >Nov 22, 2025</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2025/11/22/mean-reversion-vs-reinforcement-learning-pair-trading">Mean Reversion Model vs RL Model in a Pair Trading Strategy: A Comparative Study</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Reinforcement learning is gaining every day more terrain due to its theoretical capacity to learn during the process. It is observed in our study showing such a capability, but as well compared the result against the standard model of deviations from the mean...</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">pair-trading</span>
+                                    
+                                      <span class="post-tag">reinforcement-learning</span>
+                                    
+                                      <span class="post-tag">stochastic-models</span>
+                                    
+                                      <span class="post-tag">ornstein-uhlenbeck</span>
+                                    
+                                      <span class="post-tag">quantitative-finance</span>
+                                    
+                                      <span class="post-tag">statistical-arbitrage</span>
+                                    
+                                      <span class="post-tag">Q-learning</span>
+                                    
+                                      <span class="post-tag">SARSA</span>
+                                    
+                                      <span class="post-tag">Under Reviewing</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2025/11/22/mean-reversion-vs-reinforcement-learning-pair-trading"
+                                  aria-label="Read full post: Mean Reversion Model vs RL Model in a Pair Trading Strategy: A Comparative Study"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2025-04-21T00:00:00-05:00"
+                            >Apr 21, 2025</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2025/04/21/pair-trading-with-reinforcement-learning">Pair trading strategy using reinforcement learning algortihms (PPO and A2C)</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Reinforcement learning is gaining every day more terrain due to its theoretical capacity to learn during the process. It is observed in our study showing such a capability, but as well compared the result against the standard model of deviations from the mean...</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">Algorithmic Trading</span>
+                                    
+                                      <span class="post-tag">Reinforcement Learning</span>
+                                    
+                                      <span class="post-tag">Pair Trading Strategy</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2025/04/21/pair-trading-with-reinforcement-learning"
+                                  aria-label="Read full post: Pair trading strategy using reinforcement learning algortihms (PPO and A2C)"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                    </ul>
+                  
+                </div>
+
+              
+                
+                
+
+                <div
+                  class="post-panel"
+                  id="tab-risk-management"
+                  role="tabpanel"
+                  aria-labelledby="btn-risk-management"
+                  tabindex="0"
+                >
+                  
+                    <ul class="post-list" aria-label="Risk Management posts">
+                      
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2025</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2025-12-13T00:00:00-06:00"
+                            >Dec 13, 2025</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2025/12/13/market-risk-management">Market Risk and Portfolio Management (Why It Actually Matters)</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Risk management is not just a compliance exercise. It is the discipline that separates portfolios that survive from those that do not. Here is a personal take on what it means in practice, especially from the market risk side.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">risk management</span>
+                                    
+                                      <span class="post-tag">portfolio management</span>
+                                    
+                                      <span class="post-tag">market risk</span>
+                                    
+                                      <span class="post-tag">VaR</span>
+                                    
+                                      <span class="post-tag">liquidity risk</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2025/12/13/market-risk-management"
+                                  aria-label="Read full post: Market Risk and Portfolio Management (Why It Actually Matters)"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+                            <li class="year-marker" aria-hidden="true" style="font-size: 1.5em;">2020</li>
+                            
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2020-06-23T00:00:00-05:00"
+                            >Jun 23, 2020</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2020/06/23/cornish-fisher-var">Cornish-Fisher VaR when a normal quantile is not enough</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Build Cornish-Fisher VaR from return moments, compare it with normal and EVT VaR, and examine its backtests.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">market risk</span>
+                                    
+                                      <span class="post-tag">VaR</span>
+                                    
+                                      <span class="post-tag">Cornish-Fisher</span>
+                                    
+                                      <span class="post-tag">backtesting</span>
+                                    
+                                      <span class="post-tag">Python</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2020/06/23/cornish-fisher-var"
+                                  aria-label="Read full post: Cornish-Fisher VaR when a normal quantile is not enough"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                        
+
+                          
+                          
+
+                          <li class="post-entry">
+                            <time
+                              class="post-entry__date"
+                              datetime="2020-01-05T00:00:00-06:00"
+                            >Jan 05, 2020</time>
+
+                            <div class="post-entry__body">
+                              <h2 class="post-entry__title">
+                                <a href="/blog/2020/01/05/extreme-value-theory-var">Extreme Value Theory for Value at Risk, from returns to the tail</a>
+                              </h2>
+
+                              
+                                <p class="post-entry__excerpt">Work through a peaks-over-threshold VaR estimate and compare its assumptions with normal VaR.</p>
+                              
+
+                              <div class="post-entry__footer">
+                                
+                                  <div class="post-entry__tags" aria-label="Tags">
+                                    
+                                      <span class="post-tag">market risk</span>
+                                    
+                                      <span class="post-tag">VaR</span>
+                                    
+                                      <span class="post-tag">extreme value theory</span>
+                                    
+                                      <span class="post-tag">generalized Pareto</span>
+                                    
+                                      <span class="post-tag">Python</span>
+                                    
+                                  </div>
+                                
+
+                                <a
+                                  class="post-entry__readmore"
+                                  href="/blog/2020/01/05/extreme-value-theory-var"
+                                  aria-label="Read full post: Extreme Value Theory for Value at Risk, from returns to the tail"
+                                >Read <span class="arrow" aria-hidden="true">→</span></a>
+                              </div>
+                            </div>
+                          </li>
+
+                        
+                      
+                    </ul>
+                  
+                </div>
+
+              
+                
+                
+
+                <div
+                  class="post-panel"
+                  id="tab-economic-analysis"
+                  role="tabpanel"
+                  aria-labelledby="btn-economic-analysis"
+                  tabindex="0"
+                >
+                  
+                    <div class="post-panel__empty" role="status" aria-live="polite">
+                      No posts in this category yet.
+                    </div>
+                  
+                </div>
+
+              
+            </div><!-- /post-panels -->
+
+          </div><!-- /blog-container -->
+
+        </div>
+      </section>
+    </div><!-- /main -->
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="https://craquinterogo.github.io/assets/js/jquery.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrolly.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrollex.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/skel.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="https://craquinterogo.github.io/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="https://craquinterogo.github.io/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
+
+
+    <script>
+    (function () {
+      'use strict';
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var buttons = Array.prototype.slice.call(document.querySelectorAll('.cat-nav__btn'));
+        var panels  = document.querySelectorAll('.post-panel');
+        var select  = document.getElementById('category-select');
+        var compact = window.matchMedia('(max-width: 680px)');
+
+        if (!buttons.length) return;
+
+        /* ── Activate a tab ──────────────────────────────── */
+        function activate(btn) {
+          var target = btn.dataset.tab;
+
+          buttons.forEach(function (b) {
+            var active = b === btn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-selected', active ? 'true' : 'false');
+            b.setAttribute('tabindex', active ? '0' : '-1');
+          });
+
+          panels.forEach(function (p) {
+            p.classList.toggle('is-active', p.id === 'tab-' + target);
+          });
+
+          select.value = target;
+          select.setAttribute('aria-controls', 'tab-' + target);
+
+          /* Persist selected tab in URL hash (no page jump) */
+          try {
+            history.replaceState(null, '', '#' + target);
+          } catch (e) { /* private mode fallback */ }
+        }
+
+        /* ── Restore from URL hash ───────────────────────── */
+        var hash    = location.hash.replace('#', '');
+        var initial = hash ? buttons.find(function (b) { return b.dataset.tab === hash; }) : null;
+        if (initial) activate(initial);
+
+        select.addEventListener('change', function () {
+          activate(buttons.find(function (btn) { return btn.dataset.tab === select.value; }));
+        });
+
+        function updatePresentation() {
+          panels.forEach(function (panel) {
+            panel.setAttribute('role', compact.matches ? 'region' : 'tabpanel');
+          });
+        }
+
+        compact.addEventListener('change', updatePresentation);
+        updatePresentation();
+
+        /* ── Click handlers ──────────────────────────────── */
+        buttons.forEach(function (btn) {
+          btn.addEventListener('click', function () { activate(btn); });
+
+          /* Keyboard: arrow keys, Home, End (ARIA tablist pattern) */
+          btn.addEventListener('keydown', function (e) {
+            var idx = buttons.indexOf(btn);
+            var next = null;
+
+            if      (e.key === 'ArrowRight') { next = buttons[(idx + 1) % buttons.length]; }
+            else if (e.key === 'ArrowLeft')  { next = buttons[(idx - 1 + buttons.length) % buttons.length]; }
+            else if (e.key === 'Home')       { next = buttons[0]; }
+            else if (e.key === 'End')        { next = buttons[buttons.length - 1]; }
+
+            if (next) {
+              next.focus();
+              activate(next);
+              e.preventDefault();
+            }
+          });
+        });
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>

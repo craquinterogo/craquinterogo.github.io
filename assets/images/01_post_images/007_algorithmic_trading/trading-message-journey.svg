@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="900" viewBox="0 0 1000 900" role="img" aria-labelledby="title description">
+  <title id="title">From trading intent to a remote order</title>
+  <desc id="description">An order passes through a strategy, local risk checks, a codec and connection, broker processing, and a venue. Reports return to update state. Only one stage is serialization. Three separate IBKR routes are JSON over HTTPS to Web API, version-dependent Protobuf messages over TCP to TWS or IB Gateway, and separately onboarded FIX connectivity.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#d4af37"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="900" rx="8" fill="#242424"/>
+  <g font-family="system-ui, sans-serif" text-anchor="middle" fill="#e8e8e8">
+    <text x="500" y="48" font-size="28" font-weight="600">A trade is a journey, not just a message</text>
+    <text x="500" y="82" fill="#bcbcbc" font-size="21">The encoding is one stage. Every stage can affect the outcome.</text>
+    <g fill="#393222" stroke="#d4af37" stroke-width="2">
+      <rect x="36" y="126" width="200" height="98" rx="8"/>
+      <rect x="300" y="126" width="200" height="98" rx="8"/>
+      <rect x="564" y="126" width="400" height="98" rx="8"/>
+      <rect x="564" y="304" width="400" height="98" rx="8"/>
+      <rect x="36" y="304" width="464" height="98" rx="8"/>
+    </g>
+    <g font-size="22" font-weight="600">
+      <text x="136" y="165">Strategy</text>
+      <text x="400" y="165">Local risk</text>
+      <text x="764" y="165">Encode + client connection</text>
+      <text x="764" y="343">Broker processing</text>
+      <text x="268" y="343">Venue</text>
+    </g>
+    <g font-size="19">
+      <text x="136" y="199">Decide to trade</text>
+      <text x="400" y="199">Check the intent</text>
+      <text x="764" y="199">Turn fields into bytes; send them</text>
+      <text x="764" y="377">Checks, queues, routing</text>
+      <text x="268" y="377">Accept / reject; match if possible</text>
+    </g>
+    <g fill="none" stroke="#d4af37" stroke-width="2.5" marker-end="url(#arrow)">
+      <path d="M238 175 L290 175"/>
+      <path d="M502 175 L554 175"/>
+      <path d="M764 226 L764 294"/>
+      <path d="M562 353 L510 353"/>
+      <path d="M268 404 L268 452 L764 452 L764 476"/>
+    </g>
+    <text x="516" y="439" fill="#bcbcbc" font-size="19">Reports return through the integration</text>
+    <text x="500" y="510" font-size="22" font-weight="600">Update state: acceptance is not the same as a fill.</text>
+    <rect x="28" y="550" width="944" height="282" rx="10" fill="#2e2e2e"/>
+    <text x="500" y="590" font-size="25" font-weight="600">IBKR offers different entry paths</text>
+    <g font-size="21" text-anchor="start">
+      <text x="58" y="641" fill="#d4af37">Web API</text>
+      <text x="330" y="641">JSON over HTTPS to Web API endpoints</text>
+      <text x="58" y="696" fill="#d4af37">TWS API</text>
+      <text x="330" y="696">TCP to TWS / IB Gateway; Protobuf support</text>
+      <text x="330" y="726" fill="#bcbcbc" font-size="18">Message coverage depends on compatible versions.</text>
+      <text x="58" y="781" fill="#d4af37">FIX connectivity</text>
+      <text x="330" y="781">Separate onboarding and counterparty rules</text>
+    </g>
+    <text x="500" y="870" fill="#bcbcbc" font-size="19">Conceptual paths, not a network topology or latency benchmark.</text>
+  </g>
+</svg>

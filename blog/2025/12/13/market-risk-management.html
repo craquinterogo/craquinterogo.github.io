@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Market Risk and Portfolio Management (Why It Actually Matters) | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	
+	
+	<meta name="description" content="A narrative walk through financial risk management, with focus on market risk metrics, the cost of ignoring them, and a touch of liquidity risk." />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Market Risk and Portfolio Management (Why It Actually Matters)" />
+	<meta property="og:description" content="A narrative walk through financial risk management, with focus on market risk metrics, the cost of ignoring them, and a touch of liquidity risk." />
+	<meta property="og:url" content="https://craquinterogo.github.io/blog/2025/12/13/market-risk-management" />
+	<meta name="twitter:title" content="Market Risk and Portfolio Management (Why It Actually Matters)" />
+	<meta name="twitter:description" content="A narrative walk through financial risk management, with focus on market risk metrics, the cost of ignoring them, and a touch of liquidity risk." />
+	
+	
+	<meta property="og:image" content="https://craquinterogo.github.io/assets/images/01_post_images/005_risk_management/001_market-risk.png" />
+	<meta property="og:image:alt" content="Market Risk and Portfolio Management (Why It Actually Matters)" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://craquinterogo.github.io/assets/images/01_post_images/005_risk_management/001_market-risk.png" />
+	<meta name="twitter:image:alt" content="Market Risk and Portfolio Management (Why It Actually Matters)" />
+	
+	
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="https://craquinterogo.github.io//" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io//">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Risk Management
+            </h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle related posts" aria-controls="related-posts-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              
+              
+              
+                <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2020/06/23/cornish-fisher-var" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/005_risk_management/001_market-risk.png" alt="Cornish-Fisher VaR when a normal quantile is not enough" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Cornish-Fisher VaR when a normal quantile...</h5>
+                          
+                            <span class="recent-post-date">Jun 23, 2020</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2020/01/05/extreme-value-theory-var" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/005_risk_management/001_market-risk.png" alt="Extreme Value Theory for Value at Risk, from returns to the tail" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Extreme Value Theory for Value at Risk, f...</h5>
+                          
+                            <span class="recent-post-date">Jan 05, 2020</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+              <div class="sidebar-category-link">
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle table of contents" aria-controls="toc-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- On-demand navigation for narrower reading layouts -->
+    <button type="button" id="sidebar-left-toggle" class="sidebar-toggle sidebar-toggle--left" aria-controls="sidebar-left" aria-expanded="false"><i class="fa fa-folder" aria-hidden="true"></i>Related</button>
+    <button type="button" id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-controls="sidebar-right" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i>Contents</button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#risk-management">Risk Management</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Market Risk and Portfolio Management (Why It Ac...</span>
+                    </div>
+                  
+
+                  <h1>Market Risk and Portfolio Management (Why It Actually Matters)</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2025-12-13T00:00:00-06:00">December 13, 2025</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">risk management</span>
+                      
+                        <span class="post-tag-pill">portfolio management</span>
+                      
+                        <span class="post-tag-pill">market risk</span>
+                      
+                        <span class="post-tag-pill">VaR</span>
+                      
+                        <span class="post-tag-pill">liquidity risk</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="https://craquinterogo.github.io/assets/images/01_post_images/005_risk_management/001_market-risk.png"
+                    alt="Market Risk and Portfolio Management (Why It Actually Matters)"
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <article class="post-body" id="post-body-content" aria-label="Article content">
+                  <blockquote>
+  <p>⚠️ <strong>Disclaimer:</strong> Any suggestion or information described in this post does not constitute investment advice. The content reflects only the personal point of view of the writer and should not be considered as a recommendation for any financial decision.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="risk-is-not-the-enemy-ignorance-of-it-is">Risk is not the enemy. Ignorance of it is.</h2>
+
+<p>I have spent a good portion of my professional career inside risk management departments, and one thing that strikes me every single time is how often people outside the field (and even some inside it) treat risk management as a bureaucratic checkbox. A necessary evil. Something that slows things down. This post is an attempt to push back on that idea, as clearly as I can.</p>
+
+<p>Risk management, when done well, is not about preventing you from taking positions. It is about understanding what you own, what it can do to your capital in bad conditions, and how much of that you can truly afford to absorb. That distinction matters enormously in portfolio management, and it matters even more in the specific corner of the field I care about most: <strong>market risk</strong>.</p>
+
+<hr />
+
+<h2 id="what-is-market-risk">What is market risk?</h2>
+
+<p>Let us start from first principles. When you hold a financial instrument (a stock, a bond, a derivative, a currency position), its value changes over time in response to movements in the broader market. Those movements can be driven by interest rate changes, equity index swings, foreign exchange fluctuations, commodity price shifts, or volatility expansions. The potential loss arising from any of those adverse price movements is what practitioners call <strong>market risk</strong>.</p>
+
+<p>It sits under the wider umbrella of financial risk, which also includes credit risk (the risk that a counterparty defaults), operational risk (internal processes failing), and liquidity risk (the risk of not being able to exit a position without moving the market against yourself). Each category deserves its own serious treatment, and I plan to get there. But market risk is where I feel most at home, so it gets to go first.</p>
+
+<p>What makes market risk particularly interesting in portfolio management is that it is not just about individual asset losses. It is about how those assets behave <strong>together</strong>. A portfolio of 50 stocks is not simply 50 separate risks added up. Correlations, concentration, and tail dependencies mean the aggregate behaviour can be far more dangerous than the sum of its parts suggests on a calm trading day.</p>
+
+<hr />
+
+<h2 id="the-cost-of-not-having-a-framework">The cost of not having a framework</h2>
+
+<p>History is unfortunately generous with examples of what happens when market risk is poorly understood or deliberately ignored.</p>
+
+<p>The collapse of <strong>Long-Term Capital Management (LTCM)</strong> in 1998 is probably the most cited academic case. A fund run by Nobel laureates and decorated traders, with leverage ratios that in calm markets looked like arbitrage genius, and in stressed markets looked like a loaded weapon pointed inward. When correlations between asset classes broke down during the Russian default crisis, positions that were modelled as independent blew up simultaneously. The Federal Reserve had to orchestrate a private bailout to prevent contagion across the broader financial system.</p>
+
+<p>A decade later, the <strong>2008 global financial crisis</strong> showed the same dynamic at systemic scale. Mortgage-backed securities were rated as low-risk instruments because historical default correlations were estimated in a period of stable and rising house prices. When that assumption collapsed, so did the models, and with them trillions of dollars in portfolio value across institutions that believed they had adequate risk controls in place.</p>
+
+<p>These are not anomalies. They are what happens when a framework for measuring and limiting market risk is either absent, miscalibrated, or (and this is the most dangerous case) present on paper but not actually used to constrain decisions.</p>
+
+<p>For an individual investor or a smaller portfolio manager, the consequences are less systemic but no less painful. A portfolio without risk controls can turn a temporary drawdown into a permanent loss of capital, particularly when leverage is involved. And in today’s environment, leverage is accessible to almost everyone.</p>
+
+<hr />
+
+<h2 id="the-metrics-that-actually-matter">The metrics that actually matter</h2>
+
+<p>Risk management is only as useful as the tools it uses to quantify exposure. Here are the ones you will encounter most frequently in a market risk context, along with an honest assessment of what each one does (and does not) tell you.</p>
+
+<h3 id="volatility-σ">Volatility (σ)</h3>
+
+<p>The most fundamental measure. Volatility quantifies how much an asset’s returns deviate from their average over a given period. It is typically expressed as an annualised standard deviation. High volatility means large price swings in both directions. In portfolio terms, the overall portfolio volatility is not just a weighted average of individual asset volatilities because correlation between assets plays a central role.</p>
+
+<p>It is a fast and intuitive metric, but volatility alone is symmetric: it treats upside surprises and downside losses equally. That is not how investors experience returns, which is why it is rarely used in isolation in professional practice.</p>
+
+<h4 id="historical-volatility-vs-implied-volatility">Historical Volatility vs. Implied Volatility</h4>
+
+<p><strong>Historical volatility (HV)</strong> is computed from past price movements. It reflects what actually happened over a backward-looking window (30 days, 60 days, etc.). It is backward-looking and purely descriptive.</p>
+
+<p><strong>Implied volatility (IV)</strong> is extracted from the market prices of options themselves. It represents what the market <em>expects</em> volatility to be going forward. If an option is traded at a certain price, you can reverse-engineer the volatility assumption baked into that price using models like Black-Scholes. It is forward-looking and expectation-based.</p>
+
+<p><strong>Why derivatives (especially options) use implied volatility:</strong></p>
+
+<p>Options are fundamentally bets on future volatility. A call option becomes more valuable if market participants expect large price swings ahead, regardless of what actually happened historically. Historical volatility is stale information by the time an option is priced. Implied volatility reflects current market consensus about future uncertainty, incorporating all available information and sentiment.</p>
+
+<h3 id="value-at-risk-var">Value at Risk (VaR)</h3>
+
+<p>VaR is the most widely used risk metric in financial institutions and is likely the one you will encounter most often in regulatory and internal reporting. The concept is deceptively simple: given a confidence level (typically 95% or 99%) and a time horizon (one day, ten days), VaR answers the question: <em>what is the maximum loss I should not expect to exceed in X% of scenarios?</em></p>
+
+<p>For example, a one-day 99% VaR of €500,000 means that on 99 out of 100 trading days, losses should not exceed that amount. The remaining 1% of days is where things get interesting.</p>
+
+<p>There are three main approaches to computing VaR:</p>
+
+<ul>
+  <li><strong>Historical simulation:</strong> Use the actual historical distribution of returns to estimate future losses. Simple to understand, no distributional assumption required, but highly sensitive to the historical window chosen.</li>
+  <li><strong>Parametric (variance-covariance) VaR:</strong> Assume returns follow a normal distribution and compute the quantile analytically. Fast and elegant, but dangerous in fat-tailed environments (which markets almost always are).</li>
+  <li><strong>Monte Carlo simulation:</strong> Generate thousands of synthetic return scenarios using a model and compute the loss distribution from those. Flexible and powerful, but computationally heavy and model-dependent.</li>
+</ul>
+
+<p>VaR is useful precisely because it gives a number. A single, communicable figure that executives and regulators can reason about. But it has a well-known technical blind spot: it says nothing about <strong>what losses look like beyond the threshold</strong>. Two portfolios can share the same VaR while having dramatically different tail behaviours.</p>
+
+<h3 id="expected-shortfall-cvar">Expected Shortfall (CVaR)</h3>
+
+<p>Expected Shortfall (also known as Conditional VaR, or CVaR) addresses exactly the blind spot of VaR. Instead of asking what the worst loss is in 99% of scenarios, it asks: <em>given that we are already in the worst 1% of scenarios, what is the average loss we should expect?</em></p>
+
+<p>This makes it a <strong>coherent risk measure</strong> in the technical sense: it respects the mathematical properties that a well-behaved risk metric should have (including sub-additivity, which means diversification always reduces risk). The Basel III and Basel IV regulatory frameworks progressively shifted from VaR to Expected Shortfall as the primary capital requirement metric for market risk, specifically because of this property.</p>
+
+<p>For a portfolio manager, CVaR is the more honest metric. It forces you to think about what happens in genuinely bad markets, not just the edge of bad markets.</p>
+
+<h3 id="beta-β">Beta (β)</h3>
+
+<p>Beta measures how much a portfolio (or a single asset) moves relative to a benchmark, typically the overall market. A beta of 1 means the portfolio moves in lockstep with the market. A beta of 1.5 means it amplifies market movements by 50% in both directions. A beta of 0.5 implies half the market sensitivity.</p>
+
+<p>Beta is a central concept in the Capital Asset Pricing Model (CAPM) and in factor-based investing more broadly. In risk management, it helps isolate the portion of portfolio risk that is systematic (driven by broad market exposure, which cannot be diversified away) versus idiosyncratic (specific to individual holdings, which can be reduced through diversification).</p>
+
+<p>Managing beta deliberately is one of the most direct levers a portfolio manager has to control market risk exposure.</p>
+
+<h3 id="maximum-drawdown-mdd">Maximum Drawdown (MDD)</h3>
+
+<p>Maximum drawdown measures the largest peak-to-trough decline in a portfolio’s value over a given period. It is the closest market risk metric to what investors actually feel in their stomach during a crisis. A portfolio that has experienced a 40% drawdown needs a subsequent return of approximately 67% just to get back to the prior peak.</p>
+
+<p>For strategies that may carry systematic biases (trend-following, momentum, leveraged strategies), maximum drawdown is an essential metric to combine with VaR and CVaR. It grounds the conversation in real trajectory rather than distributional abstractions.</p>
+
+<h3 id="the-sharpe-ratio-and-its-risk-adjusted-cousins">The Sharpe Ratio (and its risk-adjusted cousins)</h3>
+
+<p>Strictly speaking, the Sharpe ratio is a performance metric, but in portfolio management, it lives comfortably inside the risk management conversation. It measures the excess return earned per unit of volatility:</p>
+
+\[\text{Sharpe} = \frac{R_p - R_f}{\sigma_p}\]
+
+<p>Where $R_p$ is the portfolio return, $R_f$ is the risk-free rate, and $\sigma_p$ is the portfolio’s standard deviation of returns. A higher Sharpe ratio means you are being better compensated for the risk you are taking.</p>
+
+<p>Its cousins include the <strong>Sortino ratio</strong> (which uses downside deviation instead of total standard deviation, penalising only negative volatility) and the <strong>Calmar ratio</strong> (which uses maximum drawdown in the denominator). Each tells a slightly different story, and together they give a richer picture of risk-adjusted performance than any single number alone.</p>
+
+<hr />
+
+<h2 id="a-word-on-liquidity-risk">A word on liquidity risk</h2>
+
+<p>No discussion of market risk in portfolio management is complete without at least acknowledging <strong>liquidity risk</strong>, because the two are far more entangled than they appear in textbooks.</p>
+
+<p>Liquidity risk refers to the risk of being unable to exit a position at, or near, the prevailing market price without causing (or absorbing) significant price impact. In quiet markets, it is easy to underestimate. In stressed markets, it becomes the dominant risk.</p>
+
+<p>Two key dimensions define it in practice:</p>
+
+<p><strong>Market liquidity risk</strong> is the risk that an asset’s bid-ask spread widens dramatically, or that market depth (the available volume of buy and sell orders at various price levels) evaporates when you actually need to transact. A position that looks perfectly liquid on a normal trading day can become nearly untradeable in a crisis, precisely because every other market participant is trying to do the same thing at the same time.</p>
+
+<p><strong>Funding liquidity risk</strong> is the risk that you are unable to meet your obligations (margin calls, redemption requests, collateral requirements) even though your assets have intrinsic value. This is what ultimately killed LTCM: not that its positions were wrong, but that it could not survive long enough for the market to recognise that.</p>
+
+<p>The standard tool for integrating market and liquidity risk is <strong>Liquidity-Adjusted VaR (LVaR)</strong>, which modifies the standard VaR calculation to account for the additional loss that could arise from being forced to unwind a position over a stressed timeframe rather than instantaneously. It is a more conservative and more honest number, and unsurprisingly, it is the one regulators increasingly prefer.</p>
+
+<hr />
+
+<h2 id="why-this-matters-beyond-the-trading-floor">Why this matters beyond the trading floor</h2>
+
+<p>It is tempting to think that all of this is relevant only to institutional asset managers, investment banks, or hedge funds with dedicated risk teams. But the logic applies at any scale.</p>
+
+<p>If you manage a personal investment portfolio, understanding how correlated your positions are, what your implicit beta to the equity market is, and whether your liquidity assumptions hold under stress is not a professional luxury. It is the basic intellectual hygiene that separates a portfolio that weathers a crisis from one that forces painful decisions at the worst possible moment.</p>
+
+<p>The frameworks described here do not require a Bloomberg terminal or a team of quants to use meaningfully. Many can be approximated with open-source tools, historical data, and a clear head. Future posts in this series will go deeper into the implementation side, including concrete examples in Python and references to the <a href="https://www.garp.org/frm" target="_blank" rel="noopener">FRM curriculum</a> for those who want a rigorous foundation.</p>
+
+<hr />
+
+<p>Hope this was a useful starting point. If you have questions or want to explore any of these topics further, do not hesitate to reach out via LinkedIn. I am always happy to discuss.</p>
+
+                </article>
+
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="https://craquinterogo.github.io/assets/js/jquery.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrolly.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrollex.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/skel.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="https://craquinterogo.github.io/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="https://craquinterogo.github.io/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
+
+
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          window.addEventListener('resize', updateProgress);
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── On-demand sidebars ──────────────────────────── */
+        var drawers = [];
+        function makeSidebarToggle(toggleId, sidebarId, overlayId, query) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+          var compact = window.matchMedia(query);
+
+          function setOpen(open, restoreFocus) {
+            sidebar.classList.toggle('active', open);
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            sidebar.inert = compact.matches && !open;
+            if (open) sidebar.querySelector('button, a').focus();
+            else if (restoreFocus) toggle.focus();
+          }
+
+          drawers.push(function () { setOpen(false, false); });
+          toggle.addEventListener('click', function () {
+            var open = !sidebar.classList.contains('active');
+            drawers.forEach(function (close) { close(); });
+            setOpen(open, !open);
+          });
+          overlay.addEventListener('click', function () { setOpen(false, true); });
+          sidebar.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && compact.matches) setOpen(false, true);
+          });
+          sidebar.addEventListener('click', function (event) {
+            if (compact.matches && event.target.closest('#toc-sidebar-nav a')) setOpen(false, true);
+          });
+          compact.addEventListener('change', function () { setOpen(false, false); });
+          setOpen(false, false);
+        }
+
+        makeSidebarToggle('sidebar-left-toggle', 'sidebar-left', 'sidebar-left-overlay', '(max-width: 1599px)');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay', '(max-width: 1199px)');
+
+        /* Keep wide technical content scrollable without widening the page. */
+        if (body) {
+          body.querySelectorAll('pre').forEach(function (pre) {
+            pre.tabIndex = 0;
+            pre.setAttribute('aria-label', 'Code sample');
+          });
+          body.querySelectorAll('table').forEach(function (table) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'post-table-scroll';
+            wrapper.tabIndex = 0;
+            wrapper.setAttribute('role', 'region');
+            wrapper.setAttribute('aria-label', 'Scrollable table');
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+          });
+        }
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            hdr.querySelector('.collapse-toggle').setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
+            }
+          });
+        });
+
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            var nums    = [0, 0, 0, 0];
+            var list = document.createElement('ul');
+            list.className = 'toc-list';
+            list.id = 'toc-heading-list';
+            var stack = [];
+            var branches = [];
+
+            function setBranchExpanded(branch, expanded) {
+              branch.children.hidden = !expanded;
+              branch.button.setAttribute('aria-expanded', String(expanded));
+              branch.button.setAttribute('aria-label', (expanded ? 'Collapse' : 'Expand') + ' subsections of ' + branch.text);
+            }
+
+            headings.forEach(function (h, index) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              if (h.firstChild && h.firstChild.nodeType === Node.TEXT_NODE) {
+                h.firstChild.textContent = h.firstChild.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
+              }
+              var number = document.createElement('span');
+              number.className = 'section-number';
+              number.textContent = numStr + '. ';
+              h.insertBefore(number, h.firstChild);
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              }
+              var item = document.createElement('li');
+              item.className = 'toc-level-' + (level + 1);
+              var link = document.createElement('a');
+              link.setAttribute('href', '#' + h.id);
+              var tocNumber = document.createElement('span');
+              tocNumber.className = 'toc-number';
+              tocNumber.textContent = numStr + '. ';
+              link.appendChild(tocNumber);
+              link.appendChild(document.createTextNode(rawText));
+              var row = document.createElement('div');
+              row.className = 'toc-entry';
+              row.appendChild(link);
+              item.appendChild(row);
+
+              while (stack.length && stack[stack.length - 1].level >= level) stack.pop();
+              var parent = stack[stack.length - 1];
+              if (parent && !parent.children) {
+                parent.children = document.createElement('ul');
+                parent.children.className = 'toc-list toc-children';
+                parent.children.id = 'toc-children-' + parent.index;
+                parent.button = document.createElement('button');
+                parent.button.type = 'button';
+                parent.button.className = 'toc-branch-toggle';
+                parent.button.setAttribute('aria-controls', parent.children.id);
+                var chevron = document.createElement('i');
+                chevron.className = 'fa fa-chevron-down';
+                chevron.setAttribute('aria-hidden', 'true');
+                parent.button.appendChild(chevron);
+                parent.row.insertBefore(parent.button, parent.row.firstChild);
+                parent.item.appendChild(parent.children);
+                branches.push(parent);
+                setBranchExpanded(parent, true);
+                parent.button.addEventListener('click', function () {
+                  setBranchExpanded(parent, parent.children.hidden);
+                  updateBulkControls();
+                });
+              }
+              (parent ? parent.children : list).appendChild(item);
+              stack.push({ level: level, index: index, item: item, row: row, text: rawText });
+            });
+
+            var expandAll;
+            var collapseAll;
+            function updateBulkControls() {
+              if (!expandAll) return;
+              expandAll.disabled = branches.every(function (branch) { return !branch.children.hidden; });
+              collapseAll.disabled = branches.every(function (branch) { return branch.children.hidden; });
+            }
+
+            if (branches.length) {
+              var controls = document.createElement('div');
+              controls.className = 'toc-controls';
+              controls.setAttribute('role', 'group');
+              controls.setAttribute('aria-label', 'Table of contents branches');
+              expandAll = document.createElement('button');
+              collapseAll = document.createElement('button');
+              [expandAll, collapseAll].forEach(function (button, index) {
+                button.type = 'button';
+                button.textContent = index === 0 ? 'Expand all' : 'Collapse all';
+                button.setAttribute('aria-controls', list.id);
+                button.addEventListener('click', function () {
+                  branches.forEach(function (branch) { setBranchExpanded(branch, index === 0); });
+                  updateBulkControls();
+                });
+                controls.appendChild(button);
+              });
+              tocNav.appendChild(controls);
+              updateBulkControls();
+            }
+            tocNav.appendChild(list);
+            if (tocSect) tocSect.style.display = 'block';
+          } else {
+            if (tocSect) tocSect.style.display = 'none';
+            document.body.classList.add('has-no-toc');
+          }
+        }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                tocNav.querySelectorAll('.toc-entry').forEach(function (row) { row.removeAttribute('data-active-descendant'); });
+                var active = Array.prototype.find.call(tocLinks, function (link) { return link.getAttribute('href') === '#' + entry.target.id; });
+                if (active) {
+                  active.setAttribute('data-active', '');
+                  var ancestor = active.closest('li').parentElement.closest('li');
+                  while (ancestor) {
+                    ancestor.firstElementChild.setAttribute('data-active-descendant', '');
+                    ancestor = ancestor.parentElement.closest('li');
+                  }
+                }
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>

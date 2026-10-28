@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Before the 'AI' hype: AI winters, tiny transistors, and the road to Transformers | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	
+	
+	<meta name="description" content="How early AI ambitions, funding winters, semiconductor engineering, and neural networks converged on the arrival of Transformers in 2017." />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Before the &#39;AI&#39; hype: AI winters, tiny transistors, and the road to Transformers" />
+	<meta property="og:description" content="How early AI ambitions, funding winters, semiconductor engineering, and neural networks converged on the arrival of Transformers in 2017." />
+	<meta property="og:url" content="https://craquinterogo.github.io/blog/2026/10/11/from-ai-winters-to-transformers" />
+	<meta name="twitter:title" content="Before the &#39;AI&#39; hype: AI winters, tiny transistors, and the road to Transformers" />
+	<meta name="twitter:description" content="How early AI ambitions, funding winters, semiconductor engineering, and neural networks converged on the arrival of Transformers in 2017." />
+	
+	
+	<meta property="og:image" content="https://craquinterogo.github.io/assets/images/01_post_images/006_artificial_intelligence/ai-winters-to-transformers-cover.png" />
+	<meta property="og:image:alt" content="A frozen mountain landscape gives way to dawn as a luminous neural tree grows from a silicon monolith." />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://craquinterogo.github.io/assets/images/01_post_images/006_artificial_intelligence/ai-winters-to-transformers-cover.png" />
+	<meta name="twitter:image:alt" content="A frozen mountain landscape gives way to dawn as a luminous neural tree grows from a silicon monolith." />
+	
+	
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="https://craquinterogo.github.io//" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io//">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Artificial Intelligence
+            </h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle related posts" aria-controls="related-posts-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              
+              
+              
+                <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/03/08/local_llm_model" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/006_artificial_intelligence/llm_entry_post.png" alt="Just another post of local LLM models" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Just another post of local LLM models</h5>
+                          
+                            <span class="recent-post-date">Mar 08, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+              <div class="sidebar-category-link">
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle table of contents" aria-controls="toc-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- On-demand navigation for narrower reading layouts -->
+    <button type="button" id="sidebar-left-toggle" class="sidebar-toggle sidebar-toggle--left" aria-controls="sidebar-left" aria-expanded="false"><i class="fa fa-folder" aria-hidden="true"></i>Related</button>
+    <button type="button" id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-controls="sidebar-right" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i>Contents</button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          
+            
+              
+            
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#artificial-intelligence">Artificial Intelligence</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Before the 'AI' hype: AI winters, tiny transist...</span>
+                    </div>
+                  
+
+                  <h1>Before the 'AI' hype: AI winters, tiny transistors, and the road to Transformers</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2026-10-11T00:00:00-05:00">October 11, 2026</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">artificial intelligence</span>
+                      
+                        <span class="post-tag-pill">AI history</span>
+                      
+                        <span class="post-tag-pill">deep learning</span>
+                      
+                        <span class="post-tag-pill">semiconductors</span>
+                      
+                        <span class="post-tag-pill">NLP</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="https://craquinterogo.github.io/assets/images/01_post_images/006_artificial_intelligence/ai-winters-to-transformers-cover.png"
+                    alt="Before the 'AI' hype: AI winters, tiny transistors, and the road to Transformers"
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <article class="post-body" id="post-body-content" aria-label="Article content">
+                  <p>In my <a href="/blog/2026/03/08/local_llm_model">previous AI entry</a>, I explored running a language model locally. You download some weights, start an inference engine, and suddenly your computer is producing paragraphs. Slowly, perhaps, but still paragraphs.</p>
+
+<p>It is easy to look at that experience and imagine that artificial intelligence appeared when somebody finally gave a chatbot a friendly interface. The actual story is much stranger, and much longer.</p>
+
+<p>Researchers made gloriously ambitious plans in the 1950s, only to see funding disappear when reality refused to cooperate. Meanwhile, semiconductor engineers quietly improved the tiny switches underneath everything. Eventually, hardware, data, and learning algorithms came together at a scale that earlier researchers could barely afford to experiment with.</p>
+
+<p>So, before opening the hood of a Transformer, I want to take a step back: <strong>how did we get a machine capable of training one in the first place?</strong></p>
+
+<blockquote>
+  <p><strong>Two reading companions for the road.</strong> This post’s historical backbone owes a great deal to Stuart Russell and Peter Norvig’s <em>Artificial Intelligence: A Modern Approach</em>, especially Chapter 1: the early ambitions, the symbolic and neural traditions, and the boom-and-winter cycles <a class="citation" href="#RussellNorvig2021">(Russell &amp; Norvig, 2021)</a>.</p>
+
+  <p>For the stretch from neural-network learning to the deep-learning revival, Yann LeCun, Yoshua Bengio, and Geoffrey Hinton’s <em>Deep Learning</em> is the other recurring guide <a class="citation" href="#LeCunBengioHinton2015">(LeCun et al., 2015)</a>. Rather than make these companions wave from the end of every paragraph, I acknowledge their influence here and keep citations along the way for particular papers, historical documents, and results.</p>
+</blockquote>
+
+<h2 id="a-summer-with-an-ambitious-to-do-list">A summer with an ambitious to-do list</h2>
+
+<nav class="workflow-progress" aria-label="AI history overview, step 1 of 8">
+  <ol style="--flow-count: 8">
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#a-summer-with-an-ambitious-to-do-list" aria-current="step">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Early ambitions</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#from-promising-demonstrations-to-a-very-cold-reality">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">AI winters</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#meanwhile-something-very-small-was-getting-very-important">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Semiconductors</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#better-hardware-still-needed-something-worth-training">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Hardware and learning</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#the-unexpected-supporting-actor-computer-graphics">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Computer graphics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#but-language-does-not-arrive-as-a-photograph">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Language</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#2017-the-doorway-to-transformers">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Transformers</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#references">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">References</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The roots reach back before the usual birthday. In 1943, Warren McCulloch and Walter Pitts described a mathematical model of neuron-like units. Rather than miniature biological brains, these were simplified computational elements that suggested how networks could perform logical operations. In 1950, Alan Turing’s <em>Computing Machinery and Intelligence</em> reframed the question of machine intelligence through what became known as the imitation game <a class="citation" href="#Turing1950">(Turing, 1950)</a>.</p>
+
+<p>Before the mathematics, here is the biological inspiration:</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/006_artificial_intelligence/biological-neuron.svg" aria-label="Open the labeled biological neuron diagram at full size">
+    <img src="/assets/images/01_post_images/006_artificial_intelligence/biological-neuron.svg" alt="Schematic biological neuron showing branching dendrites, the cell body and nucleus, a myelinated axon with nodes of Ranvier, and synaptic terminals. Signaling typically travels from the dendrites toward the axon terminals." width="800" height="580" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 1.</strong> Anatomy of a biological neuron. Original schematic, not to scale. Select the image to enlarge.</figcaption>
+</figure>
+
+<p><strong>Dendrites</strong> typically receive incoming signals, while the <strong>cell body (soma)</strong> contains the nucleus and integrates those inputs. The <strong>axon</strong> carries action potentials toward the <strong>synaptic terminals</strong>, which communicate with other cells. In this myelinated example, the <strong>myelin sheath</strong> helps speed conduction, and the gaps between its segments are called <strong>nodes of Ranvier</strong>. Not every neuron has this shape or a myelinated axon.</p>
+
+<p>The artificial neurons we will meet borrow the idea of combining inputs and producing an output, not this entire biological machinery. No tiny axon is hiding inside your processor.</p>
+
+<p>Then came the naming moment. In a proposal dated <strong>1955</strong>, John McCarthy, Marvin Minsky, Nathaniel Rochester, and Claude Shannon outlined a summer research project to be held at Dartmouth in <strong>1956</strong>. The proposal used the term <em>artificial intelligence</em> and included language, abstraction, learning, and self-improvement in its ambitions <a class="citation" href="#McCarthy1955Dartmouth">(McCarthy et al., 1955)</a>.</p>
+
+<p>Those dates are easy to mix up. Although the proposal was written in 1955, the gathering itself took place in 1956. Dartmouth is commonly treated as AI’s founding event, not as the moment somebody first wondered whether machines could think.</p>
+
+<p>Two influential traditions provide a useful thread through this history, even though they do not cover the whole field:</p>
+
+<ul>
+  <li><strong>Symbolic AI:</strong> represent knowledge with symbols and rules, then search or reason over them. Give the machine explicit instructions about how its little world works. This tradition shaped work in knowledge representation, search, and language understanding.</li>
+  <li><strong>Neural approaches:</strong> connect simple computational units and adjust their connections from examples. Give the machine a learning procedure rather than a rule for every possible situation. This tradition predates the AI winters; its fortunes changed over time, with renewed interest in multilayer learning and <strong>backpropagation</strong> in the mid-1980s.</li>
+</ul>
+
+<p>These were not sealed-off camps, and AI has never consisted of only two methods. But the contrast is useful: <strong>write down the knowledge</strong> versus <strong>learn a useful representation from experience</strong>.</p>
+
+<p>Frank Rosenblatt’s perceptron work in the late 1950s gave the second approach an influential early example. A simple perceptron makes a decision by combining weighted inputs and applying a threshold. During training, those weights are adjusted so it can learn certain classifications without someone having to hand-write every decision rule.</p>
+
+<p>That sounds familiar because the broad idea is still with us. The scale, architecture, and training methods have changed rather dramatically.</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/006_artificial_intelligence/perceptron.svg" aria-label="Open the perceptron diagram at full size">
+    <img src="/assets/images/01_post_images/006_artificial_intelligence/perceptron.svg" alt="A simple perceptron combines three inputs using learned weights, adds a bias, and applies a threshold to produce a binary output: 1 if the weighted sum plus bias is at least zero, and 0 otherwise." width="1000" height="560" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 2.</strong> A simple perceptron: weighted inputs and a bias feed a threshold function that produces a binary decision. Training adjusts the weights and bias. Original schematic. Select the image to enlarge.</figcaption>
+</figure>
+
+<p>By the 1960s, the ambition was also moving off the screen. The Computer History Museum’s account of <em>Shakey</em>, that describes as a robot developed at the Stanford Research Institute between <strong>1966 and 1972</strong> that combined sensing, planning, and movement in rooms containing blocks and ramps. It was a research robot, not a household assistant, but its work advanced visual analysis and route finding <a class="citation" href="#CHMShakey">(Computer History Museum, n.d.)</a>.</p>
+
+<p>Getting a robot across a room turns out to be a rather good way to discover everything your tidy theory forgot about the room.</p>
+
+<h2 id="from-promising-demonstrations-to-a-very-cold-reality">From promising demonstrations to a very cold reality</h2>
+
+<nav class="workflow-progress" aria-label="AI history overview, step 2 of 8">
+  <ol style="--flow-count: 8">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#a-summer-with-an-ambitious-to-do-list">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Early ambitions</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#from-promising-demonstrations-to-a-very-cold-reality" aria-current="step">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">AI winters</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#meanwhile-something-very-small-was-getting-very-important">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Semiconductors</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#better-hardware-still-needed-something-worth-training">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Hardware and learning</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#the-unexpected-supporting-actor-computer-graphics">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Computer graphics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#but-language-does-not-arrive-as-a-photograph">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Language</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#2017-the-doorway-to-transformers">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Transformers</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#references">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">References</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Early systems produced genuine achievements in game-playing, theorem proving, and carefully controlled tasks. The trouble was assuming that a program working in a small, tidy world was nearly ready for the large, untidy one outside the laboratory.</p>
+
+<p>Anyone who has taken a research prototype into production can probably feel this paragraph in their bones. Consider a search procedure with ten possible choices at each step. Exploring all sequences of six steps means considering a million possibilities. At twelve steps, it is a trillion. The example is deliberately simple, but the lesson is not: <strong>a slightly larger problem can demand vastly more computation</strong>.</p>
+
+<p>This is a <em>combinatorial explosion</em>. Faster hardware helps, but a tenfold improvement in your machine does not rescue an algorithm whose workload has grown a millionfold.</p>
+
+<p><span style="text-decoration:underline">Neural approaches had their own difficulties</span>. A single-layer perceptron cannot represent every classification rule. The familiar XOR example, where the answer is true only when two binary inputs differ, cannot be separated with a single straight decision boundary. Marvin Minsky and Seymour Papert explored limitations of perceptron models in their 1969 book <em>Perceptrons: An Introduction to Computational Geometry</em> <a class="citation" href="#MinskyPapert1969">(Minsky &amp; Papert, 1969)</a>. Their findings did not, however, prove that every multilayer neural network was doomed.</p>
+
+<p>Nevertheless, enthusiasm and funding for neural-network research suffered. In Britain, the <strong>1973 Lighthill report</strong> criticized the field, including its difficulty overcoming combinatorial explosion, and contributed to severe reductions in support. This is the territory usually described as the first <strong>AI winter</strong>, broadly associated with the 1970s.</p>
+
+<blockquote>
+  <p><strong>Winter did not mean that nobody made progress.</strong> It meant declining confidence and support in important parts of the field. Hardware limitations were real, but so were weak methods, brittle demonstrations, and promises that ran far ahead of results.</p>
+</blockquote>
+
+<p>There was another boom around expert systems: programs encoding specialist knowledge in rules. These delivered useful applications, including configuring computer orders, but acquiring and maintaining all that knowledge was expensive. Systems could struggle when the world changed or uncertainty did not fit their rules. The commercial enthusiasm of the 1980s gave way to another period of disappointment around the late 1980s and early 1990s.</p>
+
+<p><span style="text-decoration:underline">There is no single worldwide date when AI was switched off and subsequently switched back on. Different approaches, institutions, and countries experienced these cycles differently</span>. And while investors and funders changed their minds, work on learning, probability, and neural networks continued.</p>
+
+<h2 id="meanwhile-something-very-small-was-getting-very-important">Meanwhile, something very small was getting very important</h2>
+
+<nav class="workflow-progress" aria-label="AI history overview, step 3 of 8">
+  <ol style="--flow-count: 8">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#a-summer-with-an-ambitious-to-do-list">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Early ambitions</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#from-promising-demonstrations-to-a-very-cold-reality">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">AI winters</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#meanwhile-something-very-small-was-getting-very-important" aria-current="step">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Semiconductors</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#better-hardware-still-needed-something-worth-training">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Hardware and learning</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#the-unexpected-supporting-actor-computer-graphics">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Computer graphics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#but-language-does-not-arrive-as-a-photograph">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Language</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#2017-the-doorway-to-transformers">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Transformers</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#references">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">References</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>To understand the eventual comeback, we need to leave the AI laboratory for a moment and visit the semiconductor factory. An artificial neuron is a mathematical operation. A transistor is a physical electronic device. <strong>They are not the same thing</strong>, and a neural network does not normally assign one transistor to each artificial neuron.</p>
+
+<p>Instead, processors built from transistors execute the arithmetic, while memory stores the model’s weights and working data. That distinction makes the hardware story much more interesting than “we finally built enough electronic neurons.”</p>
+
+<h3 id="from-individual-switches-to-circuits-on-a-chip">From individual switches to circuits on a chip</h3>
+
+<p>The Computer History Museum traces this breakthrough in <em>1947: Invention of the Point-Contact Transistor</em>. At Bell Labs in <strong>1947</strong>, John Bardeen and Walter Brattain demonstrated the device within the solid-state research effort led by William Shockley. It offered a path beyond the vacuum tubes used in early electronic equipment <a class="citation" href="#CHMTransistor1947">(Computer History Museum, n.d.)</a>.</p>
+
+<p>What does either device actually do? Think of an <strong>electrically controlled valve</strong>: one signal regulates how much electricity can flow through another part of a circuit. Both vacuum tubes and transistors can amplify signals or serve as switches. In digital circuits, those switches help represent the zeros and ones used in computation.</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/006_artificial_intelligence/vacuum-tube-vs-transistor.svg" aria-label="Open the vacuum tube and transistor comparison at full size">
+    <img src="/assets/images/01_post_images/006_artificial_intelligence/vacuum-tube-vs-transistor.svg" alt="Comparison of two electrically controlled valves. A vacuum tube uses a heated cathode to release electrons across a vacuum, with a grid controlling their passage to a collecting plate. A MOS transistor uses a gate voltage to control a conducting channel in a solid semiconductor, without a heated cathode or vacuum enclosure." width="900" height="1040" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 3.</strong> Same job, different machinery: a vacuum triode controls electrons crossing a vacuum, while a MOS transistor controls conduction inside a solid. The MOS example is a later chip-building design, not the original 1947 transistor. Original simplified schematic, not to scale; power supplies and most wiring are omitted. Select the image to enlarge.</figcaption>
+</figure>
+
+<p>In the <strong>vacuum tube</strong>, a heater makes the cathode hot enough to release electrons. A voltage on the intervening wire <strong>grid</strong> controls how many reach the collecting plate. Heating takes energy, produces heat, and requires a warm-up period.</p>
+
+<p>In the <strong>MOS transistor</strong> shown here, a voltage on the <strong>gate</strong> changes how readily a conducting path forms between two terminals, called the source and drain. An insulating layer separates the gate from the semiconductor: its electric field controls the path without needing a hot cathode. Transistors still consume power and generate heat, but removing the heater and vacuum enclosure opened the way to much smaller devices, eventually packed by the billions onto chips. MOS transistors came later, however it’s worth to mention that the 1947 breakthrough used a different architecture, namely, the point-contact structure.</p>
+
+<p>What followed was not one miraculous invention but a succession of manufacturing and design advances:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Development</th>
+      <th>Why it mattered for computing</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Transistors replacing vacuum tubes</td>
+      <td>A route toward smaller electronic switching devices without the tubes’ heated cathodes.</td>
+    </tr>
+    <tr>
+      <td>Integrated circuits, demonstrated and developed in the late 1950s</td>
+      <td>Multiple components and their connections could be built together rather than individually assembled.</td>
+    </tr>
+    <tr>
+      <td>Planar silicon manufacturing</td>
+      <td>A practical foundation for making and interconnecting devices on a chip at scale.</td>
+    </tr>
+    <tr>
+      <td>MOS transistors, developed in 1959 and demonstrated in 1960</td>
+      <td>A device structure well suited to dense integrated circuits and, eventually, large memories and processors.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The museum’s <em>1959: Practical Monolithic Integrated Circuit Concept Patented</em> connects Jack Kilby’s early integrated-circuit demonstration in 1958 with Robert Noyce’s 1959 conception. Noyce used the planar process to make a practical monolithic circuit with connections formed on the chip <a class="citation" href="#CHMIntegratedCircuit1959">(Computer History Museum, n.d.)</a>.</p>
+
+<p>Another museum account, <em>1960: Metal Oxide Semiconductor (MOS) Transistor Demonstrated</em>, follows Atalla and Kahng’s MOS transistor work, which supplied another crucial part of the scaling story <a class="citation" href="#CHMMOS1960">(Computer History Museum, n.d.)</a>. Over the following decades, advances in fabrication, circuit design, and manufacturing economics put increasingly large amounts of computation and memory within reach. <strong>This did not automatically produce a good learning algorithm. It did make much larger experiments possible.</strong></p>
+
+<h3 id="what-moores-law-does-and-does-not-promise">What Moore’s law does, and does not, promise</h3>
+
+<p>The museum’s <em>1965: Moore’s Law Predicts the Future of Integrated Circuits</em> follows both the original observation and its later revision. In <strong>1965</strong>, Gordon Moore described an approximately annual doubling in the number of components on economically attractive integrated circuits. In <strong>1975</strong>, he revised the projected pace to roughly a doubling every two years <a class="citation" href="#CHMMoore1965">(Computer History Museum, n.d.)</a>.</p>
+
+<p>The important phrase is <em>components on a chip</em>. Moore’s law is not a law of physics promising that every application becomes twice as fast every two years. More transistors can support larger caches, more cores, and specialized arithmetic units. Whether a model trains faster also depends on memory bandwidth, communication, power consumption, software, and how well the computation fits the hardware. If your processor spends its time waiting for data, adding more arithmetic units can be a little like hiring more cooks for a kitchen with one very slow delivery driver.</p>
+
+<h2 id="better-hardware-still-needed-something-worth-training">Better hardware still needed something worth training</h2>
+
+<nav class="workflow-progress" aria-label="AI history overview, step 4 of 8">
+  <ol style="--flow-count: 8">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#a-summer-with-an-ambitious-to-do-list">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Early ambitions</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#from-promising-demonstrations-to-a-very-cold-reality">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">AI winters</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#meanwhile-something-very-small-was-getting-very-important">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Semiconductors</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#better-hardware-still-needed-something-worth-training" aria-current="step">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Hardware and learning</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#the-unexpected-supporting-actor-computer-graphics">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Computer graphics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#but-language-does-not-arrive-as-a-photograph">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Language</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#2017-the-doorway-to-transformers">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Transformers</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#references">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">References</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>It would be tempting to write the rest of the story as: chips improved, therefore deep learning happened.</p>
+
+<p>Training a neural network involves comparing predictions with targets and adjusting parameters to reduce an error measure. For a multilayer network, we need to determine how parameters in earlier layers contributed to the final error.</p>
+
+<p><strong>Backpropagation</strong> efficiently computes those derivatives by applying the chain rule backward through the computation. An optimizer then uses the derivatives to update the weights. The two are connected, but they are not the same operation. More technical details in my technical <a href="https://quantero.kruk-ai.com/topics/artificial_intelligence/deep_learning/backpropagation_methodology/" target="_blank" rel="noopener">blog here</a>.</p>
+
+<p>Rumelhart, Hinton, and Williams’ <strong>1986</strong> paper helped popularize learning internal representations this way <a class="citation" href="#Rumelhart1986">(Rumelhart et al., 1986)</a>. But the underlying ideas had been developing for years. The paper’s influence should not be confused with the invention of differentiation or the first backward-gradient calculation.</p>
+
+<p>This made a richer kind of learning practical. Instead of asking a single decision boundary to do everything, multiple layers could learn successive transformations.</p>
+
+<p>For images, an intuitive picture is that some early features respond to local edges, while later combinations capture more complex patterns. That is an explanatory sketch, not a guarantee that every network neatly organizes itself into human-readable concepts.</p>
+
+<p>There were also successes before the famous 2010s boom, including convolutional networks for document recognition in the 1990s. Around <strong>2006</strong>, layer-wise pretraining helped renew interest in deeper networks. Later successes drew on other improvements too, including activation functions such as ReLU, regularization, and better training practices.</p>
+
+<p>So the winters did not leave an empty laboratory waiting for a faster chip. They left a complicated body of ideas, some useful results, and several problems still needing solutions.</p>
+
+<h2 id="the-unexpected-supporting-actor-computer-graphics">The unexpected supporting actor: computer graphics</h2>
+
+<nav class="workflow-progress" aria-label="AI history overview, step 5 of 8">
+  <ol style="--flow-count: 8">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#a-summer-with-an-ambitious-to-do-list">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Early ambitions</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#from-promising-demonstrations-to-a-very-cold-reality">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">AI winters</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#meanwhile-something-very-small-was-getting-very-important">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Semiconductors</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#better-hardware-still-needed-something-worth-training">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Hardware and learning</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#the-unexpected-supporting-actor-computer-graphics" aria-current="step">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Computer graphics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#but-language-does-not-arrive-as-a-photograph">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Language</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#2017-the-doorway-to-transformers">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Transformers</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#references">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">References</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Neural-network training repeatedly performs operations on large arrays of numbers. A layer commonly involves multiplying matrices, adding offsets, and applying nonlinear functions. Training repeats related operations across examples and layers.</p>
+
+<p>A CPU is a flexible generalist. A GPU devotes much of its design to high-throughput parallel work. Not every task suits a GPU, but large, well-organized batches of neural-network arithmetic often do.</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/006_artificial_intelligence/cpu-vs-gpu.svg" aria-label="Open the CPU and GPU comparison at full size">
+    <img src="/assets/images/01_post_images/006_artificial_intelligence/cpu-vs-gpu.svg" alt="Side-by-side CPU and GPU comparison. A CPU emphasizes fewer complex cores for varied tasks and decisions; a GPU emphasizes many arithmetic lanes for similar operations on large arrays. Neural-network layers offer many multiplications and additions that can run in parallel. CPUs also work in parallel, and GPU benefits depend on workload size, memory, data transfers, and software." width="1000" height="1040" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 4.</strong> A CPU and a GPU divide their resources differently. Large neural-network operations often provide enough similar arithmetic to keep a GPU's many lanes busy, while the CPU runs and coordinates the application. Original conceptual schematic: blocks are not actual core counts or equivalent units, and this is not a performance benchmark. Select the image to enlarge.</figcaption>
+</figure>
+
+<p>Think of the CPU as a small team of versatile problem-solvers, and the GPU as a much larger team organized to carry out similar calculations together. In a neural-network layer, many input values must be multiplied by weights and added together. Much of that work can happen at the same time; matrix operations package it so the GPU can process many pieces in parallel. The same hardware can accelerate related calculations during training, not just the forward prediction.</p>
+
+<p>This is a division of labor, not a contest with one universal winner. CPUs also have multiple cores and instructions that process several numbers at once. They remain useful for varied logic, preparing data, and coordinating computation, and can be the better choice for small workloads. A GPU earns its advantage when there is enough suitable work to offset setup and data-transfer costs, with enough memory capacity and bandwidth to feed the calculations. Some steps still depend on earlier results, so not everything runs at once.</p>
+
+<p>Hardware originally developed for demanding graphics workloads therefore became useful for something rather different: learning from data.</p>
+
+<p>The practical breakthrough was not just the silicon. Programmable GPU environments such as CUDA and optimized numerical software made that parallel hardware usable for research. The deep-learning revival benefited from both more convenient GPU programming and architectures that could exploit it.</p>
+
+<p>Two other ingredients deserve equal billing:</p>
+
+<ul>
+  <li><strong>Data and benchmarks.</strong> Large digital datasets supplied examples to learn from, while shared benchmarks made improvements easier to compare.</li>
+  <li><strong>Memory and software.</strong> Training needs storage for weights, intermediate activations, gradients, and other working state. Better memory capacity and bandwidth, numerical libraries, and later frameworks made larger experiments more feasible and repeatable.</li>
+</ul>
+
+<p>The real breakthrough was a combination: <strong>algorithms, data, compute, and tools</strong>.</p>
+
+<p>And faster experiments have a second-order benefit. When an experiment takes days rather than an impractical length of time, researchers can try more ideas, identify failures sooner, and improve the next model. Compute changes the pace of discovery as well as the size of a network.</p>
+
+<h3 id="alexnet-a-result-people-could-not-easily-ignore">AlexNet: a result people could not easily ignore</h3>
+
+<p>In <strong>2012</strong>, Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton published the convolutional-network work now associated with <strong>AlexNet</strong>. Their network had roughly <strong>60 million parameters</strong>, and training took about <strong>five to six days on two NVIDIA GTX 580 GPUs</strong>, each with 3 GB of memory.</p>
+
+<p>The team’s winning ILSVRC-2012 competition entry achieved a <strong>15.3% top-five test error</strong>, compared with <strong>26.2%</strong> for the runner-up. Because that entry combined multiple networks, the winning score should not be attributed to a single network. Top-five error asks whether the correct category is missing from the model’s five highest-ranked guesses <a class="citation" href="#Krizhevsky2012">(Krizhevsky et al., 2012)</a>.</p>
+
+<p>AlexNet did not invent neural networks, convolution, GPUs, or image recognition. It showed what their combination could deliver at a scale that made the result difficult to dismiss.</p>
+
+<h2 id="but-language-does-not-arrive-as-a-photograph">But language does not arrive as a photograph</h2>
+
+<nav class="workflow-progress" aria-label="AI history overview, step 6 of 8">
+  <ol style="--flow-count: 8">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#a-summer-with-an-ambitious-to-do-list">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Early ambitions</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#from-promising-demonstrations-to-a-very-cold-reality">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">AI winters</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#meanwhile-something-very-small-was-getting-very-important">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Semiconductors</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#better-hardware-still-needed-something-worth-training">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Hardware and learning</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#the-unexpected-supporting-actor-computer-graphics">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Computer graphics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#but-language-does-not-arrive-as-a-photograph" aria-current="step">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Language</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#2017-the-doorway-to-transformers">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Transformers</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#references">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">References</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Recognizing an object in an image and predicting the next word in a sentence are different problems.</p>
+
+<p>Language has order, variable length, and dependencies that can stretch across a sentence. “The analyst who reviewed the reports <strong>was</strong> concerned” requires relating words that are not adjacent. A model also needs to represent similarities between words without treating every possible sentence as an entirely unrelated object.</p>
+
+<p>Statistical language models already existed. Neural methods did not invent the idea of estimating the probability of text. An influential <strong>2003</strong> paper by Bengio and colleagues learned distributed word representations together with a probabilistic language model. Instead of representing every word as an isolated label, the system learned vectors that could help generalize across related contexts <a class="citation" href="#Bengio2003LanguageModel">(Bengio et al., 2003)</a>. Now we have a useful ingredient: learned numerical representations of language. The next question is how to process the sequence.</p>
+
+<h3 id="recurrence-read-update-repeat">Recurrence: read, update, repeat</h3>
+
+<p>A recurrent neural network, or <strong>RNN</strong>, processes a sequence while updating an internal state. Informally: read a word, update a summary, read the next word, and carry on. The difficulty is retaining and learning useful information across many steps. Gradients can become very small or very large, making long-range learning difficult. <strong>Long short-term memory</strong>, or <strong>LSTM</strong>, introduced by Hochreiter and Schmidhuber in <strong>1997</strong>, was designed to address important aspects of this problem <a class="citation" href="#HochreiterSchmidhuber1997">(Hochreiter &amp; Schmidhuber, 1997)</a>.</p>
+
+<p>In <strong>2014</strong>, Sutskever, Vinyals, and Le demonstrated sequence-to-sequence learning with deep LSTMs: one network encoded an input sequence into a fixed-length representation, and another generated the output sequence <a class="citation" href="#Sutskever2014Sequence">(Sutskever et al., 2014)</a>. There is an obvious pressure point: asking one fixed-length representation to carry everything important about a long input. It is a little like reading an entire report, closing it, and trying to write an accurate translation using only the notes on one index card.</p>
+
+<h3 id="attention-perhaps-keep-the-report-open">Attention: perhaps keep the report open</h3>
+
+<p>Bahdanau, Cho, and Bengio proposed a neural translation approach in a <strong>2014 preprint</strong>, presented at <strong>ICLR 2015</strong>, that learned to align and translate jointly. Rather than relying exclusively on one fixed-length summary, the decoder could form a context from relevant encoder states as it produced each output word <a class="citation" href="#Bahdanau2015Attention">(Bahdanau et al., 2015)</a>. This is the attention mechanism that matters for our route through neural machine translation.</p>
+
+<p>It was a major improvement, but recurrent models still had a structural constraint. Their hidden states depend on earlier hidden states, which limits parallel computation across sequence positions. More powerful GPUs do not simply erase that dependency. At this point, our two stories finally meet:</p>
+
+<ul>
+  <li>Semiconductor engineering and GPU programming made large parallel computations practical.</li>
+  <li>Language modeling and attention supplied a reason to reconsider how a sequence model should organize its computation.</li>
+</ul>
+
+<h2 id="2017-the-doorway-to-transformers">2017: the doorway to Transformers</h2>
+
+<nav class="workflow-progress" aria-label="AI history overview, step 7 of 8">
+  <ol style="--flow-count: 8">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#a-summer-with-an-ambitious-to-do-list">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Early ambitions</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#from-promising-demonstrations-to-a-very-cold-reality">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">AI winters</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#meanwhile-something-very-small-was-getting-very-important">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Semiconductors</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#better-hardware-still-needed-something-worth-training">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Hardware and learning</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#the-unexpected-supporting-actor-computer-graphics">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Computer graphics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#but-language-does-not-arrive-as-a-photograph">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Language</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#2017-the-doorway-to-transformers" aria-current="step">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Transformers</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#references">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">References</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>In <strong>2017</strong>, Vaswani and colleagues introduced the <strong>Transformer</strong> in <em>Attention Is All You Need</em>. Their architecture used attention rather than recurrence or convolution as the core mechanism for relating sequence positions. On machine-translation tasks, the paper demonstrated strong results with a design better suited to parallel training <a class="citation" href="#Vaswani2017Attention">(Vaswani et al., 2017)</a>.</p>
+
+<p>That does <strong>not</strong> mean attention itself was invented in 2017. Nor does it mean that generating text suddenly became completely parallel: autoregressive output still depends on earlier generated tokens. <span style="text-decoration:underline">The important shift was architectural</span>. The model could exploit the available hardware differently instead of merely asking the same recurrent computation to run faster.</p>
+
+<p>Looking back, this is what I find most interesting about AI’s history. The ideas did not advance in isolation from the machines, and the machines did not determine the ideas automatically. Progress came from making the two fit, with data, software, and a lot of patient experimentation in between.</p>
+
+<p>The road from Dartmouth to Transformers was not a straight climb. It was a sequence of useful ideas, uncomfortable limits, disappointed expectations, and engineering breakthroughs that eventually reinforced one another.</p>
+
+<p><strong>In the next entry, I’ll explore the Transformer architecture in more detail: how its components fit together, what self-attention actually computes, and why that design changed language modeling.</strong></p>
+
+<h2 id="references">References</h2>
+
+<nav class="workflow-progress" aria-label="AI history overview, step 8 of 8">
+  <ol style="--flow-count: 8">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#a-summer-with-an-ambitious-to-do-list">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Early ambitions</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#from-promising-demonstrations-to-a-very-cold-reality">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">AI winters</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#meanwhile-something-very-small-was-getting-very-important">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Semiconductors</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#better-hardware-still-needed-something-worth-training">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Hardware and learning</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#the-unexpected-supporting-actor-computer-graphics">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Computer graphics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#but-language-does-not-arrive-as-a-photograph">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Language</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#2017-the-doorway-to-transformers">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Transformers</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#references" aria-current="step">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">References</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<ol class="bibliography"><li><span id="RussellNorvig2021">Russell, S., &amp; Norvig, P. (2021). <i>Artificial Intelligence: A Modern Approach</i> (4th ed.). Pearson. <a href="https://aima.cs.berkeley.edu/newchap01.pdf" target="_blank" rel="noopener noreferrer">https://aima.cs.berkeley.edu/newchap01.pdf</a></span></li>
+<li><span id="LeCunBengioHinton2015">LeCun, Y., Bengio, Y., &amp; Hinton, G. (2015). Deep Learning. <i>Nature</i>, <i>521</i>, 436–444. <a href="https://doi.org/10.1038/nature14539" target="_blank" rel="noopener noreferrer">https://doi.org/10.1038/nature14539</a></span></li>
+<li><span id="Turing1950">Turing, A. M. (1950). Computing Machinery and Intelligence. <i>Mind</i>, <i>59</i>(236), 433–460. <a href="https://doi.org/10.1093/mind/LIX.236.433" target="_blank" rel="noopener noreferrer">https://doi.org/10.1093/mind/LIX.236.433</a></span></li>
+<li><span id="McCarthy1955Dartmouth">McCarthy, J., Minsky, M. L., Rochester, N., &amp; Shannon, C. E. (1955). <i>A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence</i>. Dartmouth College. <a href="https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html" target="_blank" rel="noopener noreferrer">https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html</a></span></li>
+<li><span id="CHMShakey">Computer History Museum. <i>Shakey, The World’s First Mobile Intelligent Robot, 1972</i>. <a href="https://www.computerhistory.org/revolution/artificial-intelligence-robotics/13/289" target="_blank" rel="noopener noreferrer">https://www.computerhistory.org/revolution/artificial-intelligence-robotics/13/289</a></span></li>
+<li><span id="MinskyPapert1969">Minsky, M., &amp; Papert, S. (1969). <i>Perceptrons: An Introduction to Computational Geometry</i>. MIT Press. <a href="https://openlibrary.org/books/OL18676461M" target="_blank" rel="noopener noreferrer">https://openlibrary.org/books/OL18676461M</a></span></li>
+<li><span id="CHMTransistor1947">Computer History Museum. <i>1947: Invention of the Point-Contact Transistor</i>. <a href="https://www.computerhistory.org/siliconengine/invention-of-the-point-contact-transistor/" target="_blank" rel="noopener noreferrer">https://www.computerhistory.org/siliconengine/invention-of-the-point-contact-transistor/</a></span></li>
+<li><span id="CHMIntegratedCircuit1959">Computer History Museum. <i>1959: Practical Monolithic Integrated Circuit Concept Patented</i>. <a href="https://www.computerhistory.org/siliconengine/practical-monolithic-integrated-circuit-concept-patented/" target="_blank" rel="noopener noreferrer">https://www.computerhistory.org/siliconengine/practical-monolithic-integrated-circuit-concept-patented/</a></span></li>
+<li><span id="CHMMOS1960">Computer History Museum. <i>1960: Metal Oxide Semiconductor (MOS) Transistor Demonstrated</i>. <a href="https://www.computerhistory.org/siliconengine/metal-oxide-semiconductor-mos-transistor-demonstrated/" target="_blank" rel="noopener noreferrer">https://www.computerhistory.org/siliconengine/metal-oxide-semiconductor-mos-transistor-demonstrated/</a></span></li>
+<li><span id="CHMMoore1965">Computer History Museum. <i>1965: Moore’s Law Predicts the Future of Integrated Circuits</i>. <a href="https://www.computerhistory.org/siliconengine/moores-law-predicts-the-future-of-integrated-circuits/" target="_blank" rel="noopener noreferrer">https://www.computerhistory.org/siliconengine/moores-law-predicts-the-future-of-integrated-circuits/</a></span></li>
+<li><span id="Rumelhart1986">Rumelhart, D. E., Hinton, G. E., &amp; Williams, R. J. (1986). Learning Representations by Back-Propagating Errors. <i>Nature</i>, <i>323</i>, 533–536. <a href="https://doi.org/10.1038/323533a0" target="_blank" rel="noopener noreferrer">https://doi.org/10.1038/323533a0</a></span></li>
+<li><span id="Krizhevsky2012">Krizhevsky, A., Sutskever, I., &amp; Hinton, G. E. (2012). ImageNet Classification with Deep Convolutional Neural Networks. <i>Advances in Neural Information Processing Systems</i>, <i>25</i>. <a href="https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html" target="_blank" rel="noopener noreferrer">https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html</a></span></li>
+<li><span id="Bengio2003LanguageModel">Bengio, Y., Ducharme, R., Vincent, P., &amp; Jauvin, C. (2003). A Neural Probabilistic Language Model. <i>Journal of Machine Learning Research</i>, <i>3</i>, 1137–1155. <a href="https://www.jmlr.org/papers/v3/bengio03a.html" target="_blank" rel="noopener noreferrer">https://www.jmlr.org/papers/v3/bengio03a.html</a></span></li>
+<li><span id="HochreiterSchmidhuber1997">Hochreiter, S., &amp; Schmidhuber, J. (1997). Long Short-Term Memory. <i>Neural Computation</i>, <i>9</i>(8), 1735–1780. <a href="https://doi.org/10.1162/neco.1997.9.8.1735" target="_blank" rel="noopener noreferrer">https://doi.org/10.1162/neco.1997.9.8.1735</a></span></li>
+<li><span id="Sutskever2014Sequence">Sutskever, I., Vinyals, O., &amp; Le, Q. V. (2014). Sequence to Sequence Learning with Neural Networks. <i>Advances in Neural Information Processing Systems</i>, <i>27</i>. <a href="https://arxiv.org/abs/1409.3215" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/1409.3215</a></span></li>
+<li><span id="Bahdanau2015Attention">Bahdanau, D., Cho, K., &amp; Bengio, Y. (2015). Neural Machine Translation by Jointly Learning to Align and Translate. <i>International Conference on Learning Representations</i>. <a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/1409.0473</a></span></li>
+<li><span id="Vaswani2017Attention">Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., &amp; Polosukhin, I. (2017). Attention Is All You Need. <i>Advances in Neural Information Processing Systems</i>, <i>30</i>, 5998–6008. <a href="https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html" target="_blank" rel="noopener noreferrer">https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html</a></span></li></ol>
+
+                </article>
+
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="https://craquinterogo.github.io/assets/js/jquery.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrolly.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrollex.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/skel.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="https://craquinterogo.github.io/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="https://craquinterogo.github.io/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
+
+
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          window.addEventListener('resize', updateProgress);
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── On-demand sidebars ──────────────────────────── */
+        var drawers = [];
+        function makeSidebarToggle(toggleId, sidebarId, overlayId, query) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+          var compact = window.matchMedia(query);
+
+          function setOpen(open, restoreFocus) {
+            sidebar.classList.toggle('active', open);
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            sidebar.inert = compact.matches && !open;
+            if (open) sidebar.querySelector('button, a').focus();
+            else if (restoreFocus) toggle.focus();
+          }
+
+          drawers.push(function () { setOpen(false, false); });
+          toggle.addEventListener('click', function () {
+            var open = !sidebar.classList.contains('active');
+            drawers.forEach(function (close) { close(); });
+            setOpen(open, !open);
+          });
+          overlay.addEventListener('click', function () { setOpen(false, true); });
+          sidebar.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && compact.matches) setOpen(false, true);
+          });
+          sidebar.addEventListener('click', function (event) {
+            if (compact.matches && event.target.closest('#toc-sidebar-nav a')) setOpen(false, true);
+          });
+          compact.addEventListener('change', function () { setOpen(false, false); });
+          setOpen(false, false);
+        }
+
+        makeSidebarToggle('sidebar-left-toggle', 'sidebar-left', 'sidebar-left-overlay', '(max-width: 1599px)');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay', '(max-width: 1199px)');
+
+        /* Keep wide technical content scrollable without widening the page. */
+        if (body) {
+          body.querySelectorAll('pre').forEach(function (pre) {
+            pre.tabIndex = 0;
+            pre.setAttribute('aria-label', 'Code sample');
+          });
+          body.querySelectorAll('table').forEach(function (table) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'post-table-scroll';
+            wrapper.tabIndex = 0;
+            wrapper.setAttribute('role', 'region');
+            wrapper.setAttribute('aria-label', 'Scrollable table');
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+          });
+        }
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            hdr.querySelector('.collapse-toggle').setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
+            }
+          });
+        });
+
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            var nums    = [0, 0, 0, 0];
+            var list = document.createElement('ul');
+            list.className = 'toc-list';
+            list.id = 'toc-heading-list';
+            var stack = [];
+            var branches = [];
+
+            function setBranchExpanded(branch, expanded) {
+              branch.children.hidden = !expanded;
+              branch.button.setAttribute('aria-expanded', String(expanded));
+              branch.button.setAttribute('aria-label', (expanded ? 'Collapse' : 'Expand') + ' subsections of ' + branch.text);
+            }
+
+            headings.forEach(function (h, index) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              if (h.firstChild && h.firstChild.nodeType === Node.TEXT_NODE) {
+                h.firstChild.textContent = h.firstChild.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
+              }
+              var number = document.createElement('span');
+              number.className = 'section-number';
+              number.textContent = numStr + '. ';
+              h.insertBefore(number, h.firstChild);
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              }
+              var item = document.createElement('li');
+              item.className = 'toc-level-' + (level + 1);
+              var link = document.createElement('a');
+              link.setAttribute('href', '#' + h.id);
+              var tocNumber = document.createElement('span');
+              tocNumber.className = 'toc-number';
+              tocNumber.textContent = numStr + '. ';
+              link.appendChild(tocNumber);
+              link.appendChild(document.createTextNode(rawText));
+              var row = document.createElement('div');
+              row.className = 'toc-entry';
+              row.appendChild(link);
+              item.appendChild(row);
+
+              while (stack.length && stack[stack.length - 1].level >= level) stack.pop();
+              var parent = stack[stack.length - 1];
+              if (parent && !parent.children) {
+                parent.children = document.createElement('ul');
+                parent.children.className = 'toc-list toc-children';
+                parent.children.id = 'toc-children-' + parent.index;
+                parent.button = document.createElement('button');
+                parent.button.type = 'button';
+                parent.button.className = 'toc-branch-toggle';
+                parent.button.setAttribute('aria-controls', parent.children.id);
+                var chevron = document.createElement('i');
+                chevron.className = 'fa fa-chevron-down';
+                chevron.setAttribute('aria-hidden', 'true');
+                parent.button.appendChild(chevron);
+                parent.row.insertBefore(parent.button, parent.row.firstChild);
+                parent.item.appendChild(parent.children);
+                branches.push(parent);
+                setBranchExpanded(parent, true);
+                parent.button.addEventListener('click', function () {
+                  setBranchExpanded(parent, parent.children.hidden);
+                  updateBulkControls();
+                });
+              }
+              (parent ? parent.children : list).appendChild(item);
+              stack.push({ level: level, index: index, item: item, row: row, text: rawText });
+            });
+
+            var expandAll;
+            var collapseAll;
+            function updateBulkControls() {
+              if (!expandAll) return;
+              expandAll.disabled = branches.every(function (branch) { return !branch.children.hidden; });
+              collapseAll.disabled = branches.every(function (branch) { return branch.children.hidden; });
+            }
+
+            if (branches.length) {
+              var controls = document.createElement('div');
+              controls.className = 'toc-controls';
+              controls.setAttribute('role', 'group');
+              controls.setAttribute('aria-label', 'Table of contents branches');
+              expandAll = document.createElement('button');
+              collapseAll = document.createElement('button');
+              [expandAll, collapseAll].forEach(function (button, index) {
+                button.type = 'button';
+                button.textContent = index === 0 ? 'Expand all' : 'Collapse all';
+                button.setAttribute('aria-controls', list.id);
+                button.addEventListener('click', function () {
+                  branches.forEach(function (branch) { setBranchExpanded(branch, index === 0); });
+                  updateBulkControls();
+                });
+                controls.appendChild(button);
+              });
+              tocNav.appendChild(controls);
+              updateBulkControls();
+            }
+            tocNav.appendChild(list);
+            if (tocSect) tocSect.style.display = 'block';
+          } else {
+            if (tocSect) tocSect.style.display = 'none';
+            document.body.classList.add('has-no-toc');
+          }
+        }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                tocNav.querySelectorAll('.toc-entry').forEach(function (row) { row.removeAttribute('data-active-descendant'); });
+                var active = Array.prototype.find.call(tocLinks, function (link) { return link.getAttribute('href') === '#' + entry.target.id; });
+                if (active) {
+                  active.setAttribute('data-active', '');
+                  var ancestor = active.closest('li').parentElement.closest('li');
+                  while (ancestor) {
+                    ancestor.firstElementChild.setAttribute('data-active-descendant', '');
+                    ancestor = ancestor.parentElement.closest('li');
+                  }
+                }
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>

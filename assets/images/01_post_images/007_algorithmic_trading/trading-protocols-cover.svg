@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">The invisible currents of a trade</title>
+  <desc id="desc">Amber and cyan streams of light rush through a nocturnal financial city, weaving like fiber-optic cables above a reflective, rain-soaked street.</desc>
+  <defs>
+    <linearGradient id="sky" x2=".6" y2="1">
+      <stop stop-color="#070d1c"/><stop offset=".55" stop-color="#14283d"/><stop offset="1" stop-color="#315164"/>
+    </linearGradient>
+    <radialGradient id="haze">
+      <stop stop-color="#71bfcb" stop-opacity=".5"/><stop offset="1" stop-color="#346278" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass" x2="1" y2=".3">
+      <stop stop-color="#101e30"/><stop offset=".5" stop-color="#264252"/><stop offset="1" stop-color="#0e1b2b"/>
+    </linearGradient>
+    <linearGradient id="street" x2="0" y2="1">
+      <stop stop-color="#4b6875"/><stop offset=".4" stop-color="#172b40"/><stop offset="1" stop-color="#080e1c"/>
+    </linearGradient>
+    <linearGradient id="gold" x2="1" y2="0">
+      <stop stop-color="#de6642"/><stop offset=".45" stop-color="#ffba68"/><stop offset="1" stop-color="#fff1b5"/>
+    </linearGradient>
+    <linearGradient id="cyan" x2="1" y2="0">
+      <stop stop-color="#e3ffff"/><stop offset=".4" stop-color="#63d9df"/><stop offset="1" stop-color="#388bca"/>
+    </linearGradient>
+    <pattern id="windows" width="22" height="29" patternUnits="userSpaceOnUse">
+      <rect x="7" y="9" width="3" height="9" fill="#82c3ce" opacity=".3"/>
+      <rect x="15" y="9" width="3" height="9" fill="#ffc18c" opacity=".18"/>
+    </pattern>
+    <filter id="glow" x="-.3" y="-.5" width="1.6" height="2"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="fog"><feGaussianBlur stdDeviation="20"/></filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" seed="19"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".07"/></feComponentTransfer>
+      <feBlend in="SourceGraphic" mode="soft-light"/>
+    </filter>
+    <g id="towers">
+      <path d="M0 69L80 99V471H0ZM92 176L162 150V476H92ZM179 238L230 225V462H179ZM246 286L291 274V451H246ZM309 314L344 305V444H309ZM357 339L386 333V439H357Z"/>
+      <path d="M1200 27L1080 76V480H1200ZM1064 128L991 153V466H1064ZM975 210L917 233V458H975ZM902 274L859 286V451H902ZM843 307L807 319V446H843ZM793 337L766 345V443H793Z"/>
+    </g>
+    <g id="currents" fill="none" stroke-linecap="round">
+      <g stroke="url(#gold)">
+        <path d="M-80 598C100 584 105 402 322 398S533 482 637 430S761 317 917 283S1091 246 1260 115" stroke-width="5"/>
+        <path d="M-80 612C110 596 130 421 328 413S531 492 643 440S766 333 924 299S1111 260 1260 132" stroke-width="2"/>
+        <path d="M-80 584C87 572 99 384 318 382S536 470 631 419S750 302 908 267S1085 228 1260 98" stroke-width="1.6"/>
+        <path d="M-50 626C138 616 149 437 342 432S523 507 655 456S784 351 940 317S1130 274 1260 150" stroke-width="1"/>
+      </g>
+      <g stroke="url(#cyan)">
+        <path d="M-75 186C154 215 180 306 368 317S583 279 664 342S787 485 965 501S1138 441 1265 453" stroke-width="4"/>
+        <path d="M-75 203C147 232 176 322 365 333S581 295 655 356S788 500 964 517S1138 457 1265 469" stroke-width="1.5"/>
+        <path d="M-75 172C161 202 191 291 372 302S589 265 675 329S791 471 968 486S1137 427 1265 439" stroke-width="1.2"/>
+      </g>
+    </g>
+  </defs>
+  <g filter="url(#grain)">
+    <rect width="1200" height="630" fill="url(#sky)"/>
+    <ellipse cx="620" cy="356" rx="380" ry="340" fill="url(#haze)"/>
+    <g fill="#253e50" opacity=".7">
+      <path d="M397 371V281H424V371M433 413V251H469V413M480 420V310H513V420M525 433V273H550V433M560 437V331H590V437M608 437V302H637V437M653 437V280H679V437M690 437V316H717V437M731 437V287H752V437"/>
+      <path d="M450 251V233M666 280V250" stroke="#678e9d"/>
+    </g>
+    <path d="M0 456L590 425L1200 456V630H0Z" fill="url(#street)"/>
+    <g fill="url(#glass)" stroke="#7496a5" stroke-opacity=".2">
+      <use href="#towers"/>
+    </g>
+    <use href="#towers" fill="url(#windows)"/>
+    <g stroke="#74a2b6" stroke-opacity=".2" fill="none">
+      <path d="M80 99L23 119V467M162 150L137 176V474M230 225L211 248V459M1080 76L1120 102V475M991 153L1018 175V468M917 233L941 249V460"/>
+      <path d="M0 161L80 188M0 242L80 263M0 323L80 338M1080 151L1200 105M1080 240L1200 205M1080 329L1200 304"/>
+    </g>
+    <ellipse cx="606" cy="427" rx="285" ry="28" fill="#91d4dc" opacity=".23" filter="url(#fog)"/>
+    <g stroke-linecap="round" fill="none" opacity=".22" filter="url(#glow)">
+      <path d="M179 630L517 469L591 451" stroke="#ffb465" stroke-width="24"/>
+      <path d="M1152 630L820 513L699 454" stroke="#63d9df" stroke-width="20"/>
+      <path d="M593 630L615 464" stroke="#8dbfc4" stroke-width="28"/>
+    </g>
+    <g stroke="#9cc9cf" stroke-opacity=".13">
+      <path d="M600 438L0 630M620 438L283 630M640 438L733 630M660 438L1200 630"/>
+      <path d="M218 497H1000M95 552H1120M0 612H1200"/>
+    </g>
+    <use href="#currents" filter="url(#glow)" opacity=".85"/>
+    <use href="#currents"/>
+    <g fill="#fff2cb">
+      <ellipse cx="308" cy="398" rx="13" ry="2" transform="rotate(-3 308 398)"/>
+      <ellipse cx="713" cy="367" rx="12" ry="2" transform="rotate(-44 713 367)"/>
+      <ellipse cx="1007" cy="257" rx="14" ry="2" transform="rotate(-22 1007 257)"/>
+    </g>
+    <g fill="#d7ffff">
+      <ellipse cx="273" cy="298" rx="11" ry="1.8" transform="rotate(15 273 298)"/>
+      <ellipse cx="752" cy="432" rx="10" ry="1.8" transform="rotate(40 752 432)"/>
+      <ellipse cx="1082" cy="482" rx="13" ry="1.8" transform="rotate(-19 1082 482)"/>
+    </g>
+    <g stroke="#b6d1df" stroke-opacity=".14">
+      <path d="M124 18L110 58M294 57L280 97M469 21L455 61M732 12L718 52M1014 52L1000 92M1139 181L1125 221M52 353L38 393M420 191L406 231M810 204L796 244M658 106L644 146M337 504L323 544M1055 552L1041 592"/>
+    </g>
+    <path d="M0 620Q254 595 414 630H0ZM1200 606Q1070 595 962 630H1200Z" fill="#070d19"/>
+  </g>
+</svg>

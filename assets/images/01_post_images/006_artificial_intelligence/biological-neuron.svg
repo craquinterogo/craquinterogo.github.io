@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="580" viewBox="0 0 800 580" role="img" aria-labelledby="title description">
+  <title id="title">Parts of a biological neuron</title>
+  <desc id="description">A simplified multipolar neuron. Branching dendrites lead to the cell body, which contains the nucleus. A long axon extends to branching synaptic terminals. Myelin segments surround the axon, with gaps called nodes of Ranvier. An arrow shows the typical direction of signaling from dendrites toward axon terminals.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#d4af37"/>
+    </marker>
+  </defs>
+  <rect width="800" height="580" rx="8" fill="#242424"/>
+  <g font-family="system-ui, sans-serif">
+    <text x="36" y="48" fill="#e8e8e8" font-size="27" font-weight="600">A biological neuron</text>
+    <text x="36" y="78" fill="#bcbcbc" font-size="18">Simplified structure of a myelinated multipolar neuron</text>
+    <g fill="none" stroke="#d4af37" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M220 250 L170 206 L137 169 M170 206 L119 207 L89 183 M137 169 L136 143 M137 169 L108 151"/>
+      <path d="M216 278 L159 280 L115 259 M159 280 L121 307 L90 306 M115 259 L88 261"/>
+      <path d="M229 306 L194 343 L151 350 M194 343 L192 373 M151 350 L129 374"/>
+      <path d="M254 230 L246 180 L213 156 M246 180 L269 148"/>
+      <path d="M299 279 C335 277 343 270 370 270 L654 270"/>
+      <path d="M654 270 L684 227 L731 207 M684 227 L701 187"/>
+      <path d="M654 270 L705 270 L746 250 M705 270 L744 291"/>
+      <path d="M654 270 L684 316 L730 339 M684 316 L698 357"/>
+    </g>
+    <path d="M213 249 Q227 225 254 222 Q287 219 305 248 Q314 263 332 270 Q313 281 307 299 Q285 326 253 322 Q219 319 213 292 Q205 272 213 249Z" fill="#393222" stroke="#d4af37" stroke-width="3"/>
+    <circle cx="261" cy="272" r="20" fill="#1a1a1a" stroke="#e8e8e8" stroke-width="2"/>
+    <g fill="#554923" stroke="#d4af37" stroke-width="2">
+      <rect x="370" y="251" width="67" height="38" rx="17"/>
+      <rect x="450" y="251" width="67" height="38" rx="17"/>
+      <rect x="530" y="251" width="67" height="38" rx="17"/>
+    </g>
+    <g fill="#d4af37">
+      <circle cx="731" cy="207" r="6"/><circle cx="701" cy="187" r="6"/>
+      <circle cx="746" cy="250" r="6"/><circle cx="744" cy="291" r="6"/>
+      <circle cx="730" cy="339" r="6"/><circle cx="698" cy="357" r="6"/>
+    </g>
+    <g fill="none" stroke="#929292" stroke-width="1.5">
+      <path d="M87 127 L104 169"/>
+      <path d="M260 408 L260 326"/>
+      <path d="M331 364 L276 287"/>
+      <path d="M401 213 L401 248"/>
+      <path d="M491 371 L491 293"/>
+      <path d="M520 155 L524 243 L524 265"/>
+      <path d="M650 140 L706 196"/>
+    </g>
+    <g fill="#e8e8e8" font-size="22" font-weight="600">
+      <text x="36" y="119">Dendrites</text>
+      <text x="164" y="437">Cell body (soma)</text>
+      <text x="294" y="389">Nucleus</text>
+      <text x="353" y="198">Myelin sheath</text>
+      <text x="461" y="399">Axon</text>
+      <text x="400" y="140">Node of Ranvier</text>
+      <text x="607" y="119">Synaptic</text>
+      <text x="607" y="145">terminals</text>
+    </g>
+    <path d="M150 491 L650 491" fill="none" stroke="#d4af37" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="400" y="527" text-anchor="middle" fill="#e8e8e8" font-size="20">Typical direction of signaling</text>
+    <text x="400" y="556" text-anchor="middle" fill="#bcbcbc" font-size="17">Biological inspiration, not a literal artificial-neuron design. Not to scale.</text>
+  </g>
+</svg>

@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Debugging a European FX option in QuantLib C++ with VS Code. | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	
+	
+	<meta name="description" content="End-to-end example to price a European FX option with QuantLib in C++, link against a debug build, and debug it in VS Code." />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Debugging a European FX option in QuantLib C++ with VS Code." />
+	<meta property="og:description" content="End-to-end example to price a European FX option with QuantLib in C++, link against a debug build, and debug it in VS Code." />
+	<meta property="og:url" content="https://craquinterogo.github.io/blog/2026/07/05/debugging-european-fx-option-quantlib-vscode" />
+	<meta name="twitter:title" content="Debugging a European FX option in QuantLib C++ with VS Code." />
+	<meta name="twitter:description" content="End-to-end example to price a European FX option with QuantLib in C++, link against a debug build, and debug it in VS Code." />
+	
+	
+	<meta property="og:image" content="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" />
+	<meta property="og:image:alt" content="Debugging a European FX option in QuantLib C++ with VS Code." />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" />
+	<meta name="twitter:image:alt" content="Debugging a European FX option in QuantLib C++ with VS Code." />
+	
+	
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="https://craquinterogo.github.io//" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io//">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Quantitative Development
+            </h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle related posts" aria-controls="related-posts-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              
+              
+              
+                <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/07/18/debugging-quantlib-python-cpp-vscode" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Debugging QuantLib across Python and C++ in VS Code" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Debugging QuantLib across Python and C++ ...</h5>
+                          
+                            <span class="recent-post-date">Jul 18, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/06/20/quantlib-debug-build-and-swig-components" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Compiling QuantLib in Debug Mode and wiring components into SWIG - Python." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Compiling QuantLib in Debug Mode and wiri...</h5>
+                          
+                            <span class="recent-post-date">Jun 20, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/12/07/git-repository-hard-disk" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/005_What_is_a_Git_Repository.jpg" alt="Private GIT repositories for small or private projects." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Private GIT repositories for small or pri...</h5>
+                          
+                            <span class="recent-post-date">Dec 07, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/10/29/questdb-for-timeseries" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" alt="QuestDB, an alternative for storing your financial time series." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>QuestDB, an alternative for storing your ...</h5>
+                          
+                            <span class="recent-post-date">Oct 29, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/08/10/quantlib-setup" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Setting QuantLib up in my laptop, again. An amazing tool for quants." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Setting QuantLib up in my laptop, again. ...</h5>
+                          
+                            <span class="recent-post-date">Aug 10, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/06/29/ai-agents-for-quants" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/04_llm_and_mcp/jarvis_.jpg" alt="What about AI Agents for Quants?" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>What about AI Agents for Quants?</h5>
+                          
+                            <span class="recent-post-date">Jun 29, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2024/03/10/connecting-cpp-and-python-with-swig" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Pricing a European option in C++ from Python with SWIG" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Pricing a European option in C++ from Pyt...</h5>
+                          
+                            <span class="recent-post-date">Mar 10, 2024</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+              <div class="sidebar-category-link">
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle table of contents" aria-controls="toc-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- On-demand navigation for narrower reading layouts -->
+    <button type="button" id="sidebar-left-toggle" class="sidebar-toggle sidebar-toggle--left" aria-controls="sidebar-left" aria-expanded="false"><i class="fa fa-folder" aria-hidden="true"></i>Related</button>
+    <button type="button" id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-controls="sidebar-right" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i>Contents</button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#quantitative-development">Quantitative Development</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Debugging a European FX option in QuantLib C++ ...</span>
+                    </div>
+                  
+
+                  <h1>Debugging a European FX option in QuantLib C++ with VS Code.</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2026-07-05T00:00:00-05:00">July 05, 2026</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">quantitative finance</span>
+                      
+                        <span class="post-tag-pill">QuantLib</span>
+                      
+                        <span class="post-tag-pill">C++</span>
+                      
+                        <span class="post-tag-pill">VS Code</span>
+                      
+                        <span class="post-tag-pill">debugging</span>
+                      
+                        <span class="post-tag-pill">FX options</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg"
+                    alt="Debugging a European FX option in QuantLib C++ with VS Code."
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <article class="post-body" id="post-body-content" aria-label="Article content">
+                  <blockquote>
+  <p><strong>Warning:</strong> This post is under construction. It is being extended beyond QuantLib debug setup and is used as a component for another post on debugging QuantLib. Content may be incomplete or subject to change.</p>
+</blockquote>
+
+<p>In the previous post I explained how to compile QuantLib in debug mode. In this one, I want to close the loop with a realistic test: pricing a European FX option in C++, linking against the debug QuantLib installation, and running the code from VS Code with breakpoints and variable inspection.</p>
+
+<p>The example uses QuantLib’s <code class="language-plaintext highlighter-rouge">GarmanKohlagenProcess</code>, which models the domestic and foreign interest rates directly for an FX option. This is a good test case because it is simple enough to run quickly but rich enough to inspect curves, volatility structures, and pricing engine internals while debugging.</p>
+
+<h2 id="scenario-and-model-assumptions">Scenario and model assumptions</h2>
+
+<nav class="workflow-progress" aria-label="C++ FX option debugging, step 1 of 7">
+  <ol style="--flow-count: 7">
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#scenario-and-model-assumptions" aria-current="step">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Scenario</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#minimal-project-structure">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Project structure</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#c-code-maincpp">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">C++ code</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cmake-configuration-cmakeliststxt">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#vs-code-setup-for-debugging">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">VS Code setup</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#what-to-inspect-while-debugging">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Inspect</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#alternative-compile-and-run-from-the-command-line">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Command line</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Assume we want to price a six-month European call on EUR, with the exchange rate quoted as <strong>EURUSD</strong> (US dollars per euro). The option gives its holder the right, but not the obligation, to buy euros at the strike in exchange for dollars.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th style="text-align: right">Value</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Spot, $S_0$</td>
+      <td style="text-align: right">1.1000 USD per EUR</td>
+      <td>Current EURUSD exchange rate: one euro costs 1.10 US dollars.</td>
+    </tr>
+    <tr>
+      <td>Strike, $K$</td>
+      <td style="text-align: right">1.1200 USD per EUR</td>
+      <td>Dollars paid for each euro if the option is exercised.</td>
+    </tr>
+    <tr>
+      <td>Time to expiry, $T$</td>
+      <td style="text-align: right">6 months</td>
+      <td>Time from the valuation date to the European exercise date.</td>
+    </tr>
+    <tr>
+      <td>Domestic rate, $r_d$</td>
+      <td style="text-align: right">3.00%</td>
+      <td>USD risk-free rate, with USD as the quote currency.</td>
+    </tr>
+    <tr>
+      <td>Foreign rate, $r_f$</td>
+      <td style="text-align: right">1.50%</td>
+      <td>EUR risk-free rate, with EUR as the base currency.</td>
+    </tr>
+    <tr>
+      <td>Volatility, $\sigma$</td>
+      <td style="text-align: right">12.00%</td>
+      <td>Annualized volatility of the EURUSD exchange rate.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="how-the-garman-kohlhagen-model-prices-the-option">How the Garman-Kohlhagen model prices the option</h3>
+
+<p>The Garman-Kohlhagen (G-K) model extends the Black-Scholes framework to options on exchange rates. For this EURUSD call, its value per euro of notional, expressed in US dollars, is</p>
+
+\[C = S_0 e^{-r_f T}\Phi(d_1) - K e^{-r_d T}\Phi(d_2),
+\qquad
+d_1 = \frac{\ln(S_0/K) + (r_d-r_f+\tfrac{1}{2}\sigma^2)T}
+{\sigma\sqrt{T}},
+\qquad
+d_2 = d_1-\sigma\sqrt{T},\]
+
+<p>where $\Phi$ is the standard normal cumulative distribution function. The two discount factors reflect the two currencies: the foreign rate discounts the spot-currency leg, while the domestic rate discounts the strike payment. Equivalently, the model values the expected option payoff under the domestic pricing measure. The terminal payoff per euro is $\max(S_T-K,0)$, where $S_T$ is the EURUSD rate at expiry. Multiply the model value by the option’s EUR notional to obtain a total premium in USD.</p>
+
+<p>G-K is not a separate pricing formula from Black-Scholes so much as its FX-specific application. When an asset is priced in a domestic currency but generates a continuous yield $q$, the Black-Scholes-Merton call formula uses $S_0e^{-qT}$ for the spot term. For a foreign currency, that yield is the foreign risk-free rate, so G-K corresponds to setting $q=r_f$ and discounting the strike at $r_d$. The zero-yield Black-Scholes special case does not capture this foreign-currency carry. Using only one rate would omit the return associated with holding the foreign currency.</p>
+
+<p>The model was presented by Mark B. Garman and Steven W. Kohlhagen in their 1983 paper, “Foreign currency option values” <a class="citation" href="#GarmanKohlhagen1983">(Garman &amp; Kohlhagen, 1983)</a>.</p>
+
+<p>In QuantLib, these assumptions map to flat domestic and foreign yield curves, a flat Black volatility surface, and a <code class="language-plaintext highlighter-rouge">GarmanKohlagenProcess</code>. <code class="language-plaintext highlighter-rouge">AnalyticEuropeanEngine</code> applies the closed-form G-K valuation to the European payoff.</p>
+
+<h2 id="minimal-project-structure">Minimal project structure</h2>
+
+<nav class="workflow-progress" aria-label="C++ FX option debugging, step 2 of 7">
+  <ol style="--flow-count: 7">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#scenario-and-model-assumptions">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Scenario</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#minimal-project-structure" aria-current="step">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Project structure</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#c-code-maincpp">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">C++ code</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cmake-configuration-cmakeliststxt">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#vs-code-setup-for-debugging">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">VS Code setup</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#what-to-inspect-while-debugging">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Inspect</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#alternative-compile-and-run-from-the-command-line">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Command line</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>You can create a small folder anywhere outside your QuantLib source tree, for example:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fx-option-debug/
+├── CMakeLists.txt
+├── main.cpp
+└── .vscode/
+    ├── tasks.json
+    └── launch.json
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>File or folder</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">main.cpp</code></td>
+      <td>The C++ example: it defines the market inputs, builds the EURUSD option and pricing engine, then calculates and prints the price and risk measures.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">CMakeLists.txt</code></td>
+      <td>Tells CMake how to compile <code class="language-plaintext highlighter-rouge">main.cpp</code>, where to find the QuantLib headers and library, and how to link the program. See <a href="#cmake-configuration-cmakeliststxt">Section 4: CMake configuration</a> for the example and details.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.vscode/</code></td>
+      <td>Holds project-specific VS Code settings. Keeping these here means the editor can use the same build and debug setup whenever you open this project folder.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.vscode/tasks.json</code></td>
+      <td>Defines repeatable build tasks, such as configuring CMake and compiling the executable. VS Code can run these from its task interface or automatically before debugging.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.vscode/launch.json</code></td>
+      <td>Defines how VS Code starts the program under the debugger, including the executable path, working directory, and debugger settings. This is what makes breakpoints and variable inspection available when you press <strong>F5</strong>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="c-code-maincpp">C++ code (<code class="language-plaintext highlighter-rouge">main.cpp</code>)</h2>
+
+<nav class="workflow-progress" aria-label="C++ FX option debugging, step 3 of 7">
+  <ol style="--flow-count: 7">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#scenario-and-model-assumptions">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Scenario</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#minimal-project-structure">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Project structure</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#c-code-maincpp" aria-current="step">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">C++ code</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cmake-configuration-cmakeliststxt">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#vs-code-setup-for-debugging">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">VS Code setup</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#what-to-inspect-while-debugging">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Inspect</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#alternative-compile-and-run-from-the-command-line">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Command line</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;ql/quantlib.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iomanip&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">QuantLib</span><span class="p">;</span>
+
+    <span class="n">Calendar</span> <span class="n">calendar</span> <span class="o">=</span> <span class="n">TARGET</span><span class="p">();</span>
+    <span class="n">Date</span> <span class="n">valuationDate</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">July</span><span class="p">,</span> <span class="mi">2026</span><span class="p">);</span>
+    <span class="n">Settings</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">evaluationDate</span><span class="p">()</span> <span class="o">=</span> <span class="n">valuationDate</span><span class="p">;</span>
+
+    <span class="c1">// Market inputs</span>
+    <span class="k">const</span> <span class="n">Real</span> <span class="n">spot</span> <span class="o">=</span> <span class="mf">1.1000</span><span class="p">;</span>
+    <span class="k">const</span> <span class="n">Real</span> <span class="n">strike</span> <span class="o">=</span> <span class="mf">1.1200</span><span class="p">;</span>
+    <span class="k">const</span> <span class="n">Rate</span> <span class="n">rd</span> <span class="o">=</span> <span class="mf">0.03</span><span class="p">;</span>   <span class="c1">// domestic rate (USD)</span>
+    <span class="k">const</span> <span class="n">Rate</span> <span class="n">rf</span> <span class="o">=</span> <span class="mf">0.015</span><span class="p">;</span>  <span class="c1">// foreign rate (EUR)</span>
+    <span class="k">const</span> <span class="n">Volatility</span> <span class="n">vol</span> <span class="o">=</span> <span class="mf">0.12</span><span class="p">;</span>
+
+    <span class="n">Date</span> <span class="n">maturityDate</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="n">advance</span><span class="p">(</span><span class="n">valuationDate</span><span class="p">,</span> <span class="n">Period</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">Months</span><span class="p">));</span>
+    <span class="n">DayCounter</span> <span class="n">dc</span> <span class="o">=</span> <span class="n">Actual365Fixed</span><span class="p">();</span>
+
+    <span class="n">Handle</span><span class="o">&lt;</span><span class="n">Quote</span><span class="o">&gt;</span> <span class="n">spotHandle</span><span class="p">(</span><span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">SimpleQuote</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spot</span><span class="p">));</span>
+
+    <span class="n">Handle</span><span class="o">&lt;</span><span class="n">YieldTermStructure</span><span class="o">&gt;</span> <span class="n">domesticCurve</span><span class="p">(</span>
+        <span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FlatForward</span><span class="o">&gt;</span><span class="p">(</span><span class="n">valuationDate</span><span class="p">,</span> <span class="n">rd</span><span class="p">,</span> <span class="n">dc</span><span class="p">));</span>
+
+    <span class="n">Handle</span><span class="o">&lt;</span><span class="n">YieldTermStructure</span><span class="o">&gt;</span> <span class="n">foreignCurve</span><span class="p">(</span>
+        <span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FlatForward</span><span class="o">&gt;</span><span class="p">(</span><span class="n">valuationDate</span><span class="p">,</span> <span class="n">rf</span><span class="p">,</span> <span class="n">dc</span><span class="p">));</span>
+
+    <span class="n">Handle</span><span class="o">&lt;</span><span class="n">BlackVolTermStructure</span><span class="o">&gt;</span> <span class="n">volCurve</span><span class="p">(</span>
+        <span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">BlackConstantVol</span><span class="o">&gt;</span><span class="p">(</span><span class="n">valuationDate</span><span class="p">,</span> <span class="n">calendar</span><span class="p">,</span> <span class="n">vol</span><span class="p">,</span> <span class="n">dc</span><span class="p">));</span>
+
+    <span class="n">ext</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">GarmanKohlagenProcess</span><span class="o">&gt;</span> <span class="n">process</span> <span class="o">=</span>
+        <span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">GarmanKohlagenProcess</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spotHandle</span><span class="p">,</span> <span class="n">foreignCurve</span><span class="p">,</span> <span class="n">domesticCurve</span><span class="p">,</span> <span class="n">volCurve</span><span class="p">);</span>
+
+    <span class="n">ext</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">StrikedTypePayoff</span><span class="o">&gt;</span> <span class="n">payoff</span> <span class="o">=</span>
+        <span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">PlainVanillaPayoff</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Option</span><span class="o">::</span><span class="n">Call</span><span class="p">,</span> <span class="n">strike</span><span class="p">);</span>
+
+    <span class="n">ext</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Exercise</span><span class="o">&gt;</span> <span class="n">exercise</span> <span class="o">=</span>
+        <span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">EuropeanExercise</span><span class="o">&gt;</span><span class="p">(</span><span class="n">maturityDate</span><span class="p">);</span>
+
+    <span class="n">VanillaOption</span> <span class="n">option</span><span class="p">(</span><span class="n">payoff</span><span class="p">,</span> <span class="n">exercise</span><span class="p">);</span>
+    <span class="n">option</span><span class="p">.</span><span class="n">setPricingEngine</span><span class="p">(</span><span class="n">ext</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">AnalyticEuropeanEngine</span><span class="o">&gt;</span><span class="p">(</span><span class="n">process</span><span class="p">));</span>
+
+    <span class="c1">// Recommended first breakpoint for debugging in VS Code.</span>
+    <span class="k">const</span> <span class="n">Real</span> <span class="n">npv</span> <span class="o">=</span> <span class="n">option</span><span class="p">.</span><span class="n">NPV</span><span class="p">();</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">fixed</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setprecision</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"European FX option (Call)"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"NPV   : "</span> <span class="o">&lt;&lt;</span> <span class="n">npv</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Delta : "</span> <span class="o">&lt;&lt;</span> <span class="n">option</span><span class="p">.</span><span class="n">delta</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Gamma : "</span> <span class="o">&lt;&lt;</span> <span class="n">option</span><span class="p">.</span><span class="n">gamma</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Vega  : "</span> <span class="o">&lt;&lt;</span> <span class="n">option</span><span class="p">.</span><span class="n">vega</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Theta : "</span> <span class="o">&lt;&lt;</span> <span class="n">option</span><span class="p">.</span><span class="n">theta</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Rho   : "</span> <span class="o">&lt;&lt;</span> <span class="n">option</span><span class="p">.</span><span class="n">rho</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="cmake-configuration-cmakeliststxt">CMake configuration (<code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>)</h2>
+
+<nav class="workflow-progress" aria-label="C++ FX option debugging, step 4 of 7">
+  <ol style="--flow-count: 7">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#scenario-and-model-assumptions">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Scenario</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#minimal-project-structure">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Project structure</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#c-code-maincpp">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">C++ code</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#cmake-configuration-cmakeliststxt" aria-current="step">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#vs-code-setup-for-debugging">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">VS Code setup</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#what-to-inspect-while-debugging">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Inspect</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#alternative-compile-and-run-from-the-command-line">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Command line</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p><a href="https://cmake.org/" target="_blank" rel="noopener noreferrer">CMake</a> is a cross-platform build system generator. Rather than compile C++ code itself, it reads project instructions from <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> and generates native build files for tools such as Ninja or Make. Those tools then invoke the compiler and linker to turn source files into an executable.</p>
+
+<p>For a small example, CMake can make the build repeatable: the source files, C++ standard, include directories, libraries, and build options are recorded once instead of being retyped in long compiler commands. The same project description can also generate build files for different supported platforms and toolchains. This is especially helpful with QuantLib, where the program must find the matching headers and library at compile and link time.</p>
+
+<p>Here, the configuration declares the C++ executable, selects C++17 and Debug mode, points to the debug QuantLib installation, and links the required library. Debug builds include symbol information used by a debugger to map machine instructions back to source code. CMake does not install QuantLib or provide a compiler. Those prerequisites must already be available on the system.</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.16<span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span>FxOptionDebug CXX<span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD 17<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD_REQUIRED ON<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_BUILD_TYPE Debug<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_EXPORT_COMPILE_COMMANDS ON<span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>fx_option_debug main.cpp<span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span>QUANTLIB_DEBUG_PREFIX <span class="s2">"$ENV{HOME}/quantlib-debug-install"</span><span class="p">)</span>
+
+<span class="nb">target_include_directories</span><span class="p">(</span>fx_option_debug PRIVATE
+    <span class="si">${</span><span class="nv">QUANTLIB_DEBUG_PREFIX</span><span class="si">}</span>/include<span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span>fx_option_debug PRIVATE
+    <span class="si">${</span><span class="nv">QUANTLIB_DEBUG_PREFIX</span><span class="si">}</span>/lib/libQuantLib.so<span class="p">)</span>
+
+<span class="c1"># Helpful so the executable can find libQuantLib.so at runtime.</span>
+<span class="nb">set_target_properties</span><span class="p">(</span>fx_option_debug PROPERTIES
+    BUILD_RPATH <span class="s2">"</span><span class="si">${</span><span class="nv">QUANTLIB_DEBUG_PREFIX</span><span class="si">}</span><span class="s2">/lib"</span><span class="p">)</span>
+
+<span class="c1"># Boost via vcpkg</span>
+<span class="nb">find_package</span><span class="p">(</span>Boost REQUIRED<span class="p">)</span>  <span class="c1"># add COMPONENTS if you need specific libs</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>fx_option_debug PRIVATE Boost::boost<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="vs-code-setup-for-debugging">VS Code setup for debugging</h2>
+
+<nav class="workflow-progress" aria-label="C++ FX option debugging, step 5 of 7">
+  <ol style="--flow-count: 7">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#scenario-and-model-assumptions">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Scenario</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#minimal-project-structure">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Project structure</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#c-code-maincpp">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">C++ code</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cmake-configuration-cmakeliststxt">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#vs-code-setup-for-debugging" aria-current="step">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">VS Code setup</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#what-to-inspect-while-debugging">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Inspect</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#alternative-compile-and-run-from-the-command-line">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Command line</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The key adjustment in VS Code is to ensure the debugger launches the executable built in Debug mode and uses <code class="language-plaintext highlighter-rouge">gdb</code> (or <code class="language-plaintext highlighter-rouge">lldb</code>) with symbols available.</p>
+
+<p>For VS Code to understand and automate your C++ workflow, these configuration files must be stored inside a folder named <code class="language-plaintext highlighter-rouge">.vscode</code> at the root of your project. In practice, <code class="language-plaintext highlighter-rouge">tasks.json</code> defines how the project is configured and built, <code class="language-plaintext highlighter-rouge">launch.json</code> defines how the debugger runs the executable, and (optionally) <code class="language-plaintext highlighter-rouge">c_cpp_properties.json</code> helps IntelliSense resolve includes and compile flags. Keeping them together in <code class="language-plaintext highlighter-rouge">.vscode</code> makes the setup portable and reproducible for anyone opening the same project.</p>
+
+<h3 id="tasksjson"><code class="language-plaintext highlighter-rouge">tasks.json</code></h3>
+
+<p>This file tells VS Code which terminal commands to run before debugging. In this example, the first task configures CMake in <code class="language-plaintext highlighter-rouge">Debug</code> mode and the second task compiles the project. Because <code class="language-plaintext highlighter-rouge">launch.json</code> uses <code class="language-plaintext highlighter-rouge">preLaunchTask</code>, pressing <code class="language-plaintext highlighter-rouge">F5</code> can trigger a full configure+build cycle automatically, so your debug session always runs the latest binary.</p>
+
+<p>Important: the flag <code class="language-plaintext highlighter-rouge">-DCMAKE_TOOLCHAIN_FILE=&lt;path-to-your-vcpkg-folder&gt;/vcpkg/scripts/buildsystems/vcpkg.cmake</code> is only a template and <strong>must</strong> be adjusted to your own local vcpkg location. Replace <code class="language-plaintext highlighter-rouge">&lt;path-to-your-vcpkg-folder&gt;</code> with your real path, for example <code class="language-plaintext highlighter-rouge">/home/your-user/vcpkg</code> on Linux.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Configure CMake (Debug)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cmake"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"-S"</span><span class="p">,</span><span class="w"> </span><span class="s2">"."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"-B"</span><span class="p">,</span><span class="w"> </span><span class="s2">"build"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"-DCMAKE_BUILD_TYPE=Debug"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"-DCMAKE_TOOLCHAIN_FILE=&lt;path-to-your-vcpkg-folder&gt;/vcpkg/scripts/buildsystems/vcpkg.cmake"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"-DVCPKG_TARGET_TRIPLET=x64-linux"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"build"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Build"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shell"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cmake"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"--build"</span><span class="p">,</span><span class="w"> </span><span class="s2">"build"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-j"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"dependsOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Configure CMake (Debug)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"build"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>If this path is wrong, CMake usually fails during configuration and <code class="language-plaintext highlighter-rouge">find_package(Boost REQUIRED)</code> will not resolve dependencies from vcpkg.</p>
+
+<h3 id="launchjson"><code class="language-plaintext highlighter-rouge">launch.json</code></h3>
+
+<p>This file defines how VS Code starts the debugger for your executable. While <code class="language-plaintext highlighter-rouge">tasks.json</code> builds the binary, <code class="language-plaintext highlighter-rouge">launch.json</code> controls the runtime context used by <code class="language-plaintext highlighter-rouge">gdb</code>/<code class="language-plaintext highlighter-rouge">lldb</code>: which program to start, where to run it, which environment variables to inject, and which pre-launch build task to execute.</p>
+
+<p>For this QuantLib debug workflow, the most relevant parameters are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Purpose in this configuration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">program</code></td>
+      <td>Points to the debug executable, here <code class="language-plaintext highlighter-rouge">build/fx_option_debug</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cwd</code></td>
+      <td>Sets the working directory used when the program runs.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">preLaunchTask</code></td>
+      <td>Builds the project before each debug run so the debugger uses the latest executable.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MIMode</code></td>
+      <td>Selects the debugger backend. This example uses <code class="language-plaintext highlighter-rouge">gdb</code> on Linux.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">environment</code></td>
+      <td>Sets environment variables for the debugged process. In particular, <code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code> helps the loader find the debug <code class="language-plaintext highlighter-rouge">libQuantLib.so</code> under <code class="language-plaintext highlighter-rouge">$HOME/quantlib-debug-install/lib</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">setupCommands</code></td>
+      <td>Runs debugger commands at startup. Here, it enables pretty printing for clearer object inspection.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If <code class="language-plaintext highlighter-rouge">program</code> or <code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code> are wrong, breakpoints may not bind correctly or the process may fail to start due to missing shared libraries.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debug FX Option (QuantLib)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cppdbg"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/build/fx_option_debug"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nl">"stopAtEntry"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cwd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"environment"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LD_LIBRARY_PATH"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${env:HOME}/quantlib-debug-install/lib:${env:LD_LIBRARY_PATH}"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"externalConsole"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MIMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gdb"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"preLaunchTask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Build"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"setupCommands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enable pretty printing"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-enable-pretty-printing"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"ignoreFailures"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>With this setup, put a breakpoint on <code class="language-plaintext highlighter-rouge">option.NPV()</code>, start debugging, and inspect variables such as <code class="language-plaintext highlighter-rouge">spot</code>, <code class="language-plaintext highlighter-rouge">rd</code>, <code class="language-plaintext highlighter-rouge">rf</code>, <code class="language-plaintext highlighter-rouge">vol</code>, and <code class="language-plaintext highlighter-rouge">maturityDate</code>.</p>
+
+<h3 id="c_cpp_propertiesjson"><code class="language-plaintext highlighter-rouge">c_cpp_properties.json</code></h3>
+
+<p>This file configures how VS Code C/C++ IntelliSense understands your project: header discovery, compiler model, standard version, and browse/index behavior. It is not the file that builds or launches debugging directly, but it is essential for accurate code navigation, auto-completion, and error squiggles while editing.</p>
+
+<p>The most important parameter for this QuantLib setup is <code class="language-plaintext highlighter-rouge">includePath</code>. You must include <code class="language-plaintext highlighter-rouge">"${env:HOME}/quantlib-debug-install/include"</code>, because that is where QuantLib headers were installed in the debug workflow. If this path is missing or wrong, VS Code may show false include errors even when CMake build works.</p>
+
+<p>More details about the QuantLib debug folder <a href="/blog/2026/06/20/quantlib-debug-build-and-swig-components" target="_blank" rel="noopener">QuantLib Debug Build post</a>.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Linux"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"includePath"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"${workspaceFolder}/**"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"${env:HOME}/quantlib-debug-install/include"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"defines"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nl">"compilerPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/bin/clang"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"cStandard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c17"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"cppStandard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c++17"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"intelliSenseMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linux-clang-x64"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"browse"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+            </span><span class="nl">"compileCommands"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/build/compile_commands.json"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Relevant parameters to check first when something looks wrong:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>What to check</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">includePath</code></td>
+      <td>Include <code class="language-plaintext highlighter-rouge">${env:HOME}/quantlib-debug-install/include</code> so IntelliSense can find QuantLib headers.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">compilerPath</code></td>
+      <td>Set this to the compiler used by CMake.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cppStandard</code></td>
+      <td>Match the language standard used by the project, which is C++17 in this example.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">compileCommands</code></td>
+      <td>When the file exists and is valid, IntelliSense can use the compile flags generated by CMake.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">intelliSenseMode</code></td>
+      <td>Match the operating system, compiler, and target architecture. This example uses <code class="language-plaintext highlighter-rouge">linux-clang-x64</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="what-to-inspect-while-debugging">What to inspect while debugging</h2>
+
+<nav class="workflow-progress" aria-label="C++ FX option debugging, step 6 of 7">
+  <ol style="--flow-count: 7">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#scenario-and-model-assumptions">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Scenario</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#minimal-project-structure">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Project structure</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#c-code-maincpp">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">C++ code</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cmake-configuration-cmakeliststxt">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#vs-code-setup-for-debugging">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">VS Code setup</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#what-to-inspect-while-debugging" aria-current="step">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Inspect</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#alternative-compile-and-run-from-the-command-line">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Command line</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Below is a practical step-by-step sequence to debug this C++ example in VS Code.</p>
+
+<ol>
+  <li>Open the folder containing <code class="language-plaintext highlighter-rouge">main.cpp</code>, <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>, and <code class="language-plaintext highlighter-rouge">.vscode/</code>.</li>
+  <li>Run <strong>Run Build Task</strong> (or press <code class="language-plaintext highlighter-rouge">F5</code> directly if <code class="language-plaintext highlighter-rouge">preLaunchTask</code> is configured).</li>
+  <li>Set your first breakpoint on the line <code class="language-plaintext highlighter-rouge">const Real npv = option.NPV();</code>.</li>
+  <li>Press <code class="language-plaintext highlighter-rouge">F5</code> and select <code class="language-plaintext highlighter-rouge">Debug FX Option (QuantLib)</code>.</li>
+  <li>In the <strong>Run and Debug</strong> view, verify the program stops on your breakpoint.</li>
+  <li>Use <strong>Step Over</strong> (<code class="language-plaintext highlighter-rouge">F10</code>) to move line by line through pricing code.</li>
+  <li>Use <strong>Step Into</strong> (<code class="language-plaintext highlighter-rouge">F11</code>) when you want to enter QuantLib calls.</li>
+  <li>Watch key variables in <strong>Variables</strong> or add them to <strong>Watch</strong>:
+  <code class="language-plaintext highlighter-rouge">spot</code>, <code class="language-plaintext highlighter-rouge">strike</code>, <code class="language-plaintext highlighter-rouge">rd</code>, <code class="language-plaintext highlighter-rouge">rf</code>, <code class="language-plaintext highlighter-rouge">vol</code>, <code class="language-plaintext highlighter-rouge">maturityDate</code>, and <code class="language-plaintext highlighter-rouge">npv</code>.</li>
+  <li>Open the <strong>Debug Console</strong> to evaluate expressions (for example, <code class="language-plaintext highlighter-rouge">option.delta()</code>).</li>
+  <li>Continue (<code class="language-plaintext highlighter-rouge">F5</code>) to finish execution and confirm final NPV/Greeks output.</li>
+</ol>
+
+<p>If breakpoints do not bind or the process fails to start, check these first:</p>
+
+<ul>
+  <li>binary is built in <code class="language-plaintext highlighter-rouge">Debug</code> mode,</li>
+  <li><code class="language-plaintext highlighter-rouge">program</code> in <code class="language-plaintext highlighter-rouge">launch.json</code> points to the current executable,</li>
+  <li><code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code> contains <code class="language-plaintext highlighter-rouge">$HOME/quantlib-debug-install/lib</code>,</li>
+  <li>symbols are available (not stripped),</li>
+  <li>VS Code is using the intended <code class="language-plaintext highlighter-rouge">gdb</code> toolchain.</li>
+</ul>
+
+<blockquote>
+  <p><strong>Official Microsoft visual guides</strong></p>
+
+  <ul>
+    <li>VS Code C++ debugging docs (includes screenshots): <a href="https://code.visualstudio.com/docs/cpp/cpp-debug" target="_blank" rel="noopener">C++ debugging</a></li>
+    <li>VS Code debugging overview: <a href="https://code.visualstudio.com/docs/editor/debugging" target="_blank" rel="noopener">Debugging in VS Code</a></li>
+    <li>C/C++ in VS Code documentation: <a href="https://code.visualstudio.com/docs/languages/cpp" target="_blank" rel="noopener">C/C++ language support</a></li>
+    <li>Official VS Code YouTube channel: <a href="https://www.youtube.com/@code" target="_blank" rel="noopener">youtube.com/@code</a></li>
+    <li>Official channel search for C++ debugging videos: <a href="https://www.youtube.com/@code/search?query=cpp%20debugging" target="_blank" rel="noopener">C++ debugging videos</a></li>
+  </ul>
+</blockquote>
+
+<p>This example is intentionally compact, but it is already enough to validate your full debug workflow end to end: code, model, build, runtime linking, and IDE debugging using QuantLib. Once this is stable, extending to smile surfaces, local vol, or even custom engines becomes much easier because you can inspect every layer with confidence.</p>
+
+<h2 id="alternative-compile-and-run-from-the-command-line">Alternative: compile and run from the command line</h2>
+
+<nav class="workflow-progress" aria-label="C++ FX option debugging, step 7 of 7">
+  <ol style="--flow-count: 7">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#scenario-and-model-assumptions">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Scenario</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#minimal-project-structure">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Project structure</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#c-code-maincpp">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">C++ code</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cmake-configuration-cmakeliststxt">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#vs-code-setup-for-debugging">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">VS Code setup</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#what-to-inspect-while-debugging">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Inspect</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#alternative-compile-and-run-from-the-command-line" aria-current="step">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">Command line</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>VS Code is convenient for inspecting the calculation, but it is not required to build or run it. You can use the same CMake project from a terminal and obtain the same option value and risk measures. This is also a useful diagnostic: if the example runs from the terminal but not from VS Code, the next place to investigate is the IDE’s launch configuration rather than the pricing model.</p>
+
+<p>The commands below follow the <strong>Linux</strong> setup used throughout this post. They assume that CMake, a C++17 compiler, and a build tool are available, QuantLib is installed under <code class="language-plaintext highlighter-rouge">$HOME/quantlib-debug-install</code>, and Boost is available through your existing vcpkg installation. No files from <code class="language-plaintext highlighter-rouge">.vscode</code> are needed for this route.</p>
+
+<h3 id="1-configure-the-project">1. Configure the project</h3>
+
+<p>Open a terminal in the folder containing <code class="language-plaintext highlighter-rouge">main.cpp</code> and <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>. Replace the example vcpkg path below with the actual location of your <code class="language-plaintext highlighter-rouge">vcpkg</code> directory before running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-S</span> <span class="nb">.</span> <span class="nt">-B</span> build <span class="se">\</span>
+  <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Debug <span class="se">\</span>
+  <span class="nt">-DCMAKE_TOOLCHAIN_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/vcpkg/scripts/buildsystems/vcpkg.cmake"</span> <span class="se">\</span>
+  <span class="nt">-DVCPKG_TARGET_TRIPLET</span><span class="o">=</span>x64-linux
+</code></pre></div></div>
+
+<p>Configuration checks the compiler and dependencies and generates the build instructions. It does not yet compile the program. Here, <code class="language-plaintext highlighter-rouge">-S .</code> selects the current folder as the source directory, while <code class="language-plaintext highlighter-rouge">-B build</code> keeps generated files in a separate <code class="language-plaintext highlighter-rouge">build</code> directory. Use the same vcpkg toolchain and triplet as in the VS Code workflow. If an existing build directory was configured with a different toolchain, use a fresh directory, such as <code class="language-plaintext highlighter-rouge">build-cli</code>, consistently in all commands below.</p>
+
+<h3 id="2-compile-the-executable">2. Compile the executable</h3>
+
+<p>Once configuration finishes successfully, build the example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">--build</span> build <span class="nt">--parallel</span> 2
+</code></pre></div></div>
+
+<p>This compiles <code class="language-plaintext highlighter-rouge">main.cpp</code> and links the executable against the debug QuantLib library specified in <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>. The parallelism limit of two is a modest starting point. Adjust it to the resources available on your machine. After editing the C++ code, run this build command again before executing the program.</p>
+
+<h3 id="3-run-the-pricing-calculation">3. Run the pricing calculation</h3>
+
+<p>After a successful build, run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/fx_option_debug
+</code></pre></div></div>
+
+<p>The CMake configuration above embeds a runtime search path (<code class="language-plaintext highlighter-rouge">BUILD_RPATH</code>) pointing to your QuantLib installation, so a separate library-path setting should not normally be necessary. If the loader reports that it cannot find <code class="language-plaintext highlighter-rouge">libQuantLib.so</code>, first verify the installation path. To explicitly supply that directory for this invocation, use:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/quantlib-debug-install/lib</span><span class="k">${</span><span class="nv">LD_LIBRARY_PATH</span>:+:<span class="nv">$LD_LIBRARY_PATH</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  ./build/fx_option_debug
+</code></pre></div></div>
+
+<p>This sets the library search path only for the program being launched and preserves any existing entries.</p>
+
+<p>The output reports the call option’s NPV, delta, gamma, vega, theta, and rho. With EURUSD quoted as USD per EUR, the NPV is expressed in <strong>USD per EUR of notional</strong>, not as the premium for an entire trade. Multiply it by the EUR notional to obtain the model premium in USD. QuantLib’s vega is quoted per unit change in volatility, so multiply it by <code class="language-plaintext highlighter-rouge">0.01</code> for an approximate sensitivity to a one-percentage-point volatility increase. Likewise, multiply rho by <code class="language-plaintext highlighter-rouge">0.0001</code> for an approximate sensitivity to a one-basis-point increase in the domestic USD rate, holding the foreign curve fixed. Theta is annualized, not a one-day cash P&amp;L.</p>
+
+<p>These are local model sensitivities, not guarantees of realized profit or loss. Running from the terminal changes only how the program is launched: the market inputs, Garman-Kohlhagen process, analytic engine, and resulting prices remain the same as in the VS Code workflow.</p>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="GarmanKohlhagen1983">Garman, M. B., &amp; Kohlhagen, S. W. (1983). Foreign currency option values. <i>Journal of International Money and Finance</i>, <i>2</i>(3), 231–237. <a href="https://doi.org/10.1016/S0261-5606(83)80001-1" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/S0261-5606(83)80001-1</a></span></li></ol>
+
+                </article>
+
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="https://craquinterogo.github.io/assets/js/jquery.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrolly.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrollex.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/skel.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="https://craquinterogo.github.io/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="https://craquinterogo.github.io/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
+
+
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          window.addEventListener('resize', updateProgress);
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── On-demand sidebars ──────────────────────────── */
+        var drawers = [];
+        function makeSidebarToggle(toggleId, sidebarId, overlayId, query) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+          var compact = window.matchMedia(query);
+
+          function setOpen(open, restoreFocus) {
+            sidebar.classList.toggle('active', open);
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            sidebar.inert = compact.matches && !open;
+            if (open) sidebar.querySelector('button, a').focus();
+            else if (restoreFocus) toggle.focus();
+          }
+
+          drawers.push(function () { setOpen(false, false); });
+          toggle.addEventListener('click', function () {
+            var open = !sidebar.classList.contains('active');
+            drawers.forEach(function (close) { close(); });
+            setOpen(open, !open);
+          });
+          overlay.addEventListener('click', function () { setOpen(false, true); });
+          sidebar.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && compact.matches) setOpen(false, true);
+          });
+          sidebar.addEventListener('click', function (event) {
+            if (compact.matches && event.target.closest('#toc-sidebar-nav a')) setOpen(false, true);
+          });
+          compact.addEventListener('change', function () { setOpen(false, false); });
+          setOpen(false, false);
+        }
+
+        makeSidebarToggle('sidebar-left-toggle', 'sidebar-left', 'sidebar-left-overlay', '(max-width: 1599px)');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay', '(max-width: 1199px)');
+
+        /* Keep wide technical content scrollable without widening the page. */
+        if (body) {
+          body.querySelectorAll('pre').forEach(function (pre) {
+            pre.tabIndex = 0;
+            pre.setAttribute('aria-label', 'Code sample');
+          });
+          body.querySelectorAll('table').forEach(function (table) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'post-table-scroll';
+            wrapper.tabIndex = 0;
+            wrapper.setAttribute('role', 'region');
+            wrapper.setAttribute('aria-label', 'Scrollable table');
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+          });
+        }
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            hdr.querySelector('.collapse-toggle').setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
+            }
+          });
+        });
+
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            var nums    = [0, 0, 0, 0];
+            var list = document.createElement('ul');
+            list.className = 'toc-list';
+            list.id = 'toc-heading-list';
+            var stack = [];
+            var branches = [];
+
+            function setBranchExpanded(branch, expanded) {
+              branch.children.hidden = !expanded;
+              branch.button.setAttribute('aria-expanded', String(expanded));
+              branch.button.setAttribute('aria-label', (expanded ? 'Collapse' : 'Expand') + ' subsections of ' + branch.text);
+            }
+
+            headings.forEach(function (h, index) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              if (h.firstChild && h.firstChild.nodeType === Node.TEXT_NODE) {
+                h.firstChild.textContent = h.firstChild.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
+              }
+              var number = document.createElement('span');
+              number.className = 'section-number';
+              number.textContent = numStr + '. ';
+              h.insertBefore(number, h.firstChild);
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              }
+              var item = document.createElement('li');
+              item.className = 'toc-level-' + (level + 1);
+              var link = document.createElement('a');
+              link.setAttribute('href', '#' + h.id);
+              var tocNumber = document.createElement('span');
+              tocNumber.className = 'toc-number';
+              tocNumber.textContent = numStr + '. ';
+              link.appendChild(tocNumber);
+              link.appendChild(document.createTextNode(rawText));
+              var row = document.createElement('div');
+              row.className = 'toc-entry';
+              row.appendChild(link);
+              item.appendChild(row);
+
+              while (stack.length && stack[stack.length - 1].level >= level) stack.pop();
+              var parent = stack[stack.length - 1];
+              if (parent && !parent.children) {
+                parent.children = document.createElement('ul');
+                parent.children.className = 'toc-list toc-children';
+                parent.children.id = 'toc-children-' + parent.index;
+                parent.button = document.createElement('button');
+                parent.button.type = 'button';
+                parent.button.className = 'toc-branch-toggle';
+                parent.button.setAttribute('aria-controls', parent.children.id);
+                var chevron = document.createElement('i');
+                chevron.className = 'fa fa-chevron-down';
+                chevron.setAttribute('aria-hidden', 'true');
+                parent.button.appendChild(chevron);
+                parent.row.insertBefore(parent.button, parent.row.firstChild);
+                parent.item.appendChild(parent.children);
+                branches.push(parent);
+                setBranchExpanded(parent, true);
+                parent.button.addEventListener('click', function () {
+                  setBranchExpanded(parent, parent.children.hidden);
+                  updateBulkControls();
+                });
+              }
+              (parent ? parent.children : list).appendChild(item);
+              stack.push({ level: level, index: index, item: item, row: row, text: rawText });
+            });
+
+            var expandAll;
+            var collapseAll;
+            function updateBulkControls() {
+              if (!expandAll) return;
+              expandAll.disabled = branches.every(function (branch) { return !branch.children.hidden; });
+              collapseAll.disabled = branches.every(function (branch) { return branch.children.hidden; });
+            }
+
+            if (branches.length) {
+              var controls = document.createElement('div');
+              controls.className = 'toc-controls';
+              controls.setAttribute('role', 'group');
+              controls.setAttribute('aria-label', 'Table of contents branches');
+              expandAll = document.createElement('button');
+              collapseAll = document.createElement('button');
+              [expandAll, collapseAll].forEach(function (button, index) {
+                button.type = 'button';
+                button.textContent = index === 0 ? 'Expand all' : 'Collapse all';
+                button.setAttribute('aria-controls', list.id);
+                button.addEventListener('click', function () {
+                  branches.forEach(function (branch) { setBranchExpanded(branch, index === 0); });
+                  updateBulkControls();
+                });
+                controls.appendChild(button);
+              });
+              tocNav.appendChild(controls);
+              updateBulkControls();
+            }
+            tocNav.appendChild(list);
+            if (tocSect) tocSect.style.display = 'block';
+          } else {
+            if (tocSect) tocSect.style.display = 'none';
+            document.body.classList.add('has-no-toc');
+          }
+        }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                tocNav.querySelectorAll('.toc-entry').forEach(function (row) { row.removeAttribute('data-active-descendant'); });
+                var active = Array.prototype.find.call(tocLinks, function (link) { return link.getAttribute('href') === '#' + entry.target.id; });
+                if (active) {
+                  active.setAttribute('data-active', '');
+                  var ancestor = active.closest('li').parentElement.closest('li');
+                  while (ancestor) {
+                    ancestor.firstElementChild.setAttribute('data-active-descendant', '');
+                    ancestor = ancestor.parentElement.closest('li');
+                  }
+                }
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,2122 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Setting QuantLib up in my laptop, again. An amazing tool for quants. | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	
+	
+	<meta name="description" content="From time to time I do like maintainance and formatting my laptop, but everytime I need to setup many things, on of them is QuantLib, an amazing tool for quants." />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Setting QuantLib up in my laptop, again. An amazing tool for quants." />
+	<meta property="og:description" content="From time to time I do like maintainance and formatting my laptop, but everytime I need to setup many things, on of them is QuantLib, an amazing tool for quants." />
+	<meta property="og:url" content="https://craquinterogo.github.io/blog/2025/08/10/quantlib-setup" />
+	<meta name="twitter:title" content="Setting QuantLib up in my laptop, again. An amazing tool for quants." />
+	<meta name="twitter:description" content="From time to time I do like maintainance and formatting my laptop, but everytime I need to setup many things, on of them is QuantLib, an amazing tool for quants." />
+	
+	
+	<meta property="og:image" content="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" />
+	<meta property="og:image:alt" content="Setting QuantLib up in my laptop, again. An amazing tool for quants." />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" />
+	<meta name="twitter:image:alt" content="Setting QuantLib up in my laptop, again. An amazing tool for quants." />
+	
+	
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="https://craquinterogo.github.io//" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io//">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Quantitative Development
+            </h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle related posts" aria-controls="related-posts-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              
+              
+              
+                <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/07/18/debugging-quantlib-python-cpp-vscode" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Debugging QuantLib across Python and C++ in VS Code" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Debugging QuantLib across Python and C++ ...</h5>
+                          
+                            <span class="recent-post-date">Jul 18, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/07/05/debugging-european-fx-option-quantlib-vscode" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" alt="Debugging a European FX option in QuantLib C++ with VS Code." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Debugging a European FX option in QuantLi...</h5>
+                          
+                            <span class="recent-post-date">Jul 05, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2026/06/20/quantlib-debug-build-and-swig-components" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Compiling QuantLib in Debug Mode and wiring components into SWIG - Python." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Compiling QuantLib in Debug Mode and wiri...</h5>
+                          
+                            <span class="recent-post-date">Jun 20, 2026</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/12/07/git-repository-hard-disk" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/005_What_is_a_Git_Repository.jpg" alt="Private GIT repositories for small or private projects." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Private GIT repositories for small or pri...</h5>
+                          
+                            <span class="recent-post-date">Dec 07, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/10/29/questdb-for-timeseries" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/01_financial-data-visualization.jpg" alt="QuestDB, an alternative for storing your financial time series." loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>QuestDB, an alternative for storing your ...</h5>
+                          
+                            <span class="recent-post-date">Oct 29, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/06/29/ai-agents-for-quants" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/04_llm_and_mcp/jarvis_.jpg" alt="What about AI Agents for Quants?" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>What about AI Agents for Quants?</h5>
+                          
+                            <span class="recent-post-date">Jun 29, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2024/03/10/connecting-cpp-and-python-with-swig" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg" alt="Pricing a European option in C++ from Python with SWIG" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Pricing a European option in C++ from Pyt...</h5>
+                          
+                            <span class="recent-post-date">Mar 10, 2024</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+              <div class="sidebar-category-link">
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle table of contents" aria-controls="toc-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- On-demand navigation for narrower reading layouts -->
+    <button type="button" id="sidebar-left-toggle" class="sidebar-toggle sidebar-toggle--left" aria-controls="sidebar-left" aria-expanded="false"><i class="fa fa-folder" aria-hidden="true"></i>Related</button>
+    <button type="button" id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-controls="sidebar-right" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i>Contents</button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#quantitative-development">Quantitative Development</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Setting QuantLib up in my laptop, again. An ama...</span>
+                    </div>
+                  
+
+                  <h1>Setting QuantLib up in my laptop, again. An amazing tool for quants.</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2025-08-10T00:00:00-05:00">August 10, 2025</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">technology</span>
+                      
+                        <span class="post-tag-pill">quantitative finance</span>
+                      
+                        <span class="post-tag-pill">QuantLib</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/00_circuit.jpg"
+                    alt="Setting QuantLib up in my laptop, again. An amazing tool for quants."
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <article class="post-body" id="post-body-content" aria-label="Article content">
+                  <p>Recently I’ve decided to run the maintainance of my laptop, just to remove files I no longer use and that are hidden because I moved somewhere and I don’t remember where. Naturally, every time I have to set it up again. That’s why this post is a reminder of how to setting up the <a href="https://www.quantlib.org/docs.shtml" target="_blank" rel="noopener">QuantLib</a> library, since I think is one of the most nice libraries in scope of quantitative finance. This library covers different instruments, pricing engines and more, developed by following an architecture that has evolved over time, as pointed out in <a href="https://leanpub.com/implementingquantlib/" target="_blank" rel="noopener">Luigi Ballabio’s book</a>. I strongly encorage the readers to read the book, where Luigi walk you throug design patterns and reasoning for implementing them. In my opinion this approach, although far from being perfect, is a really good approximation to the <a href="https://math.ucr.edu/home/baez/physics/General/occam.html" target="_blank" rel="noopener">Occam’s Razor</a>, where parsimony is our allie. Different concepts are discussed in there. Concepts that I’d like to dive deep into later on in another post. At the moment, let’s see how to use the library if you love, as I do, dive into details of quantitative finance via well designed tools.</p>
+
+<h1 id="quantlib">QuantLib</h1>
+<p>QuantLib is a free/open-source library for quantitative finance, as <a href="https://www.quantlib.org/" target="_blank" rel="noopener">it’s webpage</a> starts saying. It is coded essencially in C++, see <a href="https://github.com/lballabio/quantlib" target="_blank" rel="noopener">QuantLib Github repository</a>. Some non-quants may blank their eyes and say <strong>“it’s hard to learn”</strong>. But here is where things get better, because the library is also exposed to Python via <a href="https://www.swig.org/" target="_blank" rel="noopener">Swig</a>, see <a href="https://github.com/lballabio/QuantLib-SWIG" target="_blank" rel="noopener">QuantLib-Swig repository</a>. Amazing, right?.</p>
+
+<p>It’s not necessary that you try to understand how programming languages are linked with a very big project as QuantLib. Instead, you could take a look into a very straightforward example I prepared a couple of years ago <a href="https://github.com/craquinterogo/quantitative_finance/tree/master/Derivatives" target="_blank" rel="noopener">here</a>.</p>
+
+<p>Frequent posts are published by Luigi <a href="https://implementingquantlib.substack.com/" target="_blank" rel="noopener">here</a>, in case you want to stay tuned with tips and tricks to work with the library. Also new releases are notified, among other channels, there.</p>
+
+<h2 id="quantlib-c">QuantLib C++</h2>
+
+<nav class="workflow-progress" aria-label="QuantLib setup guide, step 1 of 10">
+  <ol style="--flow-count: 10">
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#quantlib-c" aria-current="step">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">QuantLib C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#quantlib-python">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">QuantLib Python</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#why">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Why?</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cloning-quantlib-repository">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Clone repository</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#folder-directories">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Folder directories</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#installing-quantlib">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Install</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cmake-configuration">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#c-testing-file">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">C++ test file</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compiling-the-test">
+          <span class="workflow-progress__number">09</span>
+          <span class="workflow-progress__label">Compile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#i-want-to-run-with-commands">
+          <span class="workflow-progress__number">10</span>
+          <span class="workflow-progress__label">Run with commands</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>The core is documented <a href="https://www.quantlib.org/reference/index.html">here</a>, besides QuantLib books. People not involved in C++ coding may feel overwhelmed as the library is comprised a many classes, design patterns, pricing engines and financial instruments. Moreover, diversity is what makes QuantLib a nice tool for quants, since with variety of instruments and payoffs we can build synthetic pay-offs.</p>
+
+<h2 id="quantlib-python">QuantLib Python</h2>
+
+<nav class="workflow-progress" aria-label="QuantLib setup guide, step 2 of 10">
+  <ol style="--flow-count: 10">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-c">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">QuantLib C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#quantlib-python" aria-current="step">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">QuantLib Python</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#why">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Why?</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cloning-quantlib-repository">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Clone repository</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#folder-directories">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Folder directories</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#installing-quantlib">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Install</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cmake-configuration">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#c-testing-file">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">C++ test file</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compiling-the-test">
+          <span class="workflow-progress__number">09</span>
+          <span class="workflow-progress__label">Compile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#i-want-to-run-with-commands">
+          <span class="workflow-progress__number">10</span>
+          <span class="workflow-progress__label">Run with commands</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Don’t cry, baby, don’t cry. There is a layer on top C++ codes, that exposes the library to Python programming language. This is done by means <a href="https://www.swig.org/" target="_blank" rel="noopener">Swig</a>, which is <em>“a software development tool that connects programs coded C/C++ with high-level programming languages”</em>. I think the reader starts seeing what is this about.</p>
+
+<h2 id="why">Why?</h2>
+
+<nav class="workflow-progress" aria-label="QuantLib setup guide, step 3 of 10">
+  <ol style="--flow-count: 10">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-c">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">QuantLib C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-python">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">QuantLib Python</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#why" aria-current="step">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Why?</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cloning-quantlib-repository">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Clone repository</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#folder-directories">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Folder directories</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#installing-quantlib">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Install</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cmake-configuration">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#c-testing-file">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">C++ test file</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compiling-the-test">
+          <span class="workflow-progress__number">09</span>
+          <span class="workflow-progress__label">Compile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#i-want-to-run-with-commands">
+          <span class="workflow-progress__number">10</span>
+          <span class="workflow-progress__label">Run with commands</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>With the architectural design, implemented to optimize classes and data resource consumption, all coded in C++ in spite the programming language challenges, allows to build on top thereof. This approach keeps a single point for developing, with top layers enabling users to connect without losing core functionalities. That’s what I infer at least, perhaps we can ask Luigi and library’s contributors to confirm or challenging this assumption.</p>
+
+<h1 id="installation">Installation</h1>
+<p>I forgot to mention that my OS is one of Linux family, that I prefer since it allows more control on OS setup. Therefore, the instructions described in here are mainly useful for this operating systems. Nonetheless, as this instructions use tools also available in other OSs, such as <a href="https://cmake.org/" target="_blank" rel="noopener">CMake</a> or <a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a>, readers likely wouldn’t find any problem replicating in their respective OS. <strong>Following steps correspond only to QuantLib install, no any other installation is covered, for instance CMake, Git, C++ compiler, Boost lib and others</strong>.</p>
+
+<h2 id="cloning-quantlib-repository">Cloning QuantLib repository</h2>
+
+<nav class="workflow-progress" aria-label="QuantLib setup guide, step 4 of 10">
+  <ol style="--flow-count: 10">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-c">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">QuantLib C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-python">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">QuantLib Python</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#why">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Why?</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#cloning-quantlib-repository" aria-current="step">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Clone repository</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#folder-directories">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Folder directories</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#installing-quantlib">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Install</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cmake-configuration">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#c-testing-file">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">C++ test file</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compiling-the-test">
+          <span class="workflow-progress__number">09</span>
+          <span class="workflow-progress__label">Compile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#i-want-to-run-with-commands">
+          <span class="workflow-progress__number">10</span>
+          <span class="workflow-progress__label">Run with commands</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Using <a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a> we can open a terminal to clone the repository. My preference is creating a folder fully dedicated to Git specific projects, reason why commands listed here run within such a folder. Readers can choose based on their own preferences.</p>
+
+<blockquote>
+  <p>⚠️ <strong>Warning</strong> :: Recall that if you want to work with the library by modifying it for your own project, it’s better to <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo" target="_blank" rel="noopener">fork the repository</a> and then cloning your forked repository in your laptop, instead of cloning QuantLib repository directly.</p>
+</blockquote>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>git clone https://github.com/lballabio/QuantLib.git
+</code></pre></div></div>
+
+<p>Once this command is executed, all the codes in QuantLib github repository will be copied into your laptop. The project contains a lot of files, including not only C++ files -source code and headers-, but also configuration files such as <code class="language-plaintext highlighter-rouge">CMaLists.txt</code> or <code class="language-plaintext highlighter-rouge">QuantLib.vcxproj</code>. The former is the one I’ll use here, but reader if working in Windows, with access to Visual Studio may run the later.</p>
+
+<h2 id="folder-directories">Folder directories</h2>
+
+<nav class="workflow-progress" aria-label="QuantLib setup guide, step 5 of 10">
+  <ol style="--flow-count: 10">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-c">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">QuantLib C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-python">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">QuantLib Python</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#why">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Why?</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cloning-quantlib-repository">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Clone repository</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#folder-directories" aria-current="step">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Folder directories</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#installing-quantlib">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Install</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cmake-configuration">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#c-testing-file">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">C++ test file</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compiling-the-test">
+          <span class="workflow-progress__number">09</span>
+          <span class="workflow-progress__label">Compile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#i-want-to-run-with-commands">
+          <span class="workflow-progress__number">10</span>
+          <span class="workflow-progress__label">Run with commands</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>As you may be eager for running the library for then playing with it, I’m going to take only few sentences to point out relevant folders.</p>
+
+<h3 id="core-folder">Core folder</h3>
+<p>The core of the library is within a folder called <code class="language-plaintext highlighter-rouge">/ql</code> that is comprised by subfolders in charge of many different thigs such as:</p>
+
+<ul>
+  <li>Design pattern classes <code class="language-plaintext highlighter-rouge">/patterns</code> (<code class="language-plaintext highlighter-rouge">LazyObject</code>,<code class="language-plaintext highlighter-rouge">Observable</code> or <code class="language-plaintext highlighter-rouge">Singleton</code>, for instance)</li>
+  <li>Financial instruments supported <code class="language-plaintext highlighter-rouge">/instruments</code></li>
+  <li>Term structure classes <code class="language-plaintext highlighter-rouge">/termstructures</code></li>
+  <li>Cashflows modelling <code class="language-plaintext highlighter-rouge">/cashflows</code></li>
+  <li>Stochastic processes <code class="language-plaintext highlighter-rouge">/processes</code></li>
+  <li>Pricing engines <code class="language-plaintext highlighter-rouge">/pricingengines</code></li>
+  <li>Others</li>
+</ul>
+
+<h3 id="examples-folder">Examples folder</h3>
+<p>The <code class="language-plaintext highlighter-rouge">/Examples</code> folder contains different examples for pricing diverse type of instruments in C++. You’ll see that each example contains its own <code class="language-plaintext highlighter-rouge">.vcxproj</code> file, that can be individually executed in Visual Studio. Moreover, <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> file is also allocated within each subfolder of examples, and it allows to run the examples once the library has been installed (Installation step described later on here).</p>
+
+<h3 id="documentation">Documentation</h3>
+<p>Similar documentation as observed in <a href="https://www.quantlib.org/reference/index.html" target="_blank" rel="noopener">Official website</a> can be reproduced and extended with files in folder named <code class="language-plaintext highlighter-rouge">\Docs</code>. This folder contains a make file named <code class="language-plaintext highlighter-rouge">MakeFile.am</code> that is responsible for documentation generation by executing the command below, preferibly in your own <code class="language-plaintext highlighter-rouge">\build</code> folder, that I’ll refer to later as well.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">make docs
+</span></code></pre></div></div>
+
+<p>By running the documentation it will generates a set of <code class="language-plaintext highlighter-rouge">*.html</code> files that can be easily navigated by any library user.</p>
+
+<h3 id="docker-approach">Docker approach</h3>
+<p>In case you want to bear a container approach for your projects or your systems, it is also allowed to do so using the docker file named <code class="language-plaintext highlighter-rouge">ci.Dockerfile</code>, quite usefull for <a href="https://www.atlassian.com/continuous-delivery/continuous-integration" target="_blank" rel="noopener">continuous integration or CI</a>. This file is allocated in <code class="language-plaintext highlighter-rouge">\dockerfiles</code> folder.</p>
+
+<h2 id="installing-quantlib">Installing QuantLib</h2>
+
+<nav class="workflow-progress" aria-label="QuantLib setup guide, step 6 of 10">
+  <ol style="--flow-count: 10">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-c">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">QuantLib C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-python">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">QuantLib Python</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#why">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Why?</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cloning-quantlib-repository">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Clone repository</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#folder-directories">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Folder directories</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#installing-quantlib" aria-current="step">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Install</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#cmake-configuration">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#c-testing-file">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">C++ test file</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compiling-the-test">
+          <span class="workflow-progress__number">09</span>
+          <span class="workflow-progress__label">Compile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#i-want-to-run-with-commands">
+          <span class="workflow-progress__number">10</span>
+          <span class="workflow-progress__label">Run with commands</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Once you are familiarized with main folders, I can proceed with how I do install the library. Before, I want to highlight two points.</p>
+<ul>
+  <li>This approach will create a compiled library which means will compile QuantLib code generating a <code class="language-plaintext highlighter-rouge">libQuantLib.so</code> file (this is the shared library yielded in Linux OS), together with the respective headers that can be used by including them in any other project’s compilation using QuantLib (or your experimental version).</li>
+  <li>It is true that <strong>you don’t need to compile QuantLib code</strong> if you use package managers such as <a href="https://conan.io/" target="_blank" rel="noopener">Conan</a> or <a href="https://vcpkg.io/en/" target="_blank" rel="noopener">VCPKG</a>. Nonetheless, I hope you’re also into in Quantitative Finance as I do, just to have time to play and experiment with extra models/methods. If the last is also your case, you’ll need to compile the library with your changes and install it, as I’ll show below.</li>
+</ul>
+
+<h3 id="cmake-approach">CMake approach</h3>
+<p>Due to I do work in Linux, my personal preference is to use CMake for compiling C++ projects, given the portability and easy use for compiling structured C++ projects. As such, I’ll refer to the <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> in the root folder where you cloned QuantLib repository. This file contains all the instructions for compiling QuantLib codes. I guess you agree on that describing the content is out of scope this instructions, so I’ll skip its content description. Just keep in mind that this file is core for compilation and installation under this approach.</p>
+
+<h4 id="compilation-setup">Compilation Setup</h4>
+<p>Then what we have to do is to create a folder that is used as a temporal folder allocating any temporary file required for compiling and then installating. This folder is commonly named as <code class="language-plaintext highlighter-rouge">\build</code>, and it is located at the same level of <code class="language-plaintext highlighter-rouge">\ql</code> folder. Then we’ll get into this folder in the terminal to start the process, as follows.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="nb">mkdir </span>build
+<span class="o">&gt;</span> <span class="nb">cd </span>build
+<span class="o">&gt;</span> cmake .. <span class="se">\</span>
+  <span class="nt">-DBoost_INCLUDE_DIR</span><span class="o">=</span>/.../vcpkg/installed/x64-linux/include <span class="se">\</span>
+  <span class="nt">-DBOOST_ROOT</span><span class="o">=</span>/.../vcpkg/packages/boost-config_x64-linux <span class="se">\</span>
+  <span class="nt">-DBoost_NO_SYSTEM_PATHS</span><span class="o">=</span>ON <span class="se">\</span>
+  <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Release <span class="se">\</span>
+  <span class="nt">-DBUILD_SHARED_LIBS</span><span class="o">=</span>ON <span class="se">\</span>
+  <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="nv">$HOME</span>/quantlib-install
+</code></pre></div></div>
+
+<p>As you noticed, CMake requires have already been installed, since third line uses CMake’s command line interface to do prepare files for compilation. Additionally, I’m using three CMake flags <a href="https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html" target="_blank" rel="noopener">DCMAKE_BUILD_TYPE</a>, <a href="https://cmake.org/cmake/help/latest/variable/BUILD_SHARED_LIBS.html" target="_blank" rel="noopener">DBUILD_SHARED_LIBS</a>, and <a href="https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html" target="_blank" rel="noopener">DCMAKE_INSTALL_PREFIX</a>. I’ll skip the first two, as the reader may refer the official documentation in the link. Nevertheless, I want to emphasize in the third one. <code class="language-plaintext highlighter-rouge">DCMAKE_INSTALL_PREFIX</code> parameter is in charge of configuring the folder where the library will be installed, then it can be modified as user wishes, but keeping into account that <strong>you have to remember this path since it will be called by other projects when refering to QuantLib classes</strong>.</p>
+
+<p>Furthermore, if you paid attention, there is a <code class="language-plaintext highlighter-rouge">..</code> in the command. This means CMake will look for the <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> in parent folder respect to the folder in the terminal. As I’m executing this command within <code class="language-plaintext highlighter-rouge">\build</code> folder, it means CMake will look for the <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> in the root QuantLib folder where I cloned the repository using Git.</p>
+
+<h4 id="compilation">Compilation</h4>
+<p>Once executed, the folder <code class="language-plaintext highlighter-rouge">\build</code> will contains the setup files needed to compile the solution. <strong>So far, this files are not QuantLib’s compiled files</strong>. Then to proceed with compiling the files to then generating our <strong>shared library</strong> and respective headers, we need to run the command below.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>cmake <span class="nt">--build</span> <span class="nb">.</span> <span class="nt">--clean-first</span>
+</code></pre></div></div>
+
+<p>If you have previously conducted the compilation with errors, then the errors were fixed and you want to continue compilation without compiling everything from beginning, remove the parameter <code class="language-plaintext highlighter-rouge">--clean-first</code>.</p>
+
+<blockquote>
+  <p>☕🍵 <strong>Tip</strong> :: Now, please go and grab a cup of coffee or tea, because it will take a while. You’ll see how the progess is indicated in the terminal going through QuantLib targets, setup in CMake files, as shown below.</p>
+</blockquote>
+
+<p align="center">
+    <img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/001_make_quantlib.png" alt="Calling MCP Server" />
+</p>
+
+<p><strong>Easy peasy lemon squeezy!!</strong>. So far, at least, we can rely on CMake configuration that QuantLib contributors have built for us, such that we don’t need to do any extra to compile the codes. As a result, we’ll be able to see extra folders within <code class="language-plaintext highlighter-rouge">\build</code> folder, such as <code class="language-plaintext highlighter-rouge">\ql</code> (again?), <code class="language-plaintext highlighter-rouge">\Testing</code>, <code class="language-plaintext highlighter-rouge">\Examples</code>, and more. But lets pay attention to a relevant thing, for understanding what’s going on.</p>
+
+<p>If you take a look in <code class="language-plaintext highlighter-rouge">\build\ql</code> folder, you’ll see that sub-folders structure is pretty similar to the one observed in <code class="language-plaintext highlighter-rouge">\ql</code> folder. <strong>Why?</strong>. Well, that’s the C++ and CMake magic. When compiled the codes, CMake has copied the headers (<code class="language-plaintext highlighter-rouge">.h/.hpp</code> files) of the library, as they will be installed together with <code class="language-plaintext highlighter-rouge">\build\ql\libQuantLib.so</code>. We could consider <code class="language-plaintext highlighter-rouge">\build</code> folder content as a pre-stage to install.</p>
+
+<blockquote>
+  <p>⚠️ <strong>Warning</strong> :: Recall that when creating the shared library, the headers are not within the shared/static library. Then, any other program that needs to communicate with the library requires to <code class="language-plaintext highlighter-rouge">#include</code> the library’s headers.</p>
+</blockquote>
+
+<h4 id="installing">Installing</h4>
+<p>Now the last step to finally install the library is running the command below. Recall executing it being in the terminal within <code class="language-plaintext highlighter-rouge">\build</code> folder.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>make <span class="nb">install</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>⚠️ <strong>Warning</strong> :: This is crucial, because here is where <code class="language-plaintext highlighter-rouge">DCMAKE_INSTALL_PREFIX</code> parameter acts. During installation, the headers and shared library will be installed in linux within the directory you have setup in this parameter. Then, as the value started with <strong>$HOME</strong>, will means the user home directory will be used to install the library. If you don’t know which directory is that, just run in the terminal the command <code class="language-plaintext highlighter-rouge">echo $HOME</code>, that shows the respective folder.</p>
+</blockquote>
+
+<p>You can check the installation of the library just by running the following commands.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span><span class="nb">cd</span> <span class="nv">$HOME</span>/quantlib-install
+<span class="gp">&gt;</span><span class="w"> </span><span class="nb">ls</span>
+</code></pre></div></div>
+
+<p>First command will redirect to the folder where QuantLib has been installed, and second one will list the content of that folder. As result, you should be able to see three folders.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Folder</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\bin</code></td>
+      <td>Contains additional executables, not needed at the moment for us.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">\include</code></td>
+      <td>✅ This folder internally contains a subfolder named <code class="language-plaintext highlighter-rouge">\ql</code>, that stores all the headers required by any other C++ project to interact with QuantLib library just installed.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lib</code></td>
+      <td>✅  Contains all elements associated with the <strong>shared library</strong> named <code class="language-plaintext highlighter-rouge">libQuantLib.so</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This folders will be used to test our installation.</p>
+
+<h1 id="testing-quantlib-install">Testing QuantLib install</h1>
+<p>For testing the install of QuantLib library in our laptop we can replicate the code below. Any doubt you can refer to QuantLib documentation and also <code class="language-plaintext highlighter-rouge">\Example</code> folder. In this ocassion I want to price a fixed-rate bond, but you can try with any other instrument modelled.</p>
+
+<p><strong>Having followed the steps above, we can now move to any other folder, as you wish, to create new code for testing the appropriate installation of the library.</strong>. Then proceed following forthcoming steps in this new folder <strong>apart from</strong> any other folder related to QuantLib library.</p>
+
+<h2 id="cmake-configuration">CMake configuration</h2>
+
+<nav class="workflow-progress" aria-label="QuantLib setup guide, step 7 of 10">
+  <ol style="--flow-count: 10">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-c">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">QuantLib C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-python">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">QuantLib Python</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#why">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Why?</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cloning-quantlib-repository">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Clone repository</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#folder-directories">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Folder directories</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#installing-quantlib">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Install</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#cmake-configuration" aria-current="step">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#c-testing-file">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">C++ test file</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compiling-the-test">
+          <span class="workflow-progress__number">09</span>
+          <span class="workflow-progress__label">Compile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#i-want-to-run-with-commands">
+          <span class="workflow-progress__number">10</span>
+          <span class="workflow-progress__label">Run with commands</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>As I mentioned before, CMake is a tool that facilitates many tasks, when referred to C++ code compilation. For that reason I prefer to explain this example using it, also because let us to identify the blocks required for any C++ code that makes use of QuantLib (When not having Visual Studio).</p>
+
+<p>Then, in this new location, we can create a file named <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>. The content of this file is detailed below.</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.10<span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span>TestingQuantLib<span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD 17<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD_REQUIRED ON<span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>main main.cpp<span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span>QUANTLIB_INCLUDE_DIR <span class="s2">"$ENV{HOME}/quantlib-install/include"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>QUANTLIB_LIB_DIR <span class="s2">"$ENV{HOME}/quantlib-install/lib"</span><span class="p">)</span>
+
+<span class="nb">target_include_directories</span><span class="p">(</span>main PRIVATE <span class="si">${</span><span class="nv">QUANTLIB_INCLUDE_DIR</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>main PRIVATE <span class="si">${</span><span class="nv">QUANTLIB_LIB_DIR</span><span class="si">}</span>/libQuantLib.so<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Four lines play a relevant role for compilation using QuantLib. That I’ll describe below.</p>
+
+<h3 id="setting-the-target">Setting the target</h3>
+
+<p>At least in the initial design, we’ll create an executable file based on codes within a file named <code class="language-plaintext highlighter-rouge">main.cpp</code>, that I’ll describe in next section. But at the moment we are calling this executable as <code class="language-plaintext highlighter-rouge">main</code>, and can be identified in the line below.</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">add_executable</span><span class="p">(</span>main main.cpp<span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="setting-variables-in-cmake-context">Setting variables in CMake context</h3>
+<p>The following lines create two variables in CMake context. They are <code class="language-plaintext highlighter-rouge">QUANTLIB_INCLUDE_DIR</code> and <code class="language-plaintext highlighter-rouge">QUANTLIB_LIB_DIR</code>. The relevante is its connection with the folders where we have installed QuantLib. You will notice the reason why I have described the result of installing the library in foregoing steps. The reason is that the two variables are going to point out to the folders containing QuantLib’s headers and shared library, respectively.</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span><span class="p">(</span>QUANTLIB_INCLUDE_DIR <span class="s2">"$ENV{HOME}/quantlib-install/include"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>QUANTLIB_LIB_DIR <span class="s2">"$ENV{HOME}/quantlib-install/lib"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="linkin-cmake-variables-to-executable">Linkin CMake variables to executable</h3>
+<p>As the executable needs to know where to look for any external source of code during preprocessing, compiling and/or linking process, the CMake variables are associated to the executable object in CMake file. Where CMake function <code class="language-plaintext highlighter-rouge">target_include_directories</code> is used to attach the folder containing headers (that’s why the <strong>include</strong> folder), whereas <code class="language-plaintext highlighter-rouge">target_link_libraries</code> function links the library by means its shared library object (<code class="language-plaintext highlighter-rouge">libQuantLib.so</code>).</p>
+
+<p>Now, let’s jumpt to the real code.</p>
+
+<h2 id="c-testing-file">C++ testing file</h2>
+
+<nav class="workflow-progress" aria-label="QuantLib setup guide, step 8 of 10">
+  <ol style="--flow-count: 10">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-c">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">QuantLib C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-python">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">QuantLib Python</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#why">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Why?</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cloning-quantlib-repository">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Clone repository</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#folder-directories">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Folder directories</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#installing-quantlib">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Install</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cmake-configuration">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#c-testing-file" aria-current="step">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">C++ test file</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#compiling-the-test">
+          <span class="workflow-progress__number">09</span>
+          <span class="workflow-progress__label">Compile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#i-want-to-run-with-commands">
+          <span class="workflow-progress__number">10</span>
+          <span class="workflow-progress__label">Run with commands</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>All this code you can store in a file named <code class="language-plaintext highlighter-rouge">main.cpp</code>, at same level of CMake file. People with experience in C++ may recognize the preprocessor directive <code class="language-plaintext highlighter-rouge">#include</code>, that enables the code to make use of structures coded in other C++ files. In this case I’m using the headers from quantlib as follows.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/instruments/bond.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/instruments/bonds/fixedratebond.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/time/calendar.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/time/calendars/target.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/settings.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/cashflows/coupon.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/time/schedule.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/cashflows/fixedratecoupon.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/time/daycounters/actualactual.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/termstructures/yieldtermstructure.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/termstructures/yield/flatforward.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ql/pricingengines/bond/discountingbondengine.hpp&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span></code></pre></div></div>
+
+<p>The next lines may be exposed to debate, since some people likes, or argue against, <a href="https://learn.microsoft.com/en-us/cpp/cpp/namespaces-cpp?view=msvc-170" target="_blank" rel="noopener">namespaces</a>. They are a mechanism to add “surnames” to the structures in C++.  Some people attempt to avoid them for the sake of clarity, but this time since the code is quite small, I’ll skip explicit reference by using namespaces.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">QuantLib</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Then a main function (Recall this is a straightforward test, and no formal), is created such that I can price a Bond -invented-, that was issued at 19th June 2022, with maturity date 19th March 2029. It pays a quarterly coupon calculated at ACT/365 day counting method. The coupon is 5.7% of notional. Bond’s notional is $10.000. The only exotic parameter here is the Forward flat rate of 5% used to create the discounting curve for getting the NPV of bond’s cashflows. The result is the dirty and clean price.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">Date</span> <span class="n">todaysDate</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">August</span><span class="p">,</span> <span class="mi">2025</span><span class="p">);</span>
+    <span class="n">Date</span> <span class="n">issueDate</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="n">June</span><span class="p">,</span> <span class="mi">2022</span><span class="p">);</span>
+    <span class="n">Date</span> <span class="n">maturityDate</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="n">March</span><span class="p">,</span> <span class="mi">2029</span><span class="p">);</span>
+    <span class="n">Calendar</span> <span class="n">calendar</span> <span class="o">=</span> <span class="n">TARGET</span><span class="p">();</span>
+    <span class="n">Real</span> <span class="n">notional</span> <span class="o">=</span> <span class="mf">10000.0</span><span class="p">;</span>
+    
+    <span class="n">todaysDate</span> <span class="o">=</span> <span class="n">calendar</span><span class="p">.</span><span class="n">adjust</span><span class="p">(</span><span class="n">todaysDate</span><span class="p">);</span>
+
+    <span class="n">Frequency</span> <span class="n">frequency</span> <span class="o">=</span> <span class="n">Quarterly</span><span class="p">;</span>
+    <span class="n">Rate</span> <span class="n">couponRate</span> <span class="o">=</span> <span class="mf">0.057</span><span class="p">;</span>
+    <span class="n">DayCounter</span> <span class="n">dayCounter</span> <span class="o">=</span> <span class="n">ActualActual</span><span class="p">(</span><span class="n">ActualActual</span><span class="o">::</span><span class="n">Actual365</span><span class="p">);</span>
+
+    <span class="cm">/*
+    ----------------------------------------------------------------------
+    BOND Coupon's calculation
+    ----------------------------------------------------------------------
+    */</span>
+    <span class="n">Schedule</span> <span class="n">schedule</span><span class="p">(</span><span class="n">issueDate</span><span class="p">,</span> <span class="n">maturityDate</span><span class="p">,</span> <span class="n">Period</span><span class="p">(</span><span class="n">frequency</span><span class="p">),</span>
+                    <span class="n">TARGET</span><span class="p">(),</span> <span class="n">Following</span><span class="p">,</span> <span class="n">Following</span><span class="p">,</span>
+                    <span class="n">DateGeneration</span><span class="o">::</span><span class="n">Backward</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+
+    <span class="c1">// Build Leg using FixedRateLeg</span>
+    <span class="n">Leg</span> <span class="n">coupons</span> <span class="o">=</span> <span class="n">FixedRateLeg</span><span class="p">(</span><span class="n">schedule</span><span class="p">)</span>
+                    <span class="p">.</span><span class="n">withNotionals</span><span class="p">(</span><span class="n">notional</span><span class="p">)</span>
+                    <span class="p">.</span><span class="n">withCouponRates</span><span class="p">(</span><span class="n">couponRate</span><span class="p">,</span> <span class="n">dayCounter</span><span class="p">);</span>
+
+    <span class="c1">// Print coupon payment dates and amounts</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">cf</span> <span class="o">:</span> <span class="n">coupons</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Payment date: "</span> <span class="o">&lt;&lt;</span> <span class="n">cf</span><span class="o">-&gt;</span><span class="n">date</span><span class="p">()</span>
+                <span class="o">&lt;&lt;</span> <span class="s">", Amount: "</span> <span class="o">&lt;&lt;</span> <span class="n">cf</span><span class="o">-&gt;</span><span class="n">amount</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/*
+    ----------------------------------------------------------------------
+    BOND Pricing
+    ----------------------------------------------------------------------
+    */</span>
+    <span class="n">Settings</span><span class="o">::</span><span class="n">instance</span><span class="p">().</span><span class="n">evaluationDate</span><span class="p">()</span> <span class="o">=</span> <span class="n">todaysDate</span><span class="p">;</span>
+
+    <span class="c1">// Discounting curve using a Flat Forward rate</span>
+    <span class="n">Handle</span><span class="o">&lt;</span><span class="n">YieldTermStructure</span><span class="o">&gt;</span> <span class="n">discountCurve</span><span class="p">(</span>
+        <span class="n">boost</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FlatForward</span><span class="o">&gt;</span><span class="p">(</span><span class="n">todaysDate</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">ActualActual</span><span class="p">(</span><span class="n">ActualActual</span><span class="o">::</span><span class="n">Actual365</span><span class="p">),</span> <span class="n">Compounded</span><span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="c1">// Bond instance creation</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Bond</span><span class="o">&gt;</span> <span class="n">bond</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FixedRateBond</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="c1">// settlement days</span>
+        <span class="n">notional</span><span class="p">,</span>
+        <span class="n">schedule</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Rate</span><span class="o">&gt;</span><span class="p">{</span><span class="n">couponRate</span><span class="p">},</span>
+        <span class="n">dayCounter</span><span class="p">,</span>
+        <span class="n">Following</span><span class="p">,</span>
+        <span class="n">notional</span><span class="p">,</span>
+        <span class="n">issueDate</span>
+    <span class="p">);</span>
+
+    <span class="c1">// Setting Bond Pricer, that allows to us pricing the bond by linking the Discount curve</span>
+    <span class="n">bond</span><span class="o">-&gt;</span><span class="n">setPricingEngine</span><span class="p">(</span>
+        <span class="n">boost</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">DiscountingBondEngine</span><span class="o">&gt;</span><span class="p">(</span><span class="n">discountCurve</span><span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="c1">// Calculation of clean and dirty prices</span>
+    <span class="n">Real</span> <span class="n">cleanPrice</span> <span class="o">=</span> <span class="n">bond</span><span class="o">-&gt;</span><span class="n">cleanPrice</span><span class="p">();</span>
+    <span class="n">Real</span> <span class="n">dirtyPrice</span> <span class="o">=</span> <span class="n">bond</span><span class="o">-&gt;</span><span class="n">dirtyPrice</span><span class="p">();</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Clean Price: "</span> <span class="o">&lt;&lt;</span> <span class="n">cleanPrice</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Dirty Price: "</span> <span class="o">&lt;&lt;</span> <span class="n">dirtyPrice</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="compiling-the-test">Compiling the test</h2>
+
+<nav class="workflow-progress" aria-label="QuantLib setup guide, step 9 of 10">
+  <ol style="--flow-count: 10">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-c">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">QuantLib C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-python">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">QuantLib Python</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#why">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Why?</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cloning-quantlib-repository">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Clone repository</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#folder-directories">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Folder directories</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#installing-quantlib">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Install</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cmake-configuration">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#c-testing-file">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">C++ test file</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#compiling-the-test" aria-current="step">
+          <span class="workflow-progress__number">09</span>
+          <span class="workflow-progress__label">Compile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#i-want-to-run-with-commands">
+          <span class="workflow-progress__number">10</span>
+          <span class="workflow-progress__label">Run with commands</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Resulting structure of files above should be like</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>quantlib_test_installing/
+├── build/
+├──── ...
+├──── main
+├── CMakeLists.txt
+└── main.cpp
+</code></pre></div></div>
+
+<p>Consequently, to test out code, in this ocassion we need to follow similar steps as when we compiled QuantLib codes. Those are:</p>
+<ul>
+  <li>Creating a <code class="language-plaintext highlighter-rouge">\build</code> folder</li>
+  <li>Executing <code class="language-plaintext highlighter-rouge">cmake ..</code> command, within <code class="language-plaintext highlighter-rouge">\build</code> folder</li>
+  <li>Execute <code class="language-plaintext highlighter-rouge">make</code> command, within <code class="language-plaintext highlighter-rouge">\build</code> folder</li>
+</ul>
+
+<p>Now!, you’ll see a new file within <code class="language-plaintext highlighter-rouge">\build</code> folder named <code class="language-plaintext highlighter-rouge">main</code>. Recall this is the name we setup in <code class="language-plaintext highlighter-rouge">CMakeList.txt</code> file, more explicitely when using the function <code class="language-plaintext highlighter-rouge">add_executable</code>. You can change the name in that line to whatever you want, and the output once you run <code class="language-plaintext highlighter-rouge">make</code> is the file with that name. Then to run the executable just type in the terminal following command.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>./main
+</code></pre></div></div>
+
+<p><strong>Voila!!</strong>. You wil have installed correctly QuantLib, and tested it via a straghtforward example, pricing a bond.</p>
+
+<p><img src="https://craquinterogo.github.io/assets/images/01_post_images/004_quant_developer/002_make_quantlib_test.png" alt="Calling MCP Server" /></p>
+
+<h2 id="i-want-to-run-with-commands">I Want to run with commands!</h2>
+
+<nav class="workflow-progress" aria-label="QuantLib setup guide, step 10 of 10">
+  <ol style="--flow-count: 10">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-c">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">QuantLib C++</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#quantlib-python">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">QuantLib Python</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#why">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Why?</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cloning-quantlib-repository">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Clone repository</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#folder-directories">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Folder directories</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#installing-quantlib">
+          <span class="workflow-progress__number">06</span>
+          <span class="workflow-progress__label">Install</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#cmake-configuration">
+          <span class="workflow-progress__number">07</span>
+          <span class="workflow-progress__label">CMake</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#c-testing-file">
+          <span class="workflow-progress__number">08</span>
+          <span class="workflow-progress__label">C++ test file</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#compiling-the-test">
+          <span class="workflow-progress__number">09</span>
+          <span class="workflow-progress__label">Compile</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#i-want-to-run-with-commands" aria-current="step">
+          <span class="workflow-progress__number">10</span>
+          <span class="workflow-progress__label">Run with commands</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>In case you prefer more command line for compiling code instead of tools such as CMake, the test can be compiled using the command below.</p>
+
+<p>First you need to add QuantLib’s path to environment variable <code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code>, such that allows the dynamic linker where to look for files.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span><span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/home/donnetoo/quantlib-install/lib:<span class="nv">$LD_LIBRARY_PATH</span>
+</code></pre></div></div>
+
+<p>Then, once the linker knows where to look for the library codes, you may compile <code class="language-plaintext highlighter-rouge">main.cpp</code> file to produce an executable named <code class="language-plaintext highlighter-rouge">main</code>, as done in CMake scheme, using <code class="language-plaintext highlighter-rouge">g++</code> compiler, as follows.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">&gt;</span><span class="w"> </span>g++ <span class="nt">-std</span><span class="o">=</span>c++17 <span class="nt">-I</span><span class="nv">$HOME</span>/quantlib-install/include main.cpp <span class="nt">-L</span><span class="nv">$HOME</span>/quantlib-install/lib <span class="nt">-lQuantLib</span> <span class="nt">-o</span> main
+</code></pre></div></div>
+
+<p>Conversely to CMake, here you can run the command even at same level of <code class="language-plaintext highlighter-rouge">main.cpp</code>. Just take into account the executable named <code class="language-plaintext highlighter-rouge">main</code> will be created at same level, unless you specify either a relative or an absolute path where to create it.</p>
+
+<hr />
+
+<p>Hope this information is useful for you. Any doubt not hesitate reaching me out via LinkedIn, I’ll be really happy to help.</p>
+
+                </article>
+
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="https://craquinterogo.github.io/assets/js/jquery.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrolly.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrollex.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/skel.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="https://craquinterogo.github.io/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="https://craquinterogo.github.io/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
+
+
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          window.addEventListener('resize', updateProgress);
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── On-demand sidebars ──────────────────────────── */
+        var drawers = [];
+        function makeSidebarToggle(toggleId, sidebarId, overlayId, query) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+          var compact = window.matchMedia(query);
+
+          function setOpen(open, restoreFocus) {
+            sidebar.classList.toggle('active', open);
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            sidebar.inert = compact.matches && !open;
+            if (open) sidebar.querySelector('button, a').focus();
+            else if (restoreFocus) toggle.focus();
+          }
+
+          drawers.push(function () { setOpen(false, false); });
+          toggle.addEventListener('click', function () {
+            var open = !sidebar.classList.contains('active');
+            drawers.forEach(function (close) { close(); });
+            setOpen(open, !open);
+          });
+          overlay.addEventListener('click', function () { setOpen(false, true); });
+          sidebar.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && compact.matches) setOpen(false, true);
+          });
+          sidebar.addEventListener('click', function (event) {
+            if (compact.matches && event.target.closest('#toc-sidebar-nav a')) setOpen(false, true);
+          });
+          compact.addEventListener('change', function () { setOpen(false, false); });
+          setOpen(false, false);
+        }
+
+        makeSidebarToggle('sidebar-left-toggle', 'sidebar-left', 'sidebar-left-overlay', '(max-width: 1599px)');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay', '(max-width: 1199px)');
+
+        /* Keep wide technical content scrollable without widening the page. */
+        if (body) {
+          body.querySelectorAll('pre').forEach(function (pre) {
+            pre.tabIndex = 0;
+            pre.setAttribute('aria-label', 'Code sample');
+          });
+          body.querySelectorAll('table').forEach(function (table) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'post-table-scroll';
+            wrapper.tabIndex = 0;
+            wrapper.setAttribute('role', 'region');
+            wrapper.setAttribute('aria-label', 'Scrollable table');
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+          });
+        }
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            hdr.querySelector('.collapse-toggle').setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
+            }
+          });
+        });
+
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            var nums    = [0, 0, 0, 0];
+            var list = document.createElement('ul');
+            list.className = 'toc-list';
+            list.id = 'toc-heading-list';
+            var stack = [];
+            var branches = [];
+
+            function setBranchExpanded(branch, expanded) {
+              branch.children.hidden = !expanded;
+              branch.button.setAttribute('aria-expanded', String(expanded));
+              branch.button.setAttribute('aria-label', (expanded ? 'Collapse' : 'Expand') + ' subsections of ' + branch.text);
+            }
+
+            headings.forEach(function (h, index) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              if (h.firstChild && h.firstChild.nodeType === Node.TEXT_NODE) {
+                h.firstChild.textContent = h.firstChild.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
+              }
+              var number = document.createElement('span');
+              number.className = 'section-number';
+              number.textContent = numStr + '. ';
+              h.insertBefore(number, h.firstChild);
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              }
+              var item = document.createElement('li');
+              item.className = 'toc-level-' + (level + 1);
+              var link = document.createElement('a');
+              link.setAttribute('href', '#' + h.id);
+              var tocNumber = document.createElement('span');
+              tocNumber.className = 'toc-number';
+              tocNumber.textContent = numStr + '. ';
+              link.appendChild(tocNumber);
+              link.appendChild(document.createTextNode(rawText));
+              var row = document.createElement('div');
+              row.className = 'toc-entry';
+              row.appendChild(link);
+              item.appendChild(row);
+
+              while (stack.length && stack[stack.length - 1].level >= level) stack.pop();
+              var parent = stack[stack.length - 1];
+              if (parent && !parent.children) {
+                parent.children = document.createElement('ul');
+                parent.children.className = 'toc-list toc-children';
+                parent.children.id = 'toc-children-' + parent.index;
+                parent.button = document.createElement('button');
+                parent.button.type = 'button';
+                parent.button.className = 'toc-branch-toggle';
+                parent.button.setAttribute('aria-controls', parent.children.id);
+                var chevron = document.createElement('i');
+                chevron.className = 'fa fa-chevron-down';
+                chevron.setAttribute('aria-hidden', 'true');
+                parent.button.appendChild(chevron);
+                parent.row.insertBefore(parent.button, parent.row.firstChild);
+                parent.item.appendChild(parent.children);
+                branches.push(parent);
+                setBranchExpanded(parent, true);
+                parent.button.addEventListener('click', function () {
+                  setBranchExpanded(parent, parent.children.hidden);
+                  updateBulkControls();
+                });
+              }
+              (parent ? parent.children : list).appendChild(item);
+              stack.push({ level: level, index: index, item: item, row: row, text: rawText });
+            });
+
+            var expandAll;
+            var collapseAll;
+            function updateBulkControls() {
+              if (!expandAll) return;
+              expandAll.disabled = branches.every(function (branch) { return !branch.children.hidden; });
+              collapseAll.disabled = branches.every(function (branch) { return branch.children.hidden; });
+            }
+
+            if (branches.length) {
+              var controls = document.createElement('div');
+              controls.className = 'toc-controls';
+              controls.setAttribute('role', 'group');
+              controls.setAttribute('aria-label', 'Table of contents branches');
+              expandAll = document.createElement('button');
+              collapseAll = document.createElement('button');
+              [expandAll, collapseAll].forEach(function (button, index) {
+                button.type = 'button';
+                button.textContent = index === 0 ? 'Expand all' : 'Collapse all';
+                button.setAttribute('aria-controls', list.id);
+                button.addEventListener('click', function () {
+                  branches.forEach(function (branch) { setBranchExpanded(branch, index === 0); });
+                  updateBulkControls();
+                });
+                controls.appendChild(button);
+              });
+              tocNav.appendChild(controls);
+              updateBulkControls();
+            }
+            tocNav.appendChild(list);
+            if (tocSect) tocSect.style.display = 'block';
+          } else {
+            if (tocSect) tocSect.style.display = 'none';
+            document.body.classList.add('has-no-toc');
+          }
+        }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                tocNav.querySelectorAll('.toc-entry').forEach(function (row) { row.removeAttribute('data-active-descendant'); });
+                var active = Array.prototype.find.call(tocLinks, function (link) { return link.getAttribute('href') === '#' + entry.target.id; });
+                if (active) {
+                  active.setAttribute('data-active', '');
+                  var ancestor = active.closest('li').parentElement.closest('li');
+                  while (ancestor) {
+                    ancestor.firstElementChild.setAttribute('data-active-descendant', '');
+                    ancestor = ancestor.parentElement.closest('li');
+                  }
+                }
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>

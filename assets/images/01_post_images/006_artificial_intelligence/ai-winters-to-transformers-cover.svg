@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">The thaw of an artificial winter</title>
+  <desc id="desc">A frozen mountain landscape opens into a warm dawn, where a luminous branching intelligence grows above a dark silicon monolith.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2=".65">
+      <stop stop-color="#080e26"/><stop offset=".4" stop-color="#22334d"/><stop offset=".74" stop-color="#755366"/><stop offset="1" stop-color="#edb27f"/>
+    </linearGradient>
+    <radialGradient id="dawn">
+      <stop stop-color="#fff2c7" stop-opacity=".95"/><stop offset=".3" stop-color="#ffb978" stop-opacity=".5"/><stop offset="1" stop-color="#d28291" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="snow" x2=".8" y2="1">
+      <stop stop-color="#c7e6f2"/><stop offset=".45" stop-color="#577b9e"/><stop offset="1" stop-color="#182b48"/>
+    </linearGradient>
+    <linearGradient id="river" x2="0" y2="1">
+      <stop stop-color="#fff0bd"/><stop offset=".4" stop-color="#dc9789"/><stop offset="1" stop-color="#729ec0"/>
+    </linearGradient>
+    <linearGradient id="stone" x2="1" y2=".4">
+      <stop stop-color="#0a142b"/><stop offset=".6" stop-color="#253148"/><stop offset="1" stop-color="#7f6171"/>
+    </linearGradient>
+    <linearGradient id="branches" x2=".7" y2="1">
+      <stop stop-color="#c6edf1"/><stop offset=".6" stop-color="#ffe2ad"/><stop offset="1" stop-color="#df957f"/>
+    </linearGradient>
+    <filter id="bloom" x="-.5" y="-.5" width="2" height="2">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    <filter id="mist"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="3" seed="12"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".08"/></feComponentTransfer>
+      <feBlend in="SourceGraphic" mode="soft-light"/>
+    </filter>
+    <g id="tree" fill="none" stroke="url(#branches)" stroke-linecap="round">
+      <path d="M822 415C820 363 812 329 819 286C825 252 839 230 830 191" stroke-width="5"/>
+      <path d="M819 315C781 293 760 263 747 228L722 190M809 300L778 232L786 191M764 264L720 247L690 213M745 226L747 183L727 156M818 278L861 248L894 202L934 182M859 250L851 202L862 169M886 215L922 225L960 213M831 210L807 169L811 133M834 249L875 289L923 290L961 268M782 283L736 302L703 285M811 346L858 323L908 336L949 318" stroke-width="2.5"/>
+      <path d="M720 247L693 256M778 232L754 208M747 183L770 164M807 169L780 151M811 133L837 114M851 202L827 178M862 169L892 149M894 202L897 174M934 182L953 158M922 225L947 244M875 289L885 263M923 290L938 309M736 302L718 326M858 323L877 303M908 336L920 361M819 286L790 308" stroke-width="1.3"/>
+    </g>
+    <g id="sparks" fill="#fff0c4">
+      <circle cx="722" cy="190" r="3"/><circle cx="690" cy="213" r="2"/>
+      <circle cx="786" cy="191" r="3"/><circle cx="727" cy="156" r="2.5"/>
+      <circle cx="811" cy="133" r="3"/><circle cx="837" cy="114" r="2"/>
+      <circle cx="862" cy="169" r="3"/><circle cx="892" cy="149" r="2"/>
+      <circle cx="934" cy="182" r="3"/><circle cx="953" cy="158" r="2"/>
+      <circle cx="960" cy="213" r="3"/><circle cx="947" cy="244" r="2"/>
+      <circle cx="961" cy="268" r="3"/><circle cx="949" cy="318" r="3"/>
+      <circle cx="920" cy="361" r="2"/><circle cx="703" cy="285" r="2.5"/>
+      <circle cx="718" cy="326" r="2"/><circle cx="780" cy="151" r="2"/>
+      <circle cx="693" cy="256" r="2"/><circle cx="770" cy="164" r="2"/>
+    </g>
+  </defs>
+  <g filter="url(#grain)">
+    <rect width="1200" height="630" fill="url(#sky)"/>
+    <ellipse cx="915" cy="315" rx="430" ry="340" fill="url(#dawn)"/>
+    <circle cx="995" cy="296" r="76" fill="#ffdfb0" opacity=".7"/>
+    <g fill="#bfd4e9">
+      <circle cx="87" cy="87" r="1"/><circle cx="164" cy="136" r="1.4"/>
+      <circle cx="312" cy="52" r="1"/><circle cx="420" cy="125" r="1.2"/>
+      <circle cx="513" cy="68" r="1"/><circle cx="606" cy="125" r="1"/>
+      <circle cx="53" cy="208" r="1.5"/><circle cx="241" cy="194" r="1"/>
+      <circle cx="358" cy="159" r="1.2"/><circle cx="691" cy="72" r="1"/>
+    </g>
+    <path d="M0 349L91 295L150 320L229 220L302 309L365 267L455 336L525 292L612 352L724 314L806 355L893 332L1008 364L1110 313L1200 347V630H0Z" fill="#3f4865"/>
+    <path d="M0 393L78 342L161 368L233 258L316 375L388 321L488 404L567 350L660 412L760 366L853 410L933 385L1030 425L1120 362L1200 401V630H0Z" fill="#243952"/>
+    <path d="M0 385L107 308L158 334L230 214L298 313L343 327L405 396L319 365L246 278L211 337L167 362L105 349L0 421Z" fill="url(#snow)"/>
+    <path d="M230 214L246 278L298 313L269 269Z" fill="#e5eff3"/>
+    <path d="M0 459C142 417 248 436 375 458S600 439 731 439S984 468 1200 414V630H0Z" fill="#20364b"/>
+    <g fill="none" stroke="#b5cad5" opacity=".2" filter="url(#mist)">
+      <path d="M-40 422Q180 380 413 437T820 427" stroke-width="17"/>
+      <path d="M335 464Q615 408 1000 452T1250 433" stroke-width="13"/>
+    </g>
+    <path d="M920 433C822 455 706 458 739 491C762 516 615 521 579 547C540 575 598 592 424 630H655C781 597 685 570 764 553C878 527 839 512 818 495C787 473 923 457 941 433Z" fill="url(#river)" opacity=".75"/>
+    <path d="M0 519C152 473 328 495 463 528L564 558L424 630H0Z" fill="#101f36"/>
+    <path d="M0 518Q235 473 463 528L329 511L197 523L85 539Z" fill="#a0b9ca" opacity=".5"/>
+    <path d="M1200 477C1052 460 951 491 903 525L829 571L732 630H1200Z" fill="#142237"/>
+    <path d="M783 447L786 366L843 351L871 367L868 449L813 467Z" fill="url(#stone)" stroke="#bc8990" stroke-opacity=".35"/>
+    <path d="M786 366L814 383L871 367M814 383L813 467" fill="none" stroke="#c7a1a1" stroke-opacity=".4"/>
+    <path d="M802 390V433M826 394V444M839 387V437M852 380V430" stroke="#ddb794" opacity=".25"/>
+    <use href="#tree" filter="url(#bloom)" opacity=".8"/>
+    <use href="#tree"/>
+    <use href="#sparks" filter="url(#bloom)"/>
+    <use href="#sparks"/>
+    <g fill="#d9e9ef" opacity=".5">
+      <circle cx="52" cy="312" r="2"/><circle cx="130" cy="236" r="2"/>
+      <circle cx="294" cy="375" r="1.5"/><circle cx="361" cy="251" r="1.4"/>
+      <circle cx="197" cy="419" r="2"/><circle cx="439" cy="310" r="1"/>
+      <circle cx="86" cy="477" r="2.4"/><circle cx="315" cy="493" r="1.6"/>
+      <circle cx="403" cy="434" r="2"/><circle cx="556" cy="377" r="1"/>
+      <circle cx="494" cy="218" r="1.6"/><circle cx="179" cy="81" r="1.5"/>
+    </g>
+    <path d="M0 604Q195 572 328 603T550 630H0Z" fill="#0b162b"/>
+  </g>
+</svg>

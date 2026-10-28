@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1120" viewBox="0 0 1000 1120" role="img" aria-labelledby="title description">
+  <title id="title">JSON, Protobuf, FIX TagValue, and SBE compared</title>
+  <desc id="description">An illustrative order has identifier 7, quantity 100, and price 123.45. JSON sends field names. Protobuf sends binary field keys and values, decoded with a schema. FIX TagValue uses a trading dictionary and numbered textual fields. SBE uses a template header and binary values at schema-defined positions in its fixed block. These are teaching examples, not complete broker messages or a message-size benchmark.</desc>
+  <rect width="1000" height="1120" rx="8" fill="#242424"/>
+  <g font-family="system-ui, sans-serif" fill="#e8e8e8">
+    <text x="36" y="48" font-size="28" font-weight="600">One small order sketch, four representations</text>
+    <text x="36" y="84" fill="#bcbcbc" font-size="21">ID 7, quantity 100, price $123.45; toy tick size = $0.01</text>
+    <g fill="#2e2e2e">
+      <rect x="28" y="112" width="944" height="202" rx="10"/>
+      <rect x="28" y="332" width="944" height="202" rx="10"/>
+      <rect x="28" y="552" width="944" height="202" rx="10"/>
+      <rect x="28" y="772" width="944" height="244" rx="10"/>
+    </g>
+    <g font-size="25" font-weight="600" fill="#d4af37">
+      <text x="52" y="153">JSON: names and values in readable text</text>
+      <text x="52" y="373">Protobuf: numbered fields and binary values</text>
+      <text x="52" y="593">FIX TagValue: trading tags and textual values</text>
+      <text x="52" y="813">SBE: a template and a predictable binary layout</text>
+    </g>
+    <g font-family="monospace" font-size="24">
+      <text x="52" y="207">{"id":7,"qty":100,"priceTicks":12345}</text>
+      <text x="52" y="427">08 07 10 64 18 B9 60</text>
+      <text x="52" y="647">35=D | 11=7 | 38=100 | 44=123.45</text>
+    </g>
+    <g font-size="21">
+      <text x="52" y="255">The receiver reads field names and parses their values.</text>
+      <text x="52" y="288" fill="#bcbcbc" font-size="19">Easy to inspect; the API still defines types, units, and required fields.</text>
+      <text x="52" y="475">The schema maps field numbers 1, 2, 3 to ID, quantity, and price ticks.</text>
+      <text x="52" y="508" fill="#bcbcbc" font-size="19">Seven bytes here, excluding framing and other request data; not self-describing.</text>
+      <text x="52" y="695">35=D: new order; 11: client ID; 38: quantity; 44: price.</text>
+      <text x="52" y="728" fill="#bcbcbc" font-size="19">Incomplete fragment. Pipes stand for SOH delimiters; a real order needs more fields.</text>
+    </g>
+    <g fill="#393222" stroke="#d4af37" stroke-width="2">
+      <rect x="52" y="838" width="280" height="72" rx="5"/>
+      <rect x="352" y="838" width="170" height="72" rx="5"/>
+      <rect x="522" y="838" width="170" height="72"/>
+      <rect x="692" y="838" width="256" height="72" rx="5"/>
+    </g>
+    <g text-anchor="middle" font-size="20">
+      <text x="192" y="866">Template / schema header</text>
+      <text x="192" y="894" fill="#bcbcbc" font-size="18">Describes how to decode</text>
+      <text x="437" y="866">ID: 7</text>
+      <text x="437" y="894" fill="#bcbcbc" font-size="18">uint32</text>
+      <text x="607" y="866">Qty: 100</text>
+      <text x="607" y="894" fill="#bcbcbc" font-size="18">uint32</text>
+      <text x="820" y="866">Price ticks: 12345</text>
+      <text x="820" y="894" fill="#bcbcbc" font-size="18">int64</text>
+    </g>
+    <text x="52" y="952" font-size="21">Toy root-block offsets: ID at 0, quantity at 4, price ticks at 8.</text>
+    <text x="52" y="986" fill="#bcbcbc" font-size="19">16-byte fixed block plus header; groups and variable data need more structure.</text>
+    <g text-anchor="middle" fill="#bcbcbc" font-size="19">
+      <text x="500" y="1056">Conceptual illustrations, not IBKR schemas or production-ready orders.</text>
+      <text x="500" y="1088">Panels are not drawn to byte scale. Binary does not always mean fewer bytes.</text>
+    </g>
+  </g>
+</svg>
