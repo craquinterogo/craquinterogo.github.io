@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="530" viewBox="0 0 900 530" role="img" aria-labelledby="title desc">
+  <title id="title">A language model is one part of a larger ecosystem</title>
+  <desc id="desc">Context enters a trained language model, which generates text or a tool request. Other AI methods and the software, data, computing infrastructure, and controls around deployed systems are shown separately. The categories are examples, not disjoint branches of a taxonomy.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b8ad88"/></marker>
+  </defs>
+  <rect width="900" height="530" rx="16" fill="#1a1a1a"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#e8e8e8">
+    <text x="40" y="42" font-size="24" font-weight="700" fill="#d4af37">A powerful component, not the whole system</text>
+    <text x="40" y="70" font-size="16" fill="#b7b3a8">The language model at inference time</text>
+    <rect x="40" y="125" width="220" height="135" rx="12" fill="#242424" stroke="#b8ad88" stroke-width="2"/>
+    <rect x="330" y="125" width="240" height="135" rx="12" fill="#332e20" stroke="#d4af37" stroke-width="2"/>
+    <rect x="640" y="125" width="220" height="135" rx="12" fill="#242424" stroke="#b8ad88" stroke-width="2"/>
+    <g text-anchor="middle">
+      <text x="150" y="162" font-size="21" font-weight="700">Supplied context</text>
+      <text x="150" y="194" font-size="17">Instructions and request</text>
+      <text x="150" y="222" font-size="17">Selected data and results</text>
+      <text x="450" y="162" font-size="21" font-weight="700">Language model</text>
+      <text x="450" y="194" font-size="17">Learned weights</text>
+      <text x="450" y="222" font-size="17">Generate output tokens</text>
+      <text x="750" y="162" font-size="21" font-weight="700">Model output</text>
+      <text x="750" y="194" font-size="17">An answer or draft</text>
+      <text x="750" y="222" font-size="17">Or a request to use a tool</text>
+    </g>
+    <g fill="none" stroke="#b8ad88" stroke-width="2.5" marker-end="url(#arrow)">
+      <path d="M262 192H318"/>
+      <path d="M572 192H628"/>
+    </g>
+    <text x="450" y="299" text-anchor="middle" font-size="18" font-weight="700">Generating a request does not execute an action.</text>
+    <rect x="40" y="335" width="820" height="72" rx="12" fill="#25332f" stroke="#92c4b5" stroke-width="2"/>
+    <rect x="40" y="430" width="820" height="72" rx="12" fill="#26303a" stroke="#92b4d6" stroke-width="2"/>
+    <g text-anchor="middle">
+      <text x="450" y="364" font-size="20" font-weight="700">The wider field of AI</text>
+      <text x="450" y="390" font-size="17">Also includes search, planning, perception and other learning methods</text>
+      <text x="450" y="459" font-size="20" font-weight="700">What deployment also needs</text>
+      <text x="450" y="485" font-size="17">Data, compute, applications, integrations and operational controls</text>
+    </g>
+  </g>
+</svg>

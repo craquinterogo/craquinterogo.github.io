@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+  <title id="title">Diversification can weaken in stress</title>
+  <desc id="desc">Illustrative returns on two assets differ in calm conditions but fall together in a stress window. A few joint losses do not establish statistical tail dependence.</desc>
+  <rect width="900" height="420" rx="16" fill="#1a1a1a"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#e8e8e8">
+    <text x="40" y="42" font-size="24" font-weight="700" fill="#d4af37">3. Different assets can share a downside</text>
+    <text x="40" y="70" font-size="16" fill="#b7b3a8">Illustrative return paths, not a correlation estimate</text>
+    <rect x="560" y="115" width="260" height="210" rx="10" fill="#362628"/>
+    <text x="280" y="109" text-anchor="middle" font-size="18" font-weight="700">Calm conditions</text>
+    <text x="690" y="109" text-anchor="middle" font-size="18" font-weight="700">Stress window</text>
+    <path d="M90 125V325H830" fill="none" stroke="#b8ad88" stroke-width="2"/>
+    <path d="M90 190H820" stroke="#817d72" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <text x="69" y="196" font-size="16">0</text>
+    <text x="90" y="98" font-size="16">Return</text>
+    <text x="94" y="148" font-size="14">+</text>
+    <text x="95" y="303" font-size="16">-</text>
+    <path d="M115 183L155 153L195 200L235 163L275 203L315 177L355 155L395 195L435 170L475 200L515 177L555 192L595 231L635 271L675 291L715 260L755 295L795 275" fill="none" stroke="#92b4d6" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M115 211L155 204L195 165L235 202L275 174L315 212L355 190L395 162L435 206L475 174L515 203L555 195L595 219L635 248L675 263L715 235L755 273L795 250" fill="none" stroke="#efaaa4" stroke-width="4" stroke-dasharray="10 6" stroke-linejoin="round"/>
+    <text x="440" y="352" text-anchor="middle" font-size="16">Time (schematic)</text>
+    <path d="M130 384H180" stroke="#92b4d6" stroke-width="4"/>
+    <text x="192" y="390" font-size="17">Asset A</text>
+    <path d="M370 384H420" stroke="#efaaa4" stroke-width="4" stroke-dasharray="10 6"/>
+    <text x="432" y="390" font-size="17">Asset B</text>
+    <text x="645" y="390" font-size="16">Joint losses can hurt both.</text>
+  </g>
+</svg>

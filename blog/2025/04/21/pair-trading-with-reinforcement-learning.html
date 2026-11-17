@@ -29,11 +29,11 @@
 	<meta name="twitter:description" content="This is a brief reference to one of my papers related to a study case of pair trading strategy using RL models with continuous action space." />
 	
 	
-	<meta property="og:image" content="https://craquinterogo.github.io/assets/images/02_algo_trading/001_rl_papers/rl_image.jpeg" />
-	<meta property="og:image:alt" content="Pair trading strategy using reinforcement learning algortihms (PPO and A2C)" />
+	<meta property="og:image" content="https://craquinterogo.github.io/assets/images/02_algo_trading/001_rl_papers/pair-trading-rl-cover.png" />
+	<meta property="og:image:alt" content="Gold and teal market-price paths diverge and converge around a small network of connected nodes, illustrating pair trading and a learning agent." />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:image" content="https://craquinterogo.github.io/assets/images/02_algo_trading/001_rl_papers/rl_image.jpeg" />
-	<meta name="twitter:image:alt" content="Pair trading strategy using reinforcement learning algortihms (PPO and A2C)" />
+	<meta name="twitter:image" content="https://craquinterogo.github.io/assets/images/02_algo_trading/001_rl_papers/pair-trading-rl-cover.png" />
+	<meta name="twitter:image:alt" content="Gold and teal market-price paths diverge and converge around a small network of connected nodes, illustrating pair trading and a learning agent." />
 	
 	
 	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -136,6 +136,14 @@
     <div id="reading-progress" aria-hidden="true"></div>
 
     <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+      
+    
+      
+        
+      
     
       
         
@@ -361,6 +369,14 @@
           
             
               
+            
+          
+            
+              
+            
+          
+            
+              
 
                 <!-- Post header -->
                 <header class="post-header-block">
@@ -410,7 +426,7 @@
                 
                   <img
                     class="post-hero"
-                    src="https://craquinterogo.github.io/assets/images/02_algo_trading/001_rl_papers/rl_image.jpeg"
+                    src="https://craquinterogo.github.io/assets/images/02_algo_trading/001_rl_papers/pair-trading-rl-cover.png"
                     alt="Pair trading strategy using reinforcement learning algortihms (PPO and A2C)"
                     loading="eager"
                   />
@@ -419,84 +435,130 @@
                 <!-- Post body -->
                 <article class="post-body" id="post-body-content" aria-label="Article content">
                   <h1 id="deep-reinforcement-learning-for-pair-trading">Deep Reinforcement Learning for Pair Trading</h1>
-<p>This is a brief summary of a recently achieved personal goal: conducting a comprehensive study of reinforcement learning (RL) strategies using real-world parameters and a rigorous evaluation process. Specifically, the research investigates RL algorithms—Proximal Policy Optimization (PPO) and Advantage Actor-Critic (A2C)—applied to pair trading strategies. The findings are detailed in two articles <a class="citation" href="#quintero2024reinforcement">(Quintero et al., 2024; Quintero et al., 2025)</a>.</p>
+<p>Can a learning algorithm improve on a trading rule that is already simple, interpretable, and grounded in a statistical relationship? That question motivated a personal research project on <strong>pair trading</strong> using reinforcement learning (RL). The goal was not just to train an agent that produced an attractive return curve. It was to test whether that agent could offer a meaningful improvement over a classical strategy once trading costs and variability in its decisions were taken into account.</p>
 
-<p>A suggestion for the reader to learn about pair trading and/or statistical arbitrage, is the book titled <strong>The art and sci-ence of statistical arbitrage</strong> written by Isichenko. It contains the fundamentals of the strategy and some statistical methods to manage it. As said before, my approach was different in the way I followed partially such principles, still keeping in mind the fundamentals.</p>
+<p>Pair trading focuses on the relationship between two assets rather than predicting the market’s overall direction. A typical <strong>mean-reversion</strong> strategy tracks a spread, a measure of their relative prices, and takes offsetting long and short positions when that spread moves unusually far from its reference level. The trade seeks to profit if the relationship moves back toward that level. The important qualification is that convergence is an expectation, not a guarantee.</p>
+
+<p>Reinforcement learning approaches the decision differently. An <strong>agent</strong> observes information about the market and its portfolio, chooses an action, and receives a <strong>reward</strong> that guides learning during training. A <strong>policy</strong> is the rule the agent learns for choosing those actions. With deep reinforcement learning (DRL), neural networks represent components of that decision-making process. Our research primarily examines <strong>Proximal Policy Optimization (PPO)</strong> and <strong>Advantage Actor-Critic (A2C)</strong>, with the findings reported in two articles <a class="citation" href="#quintero2024reinforcement">(Quintero et al., 2024; Quintero et al., 2025)</a>.</p>
+
+<p>For readers who want a broader introduction to pair trading and statistical arbitrage, Isichenko’s <strong>The Art and Science of Statistical Arbitrage</strong> provides useful foundations and statistical methods for managing these strategies. Our experiments explore a different way of making trading decisions while retaining the underlying idea of trading a relative-price relationship.</p>
 
 <h2 id="from-experimental-frameworks-to-comparative-strategy-analysis">From Experimental Frameworks to Comparative Strategy Analysis</h2>
-<p>The project was performed in three stages.</p>
-<ul>
-  <li>
-    <p>The <strong>first</strong> stage corresponds to my master thesis in Quantitative Finance (QF), where I do encompass the strategy by using three learning environments. The two learning environments are aimed to adopt a strategy different from pair trading strategy with discrete action spaces. The third one respecting the rules of pair trading, but in continuous time. Combination of strategies and action spaces were introduced as an excercise of confirmation since RL models have gained a lot of attention in algorithmic trading. As results, a blended output is noticed where the main takeaway that marks my analysis <em>is the fact that not all RL policies are deterministic, therefore model’s output is exposed to variance when extrapolated to stochastic policies</em>. In effect, this first experiment revealed that given that PPO and A2C use stochastic policy, the analysis under only one path is not enought to fully rely on. It is required to conduct the analysis given a number of simulations, at Monte Carlo simulation style.</p>
-  </li>
-  <li>
-    <p>A <strong>second</strong> stage consists in a conference paper as result of proceedings of 11th Workshop on Engineering Applications, WEA 2024, Barranquilla, Colombia, where co-authors such Diego Leon, Javier Sandoval and German Hernandes presented this work. This conference paper helped us to identify some drawbacks in the first analysis. The main one, and I didn’t mention in foregoing paragraph was the arbitrary inclusion of technical indicators, given my experience in traditional trading. It was an assumption that we expected to see an effect from. Our agnostic analysis of their influence suggested they could apport some support to the output though, when <strong>phase 2</strong> was performed we realized the technical indicators do not provide information to the model for making decisions, as we considered in the experiment. <a class="citation" href="#quintero2024reinforcement">(Quintero et al., 2024)</a>.</p>
-  </li>
-  <li>
-    <p>The <strong>third</strong> stage is summarized in a <em>study case</em> article where taking into account the output in stage #2, the signal was redefined together tachnical analysis indicators removal. Additionally, fine tunning is performed using <a href="https://docs.ray.io/en/latest/index.html" target="_blank" rel="noopener">Ray framework</a> for model parameters optimization. The output of this new approach suggests a slight improvement mainly attributed to the signal used to allow the RL agents identify opportunies to get in and get out a position in a pair trading strategy. <a class="citation" href="#quintero2025deep">(Quintero et al., 2025)</a>.</p>
-  </li>
-</ul>
+<p>The project developed through three stages, leading to the two publications discussed below. Each stage changed not only the implementation, but also what we understood a convincing evaluation should look like.</p>
 
-<p>I have to acknowledge that the work done by contributors of <a href="https://finrl.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">FinRL</a> boosted our analysis due to they provide a framework to execute this sort of analysis. The benefit of being open-source is that we dive into the bowels of the library. From a technical perspective I can highlight the learning on different functions that describe RL agents and how small changes may introduce significan impact among them when learning; furthermore, the interaction with <code class="language-plaintext highlighter-rouge">gym</code> library from OpenAI, among others. They have a good amount of agents, that I encorage the reader to read about in <a href="https://finrl.readthedocs.io/en/latest/start/three_layer.html" target="_blank" rel="noopener">here</a>.</p>
+<p>The <strong>first stage</strong>, an initial experiment in Quantitative Finance, explored three learning environments. Two used discrete action spaces and trading rules that differed from strict pair trading. The third followed pair trading rules with a continuous action space. Here, <em>continuous</em> refers to the range of available actions, such as position sizes, rather than to trading continuously in time. Comparing these settings helped us examine how much the result depended on the way the trading problem was presented to the agent.</p>
+
+<p>One lesson stood out: <strong>a single trading path is not enough to judge a stochastic policy</strong>. PPO and A2C can sample actions from learned probability distributions, so repeated evaluations can produce different decisions even on the same market history. Repeated simulations, in the spirit of Monte Carlo evaluation, help reveal that variability. They do not create new market histories or replace out-of-sample testing. Even choosing deterministic actions at evaluation time does not remove uncertainty from training or from future market conditions.</p>
+
+<p>The <strong>second stage</strong> became a conference paper for the 11th Workshop on Engineering Applications, WEA 2024, in Barranquilla, Colombia, with co-authors Diego Leon, Javier Sandoval, and German Hernandez. It also exposed a weakness in our initial assumptions. Drawing on my experience in traditional trading, we had included technical indicators expecting them to help the agent. The later comparison did not support the contribution we had expected in this experimental setting. Familiarity with an indicator was not, by itself, evidence that it added useful information <a class="citation" href="#quintero2024reinforcement">(Quintero et al., 2024)</a>.</p>
+
+<p>The <strong>third stage</strong>, published as a comparative case study, responded to those findings. We removed the technical indicators, redefined the trading signal, and used the <a href="https://docs.ray.io/en/latest/index.html" target="_blank" rel="noopener">Ray framework</a> to tune model hyperparameters, the settings that govern training. The revised approach suggested a modest improvement, which we associated mainly with a signal that helped agents identify opportunities to enter and exit pair trades. Because several parts of the setup changed, this should not be read as proof that the signal alone caused the improvement <a class="citation" href="#quintero2025deep">(Quintero et al., 2025)</a>.</p>
+
+<p>The open-source <a href="https://finrl.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">FinRL framework</a> made this work considerably more accessible. It allowed us to inspect the implementation rather than treat the agent as a black box, including its interaction with OpenAI’s <code class="language-plaintext highlighter-rouge">gym</code> environment interface. Small changes in how observations, actions, and rewards are connected can materially affect learning. FinRL’s <a href="https://finrl.readthedocs.io/en/latest/start/three_layer.html" target="_blank" rel="noopener">three-layer architecture documentation</a> is a useful starting point for readers who want to explore that structure.</p>
 
 <h2 id="data">Data</h2>
-<p>The selected instrument for these experiments were stocks. More specifically, a subset of pairs that we concluded are candidates after a rigurious fildering all combinations using S&amp;P 500 at 17th October, 2022. We run statistical tests and a measure to determine candidates. More details in <em>phase 1</em> document. This task took several hours in my laptop, I have to say. But it was worth</p>
+<p>Before an agent could learn to trade, we had to decide which relationships were worth studying. We screened stock-pair combinations using the S&amp;P 500 constituents as of October 17, 2022, applying statistical tests and a selection measure to identify candidates. The screening took several hours on my laptop, but it gave the experiments a defined starting universe rather than an arbitrary collection of pairs.</p>
 
-<p>Now, the project is summarized in two research studies exploring the use of <strong>Deep Reinforcement Learning (DRL)</strong> for <strong>pair trading</strong> — evolving from an experimental prototype to a comparative evaluation using well-known DRL algorithms.</p>
+<p>The studies use a subset of five stock pairs, with the dataset covering 2018–2023. The first publication provides the selection details. Keeping the same universe in the second study made the comparison more informative, although pair selection remains part of the strategy and must be considered when interpreting historical results.</p>
+
+<p>The two publications below trace the move from an experimental DRL framework to a more focused comparison with classical mean reversion.</p>
 
 <hr />
 <h1 id="conference-paper-and-paper">Conference paper and paper</h1>
 
 <h2 id="-phase-1-experimental-drl-framework-for-pair-trading">📘 Phase 1: Experimental DRL Framework for Pair Trading</h2>
 
-<ul>
-  <li><strong>📄 Title:</strong> Reinforcement Learning Model Applied in a Pair Trading Strategy</li>
-  <li><strong>📚 Source:</strong> Springer WEA, 2024</li>
-  <li><strong>🔗 DOI:</strong> <a href="https://link.springer.com/chapter/10.1007/978-3-031-74595-9_3" target="_blank" rel="noopener">Link to Chapter</a></li>
-</ul>
+<p>The first publication, <strong>Reinforcement Learning Model Applied in a Pair Trading Strategy</strong>, appeared in the Springer WEA 2024 proceedings. The <a href="https://link.springer.com/chapter/10.1007/978-3-031-74595-9_3" target="_blank" rel="noopener">full chapter</a> describes the experimental framework and its comparison with a classical strategy.</p>
 
 <h3 id="-highlights">🧪 Highlights</h3>
-<ul>
-  <li>Developed three <strong>customized RL environments</strong> simulating a pair trading as a single-agent control task over a subset of 5 stock pairs from S&amp;P 500.</li>
-  <li><strong>Continuous action space:</strong> agent decides both position direction and size.</li>
-  <li><strong>Reward function:</strong> Portfolio value, discounting trading costs.</li>
-  <li>The action space includes <strong>technical indicators</strong>.</li>
-</ul>
+<p>The framework explored three customized RL environments over the five selected stock pairs, treating trading as a <strong>single-agent control task</strong>. In other words, one decision-maker controlled the trading actions rather than delegating the two sides of the pair to separate agents.</p>
+
+<p>In the continuous-action formulation, the agent could choose both <strong>position direction and size</strong>, rather than select only from a small menu of fixed trades. Technical indicators were included in the initial setup as information for decision-making. These inputs should be distinguished from the action space itself, which describes what the agent is allowed to do.</p>
+
+<p>The <strong>reward function</strong> used portfolio value with trading costs deducted. This matters because a strategy can appear attractive before costs while losing its advantage through frequent trading. The learning objective therefore needed to reflect the cost of acting, not only the price movement that followed.</p>
+
+<h3 id="manual-optimization">Manual optimization</h3>
+
+<p>How long should an agent be allowed to learn? More training sounds like an obvious improvement, but in these experiments it could also mean giving an unstable learning process more time to deteriorate. Before the later automated tuning work, I addressed that question manually by inspecting training diagnostics and choosing a practical training budget.</p>
+
+<p>The four figures below show part of that manual process in the earlier experiment closely connected to the WEA 2024 chapter. They provide additional context on training rather than additional performance results from the published chapter. The original curves, axes, and highlighted regions are retained, with colors adapted to this site’s dark theme.</p>
+
+<p>The experiment used a <strong>heuristic approach</strong> to hyperparameter selection, guided by the behavior of training metrics rather than an exhaustive search. Agents were retrained in rolling windows with a 63-trading-day rebalance interval, approximately three months. Here, the <strong>training budget</strong> is the number of environment steps used to train an agent, not the number of market days in an evaluation period. Replaying a historical window during training can generate many more learning steps than that window contains observations.</p>
+
+<h4 id="a2c-looking-for-instability-in-the-actor-and-critic">A2C: looking for instability in the actor and critic</h4>
+
+<p>For A2C, I examined <strong>policy loss</strong> and <strong>value loss</strong> together. Policy loss is the objective used to update the <strong>actor</strong>, the network that determines the agent’s actions. Its sign and magnitude are not measures of trading profit, and a lower number is not automatically a better strategy. What mattered here was the change in behavior: increasingly large, erratic fluctuations were a warning that continuing training deserved scrutiny.</p>
+
+<figure>
+  <a href="/assets/images/02_algo_trading/001_rl_papers/manual-optimization-a2c-policy-loss.png" aria-label="Open Figure 1, A2C policy loss, at full size">
+    <img src="/assets/images/02_algo_trading/001_rl_papers/manual-optimization-a2c-policy-loss.png" alt="A2C policy loss for A–AVGO fluctuates around zero, with much larger oscillations later in training. The original rounded highlight marks the early training region considered during manual selection." width="1028" height="445" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 1.</strong> A2C policy loss for A–AVGO in the beta-balanced environment, which links position sizing across the two assets. The highlighted early region was considered alongside value loss when choosing a training budget. Horizontal coordinates are training steps, not trading dates.</figcaption>
+</figure>
+
+<p><strong>Value loss</strong> measures the discrepancy between the <strong>critic’s</strong> estimate of expected cumulative reward and the return targets used in training. It provides another view of the same learning process. A small value loss can be encouraging, but a sudden collapse toward zero does not, by itself, prove that the agent has learned a useful trading policy.</p>
+
+<figure>
+  <a href="/assets/images/02_algo_trading/001_rl_papers/manual-optimization-a2c-value-loss.png" aria-label="Open Figure 2, A2C value loss, at full size">
+    <img src="/assets/images/02_algo_trading/001_rl_papers/manual-optimization-a2c-value-loss.png" alt="A2C value loss for A–AVGO has large early spikes inside the original rounded highlight, falls close to zero, and shows intermittent spikes later in training." width="1029" height="443" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 2.</strong> A2C value loss for the same pair and environment. The original highlight identifies the early region inspected manually. Neither a near-zero loss nor an isolated spike is sufficient to judge the trading strategy.</figcaption>
+</figure>
+
+<p>Read together, these plots motivated keeping the A–AVGO A2C training budget at or below approximately <strong>480,000 steps</strong> in this experiment. The final configuration used <strong>450,000 training steps for both A2C and PPO</strong>. These were practical choices for that setup, not universal stopping thresholds. In particular, value loss need not rise before learning succeeds or fall to zero when it fails. Its interpretation depends on the reward scale, the targets, and the behavior of the policy.</p>
+
+<h4 id="ppo-balancing-policy-changes-against-value-prediction">PPO: balancing policy changes against value prediction</h4>
+
+<p>For PPO, the manual inspection focused on <strong>approximate Kullback–Leibler (KL) divergence</strong> and <strong>explained variance</strong>. Approximate KL divergence estimates how much the action distribution changes between the previous policy and an updated policy. Larger values indicate larger policy changes. In this experiment, a marked increase was treated as a reason to question whether additional training was still producing controlled improvements.</p>
+
+<figure>
+  <a href="/assets/images/02_algo_trading/001_rl_papers/manual-optimization-ppo-approx-kl.png" aria-label="Open Figure 3, PPO approximate KL divergence, at full size">
+    <img src="/assets/images/02_algo_trading/001_rl_papers/manual-optimization-ppo-approx-kl.png" alt="PPO approximate KL divergence for AAP–SO stays relatively low early in training, rises around 300,000 steps, and becomes larger and noisier as training continues toward 1.5 million steps." width="1071" height="379" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 3.</strong> PPO approximate KL divergence for AAP–SO in the beta-balanced environment. The rise shows larger changes between policy updates. It is a training diagnostic, not direct evidence of random decisions or worsening investment returns.</figcaption>
+</figure>
+
+<p>Explained variance asks a complementary question: <strong>how well does the critic account for variation in its return targets?</strong> For targets with nonzero variance, it is commonly expressed as $1-\operatorname{Var}(G-\hat{V})/\operatorname{Var}(G)$, where $G$ is the training return target and $\hat{V}$ is the critic’s prediction. A value near one indicates small residual variance relative to target variance. A value near zero indicates little variance explained, while a negative value means the residual variance exceeds the variance of the targets themselves. These are learning targets based on rewards, not a measure of how much stock-return variation the strategy predicts.</p>
+
+<figure>
+  <a href="/assets/images/02_algo_trading/001_rl_papers/manual-optimization-ppo-explained-variance.png" aria-label="Open Figure 4, PPO explained variance, at full size">
+    <img src="/assets/images/02_algo_trading/001_rl_papers/manual-optimization-ppo-explained-variance.png" alt="PPO explained variance for AAP–SO remains near zero early on, rises sharply after roughly 250,000 steps, and then levels off above 0.8 with occasional downward dips." width="1034" height="343" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 4.</strong> PPO explained variance for the same pair and environment. The critic's fit improves substantially before later gains become smaller. A strong fit to training targets does not establish profitable out-of-sample trading.</figcaption>
+</figure>
+
+<p>Together, the PPO plots show why “train longer” was not a sufficient rule. The critic could explain much more of its target variation while policy updates were also becoming larger. The manual decision was to weigh those signals together rather than maximize one metric in isolation.</p>
+
+<p>The broader lesson is that <strong>training diagnostics help investigate learning, but they do not replace strategy evaluation</strong>. The experiment also compared trading outcomes using 1,000 simulated action trajectories for each evaluated agent, reflecting the variability of stochastic policies. Those repetitions sampled decisions on historical data, not 1,000 independent market histories. Manual inspection helped narrow the training choices, but claims about a trading advantage still require cost-aware evaluation on data not used to select those choices.</p>
 
 <h3 id="-results">✅ Results</h3>
-<ul>
-  <li>PPO showed the most consistent performance in Sharpe ratio and cumulative return.</li>
-  <li>A2C and DDPG had higher variance—highlighting sensitivity to hyperparameters and reward design.</li>
-  <li>RL models do not outperform classical methods in pair trading strategies, consistently.</li>
-</ul>
+<p>PPO produced the most consistent performance among the tested RL models in terms of <strong>Sharpe ratio</strong>, a measure of excess return relative to return variability, and <strong>cumulative return</strong>, the compounded change in value over the evaluation period. A2C and <strong>Deep Deterministic Policy Gradient (DDPG)</strong> showed greater variability, highlighting how sensitive the outcome could be to hyperparameters and reward design.</p>
+
+<p>The central result was more cautious than a compelling backtest might suggest: <strong>the RL models did not consistently outperform the classical pair trading method</strong>. Learning a policy was possible, but that alone did not establish an advantage over a simpler rule.</p>
 
 <hr />
 
 <h2 id="-phase-2-comparative-study-of-a2c-and-ppo-but-with-new-signal">🚀 Phase 2: Comparative Study of A2C and PPO, but with new signal</h2>
 
-<p><strong>📄 Title:</strong> Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO
-<strong>📚 Source:</strong> SN Computer Science, 2025<br />
-<strong>🔗 DOI:</strong> <a href="https://link.springer.com/epdf/10.1007/s42979-025-03854-0" target="_blank" rel="noopener">Link to Article</a></p>
+<p>The follow-up article, <strong>Deep Reinforcement Learning in Continuous Action Spaces for Pair Trading: A Comparative Study of A2C and PPO</strong>, appeared in <em>SN Computer Science</em> in 2025. The <a href="https://link.springer.com/epdf/10.1007/s42979-025-03854-0" target="_blank" rel="noopener">full article</a> asks whether a revised signal and more structured trading decisions could improve on the first phase.</p>
 
 <h3 id="-methodology">🧠 Methodology</h3>
-<ul>
-  <li>Same universe a in <strong>phase 1</strong></li>
-  <li>Different signal. This time it is adjusted by the moving average of last month to remov the trend.</li>
-  <li>Agents trained in a different environment where action space is continuous, but letting them oscilate depending of the band in the strategy.</li>
-  <li><strong>Technical indicators</strong> were removed from action space.</li>
-  <li>Comparison against classical method of pair trading strategy reveals an improvemnt respect to <strong>phase 1</strong> but still without outperforming classical methods.</li>
-</ul>
+<p>Rather than change the stock universe, we changed how the trading opportunity was represented. The new signal was adjusted using a moving average over the preceding month to reduce the influence of a changing local trend. This gave the agents a different view of deviations relevant to entering and exiting a pair trade.</p>
+
+<p>We also removed the previously included technical indicators and revised the environment so that continuous actions were <strong>bounded according to the strategy’s trading bands</strong>. A trading band identifies a region of the signal associated with a trading response. The agent retained flexibility within the permitted range, but no longer had the same freedom to act regardless of that context.</p>
+
+<p>The comparison again used the classical mean-reversion strategy as a benchmark. That reference point is essential: improving on an earlier RL experiment is not the same as improving on a practical alternative.</p>
 
 <h3 id="-key-results">📊 Key Results</h3>
-<ul>
-  <li>Both A2C and PPO <strong>partially outperformed</strong> the benchmark.</li>
-  <li>PPO showed faster convergence and lower drawdowns.</li>
-  <li>Bounded action space for each of the bands in pair trading strategy improve the learning process</li>
-</ul>
+<p>Both A2C and PPO <strong>partially outperformed the benchmark</strong>, improving on the first phase without establishing consistent superiority over the classical method. The word <em>partially</em> is important. It describes a qualified result within the experiments, not evidence that either agent should be expected to win across pairs, evaluation criteria, or future market conditions.</p>
+
+<p>PPO showed faster <strong>convergence</strong>, meaning that its learning settled more quickly, and lower <strong>drawdowns</strong>, the declines from a previous portfolio-value peak. Bounding the action space by trading band also helped the learning process. Taken together, these findings suggest that representing the trading problem clearly can matter as much as choosing a sophisticated algorithm.</p>
 
 <hr />
 
 <h2 id="-summary-of-contributions">🔁 Summary of Contributions</h2>
+
+<p>The table brings the two publications together. The underlying data universe and cost-aware reward remained common reference points, while the second phase narrowed the algorithm comparison and refined the decision-making setup. Read the final row as a summary of these experiments, not as a general ranking of RL against classical trading.</p>
 
 <table>
   <thead>
@@ -540,24 +602,21 @@
   </tbody>
 </table>
 
+<p>The main progression is therefore not from “RL fails” to “RL wins.” It is from a broad prototype to a more disciplined test of when a learned policy may add value. The partial improvement is worth investigating, but it does not remove the need for repeated evaluation, realistic costs, and testing beyond the conditions used to develop the strategy.</p>
+
 <hr />
 
 <h2 id="-future-directions">🔮 Future Directions</h2>
-<ul>
-  <li>Introduce <strong>multi-agent frameworks</strong> for long/short coordination.</li>
-  <li>Use <strong>microstructure features</strong> (e.g., order book signals, bid/ask spreads).</li>
-  <li>Impact analysis of including <strong>technical indicators</strong>.</li>
-  <li>Use of <strong>transformers</strong> architecture.</li>
-</ul>
+<p>One next step is to explore <strong>multi-agent frameworks</strong>, in which separate agents could coordinate the long and short sides of a trade. That would change the control problem rather than simply replace one algorithm with another, so the value of coordination would need to be tested against the existing single-agent setup.</p>
+
+<p>Another direction is to examine <strong>market microstructure features</strong>, such as order book signals and bid/ask spreads. These describe trading conditions more directly than prices alone and could help connect a decision to its execution costs. Technical indicators also deserve a controlled impact analysis. Their limited contribution in this setup does not establish that they are unhelpful in every setting.</p>
+
+<p>Finally, <strong>transformer architectures</strong> offer another way to model sequences of observations. Their inclusion would be a research question, not an assumed upgrade. Across all these directions, the standard should remain the same: does the added complexity deliver a robust improvement over a simpler, cost-aware benchmark?</p>
 
 <hr />
 
 <h2 id="-resources">📂 Resources</h2>
-<ul>
-  <li>📜 Paper 1: <a href="https://link.springer.com/chapter/10.1007/978-3-031-74595-9_3" target="_blank" rel="noopener">Experimental Framework</a></li>
-  <li>📜 Paper 2: <a href="https://link.springer.com/epdf/10.1007/s42979-025-03854-0" target="_blank" rel="noopener">Comparative DRL Study</a></li>
-  <li>🧠 Code &amp; data (coming soon / available on request)</li>
-</ul>
+<p>For the full experimental details, start with the <a href="https://link.springer.com/chapter/10.1007/978-3-031-74595-9_3" target="_blank" rel="noopener">experimental framework chapter</a> and then the <a href="https://link.springer.com/epdf/10.1007/s42979-025-03854-0" target="_blank" rel="noopener">comparative DRL study</a>. Code and data are not yet linked here and can be requested.</p>
 
 <hr />
 

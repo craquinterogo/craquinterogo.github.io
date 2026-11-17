@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="610" viewBox="0 0 900 610" role="img" aria-labelledby="title desc">
+  <title id="title">Goal-directed action with feedback</title>
+  <desc id="desc">A goal and constraints guide selection of the next step. Proposed actions pass through harness checks and tool execution. Results, denials, or errors become observations. Evidence is checked and context updated before the next model choice. The system can answer, ask for help, or stop. Harness limits can halt the run at any point.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b8ad88"/></marker>
+  </defs>
+  <rect width="900" height="610" rx="16" fill="#1a1a1a"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#e8e8e8">
+    <text x="40" y="42" font-size="24" font-weight="700" fill="#d4af37">An agent follows evidence, not just a script</text>
+    <text x="40" y="70" font-size="16" fill="#b7b3a8">Model-guided choices inside an application-controlled execution loop</text>
+    <g stroke-width="2">
+      <rect x="40" y="115" width="240" height="100" rx="12" fill="#242424" stroke="#b8ad88"/>
+      <rect x="330" y="115" width="240" height="100" rx="12" fill="#332e20" stroke="#d4af37"/>
+      <rect x="620" y="115" width="240" height="100" rx="12" fill="#26303a" stroke="#92b4d6"/>
+      <rect x="620" y="310" width="240" height="100" rx="12" fill="#242424" stroke="#b8ad88"/>
+      <rect x="330" y="310" width="240" height="100" rx="12" fill="#26303a" stroke="#92b4d6"/>
+      <rect x="40" y="310" width="240" height="100" rx="12" fill="#25332f" stroke="#92c4b5"/>
+    </g>
+    <g fill="none" stroke="#b8ad88" stroke-width="2.5" marker-end="url(#arrow)">
+      <path d="M282 165H318"/>
+      <path d="M572 165H608"/>
+      <path d="M740 217V298"/>
+      <path d="M618 360H582"/>
+      <path d="M450 308V227"/>
+      <path d="M330 180H305V360H292"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="160" y="150" font-size="21" font-weight="700">Goal + constraints</text>
+      <text x="160" y="181" font-size="17">Reconcile the records</text>
+      <text x="160" y="204" font-size="17">Do not edit or send</text>
+      <text x="450" y="150" font-size="21" font-weight="700">Choose next step</text>
+      <text x="450" y="181" font-size="17">Model uses current context</text>
+      <text x="450" y="204" font-size="17">Propose an action or response</text>
+      <text x="740" y="150" font-size="21" font-weight="700">Check and execute</text>
+      <text x="740" y="181" font-size="17">Harness applies permissions</text>
+      <text x="740" y="204" font-size="17">Invoke only if permitted</text>
+      <text x="740" y="345" font-size="21" font-weight="700">Observe</text>
+      <text x="740" y="377" font-size="17">Result, denial or error</text>
+      <text x="450" y="345" font-size="21" font-weight="700">Check evidence</text>
+      <text x="450" y="377" font-size="17">Update context and task state</text>
+      <text x="160" y="345" font-size="21" font-weight="700">Answer, ask or stop</text>
+      <text x="160" y="377" font-size="17">Report the actual outcome</text>
+      <text x="170" y="270" font-size="16">Response instead of a tool</text>
+    </g>
+    <text x="465" y="270" font-size="16">Feedback</text>
+    <rect x="40" y="465" width="820" height="105" rx="12" fill="#362628"/>
+    <g text-anchor="middle">
+      <text x="450" y="497" font-size="20" font-weight="700" fill="#efaaa4">The harness can pause or halt at any point.</text>
+      <text x="450" y="528" font-size="17">No progress, denied permission or an exhausted budget can end a run.</text>
+      <text x="450" y="552" font-size="17">Ending a run is not the same as successfully completing the task.</text>
+      <text x="450" y="594" font-size="15" fill="#b7b3a8">Conceptual loop. An observation can still be wrong, stale or incomplete.</text>
+    </g>
+  </g>
+</svg>

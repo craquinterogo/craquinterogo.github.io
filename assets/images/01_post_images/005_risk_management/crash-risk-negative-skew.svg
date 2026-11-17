@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+  <title id="title">Negative skew: the loss tail is not a mirror of the gain tail</title>
+  <desc id="desc">Two schematic probability densities illustrate symmetry versus a longer left tail. Curves are illustrative, not fitted data or a matched-moments comparison.</desc>
+  <rect width="900" height="420" rx="16" fill="#1a1a1a"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#e8e8e8">
+    <text x="40" y="42" font-size="24" font-weight="700" fill="#d4af37">1. Losses need not mirror gains</text>
+    <text x="40" y="70" font-size="16" fill="#b7b3a8">Illustrative return distributions, not fitted data</text>
+    <path d="M90 105V325H830" fill="none" stroke="#b8ad88" stroke-width="2"/>
+    <text x="92" y="98" font-size="16">Probability density</text>
+    <path d="M115 324 C275 324 320 310 372 243 C412 185 417 132 460 132 C503 132 508 185 548 243 C600 310 645 324 805 324" fill="none" stroke="#92b4d6" stroke-width="4" stroke-dasharray="9 6"/>
+    <path d="M115 322 C200 319 300 302 385 267 C455 238 494 174 535 147 C565 127 587 140 603 176 C622 220 640 290 680 314 C705 325 760 325 805 325" fill="none" stroke="#efaaa4" stroke-width="4"/>
+    <text x="144" y="233" font-size="18" font-weight="700" fill="#efaaa4">Longer loss tail</text>
+    <path d="M240 243L241 300" fill="none" stroke="#efaaa4" stroke-width="2"/>
+    <text x="90" y="353" font-size="16">Large losses</text>
+    <text x="747" y="353" font-size="16">Large gains</text>
+    <text x="393" y="353" font-size="16">Return (schematic)</text>
+    <path d="M130 388H175" stroke="#92b4d6" stroke-width="4" stroke-dasharray="9 6"/>
+    <text x="188" y="394" font-size="17">Symmetric reference</text>
+    <path d="M480 388H525" stroke="#efaaa4" stroke-width="4"/>
+    <text x="538" y="394" font-size="17">Negative skew</text>
+  </g>
+</svg>

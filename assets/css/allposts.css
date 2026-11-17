@@ -235,15 +235,20 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 3.2rem;
+  row-gap: 1.5rem;
   align-items: start;
 }
 
 /* ── Individual post entry ────────────────────────────────── */
 .post-entry {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 8.8rem 1fr;  /* wider to fit Mon DD, YYYY */
   gap: 0 1.8rem;
-  padding: 1.4rem 0 1.4rem 0.8rem;
+  padding: 1.4rem 0.8rem;
+  background: var(--c-bg);
   border-bottom: 1px solid var(--c-border);
   /* Left accent via border — works cleanly in a CSS grid column */
   border-left: 2px solid transparent;
@@ -257,6 +262,18 @@
 
 .post-entry:last-child {
   border-bottom: none;
+}
+
+.post-entry__cover {
+  position: absolute;
+  inset: -8px;
+  z-index: -1;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  max-width: none;
+  object-fit: cover;
+  filter: blur(4px) brightness(0.25);
+  pointer-events: none;
 }
 
 /* Date column */
@@ -441,7 +458,7 @@
   .post-entry {
     grid-template-columns: 1fr;
     gap: 0.1rem;
-    padding: 1.2rem 0 1.2rem 0.6rem;
+    padding: 1.2rem 0.6rem;
   }
   .post-entry__date {
     font-size: 0.67rem;

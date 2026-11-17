@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP — Single Post layout
+    Dual sidebar: related posts (left) · TOC (right)
+-->
+<html lang="en">
+
+  <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YNFJY0416"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-6YNFJY0416');
+	</script>
+	<title>Asymmetric Crash Risk: Measuring the Losses That Do Not Behave Like Averages | </title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	
+	
+	<meta name="description" content="A practical and technical guide to downside asymmetry, crash-risk models, portfolio metrics, and stress testing." />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Asymmetric Crash Risk: Measuring the Losses That Do Not Behave Like Averages" />
+	<meta property="og:description" content="A practical and technical guide to downside asymmetry, crash-risk models, portfolio metrics, and stress testing." />
+	<meta property="og:url" content="https://craquinterogo.github.io/blog/2026/11/17/asymmetric-crash-risk" />
+	<meta name="twitter:title" content="Asymmetric Crash Risk: Measuring the Losses That Do Not Behave Like Averages" />
+	<meta name="twitter:description" content="A practical and technical guide to downside asymmetry, crash-risk models, portfolio metrics, and stress testing." />
+	
+	
+	<meta property="og:image" content="https://craquinterogo.github.io/assets/images/01_post_images/005_risk_management/asymmetric-crash-risk-cover.png" />
+	<meta property="og:image:alt" content="Golden platforms rise gradually before breaking into a steep chasm, with connected strands and fragments falling together into darkness." />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://craquinterogo.github.io/assets/images/01_post_images/005_risk_management/asymmetric-crash-risk-cover.png" />
+	<meta name="twitter:image:alt" content="Golden platforms rise gradually before breaking into a steep chasm, with connected strands and fragments falling together into darkness." />
+	
+	
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/facapple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/post.css" />
+	
+		<!-- KaTeX Configuration -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+		onload="renderMathInElement(document.body, {
+			delimiters: [
+				{left: '$$', right: '$$', display: true},
+				{left: '$', right: '$', display: false},
+				{left: '\\(', right: '\\)', display: false},
+				{left: '\\[', right: '\\]', display: true}
+			]
+		});"></script>
+</head>
+
+
+  <body class="layout-post">
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	<a href="https://craquinterogo.github.io//" class="logo"><strong>Cristian</strong> <span>Quintero</span></a>
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io//">Home</a></li>
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/about-me">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/all_posts.html">All posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/books/">Books I've Read</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/my-posts/">My posts</a></li>
+		    
+		
+		    
+		        <li><a href="https://craquinterogo.github.io/what-I-like/">I like</a></li>
+		    
+		
+	</ul>
+	<!-- <ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul> -->
+</nav>
+
+
+    <!-- Reading progress bar -->
+    <div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- ─── Resolve current post & category ──────────────── -->
+    
+      
+        
+          
+          
+          
+
+    <!-- ─── LEFT sidebar: related posts ─────────────────── -->
+    <aside id="sidebar-left" class="sidebar sidebar-left" aria-label="Related posts">
+      <div class="sidebar-content">
+        <div class="sidebar-section related-posts-section">
+          <div class="sidebar-section-header" data-target="related-posts-content">
+            <h4>
+              <i class="fa fa-folder" aria-hidden="true"></i>
+              Risk Management
+            </h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle related posts" aria-controls="related-posts-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="related-posts-content" class="sidebar-section-content expanded">
+            
+              
+              
+              
+                <ul class="recent-posts">
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2025/12/13/market-risk-management" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/005_risk_management/market-risk-cover.png" alt="Market Risk and Portfolio Management (Why It Actually Matters)" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Market Risk and Portfolio Management (Why...</h5>
+                          
+                            <span class="recent-post-date">Dec 13, 2025</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2020/06/23/cornish-fisher-var" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/005_risk_management/cornish-fisher-var-cover.png" alt="Cornish-Fisher VaR when a normal quantile is not enough" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Cornish-Fisher VaR when a normal quantile...</h5>
+                          
+                            <span class="recent-post-date">Jun 23, 2020</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                    <li class="recent-post-item">
+                      <a href="/blog/2020/01/05/extreme-value-theory-var" class="recent-post-link">
+                        
+                          <div class="recent-post-image">
+                            <img src="https://craquinterogo.github.io/assets/images/01_post_images/005_risk_management/extreme-value-theory-cover.png" alt="Extreme Value Theory for Value at Risk, from returns to the tail" loading="lazy" />
+                          </div>
+                        
+                        <div class="recent-post-content">
+                          <h5>Extreme Value Theory for Value at Risk, f...</h5>
+                          
+                            <span class="recent-post-date">Jan 05, 2020</span>
+                          
+                        </div>
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+              <div class="sidebar-category-link">
+                <a href="/all_posts" class="view-all-category">
+                  All posts <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT sidebar: table of contents ────────────── -->
+    <aside id="sidebar-right" class="sidebar sidebar-right" aria-label="Table of contents">
+      <div class="sidebar-content">
+        <div class="sidebar-section toc-section">
+          <div class="sidebar-section-header" data-target="toc-content">
+            <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Contents</h4>
+            <button type="button" class="collapse-toggle" aria-label="Toggle table of contents" aria-controls="toc-content" aria-expanded="true">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="toc-content" class="sidebar-section-content expanded">
+            <nav id="toc-sidebar-nav" aria-label="Table of contents"></nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- On-demand navigation for narrower reading layouts -->
+    <button type="button" id="sidebar-left-toggle" class="sidebar-toggle sidebar-toggle--left" aria-controls="sidebar-left" aria-expanded="false"><i class="fa fa-folder" aria-hidden="true"></i>Related</button>
+    <button type="button" id="sidebar-right-toggle" class="sidebar-toggle sidebar-toggle--right" aria-controls="sidebar-right" aria-expanded="false"><i class="fa fa-list-ul" aria-hidden="true"></i>Contents</button>
+
+    <!-- Mobile overlays -->
+    <div id="sidebar-left-overlay"  class="sidebar-overlay" aria-hidden="true"></div>
+    <div id="sidebar-right-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ──────────────────────────────────── -->
+    <div id="main" class="alt">
+      <section id="one">
+        <div class="inner">
+
+          
+            
+              
+
+                <!-- Post header -->
+                <header class="post-header-block">
+
+                  <!-- Breadcrumb -->
+                  
+                    <div class="post-breadcrumb" aria-label="Category">
+                      <a href="/all_posts#risk-management">Risk Management</a>
+                      <span class="sep" aria-hidden="true">/</span>
+                      <span>Asymmetric Crash Risk: Measuring the Losses Tha...</span>
+                    </div>
+                  
+
+                  <h1>Asymmetric Crash Risk: Measuring the Losses That Do Not Behave Like Averages</h1>
+
+                  <!-- Meta row -->
+                  <div class="post-meta" aria-label="Post metadata">
+                    
+                      <span class="post-meta__item">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <time datetime="2026-11-17T00:00:00-06:00">November 17, 2026</time>
+                      </span>
+                      <span class="post-meta__sep" aria-hidden="true">·</span>
+                    
+                    <span class="post-meta__item" id="reading-time-meta">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span id="reading-time-val">…</span> min read
+                    </span>
+                  </div>
+
+                  <!-- Tags -->
+                  
+                    <div class="post-tags-header" aria-label="Tags">
+                      
+                        <span class="post-tag-pill">risk management</span>
+                      
+                        <span class="post-tag-pill">market risk</span>
+                      
+                        <span class="post-tag-pill">crash risk</span>
+                      
+                        <span class="post-tag-pill">expected shortfall</span>
+                      
+                        <span class="post-tag-pill">extreme value theory</span>
+                      
+                        <span class="post-tag-pill">options</span>
+                      
+                    </div>
+                  
+
+                </header>
+
+                <!-- Hero image -->
+                
+                  <img
+                    class="post-hero"
+                    src="https://craquinterogo.github.io/assets/images/01_post_images/005_risk_management/asymmetric-crash-risk-cover.png"
+                    alt="Asymmetric Crash Risk: Measuring the Losses That Do Not Behave Like Averages"
+                    loading="eager"
+                  />
+                
+
+                <!-- Post body -->
+                <article class="post-body" id="post-body-content" aria-label="Article content">
+                  <blockquote>
+  <p><strong>Scope:</strong> This is an educational discussion of market and portfolio risk, not investment advice or a production risk model.</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>AI Generated</strong> Certain diagrams are created with generative AI, and may be subject to change in case discrepancies are flagged over reviewing.</p>
+</blockquote>
+
+<h2 id="what-makes-crash-risk-asymmetric">What makes crash risk asymmetric?</h2>
+
+<nav class="workflow-progress" aria-label="Asymmetric crash risk, step 1 of 5">
+  <ol style="--flow-count: 5">
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#what-makes-crash-risk-asymmetric" aria-current="step">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Concept</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#why-losses-can-be-different-from-gains">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Mechanisms</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#metrics-different-questions-complementary-answers">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Metrics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#models-and-stress-tests">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Models</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#a-practical-assessment-workflow">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Assessment</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Most people do not experience a 10% gain and a 10% loss as mirror images. A loss reduces the capital available to recover, and a severe loss can force an investor or institution to sell assets at exactly the wrong time. Markets, too, need not treat good and bad news symmetrically: prices can fall quickly, volatility can rise as they fall, and assets that looked diversified can decline together.</p>
+
+<p><strong>Asymmetric crash risk</strong> is the risk that adverse outcomes are more severe, more abrupt, or more interconnected than a symmetric model of ordinary returns suggests. It is not a forecast that a crash will happen on a particular date. It is a warning that the shape of the loss distribution and the way risk changes in stress may make average conditions a poor guide to survival. Research on rare disasters and asset prices is one reason this risk matters even when crashes are infrequent <a class="citation" href="#Barro2006Disasters">(Barro, 2006)</a>.</p>
+
+<p>Imagine two portfolios with the same average return and day-to-day volatility. One has occasional large losses. The other has occasional large gains. Their averages and standard deviations can look similar, yet their outcomes for someone who must preserve capital are not. And a portfolio can look diversified in calm markets but become concentrated in a downturn if its holdings share a hidden exposure.</p>
+
+<p>That is why crash risk should not be reduced to one statistic. It is a <strong>distribution</strong>, a <strong>path through time</strong>, and often a <strong>system-wide interaction</strong>.</p>
+
+<h2 id="why-losses-can-be-different-from-gains">Why losses can be different from gains</h2>
+
+<nav class="workflow-progress" aria-label="Asymmetric crash risk, step 2 of 5">
+  <ol style="--flow-count: 5">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#what-makes-crash-risk-asymmetric">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Concept</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#why-losses-can-be-different-from-gains" aria-current="step">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Mechanisms</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#metrics-different-questions-complementary-answers">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Metrics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#models-and-stress-tests">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Models</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#a-practical-assessment-workflow">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Assessment</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Several mechanisms can reinforce one another. The diagrams below are original conceptual illustrations, not fitted distributions, empirical estimates, or forecasts.</p>
+
+<h3 id="1-negative-skew-and-heavy-tails">1. Negative skew and heavy tails</h3>
+
+<p>A return distribution may have a longer or heavier loss tail than gain tail. Negative skewness is a compact clue, not a complete description of rare losses.</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/005_risk_management/crash-risk-negative-skew.svg" aria-label="Open the negative skew diagram at full size">
+    <img src="/assets/images/01_post_images/005_risk_management/crash-risk-negative-skew.svg" alt="Schematic return distributions compare a symmetric reference with a negatively skewed distribution whose loss tail extends farther to the left. Both are schematic, not fitted to data." width="900" height="420" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 1.</strong> The shape of the loss tail matters, not just the width of the distribution. Skewness describes asymmetry. Heavy tails describe tail weight relative to a reference distribution. Heavy tails can also be symmetric.</figcaption>
+</figure>
+
+<h3 id="2-volatility-feedback-and-leverage">2. Volatility feedback and leverage</h3>
+
+<p>Falling prices can raise measured or expected volatility. Leveraged investors may then need to cut positions or post collateral, adding selling pressure.</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/005_risk_management/crash-risk-leverage-feedback.svg" aria-label="Open the leverage feedback diagram at full size">
+    <img src="/assets/images/01_post_images/005_risk_management/crash-risk-leverage-feedback.svg" alt="A possible feedback loop runs from falling prices to higher volatility or margin requirements, then to leverage reduction and forced selling, which can depress prices further." width="900" height="420" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 2.</strong> Risk controls and collateral requirements can turn a price decline into additional selling. This is a possible amplification mechanism, not an inevitable response to every loss.</figcaption>
+</figure>
+
+<h3 id="3-changing-dependence">3. Changing dependence</h3>
+
+<p>Diversification can protect a portfolio less during large losses than during ordinary fluctuations. Two assets may behave differently on most days yet fall together in a broad sell-off. If that downside connection is stronger than their connection during gains, a correlation estimated across the full sample can conceal the asymmetry that matters most for preserving capital.</p>
+
+<p><strong>Correlation</strong> measures linear co-movement. <strong>Downside dependence</strong> concerns how assets behave together during adverse outcomes, which need not mirror their behavior during favorable ones. <strong>Lower-tail dependence</strong> has a more specific statistical meaning: it describes the limiting probability that one return is extremely low given that another is extremely low, as their respective percentile thresholds approach zero. It is not simply a correlation calculated on a handful of bad days. An asymmetric dependence pattern can also exist in a stable joint distribution, without the underlying relationship changing over calendar time <a class="citation" href="#McNeilFreyEmbrechts2015QRM">(McNeil et al., 2015)</a>.</p>
+
+<p>Two foundational studies put this distinction into an equity-market context. Longin and Solnik’s <em>Extreme Correlation of International Equity Markets</em> uses extreme-value methods to study joint extremes. In their sample, correlations increase in bear markets but not in bull markets, and a multivariate normal model is rejected for the negative tail but not the positive tail <a class="citation" href="#LonginSolnik2001ExtremeCorrelation">(Longin &amp; Solnik, 2001)</a>. Ang and Chen’s <em>Asymmetric Correlations of Equity Portfolios</em> finds stronger correlations between U.S. equity portfolios and the aggregate market during downside moves than during upside moves, especially at extremes. Their analysis also shows that this correlation asymmetry is distinct from an individual return distribution’s skewness <a class="citation" href="#AngChen2002AsymmetricCorrelations">(Ang &amp; Chen, 2002)</a>. These findings support examining joint losses directly rather than assuming that a full-sample correlation captures both directions equally well.</p>
+
+<p>There is an important measurement caveat. Forbes and Rigobon’s <em>No Contagion, Only Interdependence</em> shows that higher volatility can raise measured cross-market correlations even without a change in the underlying transmission relationship. Under their assumptions, adjusting for this effect removes much of the apparent evidence of contagion in the crises they examine <a class="citation" href="#ForbesRigobon2002Interdependence">(Forbes &amp; Rigobon, 2002)</a>. A higher crisis-period correlation is therefore not, by itself, proof that markets have developed a new link or that statistical tail dependence has increased.</p>
+
+<p>For crash-risk assessment, the question is not whether “all correlations go to one.” It is whether the portfolio’s protection survives <strong>joint downside outcomes</strong>. Compare upside and downside co-movement, inspect joint threshold breaches, and stress shared market exposures. Treat these as complementary diagnostics rather than interchangeable estimates of tail dependence. This keeps the focus on the asymmetry: holdings that contribute differently to gains may still concentrate losses when the same adverse shock reaches them.</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/005_risk_management/crash-risk-changing-dependence.svg" aria-label="Open the changing dependence diagram at full size">
+    <img src="/assets/images/01_post_images/005_risk_management/crash-risk-changing-dependence.svg" alt="Two schematic asset-return paths differ in a calm period but become jointly negative in a stress period, illustrating the possibility that diversification weakens in a downturn." width="900" height="420" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 3.</strong> Different holdings may share a downside exposure. A joint loss does not by itself establish a change in correlation or statistical tail dependence. Establishing either requires many observations and explicit estimation.</figcaption>
+</figure>
+
+<h3 id="4-market-and-funding-liquidity">4. Market and funding liquidity</h3>
+
+<p>Losses can change not only a portfolio’s value but also its owner’s ability to keep holding it. For a leveraged investor with long positions, rising prices may create room to maintain or increase exposure. Falling prices can instead consume the capital needed to finance those positions and force sales. This is one reason the path down need not mirror the path up. Brunnermeier and Pedersen’s <em>Market Liquidity and Funding Liquidity</em> provides a framework for understanding how financing constraints and trading conditions can reinforce that asymmetry <a class="citation" href="#BrunnermeierPedersen2009Liquidity">(Brunnermeier &amp; Pedersen, 2009)</a>.</p>
+
+<p><strong>Market liquidity</strong> is the ease of trading an asset without a substantial price impact. When it deteriorates, selling the same quantity may require a larger price concession. <strong>Funding liquidity</strong> is the ease of obtaining the financing needed to hold positions and support trading. It depends on available capital and financing terms, including margins or haircuts that determine how much capital the trader must contribute.</p>
+
+<p>The paper links the two through <strong>funding-constrained liquidity providers</strong>, such as dealers who absorb other investors’ selling. A price decline may make an asset look attractive, but it can also inflict losses on these potential buyers’ existing holdings. With less capital available, they may be unable to buy or may have to sell themselves. If margins also rise, each position requires more capital just when capital is scarce. Lower prices therefore need not immediately attract enough buying to stabilize the market.</p>
+
+<p>This interaction can produce two <strong>liquidity spirals</strong>. In a <strong>loss spiral</strong>, price declines erode capital, forcing position cuts that can push prices down further. In a <strong>margin spiral</strong>, higher margin requirements reduce financing capacity and trigger sales. If the resulting illiquidity leads to further margin increases, the cycle reinforces itself. For example, increasing a position’s margin requirement from 10% to 20% doubles the required capital contribution at an unchanged position value.</p>
+
+<p>The asymmetry comes from <strong>constraints that become binding on the way down</strong>. Gains do not usually compel a long investor to sell, but losses and funding shortfalls can leave no choice. Forced sales can then make other investors’ losses worse, even across different assets financed by the same institutions. This is not a claim that margins always rise after losses or that every decline becomes a crisis. It explains how a decline can become self-reinforcing under the conditions studied in the paper, and why crash-risk assessments should stress prices, funding availability, and margins together <a class="citation" href="#BrunnermeierPedersen2009Liquidity">(Brunnermeier &amp; Pedersen, 2009)</a>.</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/005_risk_management/crash-risk-liquidity-spiral.svg" aria-label="Open the liquidity spiral diagram at full size">
+    <img src="/assets/images/01_post_images/005_risk_management/crash-risk-liquidity-spiral.svg" alt="Market illiquidity makes asset sales more costly, reducing realizable cash and collateral values. Funding pressure from margin calls or redemptions can force further sales, worsening market liquidity." width="900" height="420" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 4.</strong> Market liquidity is the ability to trade without excessive price impact. Funding liquidity is the ability to meet cash obligations. A solvent-looking portfolio can still struggle to raise cash on time.</figcaption>
+</figure>
+
+<h3 id="5-jumps-and-rare-events">5. Jumps and rare events</h3>
+
+<p>Some price moves are too abrupt to describe well as many small, independent fluctuations. Jump models and studies of option prices help quantify how markets price such tail events <a class="citation" href="#Bates2000CrashFears">(Bates, 2000; Bollerslev &amp; Todorov, 2011)</a>.</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/005_risk_management/crash-risk-price-jump.svg" aria-label="Open the price jump diagram at full size">
+    <img src="/assets/images/01_post_images/005_risk_management/crash-risk-price-jump.svg" alt="An illustrative price path fluctuates gradually before dropping discontinuously at an event, then resumes at a lower level. A dashed vertical gap marks the jump, without assuming execution at intermediate prices." width="900" height="420" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 5.</strong> A discontinuity can bypass a planned exit price. A stop order is not a guaranteed execution price, and a continuous-path model does not explicitly represent jumps. Not all abrupt observed moves are true mathematical discontinuities.</figcaption>
+</figure>
+
+<p>Leverage makes drawdown arithmetic especially unforgiving. After a 40% loss, an investment needs a 66.7% gain to return to its starting value: the gain is calculated on a smaller base. This does not mean every drawdown is permanent, but it does explain why the size and sequence of losses matter as much as the average return.</p>
+
+<h2 id="metrics-different-questions-complementary-answers">Metrics: different questions, complementary answers</h2>
+
+<nav class="workflow-progress" aria-label="Asymmetric crash risk, step 3 of 5">
+  <ol style="--flow-count: 5">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#what-makes-crash-risk-asymmetric">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Concept</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#why-losses-can-be-different-from-gains">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Mechanisms</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#metrics-different-questions-complementary-answers" aria-current="step">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Metrics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#models-and-stress-tests">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Models</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#a-practical-assessment-workflow">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Assessment</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Let $R$ be a portfolio return over a specified horizon, and define positive loss $L=-R$. State the horizon, currency, portfolio scope, and whether returns include fees and liquidity costs whenever reporting a risk number.</p>
+
+<h3 id="distribution-shape-and-downside-variation">Distribution shape and downside variation</h3>
+
+<p>The standardized third central moment,</p>
+
+\[\operatorname{Skew}(R)=\frac{E[(R-E[R])^3]}{\operatorname{SD}(R)^3},\]
+
+<p>summarizes asymmetry. Negative skewness indicates a distribution with a longer or more influential left tail. But it is estimated noisily, especially from short samples, and one extreme observation can move it substantially. It should prompt further investigation, not serve as a crash probability.</p>
+
+<p><strong>Downside deviation</strong> and <strong>semivariance</strong> focus on returns below a chosen target (often zero or a required return), rather than treating upside and downside variation equally. They can better match a loss-focused objective, but the result depends on the target and still may not reveal the severity of the most extreme losses. Research on downside risk also shows why the relevant risk measure depends on the investor’s exposure and question <a class="citation" href="#AngChenXing2006Downside">(Ang et al., 2006)</a>.</p>
+
+<h3 id="var-and-expected-shortfall">VaR and Expected Shortfall</h3>
+
+<p>For tail probability $\alpha$, <strong>Value at Risk</strong> at confidence $1-\alpha$ is the loss quantile</p>
+
+\[\operatorname{VaR}_{1-\alpha}(L)=F_L^{-1}(1-\alpha).\]
+
+<p>A 99% one-day VaR of $X$ means that the model assigns a 1% probability to a one-day loss greater than $X$. It does <strong>not</strong> mean the maximum loss is $X$, nor does it say how bad a breach could be.</p>
+
+<p><strong>Expected Shortfall (ES)</strong> answers the next question: how severe are losses in the worst $\alpha$ fraction of outcomes? For a continuous loss distribution,</p>
+
+\[\operatorname{ES}_{1-\alpha}(L)
+=E[L\mid L&gt;\operatorname{VaR}_{1-\alpha}(L)].\]
+
+<p>For distributions with discrete outcomes, ES is more generally defined as the average of quantiles across the tail, avoiding ambiguity at the quantile boundary. ES is therefore more informative about tail severity than VaR alone. Neither measure is trustworthy without a suitable model, a stated horizon, and uncertainty analysis. Extreme-value methods can help estimate rare quantiles, but the chosen tail threshold and limited number of extreme observations are important sources of uncertainty <a class="citation" href="#McNeilFreyEmbrechts2015QRM">(McNeil et al., 2015)</a>.</p>
+
+<h3 id="drawdown-and-path-risk">Drawdown and path risk</h3>
+
+<p><strong>Maximum drawdown</strong> is the largest peak-to-trough decline in portfolio value over a specified sample. Unlike a one-period quantile, it retains information about the sequence of returns and is often easier to relate to capital recovery. It is still sample-dependent: a different start and end date can produce a different maximum, and historical drawdown is not a bound on future losses.</p>
+
+<h3 id="volatility-asymmetry-and-option-prices">Volatility asymmetry and option prices</h3>
+
+<p>A symmetric volatility model can miss the observation that negative shocks are followed by different volatility dynamics than positive shocks. Asymmetric GARCH specifications, such as GJR-GARCH, allow conditional variance to respond differently to negative innovations <a class="citation" href="#GlostenJagannathanRunkle1993">(Glosten et al., 1993)</a>. This can improve a model of changing volatility, but it does not by itself capture every jump, liquidity event, or changing cross-asset dependence.</p>
+
+<p>Options provide another lens. A <strong>volatility skew</strong> compares implied volatilities across strikes. A common summary is the implied-volatility difference between an out-of-the-money put and a comparable call. A pronounced put premium can indicate that downside protection is expensive relative to upside exposure. This is a market price under risk-neutral pricing, not a direct estimate of the real-world crash probability: it also reflects risk aversion, supply and demand, and the cost of hedging. Option-based studies can help separate the pricing of tail events from historical frequency, subject to model and data limitations <a class="citation" href="#Bates2000CrashFears">(Bates, 2000; Bollerslev &amp; Todorov, 2011)</a>.</p>
+
+<h2 id="models-and-stress-tests">Models and stress tests</h2>
+
+<nav class="workflow-progress" aria-label="Asymmetric crash risk, step 4 of 5">
+  <ol style="--flow-count: 5">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#what-makes-crash-risk-asymmetric">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Concept</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#why-losses-can-be-different-from-gains">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Mechanisms</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#metrics-different-questions-complementary-answers">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Metrics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#models-and-stress-tests" aria-current="step">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Models</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step">
+        <a href="#a-practical-assessment-workflow">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Assessment</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Suppose a portfolio looks safe under one model and fragile under another. The useful question is not which number feels more reassuring. It is <strong>which assumptions explain the difference</strong>. No single model captures every mechanism discussed above, so a credible assessment needs approaches that can expose one another’s blind spots.</p>
+
+<p><strong>Historical simulation</strong> starts with events we have actually observed, replaying portfolio returns or risk-factor moves. Its transparency is valuable, but the selected window may omit the relevant crisis or fail to represent today’s exposures. <strong>Parametric distributions</strong> offer another starting point by fitting a mathematical description of returns. A Gaussian model is a convenient benchmark, but its symmetry and thin tails can understate downside risk. Skewed or heavy-tailed alternatives relax those assumptions without removing estimation error or the risk of choosing the wrong model.</p>
+
+<p>The next question is how risk evolves between observations. <strong>Conditional volatility models</strong>, including GJR-GARCH and EGARCH, capture volatility clustering and asymmetric responses to shocks. Their tail forecasts still depend on the chosen innovation distribution, and they may not adequately represent abrupt price gaps. <strong>Stochastic-volatility models</strong> allow volatility itself to evolve randomly, while adding <strong>jumps</strong> explicitly represents discontinuities in returns. These models can be calibrated to historical returns, option prices, or both. That choice matters because real-world return probabilities and risk-neutral pricing probabilities answer different questions.</p>
+
+<p>If the concern is specifically the largest losses, <strong>Extreme Value Theory (EVT)</strong> concentrates on the tail rather than trying to fit the center equally well. A common approach fits a generalized Pareto distribution to losses above a threshold. The attraction is a direct focus on extremes. The difficulty is that extremes are scarce, making threshold choice and parameter uncertainty essential parts of the result <a class="citation" href="#McNeilFreyEmbrechts2015QRM">(McNeil et al., 2015)</a>. At portfolio level, <strong>dependence models</strong> ask whether those losses arrive together. Copulas can represent tail dependence that a correlation matrix misses, but fitting one to calm data does not guarantee credible crisis behavior. Dependence needs to be re-estimated and stressed rather than treated as a permanent diversification benefit.</p>
+
+<p>Even a well-fitted statistical model should face a question its estimation window may not answer: <strong>what if the next crisis looks different?</strong> Historical and hypothetical <strong>stress tests</strong> revalue the portfolio under severe but coherent moves in rates, equities, credit spreads, currencies, commodities, volatility, and liquidity. Joint shocks should include plausible changes in correlations, bid-ask spreads, market depth, and funding terms. <strong>Reverse stress testing</strong> turns the exercise around. Start with an unacceptable outcome, such as a capital or liquidity threshold breach, and work backward to the combination of events that could produce it.</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/005_risk_management/crash-risk-models-and-stress.svg" aria-label="Open the models and stress tests diagram at full size">
+    <img src="/assets/images/01_post_images/005_risk_management/crash-risk-models-and-stress.svg" alt="Two complementary inputs feed portfolio revaluation. Statistical scenarios use history, return distributions, volatility, jumps, tails, and dependence. Stress scenarios use historical or hypothetical joint shocks, with reverse stress testing starting from a threshold breach. Revaluation exposes losses, tail severity, and liquidity needs for comparison." width="900" height="540" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 6.</strong> Models estimate what may happen under stated assumptions. Stress tests challenge what the portfolio can withstand. Original conceptual schematic. Stress scenarios do not automatically carry forecast probabilities, and reverse stress testing starts from the damaging outcome.</figcaption>
+</figure>
+
+<p>For an institution, the boundary of the portfolio is not the boundary of the risk. <strong>CoVaR</strong> examines system risk conditional on an institution being under stress. <strong>Marginal Expected Shortfall (MES)</strong> estimates an institution’s expected loss conditional on a broad market crash. These measures add a view of system-wide vulnerability and spillovers, rather than replacing an individual portfolio’s VaR or ES <a class="citation" href="#AdrianBrunnermeier2016CoVaR">(Adrian &amp; Brunnermeier, 2016; Acharya et al., 2017)</a>.</p>
+
+<h2 id="a-practical-assessment-workflow">A practical assessment workflow</h2>
+
+<nav class="workflow-progress" aria-label="Asymmetric crash risk, step 5 of 5">
+  <ol style="--flow-count: 5">
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#what-makes-crash-risk-asymmetric">
+          <span class="workflow-progress__number">01</span>
+          <span class="workflow-progress__label">Concept</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#why-losses-can-be-different-from-gains">
+          <span class="workflow-progress__number">02</span>
+          <span class="workflow-progress__label">Mechanisms</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#metrics-different-questions-complementary-answers">
+          <span class="workflow-progress__number">03</span>
+          <span class="workflow-progress__label">Metrics</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-done">
+        <a href="#models-and-stress-tests">
+          <span class="workflow-progress__number">04</span>
+          <span class="workflow-progress__label">Models</span>
+        </a>
+      </li>
+    
+      <li class="workflow-progress__step is-current">
+        <a href="#a-practical-assessment-workflow" aria-current="step">
+          <span class="workflow-progress__number">05</span>
+          <span class="workflow-progress__label">Assessment</span>
+        </a>
+      </li>
+    
+  </ol>
+</nav>
+
+<p>Imagine being handed a reassuring risk report just before a sharp sell-off. Before trusting the headline number, ask what it actually covers. <strong>Start with the exposure</strong>, not the model: positions, risk factors, leverage, horizon, valuation currency, and the definition of loss. Options require attention to nonlinear sensitivities. Exit restrictions and funding constraints belong in the picture from the beginning, not as explanations added after a breach.</p>
+
+<p>Once that scope is clear, describe the downside rather than stopping at an average and a standard deviation. Loss quantiles, ES, drawdown, downside variation, skew, tail estimates, and relevant option-implied measures each reveal something different. Label them honestly. A historical observation, an out-of-sample forecast, and a risk-neutral quantity inferred from option prices are not interchangeable descriptions of the future.</p>
+
+<p>Then put diversification under pressure. Inspect shared exposures and dependence during stressed periods, and run joint shocks rather than changing one asset at a time. Ask whether the liquidity assumptions still hold if several positions must be sold together. A portfolio that appears balanced by asset count can still depend on the same market factor, the same source of funding, or the same pool of buyers.</p>
+
+<p><strong>Validation is where a convincing story meets outcomes.</strong> Generate genuinely out-of-sample, one-step-ahead forecasts using only information available at the time. For VaR, examine both the frequency of exceptions and whether they cluster. For ES, compare forecasts with realized tail losses using an appropriate backtesting framework rather than expecting any single breach to equal an average tail loss. Rare events give these checks limited statistical power. Passing a backtest is evidence to consider, not proof that the next crisis is covered.</p>
+
+<p>Finally, make uncertainty visible and connect it to a decision. Vary estimation windows, tail thresholds, model families, and stress assumptions to see whether the conclusion survives reasonable alternatives. Use the resulting range to inform limits, capital and liquidity buffers, hedges, or position sizing. <strong>A metric that never changes a decision is only a report.</strong> Revisit the assessment as positions and market conditions change.</p>
+
+<figure>
+  <a href="/assets/images/01_post_images/005_risk_management/crash-risk-assessment-workflow.svg" aria-label="Open the practical assessment diagram at full size">
+    <img src="/assets/images/01_post_images/005_risk_management/crash-risk-assessment-workflow.svg" alt="A practical risk assessment moves from defining positions and constraints to measuring the downside, challenging diversification with joint shocks, validating forecasts out of sample, and using uncertainty to decide limits, buffers, hedges, or position sizes. The assessment is revisited when exposures or conditions change." width="900" height="600" loading="lazy" />
+  </a>
+  <figcaption><strong>Figure 7.</strong> From understanding exposure to making a decision. Original conceptual workflow, not a certification checklist. Model comparisons and stress tests should feed an assessment that is revisited as the portfolio changes.</figcaption>
+</figure>
+
+<p>Asymmetric crash risk matters because normal periods can create a false sense of precision: correlations appear stable, liquidity looks available, and a single VaR number seems decisive. Measuring the downside tail, the path of losses, and the conditions that can make positions fail together does not make crashes predictable. It makes the assumptions visible—and gives decision-makers a better chance of avoiding forced decisions when losses are hardest to absorb.</p>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="Barro2006Disasters">Barro, R. J. (2006). Rare Disasters and Asset Markets in the Twentieth Century. <i>The Quarterly Journal of Economics</i>, <i>121</i>(3), 823–866. <a href="https://doi.org/10.1162/qjec.121.3.823" target="_blank" rel="noopener noreferrer">https://doi.org/10.1162/qjec.121.3.823</a></span></li>
+<li><span id="McNeilFreyEmbrechts2015QRM">McNeil, A. J., Frey, R., &amp; Embrechts, P. (2015). <i>Quantitative Risk Management: Concepts, Techniques and Tools</i> (2nd ed.). Princeton University Press.</span></li>
+<li><span id="LonginSolnik2001ExtremeCorrelation">Longin, F., &amp; Solnik, B. (2001). Extreme Correlation of International Equity Markets. <i>The Journal of Finance</i>, <i>56</i>(2), 649–676. <a href="https://doi.org/10.1111/0022-1082.00340" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/0022-1082.00340</a></span></li>
+<li><span id="AngChen2002AsymmetricCorrelations">Ang, A., &amp; Chen, J. (2002). Asymmetric Correlations of Equity Portfolios. <i>Journal of Financial Economics</i>, <i>63</i>(3), 443–494. <a href="https://doi.org/10.1016/S0304-405X(02)00068-5" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/S0304-405X(02)00068-5</a></span></li>
+<li><span id="ForbesRigobon2002Interdependence">Forbes, K. J., &amp; Rigobon, R. (2002). No Contagion, Only Interdependence: Measuring Stock Market Comovements. <i>The Journal of Finance</i>, <i>57</i>(5), 2223–2261. <a href="https://doi.org/10.1111/0022-1082.00494" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/0022-1082.00494</a></span></li>
+<li><span id="BrunnermeierPedersen2009Liquidity">Brunnermeier, M. K., &amp; Pedersen, L. H. (2009). Market Liquidity and Funding Liquidity. <i>The Review of Financial Studies</i>, <i>22</i>(6), 2201–2238. <a href="https://doi.org/10.1093/rfs/hhn098" target="_blank" rel="noopener noreferrer">https://doi.org/10.1093/rfs/hhn098</a></span></li>
+<li><span id="Bates2000CrashFears">Bates, D. S. (2000). Post-’87 Crash Fears in the S&amp;P 500 Futures Option Market. <i>Journal of Econometrics</i>, <i>94</i>(1–2), 181–238. <a href="https://doi.org/10.1016/S0304-4076(99)00021-4" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/S0304-4076(99)00021-4</a></span></li>
+<li><span id="BollerslevTodorov2011Tails">Bollerslev, T., &amp; Todorov, V. (2011). Tails, Fears, and Risk Premia. <i>The Journal of Finance</i>, <i>66</i>(6), 2165–2211. <a href="https://doi.org/10.1111/j.1540-6261.2011.01695.x" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/j.1540-6261.2011.01695.x</a></span></li>
+<li><span id="AngChenXing2006Downside">Ang, A., Chen, J., &amp; Xing, Y. (2006). Downside Risk. <i>The Review of Financial Studies</i>, <i>19</i>(4), 1191–1239. <a href="https://doi.org/10.1093/rfs/hhj035" target="_blank" rel="noopener noreferrer">https://doi.org/10.1093/rfs/hhj035</a></span></li>
+<li><span id="GlostenJagannathanRunkle1993">Glosten, L. R., Jagannathan, R., &amp; Runkle, D. E. (1993). On the Relation between the Expected Value and the Volatility of the Nominal Excess Return on Stocks. <i>The Journal of Finance</i>, <i>48</i>(5), 1779–1801. <a href="https://doi.org/10.1111/j.1540-6261.1993.tb05128.x" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/j.1540-6261.1993.tb05128.x</a></span></li>
+<li><span id="AdrianBrunnermeier2016CoVaR">Adrian, T., &amp; Brunnermeier, M. K. (2016). CoVaR. <i>The American Economic Review</i>, <i>106</i>(7), 1705–1741. <a href="https://doi.org/10.1257/aer.20120555" target="_blank" rel="noopener noreferrer">https://doi.org/10.1257/aer.20120555</a></span></li>
+<li><span id="AcharyaEtAl2017SystemicRisk">Acharya, V. V., Pedersen, L. H., Philippon, T., &amp; Richardson, M. (2017). Measuring Systemic Risk. <i>The Review of Financial Studies</i>, <i>30</i>(1), 2–47. <a href="https://doi.org/10.1093/rfs/hhw088" target="_blank" rel="noopener noreferrer">https://doi.org/10.1093/rfs/hhw088</a></span></li></ol>
+
+                </article>
+
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+<footer id="footer" class="minimalist-footer">
+	<div class="inner">
+		<!-- Social Icons with visible styling -->
+		<div class="footer-social">
+			<ul class="icons">
+				
+				<li><a href="https://twitter.com/_arleyquintero" class="icon alt fa-twitter" target="_blank" aria-label="Twitter"><span class="label">Twitter</span></a></li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<li><a href="https://github.com/craquinterogo/quantitative_finance" class="icon alt fa-github" target="_blank" aria-label="GitHub"><span class="label">GitHub</span></a></li>
+				
+				
+				
+				<li><a href="https://www.linkedin.com/in/craquinterogo" class="icon alt fa-linkedin" target="_blank" aria-label="LinkedIn"><span class="label">LinkedIn</span></a></li>
+				
+			</ul>
+		</div>
+		
+		<!-- Email contact (minimalist) -->
+		
+		<div class="footer-email">
+			<a href="mailto:craquinterogo@gmail.com" class="email-link">
+				<i class="fa fa-envelope"></i> craquinterogo@gmail.com
+			</a>
+		</div>
+		
+		
+		<!-- Copyright -->
+		<div class="footer-copyright">
+			<p>&copy; Cristian Quintero | Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	/* Minimalist Footer Styles */
+	.minimalist-footer {
+		background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+		padding: 3rem 0 2rem;
+		text-align: center;
+		border-top: 3px solid #d4af37;
+	}
+	
+	.minimalist-footer .inner {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+	
+	/* Social Icons - Large, Visible, Animated */
+	.footer-social {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-social .icons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.footer-social .icons li {
+		margin: 0;
+	}
+	
+	.footer-social .icons a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background: rgba(212, 175, 55, 0.1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		border-radius: 50%;
+		color: #d4af37;
+		font-size: 1.5rem;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+	
+	.footer-social .icons a:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-5px) scale(1.1);
+		box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+		border-color: #d4af37;
+	}
+	
+	.footer-social .icons a .label {
+		display: none;
+	}
+	
+	/* Email Link */
+	.footer-email {
+		margin-bottom: 2rem;
+	}
+	
+	.footer-email .email-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(212, 175, 55, 0.1);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		border-radius: 25px;
+		color: #d4af37;
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: all 0.3s ease;
+	}
+	
+	.footer-email .email-link:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+	}
+	
+	.footer-email .email-link i {
+		font-size: 1.1rem;
+	}
+	
+	/* Copyright */
+	.footer-copyright {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.15);
+	}
+	
+	.footer-copyright p {
+		margin: 0;
+		font-size: 0.85rem;
+		color: rgba(232, 232, 232, 0.6);
+		line-height: 1.6;
+	}
+	
+	.footer-copyright a {
+		color: #d4af37;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	
+	.footer-copyright a:hover {
+		color: #c9a961;
+	}
+	
+	/* Responsive */
+	@media (max-width: 736px) {
+		.minimalist-footer {
+			padding: 2rem 0 1.5rem;
+		}
+		
+		.footer-social .icons {
+			gap: 1rem;
+		}
+		
+		.footer-social .icons a {
+			width: 45px;
+			height: 45px;
+			font-size: 1.3rem;
+		}
+		
+		.footer-email .email-link {
+			font-size: 0.85rem;
+			padding: 0.6rem 1.2rem;
+		}
+		
+		.footer-copyright p {
+			font-size: 0.75rem;
+		}
+	}
+</style>
+
+</div>
+
+<!-- Scripts -->
+	<script src="https://craquinterogo.github.io/assets/js/jquery.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrolly.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/jquery.scrollex.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/skel.min.js"></script>
+	<script src="https://craquinterogo.github.io/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="https://craquinterogo.github.io/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="https://craquinterogo.github.io/assets/js/main.js"></script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre code[class*="language-mermaid"]');
+		codeBlocks.forEach((code) => {
+			const pre = code.parentElement;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'mermaid';
+			wrapper.textContent = code.textContent;
+			pre.parentNode.replaceChild(wrapper, pre);
+		});
+
+		mermaid.initialize({
+			startOnLoad: false,
+			securityLevel: 'loose',
+			theme: 'base',
+			themeVariables: {
+				darkMode: true,
+				background: '#0b1220',
+				primaryColor: '#132035',
+				primaryTextColor: '#e6edf7',
+				primaryBorderColor: '#5fa8ff',
+				secondaryColor: '#10243a',
+				secondaryTextColor: '#e6edf7',
+				secondaryBorderColor: '#7cc4ff',
+				tertiaryColor: '#1a2e47',
+				tertiaryTextColor: '#e6edf7',
+				tertiaryBorderColor: '#8fd0ff',
+				lineColor: '#9ecbff',
+				textColor: '#e6edf7',
+				nodeBorder: '#5fa8ff',
+				edgeLabelBackground: '#0b1220',
+				clusterBkg: '#0f1b2d',
+				clusterBorder: '#4f8ed7',
+				fontFamily: '"IBM Plex Sans", "Segoe UI", sans-serif'
+			}
+		});
+
+		await mermaid.run({ querySelector: '.mermaid' });
+	</script>
+
+
+    <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reading progress bar ─────────────────────────── */
+        var bar  = document.getElementById('reading-progress');
+        var body = document.getElementById('post-body-content');
+        if (bar && body) {
+          function updateProgress() {
+            var rect    = body.getBoundingClientRect();
+            var total   = body.offsetHeight - window.innerHeight;
+            var scrolled = -rect.top;
+            var pct     = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct + '%';
+          }
+          document.addEventListener('scroll', updateProgress, { passive: true });
+          window.addEventListener('resize', updateProgress);
+          updateProgress();
+        }
+
+        /* ── Reading time estimate ────────────────────────── */
+        var rtVal = document.getElementById('reading-time-val');
+        if (rtVal && body) {
+          var words = (body.textContent || body.innerText || '').trim().split(/\s+/).length;
+          var mins  = Math.max(1, Math.round(words / 240));
+          rtVal.textContent = mins;
+        }
+
+        /* ── On-demand sidebars ──────────────────────────── */
+        var drawers = [];
+        function makeSidebarToggle(toggleId, sidebarId, overlayId, query) {
+          var sidebar = document.getElementById(sidebarId);
+          var toggle  = document.getElementById(toggleId);
+          var overlay = document.getElementById(overlayId);
+          if (!sidebar || !toggle || !overlay) return;
+          var compact = window.matchMedia(query);
+
+          function setOpen(open, restoreFocus) {
+            sidebar.classList.toggle('active', open);
+            overlay.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            sidebar.inert = compact.matches && !open;
+            if (open) sidebar.querySelector('button, a').focus();
+            else if (restoreFocus) toggle.focus();
+          }
+
+          drawers.push(function () { setOpen(false, false); });
+          toggle.addEventListener('click', function () {
+            var open = !sidebar.classList.contains('active');
+            drawers.forEach(function (close) { close(); });
+            setOpen(open, !open);
+          });
+          overlay.addEventListener('click', function () { setOpen(false, true); });
+          sidebar.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && compact.matches) setOpen(false, true);
+          });
+          sidebar.addEventListener('click', function (event) {
+            if (compact.matches && event.target.closest('#toc-sidebar-nav a')) setOpen(false, true);
+          });
+          compact.addEventListener('change', function () { setOpen(false, false); });
+          setOpen(false, false);
+        }
+
+        makeSidebarToggle('sidebar-left-toggle', 'sidebar-left', 'sidebar-left-overlay', '(max-width: 1599px)');
+        makeSidebarToggle('sidebar-right-toggle', 'sidebar-right', 'sidebar-right-overlay', '(max-width: 1199px)');
+
+        /* Keep wide technical content scrollable without widening the page. */
+        if (body) {
+          body.querySelectorAll('pre').forEach(function (pre) {
+            pre.tabIndex = 0;
+            pre.setAttribute('aria-label', 'Code sample');
+          });
+          body.querySelectorAll('table').forEach(function (table) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'post-table-scroll';
+            wrapper.tabIndex = 0;
+            wrapper.setAttribute('role', 'region');
+            wrapper.setAttribute('aria-label', 'Scrollable table');
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+          });
+        }
+
+        /* ── Collapsible sidebar sections ────────────────── */
+        document.querySelectorAll('.sidebar-section-header').forEach(function (hdr) {
+          hdr.addEventListener('click', function () {
+            var content = document.getElementById(hdr.dataset.target);
+            var icon    = hdr.querySelector('.collapse-toggle .fa');
+            if (!content) return;
+            var isExpanded = content.classList.toggle('expanded');
+            hdr.querySelector('.collapse-toggle').setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            content.classList.toggle('collapsed', !isExpanded);
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down',  isExpanded);
+              icon.classList.toggle('fa-chevron-right', !isExpanded);
+            }
+          });
+        });
+
+        /* ── TOC generation ───────────────────────────────── */
+        var tocNav  = document.getElementById('toc-sidebar-nav');
+        var mainEl  = document.getElementById('post-body-content');
+        var tocSect = document.querySelector('.toc-section');
+
+        if (tocNav && mainEl) {
+          var headings = mainEl.querySelectorAll('h1, h2, h3, h4');
+          if (headings.length > 2) {
+            var nums    = [0, 0, 0, 0];
+            var list = document.createElement('ul');
+            list.className = 'toc-list';
+            list.id = 'toc-heading-list';
+            var stack = [];
+            var branches = [];
+
+            function setBranchExpanded(branch, expanded) {
+              branch.children.hidden = !expanded;
+              branch.button.setAttribute('aria-expanded', String(expanded));
+              branch.button.setAttribute('aria-label', (expanded ? 'Collapse' : 'Expand') + ' subsections of ' + branch.text);
+            }
+
+            headings.forEach(function (h, index) {
+              var level    = parseInt(h.tagName[1], 10) - 1;
+              nums[level]++;
+              for (var i = level + 1; i < 4; i++) nums[i] = 0;
+              var numStr   = nums.slice(0, level + 1).filter(function (n) { return n > 0; }).join('.');
+              var rawText  = h.textContent.replace(/^\d+(\.\d+)*\.\s*/, '').trim();
+              if (h.firstChild && h.firstChild.nodeType === Node.TEXT_NODE) {
+                h.firstChild.textContent = h.firstChild.textContent.replace(/^\d+(\.\d+)*\.\s*/, '');
+              }
+              var number = document.createElement('span');
+              number.className = 'section-number';
+              number.textContent = numStr + '. ';
+              h.insertBefore(number, h.firstChild);
+              if (!h.id) {
+                h.id = rawText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              }
+              var item = document.createElement('li');
+              item.className = 'toc-level-' + (level + 1);
+              var link = document.createElement('a');
+              link.setAttribute('href', '#' + h.id);
+              var tocNumber = document.createElement('span');
+              tocNumber.className = 'toc-number';
+              tocNumber.textContent = numStr + '. ';
+              link.appendChild(tocNumber);
+              link.appendChild(document.createTextNode(rawText));
+              var row = document.createElement('div');
+              row.className = 'toc-entry';
+              row.appendChild(link);
+              item.appendChild(row);
+
+              while (stack.length && stack[stack.length - 1].level >= level) stack.pop();
+              var parent = stack[stack.length - 1];
+              if (parent && !parent.children) {
+                parent.children = document.createElement('ul');
+                parent.children.className = 'toc-list toc-children';
+                parent.children.id = 'toc-children-' + parent.index;
+                parent.button = document.createElement('button');
+                parent.button.type = 'button';
+                parent.button.className = 'toc-branch-toggle';
+                parent.button.setAttribute('aria-controls', parent.children.id);
+                var chevron = document.createElement('i');
+                chevron.className = 'fa fa-chevron-down';
+                chevron.setAttribute('aria-hidden', 'true');
+                parent.button.appendChild(chevron);
+                parent.row.insertBefore(parent.button, parent.row.firstChild);
+                parent.item.appendChild(parent.children);
+                branches.push(parent);
+                setBranchExpanded(parent, true);
+                parent.button.addEventListener('click', function () {
+                  setBranchExpanded(parent, parent.children.hidden);
+                  updateBulkControls();
+                });
+              }
+              (parent ? parent.children : list).appendChild(item);
+              stack.push({ level: level, index: index, item: item, row: row, text: rawText });
+            });
+
+            var expandAll;
+            var collapseAll;
+            function updateBulkControls() {
+              if (!expandAll) return;
+              expandAll.disabled = branches.every(function (branch) { return !branch.children.hidden; });
+              collapseAll.disabled = branches.every(function (branch) { return branch.children.hidden; });
+            }
+
+            if (branches.length) {
+              var controls = document.createElement('div');
+              controls.className = 'toc-controls';
+              controls.setAttribute('role', 'group');
+              controls.setAttribute('aria-label', 'Table of contents branches');
+              expandAll = document.createElement('button');
+              collapseAll = document.createElement('button');
+              [expandAll, collapseAll].forEach(function (button, index) {
+                button.type = 'button';
+                button.textContent = index === 0 ? 'Expand all' : 'Collapse all';
+                button.setAttribute('aria-controls', list.id);
+                button.addEventListener('click', function () {
+                  branches.forEach(function (branch) { setBranchExpanded(branch, index === 0); });
+                  updateBulkControls();
+                });
+                controls.appendChild(button);
+              });
+              tocNav.appendChild(controls);
+              updateBulkControls();
+            }
+            tocNav.appendChild(list);
+            if (tocSect) tocSect.style.display = 'block';
+          } else {
+            if (tocSect) tocSect.style.display = 'none';
+            document.body.classList.add('has-no-toc');
+          }
+        }
+
+        /* ── Highlight active TOC entry on scroll ─────────── */
+        var tocLinks = tocNav ? tocNav.querySelectorAll('a') : [];
+        if (tocLinks.length && typeof IntersectionObserver !== 'undefined') {
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                tocLinks.forEach(function (l) { l.removeAttribute('data-active'); });
+                tocNav.querySelectorAll('.toc-entry').forEach(function (row) { row.removeAttribute('data-active-descendant'); });
+                var active = Array.prototype.find.call(tocLinks, function (link) { return link.getAttribute('href') === '#' + entry.target.id; });
+                if (active) {
+                  active.setAttribute('data-active', '');
+                  var ancestor = active.closest('li').parentElement.closest('li');
+                  while (ancestor) {
+                    ancestor.firstElementChild.setAttribute('data-active-descendant', '');
+                    ancestor = ancestor.parentElement.closest('li');
+                  }
+                }
+              }
+            });
+          }, { rootMargin: '-10% 0px -80% 0px' });
+
+          document.querySelectorAll('#post-body-content h1, #post-body-content h2, #post-body-content h3, #post-body-content h4').forEach(function (h) {
+            if (h.id) observer.observe(h);
+          });
+        }
+
+      });
+    }());
+    </script>
+
+  </body>
+</html>

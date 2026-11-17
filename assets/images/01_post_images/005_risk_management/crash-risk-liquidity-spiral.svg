@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+  <title id="title">Market and funding liquidity can reinforce each other</title>
+  <desc id="desc">Worsening market liquidity reduces sale proceeds and collateral values, putting pressure on funding. Funding needs can force sales that worsen market liquidity.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b8ad88"/></marker>
+  </defs>
+  <rect width="900" height="420" rx="16" fill="#1a1a1a"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#e8e8e8">
+    <text x="40" y="42" font-size="24" font-weight="700" fill="#d4af37">4. Harder to sell, harder to fund</text>
+    <text x="40" y="70" font-size="16" fill="#b7b3a8">Two distinct risks can form one liquidity spiral</text>
+    <rect x="55" y="155" width="325" height="148" rx="12" fill="#26303a" stroke="#92b4d6" stroke-width="2"/>
+    <rect x="520" y="155" width="325" height="148" rx="12" fill="#362628" stroke="#efaaa4" stroke-width="2"/>
+    <g text-anchor="middle">
+      <text x="217" y="191" font-size="21" font-weight="700">Market liquidity worsens</text>
+      <text x="217" y="226" font-size="18">Wider bid-ask spreads</text>
+      <text x="217" y="254" font-size="18">Less depth, greater price impact</text>
+      <text x="217" y="282" font-size="18">Less cash raised per asset sold</text>
+      <text x="682" y="191" font-size="21" font-weight="700">Funding pressure rises</text>
+      <text x="682" y="226" font-size="18">Margin calls or redemptions</text>
+      <text x="682" y="254" font-size="18">Less collateral capacity</text>
+      <text x="682" y="282" font-size="18">Urgent need to raise cash</text>
+      <text x="450" y="111" font-size="17">Lower sale proceeds and collateral values</text>
+      <text x="450" y="373" font-size="17">Forced sales into a thin market</text>
+    </g>
+    <path d="M215 153V129H680V144" fill="none" stroke="#b8ad88" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M680 305V337H215V314" fill="none" stroke="#b8ad88" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="450" y="404" text-anchor="middle" font-size="15" fill="#b7b3a8">A possible feedback mechanism; the arrows are not measured effects.</text>
+  </g>
+</svg>

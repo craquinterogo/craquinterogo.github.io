@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+  <title id="title">Volatility and leverage can amplify selling</title>
+  <desc id="desc">A possible cycle connects falling prices, higher volatility or margins, leverage reduction, and forced selling. Arrows show a mechanism, not a measured causal effect.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#b8ad88"/></marker>
+  </defs>
+  <rect width="900" height="420" rx="16" fill="#1a1a1a"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#e8e8e8">
+    <text x="40" y="42" font-size="24" font-weight="700" fill="#d4af37">2. A decline can trigger more selling</text>
+    <text x="40" y="70" font-size="16" fill="#b7b3a8">A possible feedback loop, not an inevitable outcome</text>
+    <g stroke="#b8ad88" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+      <path d="M360 155H528"/>
+      <path d="M680 197V259"/>
+      <path d="M540 305H372"/>
+      <path d="M220 265V203"/>
+    </g>
+    <rect x="80" y="110" width="280" height="87" rx="12" fill="#362628" stroke="#efaaa4" stroke-width="2"/>
+    <rect x="540" y="110" width="280" height="87" rx="12" fill="#26303a" stroke="#92b4d6" stroke-width="2"/>
+    <rect x="540" y="270" width="280" height="75" rx="12" fill="#26303a" stroke="#92b4d6" stroke-width="2"/>
+    <rect x="80" y="270" width="280" height="75" rx="12" fill="#362628" stroke="#efaaa4" stroke-width="2"/>
+    <g text-anchor="middle" font-size="20" font-weight="700">
+      <text x="220" y="160">Prices fall</text>
+      <text x="680" y="145">Volatility or margin</text>
+      <text x="680" y="173">requirements rise</text>
+      <text x="680" y="313">Leverage is reduced</text>
+      <text x="220" y="313">Forced selling</text>
+    </g>
+    <text x="450" y="232" text-anchor="middle" font-size="17">Selling can reinforce the initial shock</text>
+    <text x="450" y="388" text-anchor="middle" font-size="16" fill="#b7b3a8">Cash buffers and lower leverage can help interrupt the cycle.</text>
+  </g>
+</svg>
